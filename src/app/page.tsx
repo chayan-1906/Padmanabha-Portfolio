@@ -1,29 +1,43 @@
-import {ThemeToggle} from "@/components/theme-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Home() {
   return (
-      <main className="min-h-screen bg-background text-foreground p-8">
-        <ThemeToggle/>
-
-        <div className="max-w-4xl mx-auto space-y-8">
-          <h1 className="text-4xl font-bold text-primary">
-            Dark Mode Testing
-          </h1>
-
-          <div className="space-y-4">
-            <div className="bg-red-400 dark:bg-yellow-400 p-4 rounded text-white dark:text-black">
-              bg-red-400 dark:bg-yellow-400 (manual toggle only)
-            </div>
-
-            <div className="bg-card border border-border p-4 rounded">
-              bg-card (works with system theme)
-            </div>
+    <main className="min-h-screen p-8" style={{
+      backgroundColor: 'rgb(var(--color-background))',
+      color: 'rgb(var(--color-foreground))'
+    }}>
+      <ThemeToggle />
+      
+      <div className="max-w-4xl mx-auto space-y-6">
+        <h1 className="text-4xl font-bold mb-4">
+          Theme Testing
+        </h1>
+        
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-6 rounded border" style={{
+            backgroundColor: 'rgb(var(--color-card))',
+            color: 'rgb(var(--color-card-foreground))',
+            borderColor: 'rgb(var(--color-border))'
+          }}>
+            <h3 className="font-semibold mb-2">Card</h3>
+            <div className="text-sm">Light: Orange → Dark: Red</div>
           </div>
-
-          <p className="text-sm text-muted-foreground">
-            Switch to "System" mode and change macOS appearance - only the card adapts, not the red/yellow box.
-          </p>
+          
+          <div className="p-6 rounded" style={{
+            backgroundColor: 'rgb(var(--color-secondary))',
+            color: 'rgb(var(--color-secondary-foreground))'
+          }}>
+            <h3 className="font-semibold mb-2">Secondary</h3>
+            <div className="text-sm">Light: Yellow → Dark: Orange</div>
+          </div>
         </div>
-      </main>
+        
+        <div className="bg-red-500 p-4 rounded text-white">
+          <div className="font-medium">Fixed Red (Never changes)</div>
+        </div>
+        
+        <p>Toggle themes - boxes should change dramatically!</p>
+      </div>
+    </main>
   )
 }
