@@ -23,6 +23,7 @@ export default function RootLayout({
 			defaultTheme="system"
 			enableSystem
 			disableTransitionOnChange={false}
+			forcedTheme={undefined}
 		>
 			{children}
 		</ThemeProvider>
