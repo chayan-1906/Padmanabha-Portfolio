@@ -6,7 +6,7 @@ import {motion, Variants} from 'framer-motion';
 import {MdEmail, MdPhone} from 'react-icons/md';
 import {FaGithub, FaLinkedin} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, TECH_STACK, SOCIAL_LINKS} from '@/constants';
+import {PERSONAL_INFO, SOCIAL_LINKS, TECH_STACK} from '@/constants';
 
 function HeroSection() {
 	const containerVariants: Variants = {
@@ -71,11 +71,7 @@ function HeroSection() {
 						scale: [1, 1.2, 1],
 						rotate: [0, 180, 360],
 					}}
-					transition={{
-						duration: 20,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute bottom-20 right-20 size-80 rounded-full opacity-20 blur-3xl')}
@@ -84,11 +80,7 @@ function HeroSection() {
 						scale: [1.2, 1, 1.2],
 						rotate: [360, 180, 0],
 					}}
-					transition={{
-						duration: 15,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 15, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
@@ -213,14 +205,7 @@ function HeroSection() {
 			>
 				<motion.div className={cn('flex flex-col items-center space-y-2')} style={{color: 'rgb(var(--color-foreground))'}}>
 					<span className={cn('text-sm opacity-70')}>Scroll to explore</span>
-					<motion.div
-						animate={{y: [0, 8, 0]}}
-						transition={{
-							duration: 1.5,
-							repeat: Infinity,
-							ease: 'easeInOut',
-						}}
-					>
+					<motion.div animate={{y: [0, 8, 0]}} transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}>
 						<ChevronDown className={cn('w-6 h-6')}/>
 					</motion.div>
 				</motion.div>
