@@ -27,6 +27,10 @@
 		background-color: rgb(var(--color-background));
 		color: rgb(var(--color-foreground));
 	}
+
+	button {
+		cursor: pointer;
+	}
 }
 
 ::selection {

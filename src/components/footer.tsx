@@ -49,11 +49,7 @@ function Footer() {
 			<div className={cn('max-w-6xl mx-auto relative z-10')}>
 				<div className={cn('grid lg:grid-cols-4 gap-12 mb-16')}>
 					{/* About Column */}
-					<motion.div
-						initial={{opacity: 0, y: 20}}
-						whileInView={{opacity: 1, y: 0}}
-						className={cn('lg:col-span-2 space-y-6')}
-					>
+					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} className={cn('lg:col-span-2 space-y-6')}>
 						<div>
 							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>
 								{PERSONAL_INFO.name}
@@ -65,9 +61,7 @@ function Footer() {
 						</div>
 						<div className={cn('flex items-center gap-4')}>
 							{SOCIAL_LINKS.map((link) => {
-								const Icon = link.name === 'GitHub' ? FaGithub :
-									link.name === 'LinkedIn' ? FaLinkedin :
-										link.name === 'Email' ? FaEnvelope : FaPhone;
+								const Icon = link.name === 'GitHub' ? FaGithub : link.name === 'LinkedIn' ? FaLinkedin : link.name === 'Email' ? FaEnvelope : FaPhone;
 								return (
 									<motion.a
 										key={link.name}
@@ -94,15 +88,8 @@ function Footer() {
 					</motion.div>
 
 					{/* Quick Links */}
-					<motion.div
-						initial={{opacity: 0, y: 20}}
-						whileInView={{opacity: 1, y: 0}}
-						transition={{delay: 0.2}}
-						className={cn('space-y-6')}
-					>
-						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>
-							Quick Links
-						</h4>
+					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.2}} className={cn('space-y-6')}>
+						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Quick Links</h4>
 						<div className={cn('space-y-3')}>
 							{navLinks.map((link) => (
 								<motion.button
@@ -119,15 +106,8 @@ function Footer() {
 					</motion.div>
 
 					{/* Contact Info */}
-					<motion.div
-						initial={{opacity: 0, y: 20}}
-						whileInView={{opacity: 1, y: 0}}
-						transition={{delay: 0.4}}
-						className={cn('space-y-6')}
-					>
-						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>
-							Get In Touch
-						</h4>
+					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.4}} className={cn('space-y-6')}>
+						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Get In Touch</h4>
 						<div className={cn('space-y-3')}>
 							<motion.a
 								href={`mailto:${PERSONAL_INFO.email}`}
@@ -145,11 +125,7 @@ function Footer() {
 							>
 								{PERSONAL_INFO.phone}
 							</motion.a>
-							<motion.p
-								className={cn('opacity-80')}
-								style={{color: 'rgb(var(--color-foreground))'}}
-								whileHover={{x: 4}}
-							>
+							<motion.p className={cn('opacity-80')} style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
 								{PERSONAL_INFO.location}
 							</motion.p>
 						</div>
@@ -171,11 +147,7 @@ function Footer() {
 								scale: [1, 1.2, 1],
 								rotate: [0, 10, -10, 0],
 							}}
-							transition={{
-								duration: 2,
-								repeat: Infinity,
-								ease: 'easeInOut',
-							}}
+							transition={{duration: 2, repeat: Infinity, ease: 'easeInOut'}}
 						>
 							<FaHeart className={cn('w-4 h-4 text-red-500')}/>
 						</motion.div>

@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import {motion, Variants} from 'framer-motion';
-import {FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaUsers} from 'react-icons/fa';
+import {FaBriefcase, FaCalendarAlt, FaTrophy, FaUsers} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {WORK_EXPERIENCE} from '@/constants';
 
@@ -47,6 +48,7 @@ function ExperienceSection() {
 			'CouchConcerts': '🎵',
 			'Remix Labs': '🧪',
 			'Skywa Solutions': '🚀',
+			'HighRadius': '⚡',
 		};
 		return icons[company] || '💼';
 	};
@@ -62,7 +64,7 @@ function ExperienceSection() {
 	};
 
 	return (
-		<section id="experience" className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'experience'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -93,23 +95,10 @@ function ExperienceSection() {
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial="hidden"
-				whileInView="visible"
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-6xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<motion.div
-						className={cn('inline-block mb-4 px-6 py-2 rounded-full text-sm font-medium text-white')}
-						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-						whileHover={{scale: 1.05}}
-					>
-						Career Journey
-					</motion.div>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						Work Experience
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -120,19 +109,12 @@ function ExperienceSection() {
 				{/* Timeline */}
 				<div className={cn('relative')}>
 					{/* Timeline Line */}
-					<motion.div
-						variants={timelineVariants}
-						className={cn('absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 origin-top')}
-					/>
+					<motion.div variants={timelineVariants} className={cn('absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 origin-top')}/>
 
 					{/* Experience Items */}
 					<div className={cn('space-y-12')}>
 						{WORK_EXPERIENCE.map((experience, index) => (
-							<motion.div
-								key={index}
-								variants={itemVariants}
-								className={cn('relative flex items-start gap-8')}
-							>
+							<motion.div key={index} variants={itemVariants} className={cn('relative flex items-start gap-8')}>
 								{/* Timeline Dot */}
 								<motion.div
 									className={cn('relative z-10 flex items-center justify-center w-16 h-16 rounded-full text-white text-2xl bg-gradient-to-br', getExperienceColor(index))}
@@ -152,70 +134,88 @@ function ExperienceSection() {
 									}}
 									transition={{duration: 0.3}}
 								>
-									{/* Header */}
-									<div className={cn('flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4')}>
-										<div>
-											<h3 className={cn('text-2xl font-bold mb-2')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-												{experience.title}
-											</h3>
-											<p className={cn('text-lg font-medium mb-2', getExperienceColor(index).includes('blue') ? 'text-blue-500' : getExperienceColor(index).includes('purple') ? 'text-purple-500' : getExperienceColor(index).includes('green') ? 'text-green-500' : 'text-orange-500')}>
-												{experience.company}
-											</p>
-										</div>
-										<div className={cn('flex flex-col lg:items-end gap-2')}>
-											<motion.span
-												className={cn('px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r', getExperienceColor(index))}
-												whileHover={{scale: 1.1}}
-											>
-												{experience.type}
-											</motion.span>
+									{/* Company Header */}
+									<div className={cn('flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6')}>
+										<div className={cn('flex items-center gap-3')}>
+											{experience.logo && (
+												<Image src={experience.logo} alt={`${experience.company} logo`} width={200} height={200} className={cn('w-10 h-10 object-contain rounded-lg')}/>
+											)}
+											<div>
+												<h3 className={cn('text-2xl font-bold mb-1')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+													{experience.company}
+												</h3>
+												<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+													{experience.location} • {experience.period}
+												</p>
+											</div>
 										</div>
 									</div>
 
-									{/* Details */}
-									<div className={cn('flex flex-wrap gap-4 mb-6 text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-										<div className={cn('flex items-center gap-2')}>
-											<FaCalendarAlt className={cn('w-4 h-4')}/>
-											<span>{experience.period}</span>
-										</div>
-										<div className={cn('flex items-center gap-2')}>
-											<FaMapMarkerAlt className={cn('w-4 h-4')}/>
-											<span>{experience.location}</span>
-										</div>
-									</div>
-
-									{/* Description */}
-									<div className={cn('space-y-3')}>
-										{experience.description.map((desc, descIndex) => (
+									{/* Roles */}
+									<div className={cn('space-y-6')}>
+										{experience.roles.map((role, roleIndex) => (
 											<motion.div
-												key={descIndex}
-												className={cn('flex items-start gap-3')}
+												key={roleIndex}
+												className={cn('border-l-2 border-blue-500 pl-4 py-2')}
 												initial={{opacity: 0, x: -20}}
 												whileInView={{opacity: 1, x: 0}}
-												transition={{delay: descIndex * 0.1}}
+												transition={{delay: roleIndex * 0.1}}
 											>
-												<motion.div
-													className={cn('w-2 h-2 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', getExperienceColor(index))}
-													whileHover={{scale: 1.5}}
-												/>
-												<p className={cn('text-sm leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-													{desc}
-												</p>
+												<div className={cn('flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2')}>
+													<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+														{role.title}
+													</h4>
+													<div className={cn('flex items-center gap-2')}>
+														<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+															{role.period}
+														</span>
+														<motion.span className={cn('px-2 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getExperienceColor(index))}
+														             whileHover={{scale: 1.05}}>
+															{role.type}
+														</motion.span>
+													</div>
+												</div>
+
+												{/* Description */}
+												<div className={cn('space-y-2 mb-4')}>
+													{role.description.map((desc, descIndex) => (
+														<motion.div
+															key={descIndex}
+															className={cn('flex items-start gap-2')}
+															initial={{opacity: 0, x: -10}}
+															whileInView={{opacity: 1, x: 0}}
+															transition={{delay: descIndex * 0.05}}
+														>
+															<motion.div
+																className={cn('w-1.5 h-1.5 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', getExperienceColor(index))}
+																whileHover={{scale: 1.5}}
+															/>
+															<p className={cn('text-sm leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+																{desc}
+															</p>
+														</motion.div>
+													))}
+												</div>
+
+												{/* Achievements */}
+												{role.achievements && (
+													<div className={cn('flex flex-wrap gap-2')}>
+														{role.achievements.map((achievement, achIndex) => (
+															<motion.div
+																key={achIndex}
+																className={cn('inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium')}
+																style={{backgroundColor: 'rgba(var(--color-secondary), 0.5)', color: 'rgb(var(--color-secondary-foreground))'}}
+																whileHover={{scale: 1.05}}
+															>
+																<FaTrophy className={cn('w-2 h-2')}/>
+																<span>{achievement}</span>
+															</motion.div>
+														))}
+													</div>
+												)}
 											</motion.div>
 										))}
 									</div>
-
-									{/* Achievements Badge */}
-									{index === 0 && (
-										<motion.div
-											className={cn('mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium')}
-											style={{backgroundColor: 'rgba(var(--color-secondary), 0.5)', color: 'rgb(var(--color-secondary-foreground))'}}
-											whileHover={{scale: 1.05}}
-										>
-											<FaUsers className={cn('w-4 h-4')}/>
-											<span>300+ Active Users</span>
-										</motion.div>
-									)}
 								</motion.div>
 							</motion.div>
 						))}

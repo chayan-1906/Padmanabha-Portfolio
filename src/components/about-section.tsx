@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import {motion, Variants} from 'framer-motion';
 import {FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
@@ -31,7 +32,7 @@ function AboutSection() {
 	};
 
 	return (
-		<section id="about" className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'about'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -41,31 +42,14 @@ function AboutSection() {
 						rotate: [0, 360],
 						scale: [1, 1.2, 1],
 					}}
-					transition={{
-						duration: 30,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial="hidden"
-				whileInView="visible"
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-6xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<motion.div
-						className={cn('inline-block mb-4 px-6 py-2 rounded-full text-sm font-medium text-white')}
-						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-						whileHover={{scale: 1.05}}
-					>
-						About Me
-					</motion.div>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						My Story
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -140,25 +124,20 @@ function AboutSection() {
 							</h3>
 							<div className={cn('space-y-6')}>
 								{WORK_EXPERIENCE.map((exp, index) => (
-									<motion.div
-										key={index}
-										className={cn('border-l-4 border-blue-500 pl-6 py-4')}
-										whileHover={{x: 8}}
-									>
+									<motion.div key={index} className={cn('border-l-4 border-blue-500 pl-6 py-4')} whileHover={{x: 8}}>
 										<div className={cn('flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2')}>
-											<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-												{exp.title}
-											</h4>
-											<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-												{exp.period}
-											</span>
+											<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>{exp.roles[0].title}</h4>
+											<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{exp.period}</span>
 										</div>
-										<p className={cn('text-blue-500 font-medium mb-2')}>{exp.company}</p>
-										<p className={cn('text-sm opacity-80 mb-3')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-											{exp.location} • {exp.type}
-										</p>
+										<div className={cn('flex items-center gap-3 mb-2')}>
+											{exp.logo && (
+												<Image src={exp.logo} alt={`${exp.company} logo`} width={200} height={200} className={cn('w-16 h-16 object-contain rounded-lg')}/>
+											)}
+											<p className={cn('text-blue-500 font-medium')}>{exp.company}</p>
+										</div>
+										<p className={cn('text-sm opacity-80 mb-3')} style={{color: 'rgb(var(--color-card-foreground))'}}>{exp.location} • {exp.roles[0].type}</p>
 										<ul className={cn('text-sm space-y-1 opacity-90')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-											{exp.description.map((desc, idx) => (
+											{exp.roles[0].description.map((desc, idx) => (
 												<li key={idx} className={cn('flex items-start gap-2')}>
 													<span className={cn('text-blue-500 mt-1')}>•</span>
 													{desc}
