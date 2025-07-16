@@ -56,6 +56,53 @@ export const COLLABORATORS = {
 	},
 };
 
+// Custom demo links for projects that don't have homepage
+export const CUSTOM_DEMO_LINKS = {
+	'School-Management-Next.js': {
+		type: 'website',
+		url: 'https://school-management-next.vercel.app', // Replace with actual URL
+		label: 'Live Demo',
+		icon: 'ExternalLink',
+	},
+	'Busgo-React-Native': {
+		type: 'apk',
+		url: 'https://github.com/chayan-1906/Busgo-React-Native/releases/download/v1.0.0/busgo-app.apk', // Replace with actual APK link
+		label: 'Download APK',
+		icon: 'Download',
+	},
+	'GitHub-MCP': {
+		type: 'executable',
+		url: 'https://github.com/chayan-1906/GitHub-MCP/releases/download/v1.0.0/github-mcp.exe', // Replace with actual executable link
+		label: 'Download',
+		icon: 'Download',
+	},
+	'FS-MCP': {
+		type: 'executable',
+		url: 'https://github.com/chayan-1906/FS-MCP/releases/download/v1.0.0/fs-mcp.exe', // Replace with actual executable link
+		label: 'Download',
+		icon: 'Download',
+	},
+	'Google-Workspace-MCP': {
+		type: 'executable',
+		url: 'https://github.com/chayan-1906/Google-Workspace-MCP/releases/download/v1.0.0/workspace-mcp.exe', // Replace with actual executable link
+		label: 'Download',
+		icon: 'Download',
+	},
+	'Foodies-React-Native': {
+		type: 'apk',
+		url: 'https://github.com/chayan-1906/Foodies-React-Native/releases/download/v1.0.0/foodies-app.apk', // Replace with actual APK link
+		label: 'Download APK',
+		icon: 'Download',
+	},
+	'ai-radio': {
+		type: 'apk',
+		url: 'https://github.com/chayan-1906/ai-radio/releases/download/v1.0.0/ai-radio-app.apk', // Replace with actual APK link
+		label: 'Download APK',
+		icon: 'Download',
+	},
+	// Add more repositories as needed
+};
+
 export const FEATURED_PROJECTS = [
 	{
 		title: 'Google-Workspace-MCP',
@@ -358,3 +405,11 @@ export const STATS = {
 	githubRepos: 100,
 	codeCommits: 2500,
 };
+
+// Type definitions for demo links
+export interface DemoLink {
+	type: 'website' | 'apk' | 'executable' | 'github';
+	url: string;
+	label: string;
+	icon: 'ExternalLink' | 'Download' | 'Github';
+}

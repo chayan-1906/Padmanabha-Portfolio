@@ -17,7 +17,7 @@ async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 		const repos: GitHubRepo[] = await response.json();
 
 		return repos
-			.filter(repo => !repo.fork && !repo.private)
+			.filter(repo => !repo.fork)
 			.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 	} catch (error) {
 		console.error('Error fetching GitHub repositories:', error);
@@ -25,109 +25,150 @@ async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 	}
 }
 
-function getFeaturedProjects(repositories: GitHubRepo[]): GitHubRepo[] {
-	// Define priority projects that should be featured
-	const priorityProjects = [
-		'Jira',
-		'DocMingle-Next.js',
-		'Busgo-React-Native',
-		'BusGo-Node.js',
-		'Music-Aceternity-Next.js',
-		'School-Management-Next.js',
-		'Foodies-React-Native',
-		'Food-App-Node.js',
-		'Mstry-Message-Next.js',
-		'frame-phones',
-		'Interior-Next.js',
-		'35-foodies',
-		'MF-Stx-Cal-Next.js',
-		'Airbnb-Next.js',
-		'ai-radio',
-		'spotify_ui',
-		'Rapido-Expo',
-		'Rapido-Server',
-		'Uber-Expo',
-		'Blinkit-Expo',
-		'Blinkit-Server',
-		'aora',
-		'Virtual-R',
-		'spring-ecommerce-app-flutter',
-		'spring-ecommerce-app-java',
-		'nike-landing-page-ui',
-		'travel-ui-expo-router',
-		'netflix_ui',
-		'travel-ui',
-		'React-Native-Wallet-Node.js',
-		'Anime-Infinite-Scrolling-Next.js',
-		'pokemon-pwa',
-		'fitclub-gym-ui-react',
-		'kanban-trello-board-ui-react',
-		'online-education-website-ui',
-		'github-search-users',
-		'comfy-sloth',
-		'material-ui-demo',
-		'movieist-react',
-		'user-management-system-fullstack',
-		'spring-boot-todo-mongodb',
-		'spring-boot-websocket',
-		'spring-product-management-app-react',
-		'spring-product-management-app-java',
-		'secret-keeper',
-		'google-sign-in-spring-boot',
-		'facebook-sign-in-spring-boot',
-		'phone-no-authentication-spring-boot',
-		'spring-data-jpa-course-java-guides',
-		'Freelance-Foundry',
-		'Infinite-Scrolling-Pagination-Firestore',
-		'airtable-apis'
-	];
+async function getReadmeContent(owner: string, repo: string): Promise<string> {
+	try {
+		const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, {
+			headers: {
+				'Accept': 'application/vnd.github.v3+json',
+			},
+			next: {revalidate: 3600},
+		});
 
-	// Get featured projects by topics first
-	const featuredByTopics = repositories.filter(repo =>
-		repo.topics.includes('featured') ||
-		repo.topics.includes('nextjs15') ||
-		repo.topics.includes('react19') ||
-		repo.topics.includes('nextjs15-typescript') ||
-		repo.topics.includes('typescript') ||
-		repo.topics.includes('react-native') ||
-		repo.topics.includes('flutter') ||
-		repo.topics.includes('mobile-app') ||
-		repo.topics.includes('full-stack') ||
-		repo.topics.includes('nodejs') ||
-		repo.topics.includes('backend') ||
-		repo.topics.includes('frontend')
-	);
-
-	// Get projects by priority names
-	const featuredByName = repositories.filter(repo =>
-		priorityProjects.includes(repo.name)
-	);
-
-	// Combine and deduplicate
-	const allFeatured = [...featuredByTopics, ...featuredByName];
-	const uniqueFeatured = allFeatured.filter((repo, index, self) =>
-		index === self.findIndex(r => r.id === repo.id)
-	);
-
-	// Sort by criteria: stars, recent updates, and specific priorities
-	const sortedFeatured = uniqueFeatured.sort((a, b) => {
-		// Priority boost for specific projects
-		const aIsPriority = priorityProjects.slice(0, 10).includes(a.name);
-		const bIsPriority = priorityProjects.slice(0, 10).includes(b.name);
-
-		if (aIsPriority && !bIsPriority) return -1;
-		if (!aIsPriority && bIsPriority) return 1;
-
-		// Then by stars
-		if (a.stargazers_count !== b.stargazers_count) {
-			return b.stargazers_count - a.stargazers_count;
+		if (!response.ok) {
+			return '';
 		}
 
-		// Then by recent updates
-		return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
-	});
-
-	return sortedFeatured.slice(0, 6);
+		const data = await response.json();
+		return atob(data.content);
+	} catch (error) {
+		console.error('Error fetching README:', error);
+		return '';
+	}
 }
 
-export {getGitHubRepositories, getFeaturedProjects};
+function extractLinkFromSection(readme: string, sectionTitle: string): string | null {
+	const lines = readme.split('\n');
+	let inSection = false;
+
+	for (let i = 0; i < lines.length; i++) {
+		const line = lines[i].trim();
+
+		// Check if we found the section
+		if (line.includes(sectionTitle)) {
+			inSection = true;
+			continue;
+		}
+
+		// If we're in the section, look for URLs
+		if (inSection) {
+			// Stop if we hit another section header
+			if (line.startsWith('#') && !line.includes(sectionTitle)) {
+				break;
+			}
+
+			// Look for URLs in markdown format [text](url) or plain URLs
+			const urlMatch = line.match(/\[.*?\]\((https?:\/\/[^\s)]+)\)/) || line.match(/(https?:\/\/[^\s]+)/);
+			if (urlMatch) {
+				return urlMatch[1];
+			}
+		}
+	}
+
+	return null;
+}
+
+function isBackendRepo(topics: string[]): boolean {
+	const backendIndicators = ['backend', 'api', 'server', 'nodejs', 'express'];
+	return backendIndicators.some(indicator => topics.includes(indicator));
+}
+
+interface DemoLink {
+	type: 'website' | 'apk' | 'guide' | 'github';
+	url: string;
+	label: string;
+	icon: 'ExternalLink' | 'Download' | 'Github';
+}
+
+async function getDemoLink(project: GitHubRepo): Promise<DemoLink | null> {
+	// Parse topics for demo configuration
+	const demoTopic = project.topics.find(topic => topic.startsWith('demo-'));
+
+	if (demoTopic) {
+		const parts = demoTopic.split('-');
+		if (parts.length >= 3) {
+			const type = parts[1]; // apk, guide, etc.
+			const label = parts.slice(2).join(' ').replace(/-/g, ' ');
+
+			// Fetch README content
+			const owner = project.owner.login;
+			const readmeContent = await getReadmeContent(owner, project.name);
+
+			let sectionTitle = '';
+			let url = '';
+
+			// Determine section title based on type
+			if (type === 'apk') {
+				sectionTitle = 'Download & Try';
+			} else if (type === 'guide') {
+				sectionTitle = '📖 User Guide';
+			}
+
+			// Extract link from README section
+			if (sectionTitle && readmeContent) {
+				const extractedUrl = extractLinkFromSection(readmeContent, sectionTitle);
+				if (extractedUrl) {
+					url = extractedUrl;
+				}
+			}
+
+			// If no URL found in README, fallback to homepage
+			if (!url && project.homepage) {
+				url = project.homepage;
+			}
+
+			// If still no URL, return null for demo types
+			if (!url) {
+				return null;
+			}
+
+			return {
+				type: type as 'website' | 'apk' | 'guide',
+				url,
+				label: label.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+				icon: type === 'apk' ? 'Download' : 'ExternalLink',
+			};
+		}
+	}
+
+	// If homepage exists, show live demo
+	if (project.homepage) {
+		return {
+			type: 'website',
+			url: project.homepage,
+			label: 'Live Demo',
+			icon: 'ExternalLink',
+		};
+	}
+
+	// For backend repos without homepage/demo, don't show button
+	if (isBackendRepo(project.topics)) {
+		return null;
+	}
+
+	// Default fallback for frontend repos
+	return {
+		type: 'github',
+		url: project.html_url,
+		label: 'View Code',
+		icon: 'Github',
+	};
+}
+
+function getFeaturedProjects(repositories: GitHubRepo[]): GitHubRepo[] {
+	return repositories
+		.filter(repository => repository.topics.includes('featured'))
+		.slice(0, 6);
+}
+
+export {getGitHubRepositories, getFeaturedProjects, getDemoLink};
+export type {DemoLink};

@@ -1,9 +1,11 @@
 'use client';
 
+import React, {useEffect, useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
+import {FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 import {GitHubRepo} from '@/types/github';
 import {COLLABORATORS} from '@/constants';
+import {DemoLink, getDemoLink} from '@/lib/github';
 import {cn} from '@/lib/utils';
 
 interface ProjectCardProps {
@@ -12,6 +14,9 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({project, index}: ProjectCardProps) {
+	const [isHovered, setIsHovered] = useState(false);
+	const [demoLink, setDemoLink] = useState<DemoLink | null>(null);
+
 	const getTechColor = (tech: string) => {
 		const colors: { [key: string]: string } = {
 			// Web Development & Frontend
@@ -297,6 +302,19 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		return [];
 	};
 
+	const getDemoIcon = (iconName: string) => {
+		switch (iconName) {
+			case 'ExternalLink':
+				return FaExternalLinkAlt;
+			case 'Download':
+				return FaDownload;
+			case 'Github':
+				return FaGithub;
+			default:
+				return FaExternalLinkAlt;
+		}
+	};
+
 	const itemVariants: Variants = {
 		hidden: {y: 40, opacity: 0, rotateX: 15},
 		visible: {
@@ -313,10 +331,19 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 	const collaborators = getCollaborators(project.name);
 
+	useEffect(() => {
+		async function fetchDemoLink() {
+			const link = await getDemoLink(project);
+			setDemoLink(link);
+		}
+
+		fetchDemoLink();
+	}, [project]);
+
 	return (
 		<motion.div
 			variants={itemVariants}
-			className={cn('group relative rounded-2xl p-8 border border-opacity-20 backdrop-blur-sm transition-all duration-500')}
+			className={cn('group relative rounded-2xl p-8 border border-opacity-20 backdrop-blur-sm transition-all duration-500 flex flex-col')}
 			style={{
 				backgroundColor: 'rgba(var(--color-card), 0.5)',
 				borderColor: 'rgba(var(--color-border), 0.3)',
@@ -326,23 +353,28 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				rotateX: 5,
 				boxShadow: '0 25px 50px rgba(0,0,0,0.25)',
 			}}
+			onHoverStart={() => setIsHovered(true)}
+			onHoverEnd={() => setIsHovered(false)}
 		>
 			{/* GitHub Icon Overlay */}
 			<motion.div
-				className={cn('absolute inset-0 rounded-2xl flex items-center justify-center z-10 pointer-events-none')}
+				className={cn('absolute inset-0 rounded-2xl flex items-center justify-center z-50 pointer-events-none')}
 				initial={{opacity: 0, scale: 0.5}}
-				whileHover={{opacity: 1, scale: 1}}
+				animate={{
+					opacity: isHovered ? 1 : 0,
+					scale: isHovered ? 1 : 0.5,
+				}}
 				transition={{duration: 0.3}}
 			>
 				<motion.a
 					href={project.html_url}
-					target="_blank"
-					rel="noopener noreferrer"
+					target={'_blank'}
+					rel={'noopener noreferrer'}
 					className={cn('pointer-events-auto')}
 					whileHover={{scale: 1.1}}
 					whileTap={{scale: 0.9}}
 				>
-					<FaGithub className={cn('w-16 h-16 text-white drop-shadow-lg')}/>
+					<FaGithub className={cn('w-16 h-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
 				</motion.a>
 			</motion.div>
 
@@ -372,18 +404,22 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			</div>
 
 			{/* Tech Stack */}
-			<div className={cn('flex flex-wrap gap-2 mb-6')}>
-				{project.topics.filter(topic => topic !== 'featured').slice(0, 4).map((tech) => (
+			<div className={cn('flex flex-wrap gap-2 mb-3')}>
+				{project.topics.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 4).map((tech) => (
 					<motion.span key={tech} className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(tech))} whileHover={{scale: 1.1, y: -2}}>
 						{tech}
 					</motion.span>
 				))}
-				{project.language && (
+			</div>
+
+			{/* Language Tag */}
+			{project.language && (
+				<div className={cn('flex mb-6')}>
 					<motion.span className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(project.language))} whileHover={{scale: 1.1, y: -2}}>
 						{project.language}
 					</motion.span>
-				)}
-			</div>
+				</div>
+			)}
 
 			{/* Collaborators */}
 			{collaborators.length > 0 && (
@@ -396,27 +432,27 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			)}
 
 			{/* Project Stats */}
-			<div className={cn('flex items-center gap-4 mb-6 text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+			<div className={cn('flex items-center gap-4 text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
 				<motion.div className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
 					<span>⭐</span>
 					<span className={cn('font-medium')}>{project.stargazers_count}</span>
 				</motion.div>
 			</div>
 
-			{/* Demo Link */}
-			{project.homepage && (
-				<div className={cn('flex justify-center')}>
+			{/* Demo Button at bottom */}
+			{demoLink && (
+				<div className={cn('flex justify-center mt-auto relative z-60')}>
 					<motion.a
-						href={project.homepage}
-						target="_blank"
-						rel="noopener noreferrer"
-						className={cn('flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white transition-all duration-300')}
+						href={demoLink.url}
+						target={'_blank'}
+						rel={'noopener noreferrer'}
+						className={cn('flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white transition-all duration-300 relative z-60')}
 						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
 						whileHover={{scale: 1.05, y: -2, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
 						whileTap={{scale: 0.95}}
 					>
-						<FaExternalLinkAlt className={cn('w-4 h-4')}/>
-						Demo
+						{React.createElement(getDemoIcon(demoLink.icon), {className: cn('w-4 h-4')})}
+						{demoLink.label}
 					</motion.a>
 				</div>
 			)}
