@@ -100,6 +100,7 @@ async function getDemoLink(project: GitHubRepo): Promise<DemoLink | null> {
 			const label = parts.slice(2).join(' ').replace(/-/g, ' ');
 
 			// Fetch README content
+			// TODO: To be fixed
 			const owner = project.owner.login;
 			const readmeContent = await getReadmeContent(owner, project.name);
 
@@ -164,11 +165,13 @@ async function getDemoLink(project: GitHubRepo): Promise<DemoLink | null> {
 	};
 }
 
-function getFeaturedProjects(repositories: GitHubRepo[]): GitHubRepo[] {
-	return repositories
-		.filter(repository => repository.topics.includes('featured'))
-		.slice(0, 6);
+function getTopFeaturedProjects(repositories: GitHubRepo[]): GitHubRepo[] {
+	return repositories.filter(repository => repository.topics.includes('portfolio') && repository.topics.includes('featured'));
 }
 
-export {getGitHubRepositories, getFeaturedProjects, getDemoLink};
+function getAllFeaturedProjects(repositories: GitHubRepo[]): GitHubRepo[] {
+	return repositories.filter(repository => repository.topics.includes('featured'));
+}
+
+export {getGitHubRepositories, getTopFeaturedProjects, getAllFeaturedProjects, getDemoLink};
 export type {DemoLink};
