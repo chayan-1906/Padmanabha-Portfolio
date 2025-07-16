@@ -84,11 +84,11 @@ function HeroSection() {
 				/>
 			</div>
 
-			<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('relative z-10 text-center max-w-4xl mx-auto px-6')}>
+			<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('relative z-10 text-center max-w-4xl mx-auto px-6 mt-20')}>
 				{/* Profile Image Placeholder */}
 				<motion.div variants={itemVariants} className={cn('mb-8')}>
 					<div className={cn('flex size-32 mx-auto mb-6 rounded-full border-4 border-gray-300 text-gray-500 bg-gray-100 overflow-hidden')}>
-						<Image src={'/images/profile-photo.jpg'} alt={'profile-picture'} width={400} height={400} className={'rounded-full object-cover'} style={{objectPosition: '50% 20%'}}/>
+						<Image src={PERSONAL_INFO.avatar} alt={'profile-picture'} width={400} height={400} className={'rounded-full object-cover'} style={{objectPosition: '50% 20%'}}/>
 					</div>
 				</motion.div>
 
@@ -200,7 +200,7 @@ function HeroSection() {
 				variants={floatingVariants}
 				initial={'initial'}
 				animate={'animate'}
-				className={cn('absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer')}
+				className={cn('absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer')}
 				onClick={() => document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})}
 			>
 				<motion.div className={cn('flex flex-col items-center space-y-2')} style={{color: 'rgb(var(--color-foreground))'}}>
