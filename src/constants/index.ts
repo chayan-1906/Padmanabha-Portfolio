@@ -183,7 +183,7 @@ export const WORK_EXPERIENCE = [
 	},
 	{
 		company: 'Remix Labs',
-		logo: 'https://remixlabs.com/images/web/logo_small.png',
+		logo: 'https://pbs.twimg.com/profile_images/1628147936214368258/AiYLTdSG_400x400.jpg',
 		location: 'Remote',
 		period: 'Mar 2023 – Present',
 		roles: [
@@ -243,6 +243,7 @@ export const WORK_EXPERIENCE = [
 	},
 	{
 		company: 'HighRadius',
+		logo: 'https://cdn.prod.website-files.com/6640cd28f51f13175e577c05/664e0093d9e2a82b937fbe15_acc0a1b6-efaa-5a44-80eb-7c325b3ade71.svg',
 		location: 'Bhubaneswar, India',
 		period: 'Jan 2021 – Sep 2021',
 		roles: [
