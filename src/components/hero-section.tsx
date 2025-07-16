@@ -84,7 +84,7 @@ function HeroSection() {
 				/>
 			</div>
 
-			<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('relative z-10 text-center max-w-4xl mx-auto px-6 mt-20')}>
+			<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('relative z-10 text-center max-w-4xl mx-auto px-6 mt-24')}>
 				{/* Profile Image Placeholder */}
 				<motion.div variants={itemVariants} className={cn('mb-8')}>
 					<div className={cn('flex size-32 mx-auto mb-6 rounded-full border-4 border-gray-300 text-gray-500 bg-gray-100 overflow-hidden')}>

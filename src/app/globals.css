@@ -28,3 +28,13 @@
 		color: rgb(var(--color-foreground));
 	}
 }
+
+::selection {
+	background: #6366f1;
+	color: white;
+}
+
+::-moz-selection {
+	background: #6366f1;
+	color: white;
+}
