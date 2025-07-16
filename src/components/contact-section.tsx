@@ -101,11 +101,7 @@ function ContactSection() {
 						rotate: [0, 360],
 						scale: [1, 1.2, 1],
 					}}
-					transition={{
-						duration: 30,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-40 -right-40 w-80 h-80 rounded-full opacity-5 blur-3xl')}
@@ -114,11 +110,7 @@ function ContactSection() {
 						rotate: [360, 0],
 						scale: [1.2, 1, 1.2],
 					}}
-					transition={{
-						duration: 25,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
@@ -139,10 +131,10 @@ function ContactSection() {
 						Get In Touch
 					</motion.div>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						Let's Work Together
+						Let&apos;s Work Together
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						Ready to bring your ideas to life? I'm always excited to work on new projects and collaborate with amazing people.
+						Ready to bring your ideas to life? I&apos;m always excited to work on new projects and collaborate with amazing people.
 					</p>
 				</motion.div>
 
@@ -291,7 +283,7 @@ function ContactSection() {
 								<motion.button
 									type="submit"
 									disabled={isSubmitting}
-									className={cn('w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed')}
+									className={cn('w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed')}
 									style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
 									whileHover={{scale: 1.05, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
 									whileTap={{scale: 0.95}}

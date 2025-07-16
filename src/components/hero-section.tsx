@@ -7,8 +7,11 @@ import {MdEmail, MdPhone} from 'react-icons/md';
 import {FaGithub, FaLinkedin} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {PERSONAL_INFO, SOCIAL_LINKS, TECH_STACK} from '@/constants';
+import {useEffect, useState} from 'react';
 
 function HeroSection() {
+	const [techGradients, setTechGradients] = useState<string[]>([]);
+
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
 		visible: {
@@ -59,6 +62,24 @@ function HeroSection() {
 				return FaGithub;
 		}
 	};
+
+	const generateRandomGradient = () => {
+		const colors = [
+			'#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981',
+			'#3b82f6', '#ef4444', '#8b5cf6', '#06b6d4', '#84cc16',
+			'#f97316', '#a855f7', '#14b8a6', '#f472b6', '#eab308'
+		];
+
+		const color1 = colors[Math.floor(Math.random() * colors.length)];
+		const color2 = colors[Math.floor(Math.random() * colors.length)];
+		const angle = Math.floor(Math.random() * 360);
+
+		return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+	};
+
+	useEffect(() => {
+		setTechGradients(TECH_STACK.map(() => generateRandomGradient()));
+	}, []);
 
 	return (
 		<section className={cn('min-h-screen relative overflow-hidden flex items-center justify-center')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
@@ -128,8 +149,8 @@ function HeroSection() {
 								key={tech}
 								className={cn('px-4 py-2 rounded-full text-sm font-medium')}
 								style={{
-									backgroundColor: 'rgb(var(--color-secondary))',
-									color: 'rgb(var(--color-secondary-foreground))',
+									background: techGradients[index] || 'rgb(var(--color-secondary))',
+									color: 'white',
 								}}
 								whileHover={{
 									scale: 1.05,
