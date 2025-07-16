@@ -46,11 +46,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 						rotate: [0, 360],
 						scale: [1, 1.2, 1],
 					}}
-					transition={{
-						duration: 20,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-40 -left-40 w-96 h-96 rounded-full opacity-10 blur-3xl')}
@@ -59,18 +55,14 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 						rotate: [360, 0],
 						scale: [1.2, 1, 1.2],
 					}}
-					transition={{
-						duration: 25,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
 			<motion.div
 				variants={containerVariants}
-				initial="hidden"
-				whileInView="visible"
+				initial={'hidden'}
+				whileInView={'visible'}
 				viewport={{once: true, margin: '-100px'}}
 				className={cn('max-w-7xl mx-auto relative z-10')}
 			>
@@ -102,10 +94,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 				</div>
 
 				{/* Floating CTA */}
-				<motion.div
-					variants={itemVariants}
-					className={cn('text-center mt-20')}
-				>
+				<motion.div variants={itemVariants} className={cn('text-center mt-20')}>
 					<motion.a
 						href="/projects"
 						className={cn('inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-semibold text-white transition-all duration-300')}
@@ -117,12 +106,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 						whileTap={{scale: 0.95}}
 					>
 						View All Projects
-						<motion.span
-							animate={{x: [0, 5, 0]}}
-							transition={{repeat: Infinity, duration: 2}}
-						>
-							→
-						</motion.span>
+						<motion.span animate={{x: [0, 5, 0]}} transition={{repeat: Infinity, duration: 2}}>→</motion.span>
 					</motion.a>
 				</motion.div>
 			</motion.div>
