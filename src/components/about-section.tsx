@@ -138,7 +138,7 @@ function AboutSection() {
 										<p className={cn('text-sm opacity-80 mb-3')} style={{color: 'rgb(var(--color-card-foreground))'}}>{exp.location} • {exp.roles[0].type}</p>
 										<ul className={cn('text-sm space-y-1 opacity-90')} style={{color: 'rgb(var(--color-card-foreground))'}}>
 											{exp.roles[0].description.map((desc, idx) => (
-												<li key={idx} className={cn('flex items-start gap-2')}>
+												<li key={idx} className={cn('flex items-center gap-2')}>
 													<span className={cn('text-blue-500 mt-1')}>•</span>
 													{desc}
 												</li>
