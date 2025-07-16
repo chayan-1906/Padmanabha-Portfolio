@@ -221,7 +221,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 			{/* Tech Stack */}
 			<div className={cn('flex flex-wrap gap-2 mb-3')}>
-				{project.topics.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 4).map((tech) => (
+				{project.topics.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 8).map((tech) => (
 					<motion.span key={tech} className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(tech))} whileHover={{scale: 1.1, y: -2}}>
 						{tech}
 					</motion.span>

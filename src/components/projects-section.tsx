@@ -68,17 +68,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 			>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<motion.div
-						className={cn('inline-block mb-4 px-6 py-2 rounded-full text-sm font-medium')}
-						style={{
-							background: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
-							color: 'white',
-						}}
-						whileHover={{scale: 1.05}}
-					>
-						Latest Work
-					</motion.div>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						Featured Projects
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>

@@ -159,54 +159,123 @@ export const FEATURED_PROJECTS = [
 
 export const WORK_EXPERIENCE = [
 	{
-		title: 'Freelancer - Flutter & Next.js Developer',
 		company: 'CouchConcerts',
+		logo: 'https://files.couchconcerts.com/public_facing_assets/logos/CouchConcerts_Blue_Background_Square.png',
 		location: 'Remote',
 		period: 'Mar 2023 – Present',
-		type: 'Freelance',
-		description: [
-			'Built cross-platform mobile app using Flutter (GetX, Firebase) connecting 300+ users',
-			'Developed Next.js 15 web application with React.js 19 and responsive design',
-			'Implemented chat functionality and event booking system with approval workflows',
-		],
-		achievements: [
-			'300+ active users',
-			'Real-time chat system',
-			'Event booking platform',
+		roles: [
+			{
+				title: 'Freelancer - Flutter & Next.js Developer',
+				period: 'Mar 2023 – Present',
+				type: 'Freelance',
+				description: [
+					'Built cross-platform mobile app using Flutter (GetX, Firebase) connecting 300+ users',
+					'Developed Next.js 15 web application with React.js 19 and responsive design',
+					'Implemented chat functionality and event booking system with approval workflows',
+				],
+				achievements: [
+					'300+ active users',
+					'Real-time chat system',
+					'Event booking platform',
+				],
+			},
 		],
 	},
 	{
-		title: 'Product Analyst',
 		company: 'Remix Labs',
+		logo: 'https://remixlabs.com/images/web/logo_small.png',
 		location: 'Remote',
 		period: 'Mar 2023 – Present',
-		type: 'Contract',
-		description: [
-			'Developed rapid prototyping platform using proprietary Remix Studio',
-			'Built MCP connectors for Claude AI (Anthropic) integration extending LLM capabilities',
-			'Created reusable component library for streamlined development workflows',
-		],
-		achievements: [
-			'MCP integrations',
-			'AI-powered tools',
-			'Component library',
+		roles: [
+			{
+				title: 'Product Analyst',
+				period: 'Mar 2023 – Present',
+				type: 'Contract',
+				description: [
+					'Developed rapid prototyping platform using proprietary Remix Studio',
+					'Built MCP connectors for Claude AI (Anthropic) integration extending LLM capabilities',
+					'Created reusable component library for streamlined development workflows',
+				],
+				achievements: [
+					'MCP integrations',
+					'AI-powered tools',
+					'Component library',
+				],
+			},
 		],
 	},
 	{
-		title: 'Flutter Developer',
 		company: 'Skywa Solutions',
 		location: 'Hyderabad, India',
-		period: 'Sept 2021 – Feb 2023',
-		type: 'Full-time',
-		description: [
-			'Developed cross-platform mobile applications published on Play Store and App Store',
-			'Built service optimization app for reducing customer wait times',
-			'Created customizable widget library ensuring consistent design system',
+		period: 'Sep 2021 – Feb 2023',
+		roles: [
+			{
+				title: 'Associate Software Engineer',
+				period: 'May 2022 – Feb 2023',
+				type: 'Full-time',
+				description: [
+					'Developed cross-platform mobile applications published on Play Store and App Store',
+					'Built service optimization app for reducing customer wait times',
+					'Created customizable widget library ensuring consistent design system',
+				],
+				achievements: [
+					'Published apps on stores',
+					'Reduced wait times',
+					'Widget library',
+				],
+			},
+			{
+				title: 'Flutter Developer',
+				period: 'Sep 2021 – May 2022',
+				type: 'Internship',
+				description: [
+					'Developed Flutter applications and designed better UI for mobile apps',
+					'Built service optimization app for reducing customer wait times',
+					'Created customizable widget library ensuring consistent design system',
+				],
+				achievements: [
+					'Flutter expertise',
+					'UI design skills',
+					'Service optimization',
+				],
+			},
 		],
-		achievements: [
-			'Published apps on stores',
-			'Reduced wait times',
-			'Widget library',
+	},
+	{
+		company: 'HighRadius',
+		location: 'Bhubaneswar, India',
+		period: 'Jan 2021 – Sep 2021',
+		roles: [
+			{
+				title: 'Automation Engineer',
+				period: 'Jun 2021 – Sep 2021',
+				type: 'Internship',
+				description: [
+					'Created full-stack web-based project identifying user requirements and designing better UI/UX',
+					'Built machine learning models for automated invoice processing',
+					'Developed responsive web interfaces with modern frameworks',
+				],
+				achievements: [
+					'ML model development',
+					'Full-stack development',
+					'UI/UX design',
+				],
+			},
+			{
+				title: 'Winter Intern',
+				period: 'Jan 2021 – Mar 2021',
+				type: 'Internship',
+				description: [
+					'Participated in winter training program for web development and machine learning',
+					'Worked on invoice processing automation using ML algorithms',
+					'Contributed to team projects and learned industry best practices',
+				],
+				achievements: [
+					'Web development training',
+					'ML automation',
+					'Team collaboration',
+				],
+			},
 		],
 	},
 ];

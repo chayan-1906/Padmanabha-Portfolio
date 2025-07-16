@@ -1,7 +1,6 @@
 'use client';
 
 import Image from "next/image";
-import {ChevronDown} from 'lucide-react';
 import {motion, Variants} from 'framer-motion';
 import {MdEmail, MdPhone} from 'react-icons/md';
 import {FaGithub, FaLinkedin} from 'react-icons/fa';
@@ -199,7 +198,7 @@ function HeroSection() {
 				{/* CTA Button */}
 				<motion.div variants={itemVariants}>
 					<motion.button
-						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300')}
+						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer')}
 						style={{
 							background: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
 							color: 'white',
@@ -213,22 +212,6 @@ function HeroSection() {
 					>
 						View My Work
 					</motion.button>
-				</motion.div>
-			</motion.div>
-
-			{/* Floating Scroll Indicator */}
-			<motion.div
-				variants={floatingVariants}
-				initial={'initial'}
-				animate={'animate'}
-				className={cn('absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer')}
-				onClick={() => document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})}
-			>
-				<motion.div className={cn('flex flex-col items-center space-y-2')} style={{color: 'rgb(var(--color-foreground))'}}>
-					<span className={cn('text-sm opacity-70')}>Scroll to explore</span>
-					<motion.div animate={{y: [0, 8, 0]}} transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}>
-						<ChevronDown className={cn('w-6 h-6')}/>
-					</motion.div>
 				</motion.div>
 			</motion.div>
 		</section>
