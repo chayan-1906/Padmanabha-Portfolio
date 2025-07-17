@@ -1,7 +1,6 @@
-import {NextRequest, NextResponse} from 'next/server';
 import {google} from 'googleapis';
-
-const SPREADSHEET_ID = '1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg';
+import {NextRequest, NextResponse} from 'next/server';
+import {CONTACT_SUBMISSION_SPREADSHEET_ID} from "@/constants";
 
 export async function POST(request: NextRequest) {
 	try {
@@ -35,10 +34,10 @@ export async function POST(request: NextRequest) {
 		if (ip !== 'unknown' && ip !== '::1' && !ip.startsWith('::ffff:192.168') && !ip.startsWith('192.168')) {
 			try {
 				console.log('Fetching location for IP:', ip);
-				const locationResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+				const locationResponse = await fetch(`http://ip-api.com/json/${ip}`);
 				const locationData = await locationResponse.json();
 				console.log('Location data:', locationData);
-				country = locationData.country_name || 'unknown';
+				country = locationData.country || 'unknown';
 				city = locationData.city || 'unknown';
 			} catch (error) {
 				console.error('Location fetch error:', error);
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
 
 		console.log('Appending to spreadsheet...');
 		await sheets.spreadsheets.values.append({
-			spreadsheetId: SPREADSHEET_ID,
+			spreadsheetId: CONTACT_SUBMISSION_SPREADSHEET_ID,
 			range: 'Website Analytics!A:E',
 			valueInputOption: 'USER_ENTERED',
 			requestBody: {
