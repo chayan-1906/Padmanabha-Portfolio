@@ -36,7 +36,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 	};
 
 	return (
-		<section id="projects" className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'projects'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Floating Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -59,13 +59,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial={'hidden'}
-				whileInView={'visible'}
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-7xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-7xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>

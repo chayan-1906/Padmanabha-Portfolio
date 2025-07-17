@@ -1,8 +1,11 @@
+import {FaBriefcase, FaCalendarAlt, FaCode} from "react-icons/fa";
+
 export const PERSONAL_INFO = {
 	name: 'Padmanabha Das',
 	title: 'Full-Stack Developer',
 	description: 'Frontend Developer with 3+ years of experience building scalable web and mobile applications. Specialized in Next.js 15, React.js 19, and Flutter with expertise in AI integration through Model Context Protocol (MCP) development.',
 	subtitle: 'Specializing in Next.js 15, React.js 19, React Native, and Flutter with expertise in AI integration through Model Context Protocol (MCP) development.',
+	aboutMe: 'Full-stack developer focused on clean code over clever code. Build scalable applications solving real problems, not theoretical ones. Enjoy turning ideas into working products people actually use. Create tools I wish existed. Cricket enthusiast who finds debugging clarity during match breaks.',
 	email: 'padmanabhadas9647@gmail.com',
 	phone: '+919647100133',
 	github: 'https://github.com/chayan-1906',
@@ -56,6 +59,64 @@ export const COLLABORATORS = {
 	},
 };
 
+export const SKILLS = {
+	frontend: [
+		'Next.js 15',
+		'React.js 19',
+		'React Native',
+		'Expo',
+		'TypeScript',
+		'JavaScript',
+		'Tailwind CSS',
+		'Framer Motion',
+		'Aceternity UI',
+		'Shadcn UI',
+		'Tanstack Query',
+		'Context API',
+		'Redux',
+	],
+	mobile: [
+		'Flutter',
+		'React Native',
+		'Expo',
+		'Firebase',
+		'Android Development',
+		'iOS Development',
+		'Cross-platform',
+	],
+	backend: [
+		'Node.js',
+		'Express.js',
+		'REST APIs',
+		'GraphQL',
+		'Spring Boot',
+		'Java',
+		'MongoDB',
+		'MySQL',
+		'PostgreSQL',
+		'Prisma',
+		'Mongoose',
+	],
+	tools: [
+		'Git',
+		'GitHub',
+		'Sentry',
+		'Vercel',
+		'Netlify',
+		'Selenium',
+		'Model Context Protocol (MCP)',
+		'JetBrains (WebStorm, IntelliJ IDEA, Android Studio)',
+		'Postman',
+	],
+	ai: [
+		'Model Context Protocol (MCP)',
+		'Claude AI Integration',
+		'OpenAI APIs',
+		'AI-powered applications',
+		'Machine Learning basics',
+	],
+};
+
 export const WORK_EXPERIENCE = [
 	{
 		company: 'CouchConcerts',
@@ -71,6 +132,7 @@ export const WORK_EXPERIENCE = [
 					'Built cross-platform mobile app using Flutter (GetX, Firebase) connecting 300+ users',
 					'Developed Next.js 15 web application with React.js 19 and responsive design',
 					'Implemented chat functionality and event booking system with approval workflows',
+					'Worked on Deeplink implementation for several screens'
 				],
 				achievements: [
 					'300+ active users',
@@ -88,16 +150,25 @@ export const WORK_EXPERIENCE = [
 		roles: [
 			{
 				title: 'Product Analyst',
-				period: 'Mar 2023 – Present',
+				period: 'Jan 2025 – Present',
 				type: 'Contract',
 				description: [
-					'Developed rapid prototyping platform using proprietary Remix Studio',
 					'Built MCP connectors for Claude AI (Anthropic) integration extending LLM capabilities',
-					'Created reusable component library for streamlined development workflows',
 				],
 				achievements: [
 					'MCP integrations',
 					'AI-powered tools',
+				],
+			},
+			{
+				title: 'Associate Software Engineer',
+				period: 'Mar 2023 – Dec 2024',
+				type: 'Full-time',
+				description: [
+					'Developed rapid prototyping platform using proprietary Remix Studio',
+					'Created reusable component library for streamlined development workflows',
+				],
+				achievements: [
 					'Component library',
 				],
 			},
@@ -180,6 +251,27 @@ export const WORK_EXPERIENCE = [
 	},
 ];
 
+export const EXPERIENCE_SUMMARY = [
+	{
+		label: 'Companies Worked',
+		value: WORK_EXPERIENCE.length,
+		color: 'text-blue-500',
+		icon: FaBriefcase,
+	},
+	{
+		label: 'Years Experience',
+		value: '3+',
+		color: 'text-purple-500',
+		icon: FaCalendarAlt,
+	},
+	{
+		label: 'Technologies Used',
+		value: `${Math.floor(Object.values(SKILLS).flat().length / 5) * 5}+`,
+		color: 'text-green-500',
+		icon: FaCode,
+	},
+];
+
 export const EDUCATION = {
 	degree: 'Bachelor of Technology in Computer Science Engineering',
 	institution: 'Kalinga Institute of Industrial Technology',
@@ -190,62 +282,6 @@ export const EDUCATION = {
 		'Graduated with Distinction',
 		'Specialized in Software Engineering',
 		'Active in coding competitions',
-	],
-};
-
-export const SKILLS = {
-	frontend: [
-		'Next.js 15',
-		'React.js 19',
-		'React Native',
-		'Expo',
-		'TypeScript',
-		'JavaScript',
-		'Tailwind CSS',
-		'Framer Motion',
-		'Aceternity UI',
-		'Shadcn UI',
-	],
-	mobile: [
-		'Flutter',
-		'React Native',
-		'Expo',
-		'Firebase',
-		'Android Development',
-		'iOS Development',
-		'Cross-platform',
-	],
-	backend: [
-		'Node.js',
-		'Express.js',
-		'REST APIs',
-		'GraphQL',
-		'Spring Boot',
-		'Java',
-		'MongoDB',
-		'MySQL',
-		'PostgreSQL',
-		'Prisma',
-		'Mongoose',
-	],
-	tools: [
-		'Git',
-		'GitHub',
-		'Sentry',
-		'Vercel',
-		'Netlify',
-		'Selenium',
-		'Model Context Protocol (MCP)',
-		'Docker',
-		'Postman',
-		'VS Code',
-	],
-	ai: [
-		'Model Context Protocol (MCP)',
-		'Claude AI Integration',
-		'OpenAI APIs',
-		'AI-powered applications',
-		'Machine Learning basics',
 	],
 };
 
@@ -290,12 +326,3 @@ export const ACHIEVEMENTS = [
 		icon: '🎓',
 	},
 ];
-
-export const STATS = {
-	yearsExperience: 3,
-	projectsCompleted: 50,
-	happyClients: 15,
-	technologies: 25,
-	githubRepos: 100,
-	codeCommits: 2500,
-};

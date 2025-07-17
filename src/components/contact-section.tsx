@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
 import {FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
@@ -91,7 +91,7 @@ function ContactSection() {
 	];
 
 	return (
-		<section id="contact" className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'contact'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -114,13 +114,7 @@ function ContactSection() {
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial="hidden"
-				whileInView="visible"
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-6xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
@@ -154,12 +148,8 @@ function ContactSection() {
 											<method.icon className={cn('w-5 h-5')}/>
 										</div>
 										<div>
-											<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-												{method.label}
-											</p>
-											<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-												{method.value}
-											</p>
+											<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{method.label}</p>
+											<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{method.value}</p>
 										</div>
 									</motion.a>
 								))}
@@ -167,14 +157,9 @@ function ContactSection() {
 						</div>
 
 						{/* Social Links */}
-						<motion.div
-							className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
-							style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
-							whileHover={{scale: 1.02}}
-						>
-							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-								Connect With Me
-							</h3>
+						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
+						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.02}}>
+							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Connect With Me</h3>
 							<div className={cn('flex gap-4')}>
 								{SOCIAL_LINKS.filter(link => link.name !== 'Email' && link.name !== 'Phone').map((link, index) => {
 									const Icon = link.name === 'GitHub' ? FaGithub : FaLinkedin;
@@ -182,8 +167,8 @@ function ContactSection() {
 										<motion.a
 											key={link.name}
 											href={link.url}
-											target="_blank"
-											rel="noopener noreferrer"
+											target={'_blank'}
+											rel={'noopener noreferrer'}
 											className={cn('p-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white transition-all duration-300')}
 											whileHover={{scale: 1.1, rotate: 5}}
 											whileTap={{scale: 0.9}}
@@ -198,21 +183,16 @@ function ContactSection() {
 
 					{/* Contact Form */}
 					<motion.div variants={itemVariants}>
-						<motion.div
-							className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
-							style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
-							whileHover={{scale: 1.01}}
-						>
-							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-								Send a Message
-							</h3>
+						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
+						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.01}}>
+							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Send a Message</h3>
 							<form onSubmit={handleSubmit} className={cn('space-y-6')}>
 								<div className={cn('grid grid-cols-1 md:grid-cols-2 gap-6')}>
 									<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 										<input
-											type="text"
-											name="name"
-											placeholder="Your Name"
+											type={'text'}
+											name={'name'}
+											placeholder={'Your Name'}
 											value={formData.name}
 											onChange={handleChange}
 											required
@@ -226,9 +206,9 @@ function ContactSection() {
 									</motion.div>
 									<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 										<input
-											type="email"
-											name="email"
-											placeholder="Your Email"
+											type={'email'}
+											name={'email'}
+											placeholder={'Your Email'}
 											value={formData.email}
 											onChange={handleChange}
 											required
@@ -243,9 +223,9 @@ function ContactSection() {
 								</div>
 								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 									<input
-										type="text"
-										name="subject"
-										placeholder="Subject"
+										type={'text'}
+										name={'subject'}
+										placeholder={'Subject'}
 										value={formData.subject}
 										onChange={handleChange}
 										required
@@ -259,8 +239,8 @@ function ContactSection() {
 								</motion.div>
 								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 									<textarea
-										name="message"
-										placeholder="Your Message"
+										name={'message'}
+										placeholder={'Your Message'}
 										value={formData.message}
 										onChange={handleChange}
 										required
@@ -274,7 +254,7 @@ function ContactSection() {
 									/>
 								</motion.div>
 								<motion.button
-									type="submit"
+									type={'submit'}
 									disabled={isSubmitting}
 									className={cn('w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed')}
 									style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}

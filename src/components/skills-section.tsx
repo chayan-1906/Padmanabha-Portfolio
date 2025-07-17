@@ -93,7 +93,7 @@ function SkillsSection() {
 	};
 
 	return (
-		<section id="skills" className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'skills'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -103,21 +103,11 @@ function SkillsSection() {
 						rotate: [360, 0],
 						scale: [1.2, 1, 1.2],
 					}}
-					transition={{
-						duration: 25,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial="hidden"
-				whileInView="visible"
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-7xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-7xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
@@ -131,11 +121,7 @@ function SkillsSection() {
 				{/* Skills Grid */}
 				<div className={cn('grid md:grid-cols-2 lg:grid-cols-4 gap-8')}>
 					{skillCategories.map((category, categoryIndex) => (
-						<motion.div
-							key={category.title}
-							variants={itemVariants}
-							className={cn('relative group')}
-						>
+						<motion.div key={category.title} variants={itemVariants} className={cn('relative group')}>
 							<motion.div
 								className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm h-full')}
 								style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
@@ -194,37 +180,6 @@ function SkillsSection() {
 						</motion.div>
 					))}
 				</div>
-
-				{/* Additional Stats */}
-				<motion.div variants={itemVariants} className={cn('mt-20 grid grid-cols-2 md:grid-cols-4 gap-8')}>
-					{[
-						{label: 'Years Experience', value: '3+', color: 'text-blue-500'},
-						{label: 'Projects Built', value: '50+', color: 'text-purple-500'},
-						{label: 'Technologies', value: '20+', color: 'text-green-500'},
-						{label: 'Happy Clients', value: '15+', color: 'text-pink-500'},
-					].map((stat, index) => (
-						<motion.div
-							key={stat.label}
-							className={cn('text-center p-6 rounded-xl border border-opacity-20 backdrop-blur-sm')}
-							style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
-							whileHover={{scale: 1.05, y: -5}}
-							initial={{opacity: 0, y: 20}}
-							whileInView={{opacity: 1, y: 0}}
-							transition={{delay: index * 0.1}}
-						>
-							<motion.div
-								className={cn('text-3xl font-bold mb-2', stat.color)}
-								animate={{scale: [1, 1.1, 1]}}
-								transition={{duration: 2, repeat: Infinity, delay: index * 0.2}}
-							>
-								{stat.value}
-							</motion.div>
-							<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-								{stat.label}
-							</p>
-						</motion.div>
-					))}
-				</motion.div>
 			</motion.div>
 		</section>
 	);
