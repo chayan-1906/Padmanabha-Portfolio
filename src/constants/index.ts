@@ -135,6 +135,7 @@ export const WORK_EXPERIENCE = [
 					'300+ active users',
 					'Real-time chat system',
 					'Event booking platform',
+					'Deeplink implementation',
 				],
 			},
 		],
@@ -178,17 +179,17 @@ export const WORK_EXPERIENCE = [
 		roles: [
 			{
 				title: 'Associate Software Engineer',
-				period: 'May 2022 – Feb 2023',
+				period: 'Jun 2022 – Feb 2023',
 				type: 'Full-time',
 				description: [
 					'Developed cross-platform mobile applications published on Play Store and App Store',
-					'Built service optimization app for reducing customer wait times',
 					'Created customizable widget library ensuring consistent design system',
+					'Mentored junior interns in Flutter development and coding best practices',
 				],
 				achievements: [
 					'Published apps on stores',
-					'Reduced wait times',
 					'Widget library',
+					'Mentored junior interns',
 				],
 			},
 			{
@@ -198,11 +199,11 @@ export const WORK_EXPERIENCE = [
 				description: [
 					'Developed Flutter applications and designed better UI for mobile apps',
 					'Built service optimization app for reducing customer wait times',
-					'Created customizable widget library ensuring consistent design system',
 				],
 				achievements: [
 					'Flutter expertise',
 					'UI design skills',
+					'Reduced wait times',
 					'Service optimization',
 				],
 			},
