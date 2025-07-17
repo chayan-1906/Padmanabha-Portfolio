@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import {FaTrophy} from 'react-icons/fa';
 import {motion, Variants} from 'framer-motion';
-import {FaBriefcase, FaCalendarAlt, FaTrophy, FaUsers} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {WORK_EXPERIENCE} from '@/constants';
+import {EXPERIENCE_SUMMARY, WORK_EXPERIENCE} from '@/constants';
 
 function ExperienceSection() {
 	const containerVariants: Variants = {
@@ -64,7 +64,7 @@ function ExperienceSection() {
 	};
 
 	return (
-		<section id={'experience'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={'experience'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -74,11 +74,7 @@ function ExperienceSection() {
 						rotate: [0, 360],
 						scale: [1, 1.2, 1],
 					}}
-					transition={{
-						duration: 20,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-20 -left-20 w-96 h-96 rounded-full opacity-5 blur-3xl')}
@@ -87,11 +83,7 @@ function ExperienceSection() {
 						rotate: [360, 0],
 						scale: [1.2, 1, 1.2],
 					}}
-					transition={{
-						duration: 25,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
@@ -141,12 +133,8 @@ function ExperienceSection() {
 												<Image src={experience.logo} alt={`${experience.company} logo`} width={200} height={200} className={cn('w-10 h-10 object-contain rounded-lg')}/>
 											)}
 											<div>
-												<h3 className={cn('text-2xl font-bold mb-1')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-													{experience.company}
-												</h3>
-												<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-													{experience.location} • {experience.period}
-												</p>
+												<h3 className={cn('text-2xl font-bold mb-1')} style={{color: 'rgb(var(--color-card-foreground))'}}>{experience.company}</h3>
+												<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{experience.location} • {experience.period}</p>
 											</div>
 										</div>
 									</div>
@@ -156,19 +144,16 @@ function ExperienceSection() {
 										{experience.roles.map((role, roleIndex) => (
 											<motion.div
 												key={roleIndex}
-												className={cn('border-l-2 border-blue-500 pl-4 py-2')}
+												className={cn('border-l-2 pl-4 py-2')}
+												style={{borderLeftColor: `rgb(${getExperienceColor(index).includes('blue') ? '59 130 246' : getExperienceColor(index).includes('purple') ? '139 92 246' : getExperienceColor(index).includes('green') ? '34 197 94' : '249 115 22'})`}}
 												initial={{opacity: 0, x: -20}}
 												whileInView={{opacity: 1, x: 0}}
 												transition={{delay: roleIndex * 0.1}}
 											>
 												<div className={cn('flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2')}>
-													<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-														{role.title}
-													</h4>
+													<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>{role.title}</h4>
 													<div className={cn('flex items-center gap-2')}>
-														<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-															{role.period}
-														</span>
+														<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{role.period}</span>
 														<motion.span className={cn('px-2 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getExperienceColor(index))}
 														             whileHover={{scale: 1.05}}>
 															{role.type}
@@ -186,13 +171,9 @@ function ExperienceSection() {
 															whileInView={{opacity: 1, x: 0}}
 															transition={{delay: descIndex * 0.05}}
 														>
-															<motion.div
-																className={cn('w-1.5 h-1.5 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', getExperienceColor(index))}
-																whileHover={{scale: 1.5}}
-															/>
-															<p className={cn('text-sm leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-																{desc}
-															</p>
+															<motion.div className={cn('w-1.5 h-1.5 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', getExperienceColor(index))}
+															            whileHover={{scale: 1.5}}/>
+															<p className={cn('text-sm leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>{desc}</p>
 														</motion.div>
 													))}
 												</div>
@@ -225,26 +206,7 @@ function ExperienceSection() {
 				{/* Summary Stats */}
 				<motion.div variants={itemVariants} className={cn('mt-20 text-center')}>
 					<div className={cn('grid grid-cols-1 md:grid-cols-3 gap-8')}>
-						{[
-							{
-								label: 'Companies Worked',
-								value: WORK_EXPERIENCE.length,
-								color: 'text-blue-500',
-								icon: FaBriefcase,
-							},
-							{
-								label: 'Years Experience',
-								value: '3+',
-								color: 'text-purple-500',
-								icon: FaCalendarAlt,
-							},
-							{
-								label: 'Projects Delivered',
-								value: '50+',
-								color: 'text-green-500',
-								icon: FaUsers,
-							},
-						].map((stat, index) => (
+						{EXPERIENCE_SUMMARY.map((stat, index) => (
 							<motion.div
 								key={stat.label}
 								className={cn('p-6 rounded-xl border border-opacity-20 backdrop-blur-sm')}
@@ -255,16 +217,10 @@ function ExperienceSection() {
 								transition={{delay: index * 0.1}}
 							>
 								<stat.icon className={cn('w-8 h-8 mx-auto mb-4', stat.color)}/>
-								<motion.div
-									className={cn('text-3xl font-bold mb-2', stat.color)}
-									animate={{scale: [1, 1.1, 1]}}
-									transition={{duration: 2, repeat: Infinity, delay: index * 0.2}}
-								>
+								<motion.div className={cn('text-3xl font-bold mb-2', stat.color)} animate={{scale: [1, 1.1, 1]}} transition={{duration: 2, repeat: Infinity, delay: index * 0.2}}>
 									{stat.value}
 								</motion.div>
-								<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-									{stat.label}
-								</p>
+								<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{stat.label}</p>
 							</motion.div>
 						))}
 					</div>
