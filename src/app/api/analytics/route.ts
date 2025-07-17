@@ -1,19 +1,11 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {google} from 'googleapis';
-import path from 'path';
-import fs from 'fs';
 
 const SPREADSHEET_ID = '1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg';
 
 export async function POST(request: NextRequest) {
 	try {
-		console.log('Analytics API called');
-
-		const credentialsPath = path.join(process.cwd(), 'google-credentials.json');
-		console.log('Credentials path:', credentialsPath);
-
-		const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
-		console.log('Credentials loaded');
+		const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
 
 		const auth = new google.auth.GoogleAuth({
 			credentials,
