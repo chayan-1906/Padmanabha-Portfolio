@@ -14,7 +14,7 @@ export const PERSONAL_INFO = {
 	company: 'Remix Labs',
 	bio: 'Flutter, React & Next.js Developer',
 	avatar: '/images/profile-photo.jpg',
-	resumeUrl: '#', // Will be added later
+	resumeUrl: 'https://drive.google.com/file/d/1dV1-68JA95d_eWWwn0SqcS_V_G83BxHx/view',
 };
 
 export const TECH_STACK = [
@@ -284,22 +284,25 @@ export const EDUCATION = {
 
 export const CERTIFICATIONS = [
 	{
-		name: 'React Developer Certification',
-		issuer: 'Meta',
-		date: '2023',
-		credentialId: 'META-REACT-2023',
+		name: 'Skywa Internship Certificate',
+		issuer: 'Skywa Solutions',
+		date: '2022',
+		credentialId: 'SKYWA-INTERN-2022',
+		url: 'https://drive.google.com/file/d/1udP-ehFX7qLiXXNsy-AOHnjaEolnrlV_/view',
 	},
 	{
-		name: 'Flutter Development',
-		issuer: 'Google',
-		date: '2022',
-		credentialId: 'GOOGLE-FLUTTER-2022',
+		name: 'Android App Development Certificate',
+		issuer: 'UDEMY',
+		date: '2021',
+		credentialId: 'UDEMY-ANDROID-2021',
+		url: 'https://drive.google.com/file/d/1jptIEUAk-OQ8v9mbXf79NBFPXC7VMIkx/view',
 	},
 	{
-		name: 'Node.js Application Development',
-		issuer: 'IBM',
-		date: '2022',
-		credentialId: 'IBM-NODE-2022',
+		name: 'DSA Course Certificate',
+		issuer: 'Katallyst',
+		date: '2021',
+		credentialId: 'DS-COURSE-2021',
+		url: 'https://drive.google.com/file/d/1UwTsM5oD8LdkzLFqLX4XmGD9qj7J8jRi/view',
 	},
 ];
 

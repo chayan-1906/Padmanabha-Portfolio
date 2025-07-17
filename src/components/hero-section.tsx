@@ -1,12 +1,12 @@
 'use client';
 
+import {useEffect, useState} from 'react';
 import Image from "next/image";
 import {motion, Variants} from 'framer-motion';
 import {MdEmail, MdPhone} from 'react-icons/md';
-import {FaGithub, FaLinkedin} from 'react-icons/fa';
+import {FaDownload, FaGithub, FaLinkedin} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {PERSONAL_INFO, SOCIAL_LINKS, TECH_STACK} from '@/constants';
-import {useEffect, useState} from 'react';
 
 function HeroSection() {
 	const [techGradients, setTechGradients] = useState<string[]>([]);
@@ -31,18 +31,6 @@ function HeroSection() {
 				type: 'spring',
 				damping: 12,
 				stiffness: 100,
-			},
-		},
-	};
-
-	const floatingVariants: Variants = {
-		initial: {y: 0},
-		animate: {
-			y: [-10, 10, -10],
-			transition: {
-				duration: 3,
-				repeat: Infinity,
-				ease: 'easeInOut',
 			},
 		},
 	};
@@ -81,7 +69,7 @@ function HeroSection() {
 	}, []);
 
 	return (
-		<section className={cn('min-h-screen relative overflow-hidden flex items-center justify-center')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section className={cn('min-h-screen relative overflow-hidden flex items-center justify-center pb-12')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Animated Background */}
 			<div className={cn('absolute inset-0 overflow-hidden')}>
 				<motion.div
@@ -125,9 +113,7 @@ function HeroSection() {
 					>
 						{PERSONAL_INFO.name}
 					</motion.h1>
-					<motion.h2 className={cn('text-2xl md:text-3xl font-medium opacity-90')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{PERSONAL_INFO.title}
-					</motion.h2>
+					<motion.h2 className={cn('text-2xl md:text-3xl font-medium opacity-90')} style={{color: 'rgb(var(--color-foreground))'}}>{PERSONAL_INFO.title}</motion.h2>
 				</motion.div>
 
 				{/* Subtitle */}
@@ -195,8 +181,8 @@ function HeroSection() {
 					</div>
 				</motion.div>
 
-				{/* CTA Button */}
-				<motion.div variants={itemVariants}>
+				{/* CTA Buttons */}
+				<motion.div variants={itemVariants} className={cn('flex flex-col sm:flex-row gap-4 justify-center')}>
 					<motion.button
 						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer')}
 						style={{
@@ -212,6 +198,26 @@ function HeroSection() {
 					>
 						View My Work
 					</motion.button>
+
+					<motion.a
+						href={PERSONAL_INFO.resumeUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2')}
+						style={{
+							background: 'transparent',
+							color: 'rgb(var(--color-foreground))',
+							border: '2px solid rgb(var(--color-border))',
+						}}
+						whileHover={{
+							scale: 1.05,
+							backgroundColor: 'rgba(var(--color-card), 0.5)',
+						}}
+						whileTap={{scale: 0.95}}
+					>
+						<FaDownload className={cn('w-5 h-5')}/>
+						Download Resume
+					</motion.a>
 				</motion.div>
 			</motion.div>
 		</section>
