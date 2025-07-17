@@ -1,11 +1,11 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
 import {FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 import {GitHubRepo} from '@/types/github';
 import {COLLABORATORS} from '@/constants';
-import {DemoLink, getDemoLink} from '@/lib/github';
+import {DemoLink} from '@/lib/github';
 import {cn} from '@/lib/utils';
 
 interface ProjectCardProps {
@@ -146,15 +146,6 @@ function ProjectCard({project, index}: ProjectCardProps) {
 	};
 
 	const collaborators = getCollaborators(project.name);
-
-	useEffect(() => {
-		async function fetchDemoLink() {
-			const link = await getDemoLink(project);
-			setDemoLink(link);
-		}
-
-		fetchDemoLink();
-	}, [project]);
 
 	return (
 		<motion.div
