@@ -101,8 +101,8 @@ async function getDemoLink(project: GitHubRepo): Promise<DemoLink | null> {
 
 			// Fetch README content
 			// TODO: To be fixed
-			const owner = project.owner.login;
-			const readmeContent = await getReadmeContent(owner, project.name);
+			// const owner = project.owner.login;
+			// const readmeContent = await getReadmeContent(owner, project.name);
 
 			let sectionTitle = '';
 			let url = '';
@@ -115,12 +115,12 @@ async function getDemoLink(project: GitHubRepo): Promise<DemoLink | null> {
 			}
 
 			// Extract link from README section
-			if (sectionTitle && readmeContent) {
-				const extractedUrl = extractLinkFromSection(readmeContent, sectionTitle);
-				if (extractedUrl) {
-					url = extractedUrl;
-				}
-			}
+			// if (sectionTitle && readmeContent) {
+			// 	const extractedUrl = extractLinkFromSection(readmeContent, sectionTitle);
+			// 	if (extractedUrl) {
+			// 		url = extractedUrl;
+			// 	}
+			// }
 
 			// If no URL found in README, fallback to homepage
 			if (!url && project.homepage) {
