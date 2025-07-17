@@ -1,10 +1,20 @@
+import fs from 'fs';
+import path from 'path';
 import {google} from 'googleapis';
 import {NextRequest, NextResponse} from 'next/server';
 import {CONTACT_SUBMISSION_SPREADSHEET_ID} from "@/constants";
 
 export async function POST(request: NextRequest) {
 	try {
-		const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
+		let credentials;
+
+		// Use environment variable in production, file in development
+		if (process.env.GOOGLE_CREDENTIALS) {
+			credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+		} else {
+			const credentialsPath = path.join(process.cwd(), 'google-credentials.json');
+			credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+		}
 
 		const auth = new google.auth.GoogleAuth({
 			credentials,
@@ -25,23 +35,26 @@ export async function POST(request: NextRequest) {
 			'unknown';
 		const userAgent = request.headers.get('user-agent') || 'unknown';
 
-		console.log('IP detected:', ip);
-		console.log('User Agent:', userAgent);
+		// Skip local/dev IPs
+		if (ip === 'unknown' || ip === '::1' || ip.startsWith('::ffff:192.168') || ip.startsWith('192.168')) {
+			return NextResponse.json({success: true, skipped: 'local'});
+		}
+
+		// Skip if in development environment
+		if (process.env.NODE_ENV === 'development') {
+			return NextResponse.json({success: true, skipped: 'dev'});
+		}
 
 		let country = 'unknown';
 		let city = 'unknown';
 
-		if (ip !== 'unknown' && ip !== '::1' && !ip.startsWith('::ffff:192.168') && !ip.startsWith('192.168')) {
-			try {
-				console.log('Fetching location for IP:', ip);
-				const locationResponse = await fetch(`http://ip-api.com/json/${ip}`);
-				const locationData = await locationResponse.json();
-				console.log('Location data:', locationData);
-				country = locationData.country || 'unknown';
-				city = locationData.city || 'unknown';
-			} catch (error) {
-				console.error('Location fetch error:', error);
-			}
+		try {
+			const locationResponse = await fetch(`http://ip-api.com/json/${ip}`);
+			const locationData = await locationResponse.json();
+			country = locationData.country || 'unknown';
+			city = locationData.city || 'unknown';
+		} catch (error) {
+			console.error('Location fetch error:', error);
 		}
 
 		console.log('Appending to spreadsheet...');
