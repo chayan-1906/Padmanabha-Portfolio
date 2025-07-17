@@ -306,23 +306,5 @@ export const CERTIFICATIONS = [
 	},
 ];
 
-export const ACHIEVEMENTS = [
-	{
-		title: 'Top Contributor',
-		description: 'Recognized as top contributor in open-source Flutter packages',
-		year: '2023',
-		icon: '🏆',
-	},
-	{
-		title: 'Hackathon Winner',
-		description: 'Won first place in college hackathon for innovative web app',
-		year: '2021',
-		icon: '🥇',
-	},
-	{
-		title: 'Academic Excellence',
-		description: 'Graduated with 9.15 CGPA in Computer Science Engineering',
-		year: '2022',
-		icon: '🎓',
-	},
-];
+// https://docs.google.com/spreadsheets/d/1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg
+export const CONTACT_SUBMISSION_SPREADSHEET_ID = '1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg';

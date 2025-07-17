@@ -20,19 +20,32 @@ function ContactSection() {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate form submission
-		await new Promise(resolve => setTimeout(resolve, 2000));
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
 
-		// Reset form
-		setFormData({
-			name: '',
-			email: '',
-			subject: '',
-			message: '',
-		});
-
-		setIsSubmitting(false);
-		alert('Thank you for your message! I\'ll get back to you soon.');
+			if (response.ok) {
+				setFormData({
+					name: '',
+					email: '',
+					subject: '',
+					message: '',
+				});
+				alert('Thank you for your message! I\'ll get back to you soon.');
+			} else {
+				throw new Error('Failed to send message');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			alert('Failed to send message. Please try again.');
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
