@@ -147,35 +147,34 @@ function SkillsSection() {
 								</div>
 
 								{/* Skills List */}
-								<div className={cn('space-y-3')}>
+								<div className={cn('space-y-4')}>
 									{category.skills.map((skill, skillIndex) => {
-										const SkillIcon = getSkillIcon(skill);
+										const SkillIcon = getSkillIcon(skill.name);
 										return (
-											<motion.div
-												key={skill}
-												variants={skillVariants}
-												className={cn('flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-opacity-50')}
-												style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
-												whileHover={{
-													x: 8,
-													backgroundColor: 'rgba(var(--color-secondary), 0.5)',
-												}}
-												custom={skillIndex}
-											>
-												<SkillIcon className={cn('w-5 h-5 text-blue-500')}/>
-												<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-													{skill}
-												</span>
+											<motion.div key={skill.name} variants={skillVariants} className={cn('space-y-2')} custom={skillIndex}>
+												<div className={cn('flex items-center justify-between')}>
+													<div className={cn('flex items-center gap-2')}>
+														<SkillIcon className={cn('w-4 h-4 text-blue-500')}/>
+														<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.name}</span>
+													</div>
+													<span className={cn('text-xs opacity-70')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.level}%</span>
+												</div>
+												<div className={cn('w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700')}>
+													<motion.div
+														className={cn('h-2 rounded-full bg-gradient-to-r', category.color)}
+														initial={{width: 0}}
+														whileInView={{width: `${skill.level}%`}}
+														transition={{duration: 1, delay: skillIndex * 0.1}}
+													/>
+												</div>
 											</motion.div>
 										);
 									})}
 								</div>
 
 								{/* Hover Effect */}
-								<motion.div
-									className={cn('absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300', category.color)}
-									style={{pointerEvents: 'none'}}
-								/>
+								<motion.div className={cn('absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300', category.color)}
+								            style={{pointerEvents: 'none'}}/>
 							</motion.div>
 						</motion.div>
 					))}
