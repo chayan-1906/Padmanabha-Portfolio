@@ -6,6 +6,7 @@ async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 		const response = await fetch(`https://api.github.com/users/${PERSONAL_INFO.github.split('/').pop()}/repos?per_page=100`, {
 			headers: {
 				'Accept': 'application/vnd.github.v3+json',
+				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
 			},
 			next: {revalidate: 3600},
 		});
@@ -30,6 +31,7 @@ async function getReadmeContent(owner: string, repo: string): Promise<string> {
 		const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, {
 			headers: {
 				'Accept': 'application/vnd.github.v3+json',
+				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
 			},
 			next: {revalidate: 3600},
 		});
