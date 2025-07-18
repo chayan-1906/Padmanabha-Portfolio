@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'files.couchconcerts.com',
 			},
+			{
+				protocol: 'https',
+				hostname: 'upload.wikimedia.org',
+			},
 		],
 	},
 };

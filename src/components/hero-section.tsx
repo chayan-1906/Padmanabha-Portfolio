@@ -6,7 +6,7 @@ import {motion, Variants} from 'framer-motion';
 import {MdEmail, MdPhone} from 'react-icons/md';
 import {FaDownload, FaGithub, FaLinkedin} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SOCIAL_LINKS, TECH_STACK} from '@/constants';
+import {PERSONAL_INFO, SOCIAL_LINKS, TECH_STACKS} from '@/constants';
 
 function HeroSection() {
 	const [techGradients, setTechGradients] = useState<string[]>([]);
@@ -79,7 +79,7 @@ function HeroSection() {
 	};
 
 	useEffect(() => {
-		setTechGradients(TECH_STACK.map(() => generateRandomGradient()));
+		setTechGradients(TECH_STACKS.map(() => generateRandomGradient()));
 	}, []);
 
 	return (
@@ -140,7 +140,7 @@ function HeroSection() {
 				{/* Tech Stack Pills */}
 				<motion.div variants={itemVariants} className={cn('mb-12')}>
 					<div className={cn('flex flex-wrap justify-center gap-3 mb-8')}>
-						{TECH_STACK.map((tech, index) => (
+						{TECH_STACKS.map((tech, index) => (
 							<motion.span
 								key={tech}
 								className={cn('px-4 py-2 rounded-full text-sm font-medium')}
