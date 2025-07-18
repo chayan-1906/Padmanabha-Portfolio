@@ -22,9 +22,7 @@ async function ProjectsPage() {
 					{/* Breadcrumb */}
 					<div className={cn('mb-8')}>
 						<nav className={cn('flex items-center space-x-2 text-sm')} style={{color: 'rgba(var(--color-foreground), 0.6)'}}>
-							<Link href="/" className={cn('hover:text-blue-500 transition-colors')}>
-								Home
-							</Link>
+							<Link href={'/'} className={cn('hover:text-blue-500 transition-colors')}>Home</Link>
 							<ChevronRight size={16}/>
 							<span style={{color: 'rgb(var(--color-foreground))'}}>Projects</span>
 						</nav>
