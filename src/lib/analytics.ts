@@ -4,7 +4,6 @@ import {CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
 
 export async function trackAnalytics() {
 	'use server';
-	console.log('trackAnalytics');
 
 	try {
 		const headersList = await headers();

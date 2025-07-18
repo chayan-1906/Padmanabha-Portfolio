@@ -5,6 +5,16 @@ export const PERSONAL_INFO = {
 	title: 'Full-Stack Developer',
 	description: 'Frontend Developer with 3+ years of experience building scalable web and mobile applications. Specialized in Next.js 15, React.js 19, and Flutter with expertise in AI integration through Model Context Protocol (MCP) development.',
 	subtitle: 'Specializing in Next.js 15, React.js 19, React Native, and Flutter with expertise in AI integration through Model Context Protocol (MCP) development.',
+	subtitleConfig: {
+		text: 'Specializing in {Next.js 15}, {React.js 19}, {React Native}, and {Flutter} with expertise in {AI integration} through Model Context Protocol (MCP) development.',
+		colors: {
+			'Next.js 15': 'text-blue-500',
+			'React.js 19': 'text-purple-500',
+			'React Native': 'text-orange-500',
+			'Flutter': 'text-pink-500',
+			'AI integration': 'text-green-500'
+		},
+	},
 	aboutMe: 'Full-stack developer focused on clean code over clever code. Build scalable applications solving real problems, not theoretical ones. Enjoy turning ideas into working products people actually use. Create tools I wish existed. Cricket enthusiast who finds debugging clarity during match breaks.',
 	email: 'padmanabhadas9647@gmail.com',
 	phone: '+919647100133',

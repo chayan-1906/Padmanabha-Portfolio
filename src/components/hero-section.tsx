@@ -64,13 +64,27 @@ function HeroSection() {
 		return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
 	};
 
+	const parseSubtitleWithColors = (text: string, colors: Record<string, string>) => {
+		const parts = text.split(/\{([^}]+)}/);
+		return parts.map((part, index) => {
+			if (index % 2 === 0) {
+				return part;
+			} else {
+				const colorClass = colors[part];
+				return (
+					<span key={index} className={cn('font-semibold', colorClass)}>{part}</span>
+				);
+			}
+		});
+	};
+
 	useEffect(() => {
 		setTechGradients(TECH_STACK.map(() => generateRandomGradient()));
 	}, []);
 
 	return (
 		<section className={cn('min-h-screen relative overflow-hidden flex items-center justify-center pb-12')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
-			{/* Fixed Background - no layout impact */}
+			{/* Fixed Background */}
 			<div className={cn('fixed inset-0 pointer-events-none')}>
 				<motion.div
 					className={cn('absolute top-20 left-20 size-96 rounded-full opacity-20 blur-3xl')}
@@ -119,10 +133,7 @@ function HeroSection() {
 				{/* Subtitle */}
 				<motion.div variants={itemVariants} className={cn('mb-8')}>
 					<p className={cn('text-lg md:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						Specializing in <span className={cn('font-semibold text-blue-500')}>Next.js 15</span>, <span className={cn('font-semibold text-purple-500')}>React.js 19</span>, <span
-						className={cn('font-semibold text-orange-500')}>React Native</span>, and <span
-						className={cn('font-semibold text-pink-500')}>Flutter</span> with expertise in <span className={cn('font-semibold text-green-500')}>AI integration</span> through Model Context
-						Protocol (MCP) development.
+						{parseSubtitleWithColors(PERSONAL_INFO.subtitleConfig.text, PERSONAL_INFO.subtitleConfig.colors)}
 					</p>
 				</motion.div>
 
@@ -201,8 +212,8 @@ function HeroSection() {
 
 					<motion.a
 						href={PERSONAL_INFO.resumeUrl}
-						target="_blank"
-						rel="noopener noreferrer"
+						target={'_blank'}
+						rel={'noopener noreferrer'}
 						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2')}
 						style={{
 							background: 'transparent',
