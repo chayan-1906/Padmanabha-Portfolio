@@ -1,10 +1,10 @@
 'use client';
 
+import Image from "next/image";
 import {motion, Variants} from 'framer-motion';
 import {FaCalendarAlt, FaMapMarkerAlt, FaTrophy} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {EDUCATIONS, SECTIONS} from '@/constants';
-import Image from "next/image";
 
 function EducationSection() {
 	const containerVariants: Variants = {

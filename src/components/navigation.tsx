@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from 'react';
 import {useTheme} from 'next-themes';
+import {usePathname, useRouter} from 'next/navigation';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ChevronDown, Menu, Monitor, Moon, Sun, X} from 'lucide-react';
 import {cn} from '@/lib/utils';
@@ -15,6 +16,8 @@ function Navigation() {
 	const [mounted, setMounted] = useState(false);
 	const navRef = useRef<HTMLDivElement>(null);
 	const themeDropdownRef = useRef<HTMLDivElement>(null);
+	const pathname = usePathname();
+	const router = useRouter();
 
 	const navItems = [
 		{name: 'Home', href: '#home'},
@@ -30,15 +33,22 @@ function Navigation() {
 		{value: 'system', label: 'System', icon: <Monitor className={cn('h-4 w-4')}/>}
 	];
 
-	const scrollToSection = (href: string) => {
-		setTimeout(() => {
-			const element = document.querySelector(href);
-			if (element) {
-				element.scrollIntoView({behavior: 'smooth'});
-			}
-		}, 100);
+	const navigateToSection = (href: string) => {
 		setIsOpen(false);
-	}
+
+		if (pathname === '/') {
+			window.history.replaceState(null, '', href);
+			setTimeout(() => {
+				const element = document.querySelector(href);
+				if (element) {
+					element.scrollIntoView({behavior: 'smooth'});
+				}
+			}, 100);
+		} else {
+			// On other pages, navigate to homepage with hash
+			router.push(`/${href}`);
+		}
+	};
 
 	useEffect(() => {
 		setMounted(true);
@@ -64,6 +74,18 @@ function Navigation() {
 		};
 	}, []);
 
+	// Handle scroll on homepage load with hash
+	useEffect(() => {
+		if (pathname === '/' && window.location.hash) {
+			setTimeout(() => {
+				const element = document.querySelector(window.location.hash);
+				if (element) {
+					element.scrollIntoView({behavior: 'smooth'});
+				}
+			}, 500);
+		}
+	}, [pathname]);
+
 	if (!mounted) {
 		return null;
 	}
@@ -83,7 +105,8 @@ function Navigation() {
 		>
 			<div className={cn('flex items-center justify-between px-6 py-4')}>
 				{/* Logo */}
-				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer')} style={{color: 'rgb(var(--color-card-foreground))'}} onClick={() => scrollToSection('#home')}>
+				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer')} style={{color: 'rgb(var(--color-card-foreground))'}}
+				            onClick={() => navigateToSection('#home')}>
 					{PERSONAL_INFO.name.split(' ').map((word, index) => (
 						<span key={index} className={index === 0 ? 'text-blue-500' : 'text-purple-500'}>
 							{word}
@@ -97,7 +120,7 @@ function Navigation() {
 					{navItems.map((item) => (
 						<motion.button
 							key={item.name}
-							onClick={() => scrollToSection(item.href)}
+							onClick={() => navigateToSection(item.href)}
 							className={cn('text-sm font-medium transition-colors duration-200 hover:text-blue-500 cursor-pointer')}
 							style={{color: 'rgb(var(--color-card-foreground))'}}
 							whileHover={{scale: 1.1}}
@@ -178,7 +201,7 @@ function Navigation() {
 							{navItems.map((item) => (
 								<motion.button
 									key={item.name}
-									onClick={() => scrollToSection(item.href)}
+									onClick={() => navigateToSection(item.href)}
 									className={cn('block w-full text-left text-sm font-medium transition-colors duration-200 hover:text-blue-500 py-2 cursor-pointer')}
 									style={{color: 'rgb(var(--color-card-foreground))'}}
 									whileHover={{x: 8}}
