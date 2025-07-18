@@ -29,8 +29,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					buttonSizes[size],
 					className
 				)}
-				ref={ref}
-				{...props}
+				ref={ref} {...props}
 			/>
 		);
 	}

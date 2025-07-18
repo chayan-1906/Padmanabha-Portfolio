@@ -1,5 +1,5 @@
-import {DemoConfig, EnhancedGitHubRepo, GitHubRepo} from "@/types/github";
 import {PERSONAL_INFO} from "@/constants";
+import {DemoConfig, EnhancedGitHubRepo, GitHubRepo} from "@/types/github";
 
 async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 	try {

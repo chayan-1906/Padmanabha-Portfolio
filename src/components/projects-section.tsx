@@ -81,7 +81,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 				{/* Floating CTA */}
 				<motion.div variants={itemVariants} className={cn('text-center mt-20')}>
 					<motion.a
-						href="/projects"
+						href={'/projects'}
 						className={cn('inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-semibold text-white transition-all duration-300')}
 						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899)'}}
 						whileHover={{
