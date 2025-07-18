@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {FaTrophy} from 'react-icons/fa';
 import {motion, Variants} from 'framer-motion';
 import {cn} from '@/lib/utils';
-import {EXPERIENCE_SUMMARY, SECTIONS, WORK_EXPERIENCE} from '@/constants';
+import {EXPERIENCE_SUMMARY, SECTIONS, WORK_EXPERIENCES} from '@/constants';
 
 function ExperienceSection() {
 	const containerVariants: Variants = {
@@ -85,7 +85,7 @@ function ExperienceSection() {
 
 					{/* Experience Items */}
 					<div className={cn('space-y-12')}>
-						{WORK_EXPERIENCE.map((experience, index) => (
+						{WORK_EXPERIENCES.map((experience, index) => (
 							<motion.div key={index} variants={itemVariants} className={cn('relative flex items-start gap-8')}>
 								{/* Timeline Dot */}
 								<motion.div

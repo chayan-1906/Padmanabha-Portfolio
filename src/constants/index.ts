@@ -43,6 +43,11 @@ export const SECTIONS = {
 		title: 'Work Experience',
 		subtitle: 'Building impactful solutions across diverse industries and technologies',
 	},
+	educationSectionConfig: {
+		name: 'Education',
+		title: 'Academic Background',
+		subtitle: 'Building a strong foundation in computer science and engineering',
+	},
 	projectsSectionConfig: {
 		name: 'Projects',
 		title: 'Featured Projects',
@@ -60,7 +65,7 @@ export const SECTIONS = {
 	},
 };
 
-export const TECH_STACK = [
+export const TECH_STACKS = [
 	'Next.js 15',
 	'React.js 19',
 	'React Native',
@@ -70,14 +75,6 @@ export const TECH_STACK = [
 	'AI Integration',
 	'MCP Development',
 ];
-
-export const COLLABORATORS = {
-	arka: {
-		name: 'Arka Bhattacharya',
-		github: 'https://github.com/arka-bhat/',
-		linkedin: 'https://www.linkedin.com/in/arka-bhattacharya/',
-	},
-};
 
 export const SKILLS = {
 	frontend: {
@@ -153,7 +150,7 @@ export const SKILLS = {
 	},
 };
 
-export const WORK_EXPERIENCE = [
+export const WORK_EXPERIENCES = [
 	{
 		company: 'CouchConcerts',
 		icon: '🎵',
@@ -299,7 +296,7 @@ export const WORK_EXPERIENCE = [
 export const EXPERIENCE_SUMMARY = [
 	{
 		label: 'Companies Worked',
-		value: WORK_EXPERIENCE.length,
+		value: WORK_EXPERIENCES.length,
 		color: 'text-blue-500',
 		icon: FaBriefcase,
 	},
@@ -317,17 +314,28 @@ export const EXPERIENCE_SUMMARY = [
 	},
 ];
 
-export const EDUCATION = {
-	degree: 'Bachelor of Technology in Computer Science Engineering',
-	institution: 'Kalinga Institute of Industrial Technology',
-	location: 'Bhubaneshwar, India',
-	period: 'July 2018 – May 2022',
-	cgpa: '9.15/10',
-	highlights: [
-		'Graduated with Distinction',
-		'Specialized in Software Engineering',
-		'Active in coding competitions',
-	],
+export const EDUCATIONS = [
+	{
+		degree: 'Bachelor of Technology in Computer Science Engineering',
+		institution: 'Kalinga Institute of Industrial Technology',
+		logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/ef/KIIT_logo.svg/1200px-KIIT_logo.svg.png',
+		location: 'Bhubaneshwar, India',
+		period: 'July 2018 – May 2022',
+		cgpa: '9.15/10',
+		highlights: [
+			'Graduated with Distinction',
+			'Specialized in Software Engineering',
+			'Active in coding competitions',
+		],
+	},
+];
+
+export const COLLABORATORS = {
+	arka: {
+		name: 'Arka Bhattacharya',
+		github: 'https://github.com/arka-bhat/',
+		linkedin: 'https://www.linkedin.com/in/arka-bhattacharya/',
+	},
 };
 
 export const CERTIFICATIONS = [

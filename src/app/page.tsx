@@ -7,6 +7,7 @@ import {SkillsSection} from '@/components/skills-section';
 import {ContactSection} from '@/components/contact-section';
 import {ProjectsSection} from '@/components/projects-section';
 import {ExperienceSection} from '@/components/experience-section';
+import {EducationSection} from '@/components/education-section';
 import {CertificationsSection} from '@/components/certifications-section';
 import {getGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
 
@@ -27,6 +28,7 @@ async function Home() {
 				<AboutSection/>
 				<SkillsSection/>
 				<ExperienceSection/>
+				<EducationSection/>
 				<ProjectsSection projects={topFeaturedProjects}/>
 				<CertificationsSection/>
 				<ContactSection/>
