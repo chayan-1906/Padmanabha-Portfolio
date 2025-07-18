@@ -36,7 +36,7 @@ async function getEnhancedGitHubRepositories(): Promise<EnhancedGitHubRepo[]> {
 				...repo,
 				demoConfig,
 			};
-		})
+		}),
 	);
 
 	return enhancedRepos;
@@ -74,26 +74,26 @@ async function getDemoConfig(repo: GitHubRepo): Promise<DemoConfig> {
 function parseReadmeForDemoLinks(readmeContent: string, repo: GitHubRepo): DemoConfig | null {
 	// Live site patterns
 	const liveSitePatterns = [
-		/Live\s+Site[^:]*:\s*\[([^\]]+)\]\(([^)]+)\)/gi,
-		/Live\s+Demo[^:]*:\s*\[([^\]]+)\]\(([^)]+)\)/gi,
-		/Demo[^:]*:\s*\[([^\]]+)\]\(([^)]+)\)/gi,
-		/\[Live\s+Site[^\]]*\]\(([^)]+)\)/gi,
-		/\[Live\s+Demo[^\]]*\]\(([^)]+)\)/gi,
+		/Live\s+Site[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
+		/Live\s+Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
+		/Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
+		/\[Live\s+Site[^\]]*]\(([^)]+)\)/gi,
+		/\[Live\s+Demo[^\]]*]\(([^)]+)\)/gi,
 		/https?:\/\/[^\s]+\.vercel\.app/gi,
 		/https?:\/\/[^\s]+\.netlify\.app/gi,
 	];
 
 	// APK download patterns - fixed to avoid badge URLs
 	const apkPatterns = [
-		/\[!\[Download\s+APK\][^\]]*\]\(([^)]+)\)/gi,
-		/\[Download\s+APK\][^\]]*\]\(([^)]+)\)/gi,
-		/\[.*Download.*APK.*\]\(([^)]+)\)/gi,
+		/\[!\[Download\s+APK][^\]]*]\(([^)]+)\)/gi,
+		/\[Download\s+APK][^\]]*]\(([^)]+)\)/gi,
+		/\[.*Download.*APK.*]\(([^)]+)\)/gi,
 	];
 
 	// User guide patterns
 	const userGuidePatterns = [
-		/User\s+Guide[^:]*:\s*\[([^\]]+)\]\(([^)]+)\)/gi,
-		/\[User\s+Guide[^\]]*\]\(([^)]+)\)/gi,
+		/User\s+Guide[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
+		/\[User\s+Guide[^\]]*]\(([^)]+)\)/gi,
 		/User\s+Guide\s*--\s*(https?:\/\/[^\s]+)/gi,
 		/https?:\/\/[^\s]*notion\.site[^\s]*/gi,
 	];
