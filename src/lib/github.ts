@@ -1,5 +1,5 @@
 import {PERSONAL_INFO} from "@/constants";
-import {DemoConfig, EnhancedGitHubRepo, GitHubRepo} from "@/types/github";
+import {Collaborator, DemoConfig, EnhancedGitHubRepo, GitHubRepo} from "@/types/github";
 
 async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 	try {
@@ -31,14 +31,16 @@ async function getEnhancedGitHubRepositories(): Promise<EnhancedGitHubRepo[]> {
 
 	const enhancedRepos = await Promise.all(
 		repositories.map(async (repo) => {
-			const [demoConfig, logoUrl] = await Promise.all([
+			const [demoConfig, logoUrl, collaborators] = await Promise.all([
 				getDemoConfig(repo),
-				getLogoUrl(repo)
+				getLogoUrl(repo),
+				getCollaborators(repo)
 			]);
 			return {
 				...repo,
 				demoConfig,
 				logoUrl,
+				collaborators,
 			};
 		}),
 	);
@@ -98,6 +100,29 @@ async function getLogoUrl(repo: GitHubRepo): Promise<string | undefined> {
 	return undefined;
 }
 
+async function getCollaborators(repo: GitHubRepo): Promise<Collaborator[]> {
+	try {
+		const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
+			headers: {
+				'Accept': 'application/vnd.github.v3+json',
+				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+			},
+			next: {revalidate: 3600},
+		});
+
+		if (readmeResponse.ok) {
+			const readmeData = await readmeResponse.json();
+			const readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
+
+			return parseCollaboratorsFromReadme(readmeContent);
+		}
+	} catch (error) {
+		console.error(`Error fetching collaborators for ${repo.name}:`, error);
+	}
+
+	return [];
+}
+
 function parseLogoFromReadme(readmeContent: string): string | undefined {
 	// Logo patterns
 	const logoPatterns = [
@@ -119,6 +144,45 @@ function parseLogoFromReadme(readmeContent: string): string | undefined {
 	}
 
 	return undefined;
+}
+
+function parseCollaboratorsFromReadme(readmeContent: string): Collaborator[] {
+	const collaborators: Collaborator[] = [];
+
+	// Find the Collaborators section
+	const collaboratorSectionPattern = /^##\s+Collaborators?\s*$/im;
+	const match = collaboratorSectionPattern.exec(readmeContent);
+
+	if (!match) {
+		return collaborators;
+	}
+
+	// Extract content after the "## Collaborators" heading until the next heading or end
+	const startIndex = match.index + match[0].length;
+	const nextHeadingPattern = /^##\s+/m;
+	const nextHeadingMatch = readmeContent.slice(startIndex).search(nextHeadingPattern);
+
+	const sectionContent = nextHeadingMatch === -1
+		? readmeContent.slice(startIndex)
+		: readmeContent.slice(startIndex, startIndex + nextHeadingMatch);
+
+	// Parse collaborator links in format: - [Name](https://github.com/username/)
+	const collaboratorPattern = /^-\s*\[([^\]]+)]\(([^)]+)\)/gm;
+	let collaboratorMatch;
+
+	while ((collaboratorMatch = collaboratorPattern.exec(sectionContent)) !== null) {
+		const name = collaboratorMatch[1].trim();
+		const url = collaboratorMatch[2].trim();
+
+		// Validate GitHub URL
+		if (url.includes('github.com')) {
+			collaborators.push({
+				name, githubUrl: url,
+			});
+		}
+	}
+
+	return collaborators;
 }
 
 function parseReadmeForDemoLinks(readmeContent: string, repo: GitHubRepo): DemoConfig | null {

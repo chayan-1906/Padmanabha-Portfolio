@@ -27,7 +27,13 @@ export interface DemoConfig {
 	label: string;
 }
 
+export interface Collaborator {
+	name: string;
+	githubUrl: string;
+}
+
 export interface EnhancedGitHubRepo extends GitHubRepo {
 	demoConfig: DemoConfig;
 	logoUrl?: string;
+	collaborators: Collaborator[];
 }

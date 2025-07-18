@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import {motion, Variants} from 'framer-motion';
-import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub} from 'react-icons/fa';
+import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {EnhancedGitHubRepo} from '@/types/github';
 
@@ -180,8 +180,6 @@ function ProjectCard({project, index}: ProjectCardProps) {
 						className={cn('w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden',
 							project.logoUrl ? 'bg-white' : 'bg-gradient-to-br ' + getTechColor(project.language || '')
 						)}
-						whileHover={{rotate: 360}}
-						transition={{duration: 0.6}}
 					>
 						{project.logoUrl ? (
 							<Image src={project.logoUrl} alt={`${project.name} logo`} height={400} width={400} className={cn('w-full h-full object-contain p-1')}/>
@@ -196,10 +194,33 @@ function ProjectCard({project, index}: ProjectCardProps) {
 					{project.name}
 				</h3>
 
-				<p className={cn('text-base opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-					{project.description || 'Innovative solution with modern technologies'}
-				</p>
+				<p className={cn('text-base opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>{project.description}</p>
 			</div>
+
+			{/* Collaborators */}
+			{project.collaborators && project.collaborators.length > 0 && (
+				<div className={cn('mb-4')}>
+					<div className={cn('flex items-center gap-2 mb-2')}>
+						<FaUsers className={cn('w-4 h-4 opacity-60')} style={{color: 'rgb(var(--color-card-foreground))'}}/>
+						<span className={cn('text-sm font-medium opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>Collaborators</span>
+					</div>
+					<div className={cn('flex flex-wrap gap-2')}>
+						{project.collaborators.map((collaborator, idx) => (
+							<motion.a
+								key={idx}
+								href={collaborator.githubUrl}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+								className={cn('px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 z-1')}
+								whileHover={{scale: 1.05, y: -1}}
+								whileTap={{scale: 0.95}}
+							>
+								{collaborator.name}
+							</motion.a>
+						))}
+					</div>
+				</div>
+			)}
 
 			{/* Tech Stack */}
 			<div className={cn('flex flex-wrap gap-2 mb-3')}>
