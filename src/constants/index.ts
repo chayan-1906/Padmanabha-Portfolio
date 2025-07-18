@@ -308,7 +308,7 @@ export const EXPERIENCE_SUMMARY = [
 	},
 	{
 		label: 'Technologies Used',
-		value: `${Math.floor(Object.values(SKILLS).flat().length / 5) * 5}+`,
+		value: `${Math.floor(Object.values(SKILLS).flatMap(category => category.items).length / 5) * 5}+`,
 		color: 'text-green-500',
 		icon: FaCode,
 	},
