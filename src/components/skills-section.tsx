@@ -1,10 +1,8 @@
 'use client';
 
 import {motion, Variants} from 'framer-motion';
-import {FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from 'react-icons/fa';
-import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from 'react-icons/si';
 import {cn} from '@/lib/utils';
-import {SKILLS} from '@/constants';
+import {SECTIONS, SKILLS} from '@/constants';
 
 function SkillsSection() {
 	const containerVariants: Variants = {
@@ -44,54 +42,6 @@ function SkillsSection() {
 		},
 	};
 
-	const skillCategories = [
-		{
-			title: 'Frontend',
-			icon: FaReact,
-			skills: SKILLS.frontend,
-			color: 'from-blue-500 to-cyan-500',
-		},
-		{
-			title: 'Mobile',
-			icon: FaMobile,
-			skills: SKILLS.mobile,
-			color: 'from-purple-500 to-pink-500',
-		},
-		{
-			title: 'Backend',
-			icon: FaNodeJs,
-			skills: SKILLS.backend,
-			color: 'from-green-500 to-emerald-500',
-		},
-		{
-			title: 'Tools',
-			icon: FaTools,
-			skills: SKILLS.tools,
-			color: 'from-orange-500 to-red-500',
-		},
-	];
-
-	const getSkillIcon = (skill: string) => {
-		const icons: { [key: string]: any } = {
-			'next.js 15': SiNextdotjs,
-			'nextjs': SiNextdotjs,
-			'react.js 19': FaReact,
-			'react': FaReact,
-			'react native': FaReact,
-			'flutter': SiFlutter,
-			'typescript': SiTypescript,
-			'node.js': FaNodeJs,
-			'mongodb': SiMongodb,
-			'firebase': SiFirebase,
-			'tailwind css': SiTailwindcss,
-			'git': FaGitAlt,
-			'database': FaDatabase,
-		};
-
-		const key = skill.toLowerCase();
-		return icons[key] || FaTools;
-	};
-
 	return (
 		<section id={'skills'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
@@ -111,17 +61,17 @@ function SkillsSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						What I Work With
+						{SECTIONS.skillsSectionConfig.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						A comprehensive toolkit for modern web and mobile development
+						{SECTIONS.skillsSectionConfig.subtitle}
 					</p>
 				</motion.div>
 
 				{/* Skills Grid */}
 				<div className={cn('grid md:grid-cols-2 lg:grid-cols-4 gap-8')}>
-					{skillCategories.map((category, categoryIndex) => (
-						<motion.div key={category.title} variants={itemVariants} className={cn('relative group')}>
+					{Object.entries(SKILLS).map(([key, category], categoryIndex) => (
+						<motion.div key={key} variants={itemVariants} className={cn('relative group')}>
 							<motion.div
 								className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm h-full')}
 								style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
@@ -134,42 +84,33 @@ function SkillsSection() {
 							>
 								{/* Category Header */}
 								<div className={cn('flex items-center gap-3 mb-6')}>
-									<motion.div
-										className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.color)}
-										whileHover={{rotate: 360}}
-										transition={{duration: 0.6}}
-									>
+									<motion.div className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.color)} whileHover={{rotate: 360}} transition={{duration: 0.6}}>
 										<category.icon className={cn('w-6 h-6')}/>
 									</motion.div>
-									<h3 className={cn('text-xl font-bold')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-										{category.title}
-									</h3>
+									<h3 className={cn('text-xl font-bold')} style={{color: 'rgb(var(--color-card-foreground))'}}>{category.title}</h3>
 								</div>
 
 								{/* Skills List */}
 								<div className={cn('space-y-4')}>
-									{category.skills.map((skill, skillIndex) => {
-										const SkillIcon = getSkillIcon(skill.name);
-										return (
-											<motion.div key={skill.name} variants={skillVariants} className={cn('space-y-2')} custom={skillIndex}>
-												<div className={cn('flex items-center justify-between')}>
-													<div className={cn('flex items-center gap-2')}>
-														<SkillIcon className={cn('w-4 h-4 text-blue-500')}/>
-														<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.name}</span>
-													</div>
-													<span className={cn('text-xs opacity-70')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.level}%</span>
+									{category.items.map((skill, skillIndex) => (
+										<motion.div key={skill.name} variants={skillVariants} className={cn('space-y-2')} custom={skillIndex}>
+											<div className={cn('flex items-center justify-between')}>
+												<div className={cn('flex items-center gap-2')}>
+													<skill.icon className={cn('w-4 h-4 text-blue-500')}/>
+													<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.name}</span>
 												</div>
-												<div className={cn('w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700')}>
-													<motion.div
-														className={cn('h-2 rounded-full bg-gradient-to-r', category.color)}
-														initial={{width: 0}}
-														whileInView={{width: `${skill.level}%`}}
-														transition={{duration: 1, delay: skillIndex * 0.1}}
-													/>
-												</div>
-											</motion.div>
-										);
-									})}
+												<span className={cn('text-xs opacity-70')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skill.level}%</span>
+											</div>
+											<div className={cn('w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700')}>
+												<motion.div
+													className={cn('h-2 rounded-full bg-gradient-to-r', category.color)}
+													initial={{width: 0}}
+													whileInView={{width: `${skill.level}%`}}
+													transition={{duration: 1, delay: skillIndex * 0.1}}
+												/>
+											</div>
+										</motion.div>
+									))}
 								</div>
 
 								{/* Hover Effect */}

@@ -1,4 +1,5 @@
-import {FaBriefcase, FaCalendarAlt, FaCode} from "react-icons/fa";
+import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from "react-icons/si";
+import {FaBriefcase, FaCalendarAlt, FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from "react-icons/fa";
 
 export const PERSONAL_INFO = {
 	name: 'Padmanabha Das',
@@ -15,7 +16,6 @@ export const PERSONAL_INFO = {
 			'AI integration': 'text-green-500'
 		},
 	},
-	aboutMe: 'Full-stack developer focused on clean code over clever code. Build scalable applications solving real problems, not theoretical ones. Enjoy turning ideas into working products people actually use. Create tools I wish existed. Cricket enthusiast who finds debugging clarity during match breaks.',
 	email: 'padmanabhadas9647@gmail.com',
 	phone: '+919647100133',
 	github: 'https://github.com/chayan-1906',
@@ -25,6 +25,39 @@ export const PERSONAL_INFO = {
 	bio: 'Flutter, React & Next.js Developer',
 	avatar: '/images/profile-photo.jpg',
 	resumeUrl: 'https://drive.google.com/file/d/1dV1-68JA95d_eWWwn0SqcS_V_G83BxHx/view',
+};
+
+export const SECTIONS = {
+	aboutSectionConfig: {
+		name: 'About',
+		title: 'About Me',
+		subtitle: 'Full-stack developer focused on clean code over clever code. Build scalable applications solving real problems, not theoretical ones. Enjoy turning ideas into working products people actually use. Create tools I wish existed. Cricket enthusiast who finds debugging clarity during match breaks.',
+	},
+	skillsSectionConfig: {
+		name: 'Skills',
+		title: 'What I Work With',
+		subtitle: 'A comprehensive toolkit for modern web and mobile development',
+	},
+	experienceSectionConfig: {
+		name: 'Experience',
+		title: 'Work Experience',
+		subtitle: 'Building impactful solutions across diverse industries and technologies',
+	},
+	projectsSectionConfig: {
+		name: 'Projects',
+		title: 'Featured Projects',
+		subtitle: 'Cutting-edge solutions in AI integration, full-stack development, and modern web technologies',
+	},
+	certificationsSectionConfig: {
+		name: 'Certifications',
+		title: 'Certifications',
+		subtitle: 'Professional certifications and achievements',
+	},
+	contactSectionConfig: {
+		name: 'Contact',
+		title: 'Let\'s Work Together',
+		subtitle: 'Ready to bring your ideas to life? I\'m always excited to work on new projects and collaborate with amazing people',
+	},
 };
 
 export const TECH_STACK = [
@@ -70,58 +103,77 @@ export const COLLABORATORS = {
 };
 
 export const SKILLS = {
-	frontend: [
-		{name: 'Next.js 15', level: 75},
-		{name: 'React.js 19', level: 80},
-		{name: 'React Native', level: 60},
-		{name: 'Expo', level: 60},
-		{name: 'TypeScript', level: 80},
-		{name: 'JavaScript', level: 85},
-		{name: 'Tailwind CSS', level: 80},
-		{name: 'Framer Motion', level: 80},
-		{name: 'Aceternity UI', level: 60},
-		{name: 'Shadcn UI', level: 85},
-		{name: 'Tanstack Query', level: 60},
-		{name: 'Context API', level: 80},
-		{name: 'Redux', level: 40},
-	],
-	mobile: [
-		{name: 'Flutter', level: 80},
-		{name: 'React Native', level: 60},
-		{name: 'Expo', level: 60},
-		{name: 'Firebase', level: 80},
-		{name: 'Android Development', level: 75},
-		{name: 'iOS Development', level: 60},
-		{name: 'Cross-platform', level: 85},
-	],
-	backend: [
-		{name: 'Node.js', level: 50},
-		{name: 'Express.js', level: 50},
-		{name: 'REST APIs', level: 75},
-		{name: 'GraphQL', level: 30},
-		{name: 'Spring Boot', level: 30},
-		{name: 'Java', level: 75},
-		{name: 'MongoDB', level: 60},
-		{name: 'MySQL', level: 55},
-		{name: 'PostgreSQL', level: 40},
-		{name: 'Prisma', level: 40},
-		{name: 'Mongoose', level: 70},
-	],
-	tools: [
-		{name: 'Git', level: 90},
-		{name: 'GitHub', level: 90},
-		{name: 'Sentry', level: 75},
-		{name: 'Vercel', level: 85},
-		{name: 'Netlify', level: 80},
-		{name: 'Selenium', level: 50},
-		{name: 'Model Context Protocol (MCP)', level: 85},
-		{name: 'JetBrains (WebStorm, IntelliJ IDEA, Android Studio)', level: 90},
-		{name: 'Postman', level: 85},
-
-		{name: 'Claude AI Integration', level: 80},
-		{name: 'OpenAI APIs', level: 75},
-		{name: 'AI-powered applications', level: 70},
-	],
+	frontend: {
+		title: 'Frontend',
+		icon: FaReact,
+		color: 'from-blue-500 to-cyan-500',
+		items: [
+			{name: 'Next.js 15', level: 75, icon: SiNextdotjs},
+			{name: 'React.js 19', level: 80, icon: FaReact},
+			{name: 'React Native', level: 60, icon: FaReact},
+			{name: 'Expo', level: 60, icon: FaReact},
+			{name: 'TypeScript', level: 80, icon: SiTypescript},
+			{name: 'JavaScript', level: 85, icon: FaCode},
+			{name: 'Tailwind CSS', level: 80, icon: SiTailwindcss},
+			{name: 'Framer Motion', level: 80, icon: FaCode},
+			{name: 'Aceternity UI', level: 60, icon: FaCode},
+			{name: 'Shadcn UI', level: 85, icon: FaCode},
+			{name: 'Tanstack Query', level: 60, icon: FaCode},
+			{name: 'Context API', level: 80, icon: FaReact},
+			{name: 'Redux', level: 40, icon: FaCode},
+		],
+	},
+	mobile: {
+		title: 'Mobile',
+		icon: FaMobile,
+		color: 'from-purple-500 to-pink-500',
+		items: [
+			{name: 'Flutter', level: 80, icon: SiFlutter},
+			{name: 'React Native', level: 60, icon: FaReact},
+			{name: 'Expo', level: 60, icon: FaReact},
+			{name: 'Firebase', level: 80, icon: SiFirebase},
+			{name: 'Android Development', level: 75, icon: FaMobile},
+			{name: 'iOS Development', level: 60, icon: FaMobile},
+			{name: 'Cross-platform', level: 85, icon: FaMobile},
+		],
+	},
+	backend: {
+		title: 'Backend',
+		icon: FaNodeJs,
+		color: 'from-green-500 to-emerald-500',
+		items: [
+			{name: 'Node.js', level: 50, icon: FaNodeJs},
+			{name: 'Express.js', level: 50, icon: FaNodeJs},
+			{name: 'REST APIs', level: 75, icon: FaCode},
+			{name: 'GraphQL', level: 30, icon: FaCode},
+			{name: 'Spring Boot', level: 30, icon: FaCode},
+			{name: 'Java', level: 75, icon: FaCode},
+			{name: 'MongoDB', level: 60, icon: SiMongodb},
+			{name: 'MySQL', level: 55, icon: FaDatabase},
+			{name: 'PostgreSQL', level: 40, icon: FaDatabase},
+			{name: 'Prisma', level: 40, icon: FaDatabase},
+			{name: 'Mongoose', level: 70, icon: SiMongodb},
+		],
+	},
+	tools: {
+		title: 'Tools',
+		icon: FaTools,
+		color: 'from-orange-500 to-red-500',
+		items: [
+			{name: 'Git', level: 90, icon: FaGitAlt},
+			{name: 'GitHub', level: 90, icon: FaGitAlt},
+			{name: 'Sentry', level: 75, icon: FaTools},
+			{name: 'Vercel', level: 85, icon: FaTools},
+			{name: 'Netlify', level: 80, icon: FaTools},
+			{name: 'Selenium', level: 50, icon: FaTools},
+			{name: 'Model Context Protocol (MCP)', level: 85, icon: FaTools},
+			{name: 'JetBrains (WebStorm, IntelliJ IDEA, Android Studio)', level: 90, icon: FaTools},
+			{name: 'Postman', level: 85, icon: FaTools},
+			{name: 'Claude AI Integration', level: 80, icon: FaTools},
+			{name: 'OpenAI APIs', level: 75, icon: FaTools},
+			{name: 'AI-powered applications', level: 70, icon: FaTools},
+		],
+	},
 };
 
 export const WORK_EXPERIENCE = [
