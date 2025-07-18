@@ -3,10 +3,9 @@
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
 import {FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
+import {cn} from '@/lib/utils';
 import {GitHubRepo} from '@/types/github';
 import {COLLABORATORS} from '@/constants';
-import {DemoLink} from '@/lib/github';
-import {cn} from '@/lib/utils';
 
 interface ProjectCardProps {
 	project: GitHubRepo;
@@ -15,7 +14,6 @@ interface ProjectCardProps {
 
 function ProjectCard({project, index}: ProjectCardProps) {
 	const [isHovered, setIsHovered] = useState(false);
-	const [demoLink, setDemoLink] = useState<DemoLink | null>(null);
 
 	const itemVariants: Variants = {
 		hidden: {y: 40, opacity: 0, rotateX: 15},
@@ -247,7 +245,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			</div>
 
 			{/* Demo Button at bottom */}
-			{demoLink && (
+			{/*{demoLink && (
 				<div className={cn('flex justify-center mt-auto relative z-60')}>
 					<motion.a
 						href={demoLink.url}
@@ -262,7 +260,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 						{demoLink.label}
 					</motion.a>
 				</div>
-			)}
+			)}*/}
 		</motion.div>
 	);
 }
