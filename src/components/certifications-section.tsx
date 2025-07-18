@@ -44,7 +44,7 @@ function CertificationsSection() {
 	};
 
 	return (
-		<section id={'certifications'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={SECTIONS.certificationsSectionConfig.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div

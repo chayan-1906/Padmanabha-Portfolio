@@ -2,9 +2,9 @@
 
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaPhone} from 'react-icons/fa';
+import {FaGithub, FaLinkedin, FaPaperPlane} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SECTIONS, SOCIAL_LINKS} from '@/constants';
+import {CONTACTS, SECTIONS, SOCIAL_LINKS} from '@/constants';
 
 function ContactSection() {
 	const [formData, setFormData] = useState({
@@ -79,32 +79,8 @@ function ContactSection() {
 		},
 	};
 
-	const contactMethods = [
-		{
-			icon: FaEnvelope,
-			label: 'Email',
-			value: PERSONAL_INFO.email,
-			href: `mailto:${PERSONAL_INFO.email}`,
-			color: 'text-red-500',
-		},
-		{
-			icon: FaPhone,
-			label: 'Phone',
-			value: PERSONAL_INFO.phone,
-			href: `tel:${PERSONAL_INFO.phone}`,
-			color: 'text-green-500',
-		},
-		{
-			icon: FaMapMarkerAlt,
-			label: 'Location',
-			value: PERSONAL_INFO.location,
-			href: '#',
-			color: 'text-blue-500',
-		},
-	];
-
 	return (
-		<section id={'contact'} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={SECTIONS.contactSectionConfig.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -143,26 +119,24 @@ function ContactSection() {
 					<motion.div variants={itemVariants} className={cn('space-y-8')}>
 						<div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
 						     style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}>
-							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-								Contact Information
-							</h3>
+							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Contact Information</h3>
 							<div className={cn('space-y-6')}>
-								{contactMethods.map((method, index) => (
+								{CONTACTS.map((contact, index) => (
 									<motion.a
-										key={method.label}
-										href={method.href}
+										key={contact.label}
+										href={contact.href}
 										className={cn('flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-opacity-50')}
 										style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
 										whileHover={{scale: 1.02, x: 8}}
-										target={method.href.startsWith('http') ? '_blank' : '_self'}
-										rel={method.href.startsWith('http') ? 'noopener noreferrer' : ''}
+										target={contact.href.startsWith('http') ? '_blank' : '_self'}
+										rel={contact.href.startsWith('http') ? 'noopener noreferrer' : ''}
 									>
 										<div className={cn('p-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white')}>
-											<method.icon className={cn('w-5 h-5')}/>
+											<contact.icon className={cn('w-5 h-5')}/>
 										</div>
 										<div>
-											<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{method.label}</p>
-											<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{method.value}</p>
+											<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{contact.label}</p>
+											<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{contact.value}</p>
 										</div>
 									</motion.a>
 								))}

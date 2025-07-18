@@ -30,7 +30,7 @@ function AboutSection() {
 	};
 
 	return (
-		<section id={'about'} className={cn('pt-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={SECTIONS.aboutSectionConfig.name.toLowerCase()} className={cn('pt-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div

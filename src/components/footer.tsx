@@ -3,29 +3,21 @@
 import {motion} from 'framer-motion';
 import {FaArrowUp, FaEnvelope, FaGithub, FaHeart, FaLinkedin, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SOCIAL_LINKS} from '@/constants';
+import {PERSONAL_INFO, SECTIONS, SOCIAL_LINKS} from '@/constants';
 
 function Footer() {
-	const scrollToTop = () => {
-		window.scrollTo({top: 0, behavior: 'smooth'});
-	};
-
 	const currentYear = new Date().getFullYear();
 
-	const navLinks = [
-		{name: 'About', href: '#about'},
-		{name: 'Skills', href: '#skills'},
-		{name: 'Experience', href: '#experience'},
-		{name: 'Projects', href: '#projects'},
-		{name: 'Contact', href: '#contact'},
-	];
+	const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'});
 
 	const scrollToSection = (href: string) => {
-		const element = document.querySelector(href);
-		if (element) {
-			element.scrollIntoView({behavior: 'smooth'});
-		}
-	};
+		setTimeout(() => {
+			const element = document.querySelector(href);
+			if (element) {
+				element.scrollIntoView({behavior: 'smooth'});
+			}
+		}, 100);
+	}
 
 	return (
 		<footer className={cn('relative py-16 px-6 border-t border-opacity-20')} style={{backgroundColor: 'rgb(var(--color-background))', borderColor: 'rgba(var(--color-border), 0.2)'}}>
@@ -38,11 +30,7 @@ function Footer() {
 						rotate: [0, 360],
 						scale: [1, 1.2, 1],
 					}}
-					transition={{
-						duration: 20,
-						repeat: Infinity,
-						ease: 'linear',
-					}}
+					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
@@ -51,13 +39,9 @@ function Footer() {
 					{/* About Column */}
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} className={cn('lg:col-span-2 space-y-6')}>
 						<div>
-							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>
-								{PERSONAL_INFO.name}
-							</h3>
+							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>{PERSONAL_INFO.name}</h3>
 							<p className={cn('text-blue-500 font-medium mb-4')}>{PERSONAL_INFO.title}</p>
-							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-								{PERSONAL_INFO.description}
-							</p>
+							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{PERSONAL_INFO.description}</p>
 						</div>
 						<div className={cn('flex items-center gap-4')}>
 							{SOCIAL_LINKS.map((link) => {
@@ -91,15 +75,15 @@ function Footer() {
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.2}} className={cn('space-y-6')}>
 						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Quick Links</h4>
 						<div className={cn('space-y-3')}>
-							{navLinks.map((link) => (
+							{Object.values(SECTIONS).map((section) => (
 								<motion.button
-									key={link.name}
-									onClick={() => scrollToSection(link.href)}
+									key={section.name}
+									onClick={() => scrollToSection(`#${section.name.toLowerCase()}`)}
 									className={cn('block text-left opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
 									style={{color: 'rgb(var(--color-foreground))'}}
 									whileHover={{x: 4}}
 								>
-									{link.name}
+									{section.name}
 								</motion.button>
 							))}
 						</div>
@@ -170,10 +154,7 @@ function Footer() {
 						whileTap={{scale: 0.95}}
 					>
 						<span>Back to Top</span>
-						<motion.div
-							animate={{y: [0, -2, 0]}}
-							transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}
-						>
+						<motion.div animate={{y: [0, -2, 0]}} transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}>
 							<FaArrowUp className={cn('w-4 h-4')}/>
 						</motion.div>
 					</motion.button>
