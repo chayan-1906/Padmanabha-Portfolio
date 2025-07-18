@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'upload.wikimedia.org',
 			},
+			{
+				protocol: 'https',
+				hostname: 'github.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+			},
 		],
 	},
 };

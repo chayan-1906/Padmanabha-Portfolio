@@ -29,4 +29,5 @@ export interface DemoConfig {
 
 export interface EnhancedGitHubRepo extends GitHubRepo {
 	demoConfig: DemoConfig;
+	logoUrl?: string;
 }

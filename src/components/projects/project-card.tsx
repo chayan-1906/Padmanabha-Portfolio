@@ -1,6 +1,7 @@
 'use client';
 
 import React, {useState} from 'react';
+import Image from 'next/image';
 import {motion, Variants} from 'framer-motion';
 import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
@@ -175,9 +176,18 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			{/* Project Header */}
 			<div className={cn('relative z-10 mb-6')}>
 				<div className={cn('flex items-start justify-between mb-4')}>
-					<motion.div className={cn('w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center', getTechColor(project.language || ''))} whileHover={{rotate: 360}}
-					            transition={{duration: 0.6}}>
-						<span className={cn('text-white font-bold text-lg')}>{project.name.charAt(0)}</span>
+					<motion.div
+						className={cn('w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden',
+							project.logoUrl ? 'bg-white' : 'bg-gradient-to-br ' + getTechColor(project.language || '')
+						)}
+						whileHover={{rotate: 360}}
+						transition={{duration: 0.6}}
+					>
+						{project.logoUrl ? (
+							<Image src={project.logoUrl} alt={`${project.name} logo`} height={400} width={400} className={cn('w-full h-full object-contain p-1')}/>
+						) : (
+							<span className={cn('text-white font-bold text-lg')}>{project.name.charAt(0)}</span>
+						)}
 					</motion.div>
 				</div>
 
