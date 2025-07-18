@@ -19,7 +19,7 @@ async function getGitHubRepositories(): Promise<GitHubRepo[]> {
 
 		return repos
 			.filter(repo => !repo.fork) // filter out forked repositories
-			.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+			.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()); // Sort by creation date (newest first)
 	} catch (error) {
 		console.error('Error fetching GitHub repositories:', error);
 		return [];
@@ -31,10 +31,14 @@ async function getEnhancedGitHubRepositories(): Promise<EnhancedGitHubRepo[]> {
 
 	const enhancedRepos = await Promise.all(
 		repositories.map(async (repo) => {
-			const demoConfig = await getDemoConfig(repo);
+			const [demoConfig, logoUrl] = await Promise.all([
+				getDemoConfig(repo),
+				getLogoUrl(repo)
+			]);
 			return {
 				...repo,
 				demoConfig,
+				logoUrl,
 			};
 		}),
 	);
@@ -69,6 +73,52 @@ async function getDemoConfig(repo: GitHubRepo): Promise<DemoConfig> {
 
 	// Fallback to homepage or default
 	return getFallbackDemoConfig(repo);
+}
+
+async function getLogoUrl(repo: GitHubRepo): Promise<string | undefined> {
+	try {
+		const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
+			headers: {
+				'Accept': 'application/vnd.github.v3+json',
+				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+			},
+			next: {revalidate: 3600},
+		});
+
+		if (readmeResponse.ok) {
+			const readmeData = await readmeResponse.json();
+			const readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
+
+			return parseLogoFromReadme(readmeContent);
+		}
+	} catch (error) {
+		console.error(`Error fetching logo for ${repo.name}:`, error);
+	}
+
+	return undefined;
+}
+
+function parseLogoFromReadme(readmeContent: string): string | undefined {
+	// Logo patterns
+	const logoPatterns = [
+		/!\[logo]\(([^)]+)\)/gi,
+		/!\[Logo]\(([^)]+)\)/gi,
+		/!\[[^\]]*logo[^\]]*]\(([^)]+)\)/gi,
+		/<img[^>]*src=["']([^"']+)["'][^>]*alt=["'][^"']*logo[^"']*["'][^>]*>/gi,
+		/<img[^>]*alt=["'][^"']*logo[^"']*["'][^>]*src=["']([^"']+)["'][^>]*>/gi,
+	];
+
+	for (const pattern of logoPatterns) {
+		const match = pattern.exec(readmeContent);
+		if (match) {
+			const url = match[1];
+			if (url && url.startsWith('http')) {
+				return url.trim();
+			}
+		}
+	}
+
+	return undefined;
 }
 
 function parseReadmeForDemoLinks(readmeContent: string, repo: GitHubRepo): DemoConfig | null {
