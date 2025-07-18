@@ -302,7 +302,7 @@ export const EXPERIENCE_SUMMARY = [
 	},
 	{
 		label: 'Years Experience',
-		value: '3+',
+		value: `${Math.floor((new Date().getTime() - new Date('2022-07-01').getTime()) / (1000 * 60 * 60 * 24 * 365))}+`,
 		color: 'text-purple-500',
 		icon: FaCalendarAlt,
 	},
