@@ -5,7 +5,7 @@ import {useTheme} from 'next-themes';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ChevronDown, Menu, Monitor, Moon, Sun, X} from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO} from '@/constants';
+import {PERSONAL_INFO, SECTIONS} from '@/constants';
 
 function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +18,10 @@ function Navigation() {
 
 	const navItems = [
 		{name: 'Home', href: '#home'},
-		{name: 'About', href: '#about'},
-		{name: 'Skills', href: '#skills'},
-		{name: 'Experience', href: '#experience'},
-		{name: 'Projects', href: '#projects'},
-		{name: 'Certifications', href: '#certifications'},
-		{name: 'Contact', href: '#contact'},
+		...Object.values(SECTIONS).map(section => ({
+			name: section.name,
+			href: `#${section.name.toLowerCase()}`
+		}))
 	];
 
 	const themes = [
@@ -85,12 +83,7 @@ function Navigation() {
 		>
 			<div className={cn('flex items-center justify-between px-6 py-4')}>
 				{/* Logo */}
-				<motion.div
-					whileHover={{scale: 1.05}}
-					className={cn('font-bold text-xl cursor-pointer')}
-					style={{color: 'rgb(var(--color-card-foreground))'}}
-					onClick={() => scrollToSection('#home')}
-				>
+				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer')} style={{color: 'rgb(var(--color-card-foreground))'}} onClick={() => scrollToSection('#home')}>
 					{PERSONAL_INFO.name.split(' ').map((word, index) => (
 						<span key={index} className={index === 0 ? 'text-blue-500' : 'text-purple-500'}>
 							{word}
@@ -196,9 +189,7 @@ function Navigation() {
 
 							{/* Mobile Theme Options */}
 							<div className={cn('border-t pt-4')} style={{borderColor: 'rgba(var(--color-border), 0.2)'}}>
-								<p className={cn('text-xs font-medium mb-2 opacity-60')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-									Theme
-								</p>
+								<p className={cn('text-xs font-medium mb-2 opacity-60')} style={{color: 'rgb(var(--color-card-foreground))'}}>Theme</p>
 								{themes.map((themeOption) => (
 									<motion.button
 										key={themeOption.value}

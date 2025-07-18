@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {FaTrophy} from 'react-icons/fa';
 import {motion, Variants} from 'framer-motion';
 import {cn} from '@/lib/utils';
-import {EXPERIENCE_SUMMARY, WORK_EXPERIENCE} from '@/constants';
+import {EXPERIENCE_SUMMARY, SECTIONS, WORK_EXPERIENCE} from '@/constants';
 
 function ExperienceSection() {
 	const containerVariants: Variants = {
@@ -91,10 +91,10 @@ function ExperienceSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						Work Experience
+						{SECTIONS.experienceSectionConfig.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						Building impactful solutions across diverse industries and technologies
+						{SECTIONS.experienceSectionConfig.subtitle}
 					</p>
 				</motion.div>
 

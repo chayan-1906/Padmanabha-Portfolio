@@ -2,7 +2,7 @@
 
 import {motion, Variants} from 'framer-motion';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO} from '@/constants';
+import {SECTIONS} from '@/constants';
 
 function AboutSection() {
 	const containerVariants: Variants = {
@@ -48,10 +48,10 @@ function AboutSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						About Me
+						{SECTIONS.aboutSectionConfig.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{PERSONAL_INFO.aboutMe}
+						{SECTIONS.aboutSectionConfig.subtitle}
 					</p>
 				</motion.div>
 			</motion.div>

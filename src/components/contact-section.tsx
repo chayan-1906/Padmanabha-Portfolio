@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
 import {FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SOCIAL_LINKS} from '@/constants';
+import {PERSONAL_INFO, SECTIONS, SOCIAL_LINKS} from '@/constants';
 
 function ContactSection() {
 	const [formData, setFormData] = useState({
@@ -131,10 +131,10 @@ function ContactSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						Let&apos;s Work Together
+						{SECTIONS.contactSectionConfig.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						Ready to bring your ideas to life? I&apos;m always excited to work on new projects and collaborate with amazing people.
+						{SECTIONS.contactSectionConfig.subtitle}
 					</p>
 				</motion.div>
 
