@@ -2,7 +2,7 @@
 
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
+import {FaGithub, FaUsers} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {GitHubRepo} from '@/types/github';
 import {COLLABORATORS} from '@/constants';
@@ -123,19 +123,6 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		return 'from-gray-500 to-gray-700';
 	};
 
-	const getDemoIcon = (iconName: string) => {
-		switch (iconName) {
-			case 'ExternalLink':
-				return FaExternalLinkAlt;
-			case 'Download':
-				return FaDownload;
-			case 'Github':
-				return FaGithub;
-			default:
-				return FaExternalLinkAlt;
-		}
-	};
-
 	const getCollaborators = (repoName: string) => {
 		if (repoName === 'FS-MCP') {
 			return [COLLABORATORS.arka];
@@ -171,14 +158,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				}}
 				transition={{duration: 0.3}}
 			>
-				<motion.a
-					href={project.html_url}
-					target={'_blank'}
-					rel={'noopener noreferrer'}
-					className={cn('pointer-events-auto')}
-					whileHover={{scale: 1.1}}
-					whileTap={{scale: 0.9}}
-				>
+				<motion.a href={project.html_url} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
 					<FaGithub className={cn('w-16 h-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
 				</motion.a>
 			</motion.div>
