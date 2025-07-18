@@ -330,14 +330,6 @@ export const EDUCATIONS = [
 	},
 ];
 
-export const COLLABORATORS = {
-	arka: {
-		name: 'Arka Bhattacharya',
-		github: 'https://github.com/arka-bhat/',
-		linkedin: 'https://www.linkedin.com/in/arka-bhattacharya/',
-	},
-};
-
 export const CERTIFICATIONS = [
 	{
 		name: 'Skywa Internship Certificate',
@@ -408,3 +400,5 @@ export const SOCIAL_LINKS = [
 
 // https://docs.google.com/spreadsheets/d/1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg
 export const CONTACT_SUBMISSION_SPREADSHEET_ID = '1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg';
+
+export const PORTFOLIO_ID = 'portfolio-I';

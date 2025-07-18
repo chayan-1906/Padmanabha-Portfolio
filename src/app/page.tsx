@@ -6,17 +6,17 @@ import {AboutSection} from '@/components/about-section';
 import {SkillsSection} from '@/components/skills-section';
 import {ContactSection} from '@/components/contact-section';
 import {ProjectsSection} from '@/components/projects-section';
-import {ExperienceSection} from '@/components/experience-section';
 import {EducationSection} from '@/components/education-section';
+import {ExperienceSection} from '@/components/experience-section';
 import {CertificationsSection} from '@/components/certifications-section';
-import {getGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
+import {getEnhancedGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
 
 async function Home() {
-	const repositories = await getGitHubRepositories();
+	const repositories = await getEnhancedGitHubRepositories();
 	const topFeaturedProjects = getTopFeaturedProjects(repositories);
 
 	// Track analytics server-side
-	await trackAnalytics();
+	await trackAnalytics({pageUrl: '/'});
 
 	return (
 		<>

@@ -1,13 +1,13 @@
 'use client';
 
 import {motion, Variants} from 'framer-motion';
-import {GitHubRepo} from '@/types/github';
-import {ProjectCard} from '@/components/projects';
 import {cn} from '@/lib/utils';
 import {SECTIONS} from "@/constants";
+import {EnhancedGitHubRepo} from '@/types/github';
+import {ProjectCard} from '@/components/projects';
 
 interface ProjectsSectionProps {
-	projects: GitHubRepo[];
+	projects: EnhancedGitHubRepo[];
 }
 
 function ProjectsSection({projects}: ProjectsSectionProps) {

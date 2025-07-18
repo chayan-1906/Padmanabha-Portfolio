@@ -1,8 +1,8 @@
 import {google} from 'googleapis';
 import {headers} from 'next/headers';
-import {CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
+import {CONTACT_SUBMISSION_SPREADSHEET_ID, PORTFOLIO_ID} from '@/constants';
 
-export async function trackAnalytics() {
+async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 	'use server';
 
 	try {
@@ -39,13 +39,15 @@ export async function trackAnalytics() {
 
 		await sheets.spreadsheets.values.append({
 			spreadsheetId: CONTACT_SUBMISSION_SPREADSHEET_ID,
-			range: 'Website Analytics!A:E',
+			range: 'Website Analytics!A:G',
 			valueInputOption: 'USER_ENTERED',
 			requestBody: {
-				values: [[serialDate, ip, country, city, userAgent]],
+				values: [[serialDate, ip, country, city, pageUrl, PORTFOLIO_ID, userAgent]],
 			},
 		});
 	} catch (error) {
 		console.error('Analytics error:', error);
 	}
 }
+
+export {trackAnalytics};

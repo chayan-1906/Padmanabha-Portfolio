@@ -20,3 +20,13 @@ export interface GitHubRepo {
 	archived: boolean;
 	disabled: boolean;
 }
+
+export interface DemoConfig {
+	type: 'live' | 'apk' | 'guide' | 'github' | 'none';
+	url: string;
+	label: string;
+}
+
+export interface EnhancedGitHubRepo extends GitHubRepo {
+	demoConfig: DemoConfig;
+}
