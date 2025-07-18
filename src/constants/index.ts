@@ -1,5 +1,5 @@
 import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from "react-icons/si";
-import {FaBriefcase, FaCalendarAlt, FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from "react-icons/fa";
+import {FaBriefcase, FaCalendarAlt, FaCode, FaDatabase, FaEnvelope, FaGitAlt, FaMapMarkerAlt, FaMobile, FaNodeJs, FaPhone, FaReact, FaTools} from "react-icons/fa";
 
 export const PERSONAL_INFO = {
 	name: 'Padmanabha Das',
@@ -69,29 +69,6 @@ export const TECH_STACK = [
 	'Node.js',
 	'AI Integration',
 	'MCP Development',
-];
-
-export const SOCIAL_LINKS = [
-	{
-		name: 'GitHub',
-		url: PERSONAL_INFO.github,
-		icon: 'Github',
-	},
-	{
-		name: 'LinkedIn',
-		url: PERSONAL_INFO.linkedin,
-		icon: 'Linkedin',
-	},
-	{
-		name: 'Email',
-		url: `mailto:${PERSONAL_INFO.email}`,
-		icon: 'Mail',
-	},
-	{
-		name: 'Phone',
-		url: `tel:${PERSONAL_INFO.phone}`,
-		icon: 'Phone',
-	},
 ];
 
 export const COLLABORATORS = {
@@ -179,9 +156,11 @@ export const SKILLS = {
 export const WORK_EXPERIENCE = [
 	{
 		company: 'CouchConcerts',
+		icon: '🎵',
 		logo: 'https://files.couchconcerts.com/public_facing_assets/logos/CouchConcerts_Blue_Background_Square.png',
 		location: 'Remote',
 		period: 'Mar 2023 – Present',
+		color: 'from-blue-500 to-cyan-500',
 		roles: [
 			{
 				title: 'Freelancer - Flutter & Next.js Developer',
@@ -204,9 +183,11 @@ export const WORK_EXPERIENCE = [
 	},
 	{
 		company: 'Remix Labs',
+		icon: '🧪',
 		logo: 'https://pbs.twimg.com/profile_images/1628147936214368258/AiYLTdSG_400x400.jpg',
 		location: 'Remote',
 		period: 'Mar 2023 – Present',
+		color: 'from-purple-500 to-pink-500',
 		roles: [
 			{
 				title: 'Product Analyst',
@@ -236,8 +217,10 @@ export const WORK_EXPERIENCE = [
 	},
 	{
 		company: 'Skywa Solutions',
+		icon: '🚀',
 		location: 'Hyderabad, India',
 		period: 'Sep 2021 – Feb 2023',
+		color: 'from-green-500 to-emerald-500',
 		roles: [
 			{
 				title: 'Associate Software Engineer',
@@ -273,9 +256,11 @@ export const WORK_EXPERIENCE = [
 	},
 	{
 		company: 'HighRadius',
+		icon: '⚡',
 		logo: 'https://cdn.prod.website-files.com/6640cd28f51f13175e577c05/664e0093d9e2a82b937fbe15_acc0a1b6-efaa-5a44-80eb-7c325b3ade71.svg',
 		location: 'Bhubaneswar, India',
 		period: 'Jan 2021 – Sep 2021',
+		color: 'from-orange-500 to-red-500',
 		roles: [
 			{
 				title: 'Automation Engineer',
@@ -366,6 +351,50 @@ export const CERTIFICATIONS = [
 		date: '2021',
 		credentialId: 'DS-COURSE-2021',
 		url: 'https://drive.google.com/file/d/1UwTsM5oD8LdkzLFqLX4XmGD9qj7J8jRi/view',
+	},
+];
+
+export const CONTACTS = [
+	{
+		icon: FaEnvelope,
+		label: 'Email',
+		value: PERSONAL_INFO.email,
+		href: `mailto:${PERSONAL_INFO.email}`,
+	},
+	{
+		icon: FaPhone,
+		label: 'Phone',
+		value: PERSONAL_INFO.phone,
+		href: `tel:${PERSONAL_INFO.phone}`,
+	},
+	{
+		icon: FaMapMarkerAlt,
+		label: 'Location',
+		value: PERSONAL_INFO.location,
+		href: '#',
+	},
+];
+
+export const SOCIAL_LINKS = [
+	{
+		name: 'GitHub',
+		url: PERSONAL_INFO.github,
+		icon: 'Github',
+	},
+	{
+		name: 'LinkedIn',
+		url: PERSONAL_INFO.linkedin,
+		icon: 'Linkedin',
+	},
+	{
+		name: 'Email',
+		url: `mailto:${PERSONAL_INFO.email}`,
+		icon: 'Mail',
+	},
+	{
+		name: 'Phone',
+		url: `tel:${PERSONAL_INFO.phone}`,
+		icon: 'Phone',
 	},
 ];
 

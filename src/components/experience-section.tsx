@@ -43,26 +43,6 @@ function ExperienceSection() {
 		},
 	};
 
-	const getExperienceIcon = (company: string) => {
-		const icons: { [key: string]: string } = {
-			'CouchConcerts': '🎵',
-			'Remix Labs': '🧪',
-			'Skywa Solutions': '🚀',
-			'HighRadius': '⚡',
-		};
-		return icons[company] || '💼';
-	};
-
-	const getExperienceColor = (index: number) => {
-		const colors = [
-			'from-blue-500 to-cyan-500',
-			'from-purple-500 to-pink-500',
-			'from-green-500 to-emerald-500',
-			'from-orange-500 to-red-500',
-		];
-		return colors[index % colors.length];
-	};
-
 	return (
 		<section id={'experience'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
@@ -109,11 +89,11 @@ function ExperienceSection() {
 							<motion.div key={index} variants={itemVariants} className={cn('relative flex items-start gap-8')}>
 								{/* Timeline Dot */}
 								<motion.div
-									className={cn('relative z-10 flex items-center justify-center w-16 h-16 rounded-full text-white text-2xl bg-gradient-to-br', getExperienceColor(index))}
+									className={cn('relative z-10 flex items-center justify-center w-16 h-16 rounded-full text-white text-2xl bg-gradient-to-br', experience.color)}
 									whileHover={{scale: 1.2, rotate: 360}}
 									transition={{duration: 0.6}}
 								>
-									{getExperienceIcon(experience.company)}
+									{experience.icon}
 								</motion.div>
 
 								{/* Content */}
@@ -145,7 +125,7 @@ function ExperienceSection() {
 											<motion.div
 												key={roleIndex}
 												className={cn('border-l-2 pl-4 py-2')}
-												style={{borderLeftColor: `rgb(${getExperienceColor(index).includes('blue') ? '59 130 246' : getExperienceColor(index).includes('purple') ? '139 92 246' : getExperienceColor(index).includes('green') ? '34 197 94' : '249 115 22'})`}}
+												style={{borderLeftColor: `rgb(${experience.color.includes('blue') ? '59 130 246' : experience.color.includes('purple') ? '139 92 246' : experience.color.includes('green') ? '34 197 94' : '249 115 22'})`}}
 												initial={{opacity: 0, x: -20}}
 												whileInView={{opacity: 1, x: 0}}
 												transition={{delay: roleIndex * 0.1}}
@@ -154,7 +134,7 @@ function ExperienceSection() {
 													<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-card-foreground))'}}>{role.title}</h4>
 													<div className={cn('flex items-center gap-2')}>
 														<span className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{role.period}</span>
-														<motion.span className={cn('px-2 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getExperienceColor(index))}
+														<motion.span className={cn('px-2 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', experience.color)}
 														             whileHover={{scale: 1.05}}>
 															{role.type}
 														</motion.span>
@@ -171,8 +151,7 @@ function ExperienceSection() {
 															whileInView={{opacity: 1, x: 0}}
 															transition={{delay: descIndex * 0.05}}
 														>
-															<motion.div className={cn('w-1.5 h-1.5 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', getExperienceColor(index))}
-															            whileHover={{scale: 1.5}}/>
+															<motion.div className={cn('w-1.5 h-1.5 rounded-full bg-gradient-to-r mt-2 flex-shrink-0', experience.color)} whileHover={{scale: 1.5}}/>
 															<p className={cn('text-sm leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>{desc}</p>
 														</motion.div>
 													))}
