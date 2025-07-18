@@ -1,12 +1,12 @@
 'use client';
 
 import {motion, Variants} from 'framer-motion';
-import {GitHubRepo} from '@/types/github';
-import {ProjectCard} from '@/components/projects';
 import {cn} from '@/lib/utils';
+import {EnhancedGitHubRepo} from '@/types/github';
+import {ProjectCard} from '@/components/projects';
 
 interface ProjectsGridProps {
-	projects: GitHubRepo[];
+	projects: EnhancedGitHubRepo[];
 }
 
 function ProjectsGrid({projects}: ProjectsGridProps) {
@@ -22,12 +22,7 @@ function ProjectsGrid({projects}: ProjectsGridProps) {
 	};
 
 	return (
-		<motion.div
-			variants={containerVariants}
-			initial={'hidden'}
-			animate={'visible'}
-			className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8')}
-		>
+		<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8')}>
 			{projects.map((project, index) => (
 				<ProjectCard key={project.id} project={project} index={index}/>
 			))}

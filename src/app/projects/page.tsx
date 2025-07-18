@@ -1,14 +1,18 @@
-import {Navigation} from '@/components/navigation';
-import {Footer} from '@/components/footer';
-import {getAllFeaturedProjects, getGitHubRepositories} from '@/lib/github';
-import {ProjectsGrid} from '@/components/projects-grid';
-import {cn} from '@/lib/utils';
 import Link from 'next/link';
 import {ChevronRight} from 'lucide-react';
+import {cn} from '@/lib/utils';
+import {Footer} from '@/components/footer';
+import {trackAnalytics} from "@/lib/analytics";
+import {Navigation} from '@/components/navigation';
+import {ProjectsGrid} from '@/components/projects-grid';
+import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
 
 async function ProjectsPage() {
-	const repositories = await getGitHubRepositories();
+	const repositories = await getEnhancedGitHubRepositories();
 	const allFeaturedProjects = getAllFeaturedProjects(repositories);
+
+	// Track analytics server-side
+	await trackAnalytics({pageUrl: '/projects'});
 
 	return (
 		<>

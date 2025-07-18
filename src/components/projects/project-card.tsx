@@ -2,13 +2,12 @@
 
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaGithub, FaUsers} from 'react-icons/fa';
+import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {GitHubRepo} from '@/types/github';
-import {COLLABORATORS} from '@/constants';
+import {EnhancedGitHubRepo} from '@/types/github';
 
 interface ProjectCardProps {
-	project: GitHubRepo;
+	project: EnhancedGitHubRepo;
 	index: number;
 }
 
@@ -123,14 +122,18 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		return 'from-gray-500 to-gray-700';
 	};
 
-	const getCollaborators = (repoName: string) => {
-		if (repoName === 'FS-MCP') {
-			return [COLLABORATORS.arka];
+	const getDemoIcon = (type: string) => {
+		switch (type) {
+			case 'live':
+				return FaExternalLinkAlt;
+			case 'apk':
+				return FaDownload;
+			case 'guide':
+				return FaBook;
+			default:
+				return FaGithub;
 		}
-		return [];
 	};
-
-	const collaborators = getCollaborators(project.name);
 
 	return (
 		<motion.div
@@ -150,7 +153,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		>
 			{/* GitHub Icon Overlay */}
 			<motion.div
-				className={cn('absolute inset-0 rounded-2xl flex items-center justify-center z-50 pointer-events-none')}
+				className={cn('absolute inset-0 rounded-2xl flex items-center justify-center z-30 pointer-events-none')}
 				initial={{opacity: 0, scale: 0.5}}
 				animate={{
 					opacity: isHovered ? 1 : 0,
@@ -206,41 +209,31 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				</div>
 			)}
 
-			{/* Collaborators */}
-			{collaborators.length > 0 && (
-				<motion.div className={cn('flex items-center gap-2 mb-6 p-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10')} whileHover={{scale: 1.02}}>
-					<FaUsers className={cn('w-4 h-4 text-purple-500')}/>
-					<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-						Collaboration with {collaborators.map(collab => collab.name).join(', ')}
-					</span>
-				</motion.div>
-			)}
-
 			{/* Project Stats */}
-			<div className={cn('flex items-center gap-4 text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+			<div className={cn('flex items-center gap-4 text-sm opacity-80 mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
 				<motion.div className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
 					<span>⭐</span>
 					<span className={cn('font-medium')}>{project.stargazers_count}</span>
 				</motion.div>
 			</div>
 
-			{/* Demo Button at bottom */}
-			{/*{demoLink && (
-				<div className={cn('flex justify-center mt-auto relative z-60')}>
+			{/* Demo Button */}
+			{project.demoConfig && project.demoConfig.type !== 'none' && (
+				<div className={cn('flex justify-center mt-auto relative z-40')}>
 					<motion.a
-						href={demoLink.url}
+						href={project.demoConfig.url}
 						target={'_blank'}
 						rel={'noopener noreferrer'}
-						className={cn('flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white transition-all duration-300 relative z-60')}
+						className={cn('flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white transition-all duration-300 relative z-40')}
 						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
 						whileHover={{scale: 1.05, y: -2, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
 						whileTap={{scale: 0.95}}
 					>
-						{React.createElement(getDemoIcon(demoLink.icon), {className: cn('w-4 h-4')})}
-						{demoLink.label}
+						{React.createElement(getDemoIcon(project.demoConfig.type), {className: cn('w-4 h-4')})}
+						{project.demoConfig.label}
 					</motion.a>
 				</div>
-			)}*/}
+			)}
 		</motion.div>
 	);
 }
