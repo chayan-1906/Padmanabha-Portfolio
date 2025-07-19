@@ -11,6 +11,8 @@ import {ExperienceSection} from '@/components/experience-section';
 import {CertificationsSection} from '@/components/certifications-section';
 import {getEnhancedGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
 
+export const dynamic = 'force-dynamic';
+
 async function Home() {
 	const repositories = await getEnhancedGitHubRepositories();
 	const topFeaturedProjects = getTopFeaturedProjects(repositories);
