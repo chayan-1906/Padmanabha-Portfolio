@@ -126,11 +126,11 @@ async function getCollaborators(repo: GitHubRepo): Promise<Collaborator[]> {
 function parseLogoFromReadme(readmeContent: string): string | undefined {
 	// Logo patterns
 	const logoPatterns = [
-		/!\[logo]\(([^)]+)\)/gi,
-		/!\[Logo]\(([^)]+)\)/gi,
-		/!\[[^\]]*logo[^\]]*]\(([^)]+)\)/gi,
-		/<img[^>]*src=["']([^"']+)["'][^>]*alt=["'][^"']*logo[^"']*["'][^>]*>/gi,
-		/<img[^>]*alt=["'][^"']*logo[^"']*["'][^>]*src=["']([^"']+)["'][^>]*>/gi,
+		/!\[logo]\(([^)]+)\)/i,
+		/!\[Logo]\(([^)]+)\)/i,
+		/!\[[^\]]*logo[^\]]*]\(([^)]+)\)/i,
+		/<img[^>]*src=["']([^"']+)["'][^>]*alt=["'][^"']*logo[^"']*["'][^>]*>/i,
+		/<img[^>]*alt=["'][^"']*logo[^"']*["'][^>]*src=["']([^"']+)["'][^>]*>/i,
 	];
 
 	for (const pattern of logoPatterns) {
@@ -188,28 +188,28 @@ function parseCollaboratorsFromReadme(readmeContent: string): Collaborator[] {
 function parseReadmeForDemoLinks(readmeContent: string, repo: GitHubRepo): DemoConfig | null {
 	// Live site patterns
 	const liveSitePatterns = [
-		/Live\s+Site[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
-		/Live\s+Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
-		/Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
-		/\[Live\s+Site[^\]]*]\(([^)]+)\)/gi,
-		/\[Live\s+Demo[^\]]*]\(([^)]+)\)/gi,
-		/https?:\/\/[^\s]+\.vercel\.app/gi,
-		/https?:\/\/[^\s]+\.netlify\.app/gi,
+		/Live\s+Site[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/i,
+		/Live\s+Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/i,
+		/Demo[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/i,
+		/\[Live\s+Site[^\]]*]\(([^)]+)\)/i,
+		/\[Live\s+Demo[^\]]*]\(([^)]+)\)/i,
+		/https?:\/\/[^\s]+\.vercel\.app/i,
+		/https?:\/\/[^\s]+\.netlify\.app/i,
 	];
 
 	// APK download patterns - fixed to avoid badge URLs
 	const apkPatterns = [
-		/\[!\[Download\s+APK][^\]]*]\(([^)]+)\)/gi,
-		/\[Download\s+APK][^\]]*]\(([^)]+)\)/gi,
-		/\[.*Download.*APK.*]\(([^)]+)\)/gi,
+		/\[!\[Download\s+APK][^\]]*]\(([^)]+)\)/i,
+		/\[Download\s+APK][^\]]*]\(([^)]+)\)/i,
+		/\[.*Download.*APK.*]\(([^)]+)\)/i,
 	];
 
 	// User guide patterns
 	const userGuidePatterns = [
-		/User\s+Guide[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/gi,
-		/\[User\s+Guide[^\]]*]\(([^)]+)\)/gi,
-		/User\s+Guide\s*--\s*(https?:\/\/[^\s]+)/gi,
-		/https?:\/\/[^\s]*notion\.site[^\s]*/gi,
+		/User\s+Guide[^:]*:\s*\[([^\]]+)]\(([^)]+)\)/i,
+		/\[User\s+Guide[^\]]*]\(([^)]+)\)/i,
+		/User\s+Guide\s*--\s*(https?:\/\/[^\s]+)/i,
+		/https?:\/\/[^\s]*notion\.site[^\s]*/i,
 	];
 
 	// Check for live site links
