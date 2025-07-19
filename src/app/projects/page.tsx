@@ -7,6 +7,8 @@ import {Navigation} from '@/components/navigation';
 import {ProjectsGrid} from '@/components/projects-grid';
 import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
 
+export const dynamic = 'force-dynamic';
+
 async function ProjectsPage() {
 	const repositories = await getEnhancedGitHubRepositories();
 	const allFeaturedProjects = getAllFeaturedProjects(repositories);
