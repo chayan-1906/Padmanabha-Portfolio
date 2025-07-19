@@ -31,11 +31,32 @@ async function getEnhancedGitHubRepositories(): Promise<EnhancedGitHubRepo[]> {
 
 	const enhancedRepos = await Promise.all(
 		repositories.map(async (repo) => {
+			// Single README fetch per repo
+			let readmeContent: string | undefined;
+			try {
+				const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
+					headers: {
+						'Accept': 'application/vnd.github.v3+json',
+						'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+					},
+					next: {revalidate: 3600},
+				});
+
+				if (readmeResponse.ok) {
+					const readmeData = await readmeResponse.json();
+					readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
+				}
+			} catch (error) {
+				console.error(`Error fetching README for ${repo.name}:`, error);
+			}
+
+			// Pass README content to all parsers
 			const [demoConfig, logoUrl, collaborators] = await Promise.all([
-				getDemoConfig(repo),
-				getLogoUrl(repo),
-				getCollaborators(repo)
+				getDemoConfig(repo, readmeContent),
+				getLogoUrl(readmeContent),
+				getCollaborators(readmeContent)
 			]);
+
 			return {
 				...repo,
 				demoConfig,
@@ -48,78 +69,30 @@ async function getEnhancedGitHubRepositories(): Promise<EnhancedGitHubRepo[]> {
 	return enhancedRepos;
 }
 
-async function getDemoConfig(repo: GitHubRepo): Promise<DemoConfig> {
-	try {
-		// Fetch README.md content
-		const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
-			headers: {
-				'Accept': 'application/vnd.github.v3+json',
-				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-			},
-			next: {revalidate: 3600},
-		});
-
-		if (readmeResponse.ok) {
-			const readmeData = await readmeResponse.json();
-			const readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
-
-			// Parse README for demo links
-			const demoConfig = parseReadmeForDemoLinks(readmeContent, repo);
-			if (demoConfig) {
-				return demoConfig;
-			}
+async function getDemoConfig(repo: GitHubRepo, readmeContent?: string): Promise<DemoConfig> {
+	if (readmeContent) {
+		// Parse README for demo links
+		const demoConfig = parseReadmeForDemoLinks(readmeContent, repo);
+		if (demoConfig) {
+			return demoConfig;
 		}
-	} catch (error) {
-		console.error(`Error fetching README for ${repo.name}:`, error);
 	}
 
 	// Fallback to homepage or default
 	return getFallbackDemoConfig(repo);
 }
 
-async function getLogoUrl(repo: GitHubRepo): Promise<string | undefined> {
-	try {
-		const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
-			headers: {
-				'Accept': 'application/vnd.github.v3+json',
-				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-			},
-			next: {revalidate: 3600},
-		});
-
-		if (readmeResponse.ok) {
-			const readmeData = await readmeResponse.json();
-			const readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
-
-			return parseLogoFromReadme(readmeContent);
-		}
-	} catch (error) {
-		console.error(`Error fetching logo for ${repo.name}:`, error);
+async function getLogoUrl(readmeContent?: string): Promise<string | undefined> {
+	if (readmeContent) {
+		return parseLogoFromReadme(readmeContent);
 	}
-
 	return undefined;
 }
 
-async function getCollaborators(repo: GitHubRepo): Promise<Collaborator[]> {
-	try {
-		const readmeResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/readme`, {
-			headers: {
-				'Accept': 'application/vnd.github.v3+json',
-				'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-			},
-			next: {revalidate: 3600},
-		});
-
-		if (readmeResponse.ok) {
-			const readmeData = await readmeResponse.json();
-			const readmeContent = Buffer.from(readmeData.content, 'base64').toString('utf-8');
-
-			return parseCollaboratorsFromReadme(readmeContent);
-		}
-	} catch (error) {
-		console.error(`Error fetching collaborators for ${repo.name}:`, error);
+async function getCollaborators(readmeContent?: string): Promise<Collaborator[]> {
+	if (readmeContent) {
+		return parseCollaboratorsFromReadme(readmeContent);
 	}
-
 	return [];
 }
 
