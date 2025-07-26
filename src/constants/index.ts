@@ -407,4 +407,4 @@ export enum PortfolioId {
 	PORTFOLIO_IV = 'portfolioIV'
 }
 
-export const PORTFOLIO_ID = PortfolioId.PORTFOLIO_I;
+export const ACTIVE_PORTFOLIO_ID = PortfolioId.PORTFOLIO_I;

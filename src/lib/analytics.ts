@@ -1,6 +1,6 @@
 import {google} from 'googleapis';
 import {headers} from 'next/headers';
-import {CONTACT_SUBMISSION_SPREADSHEET_ID, PORTFOLIO_ID} from '@/constants';
+import {ACTIVE_PORTFOLIO_ID, CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
 
 async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 	'use server';
@@ -42,7 +42,7 @@ async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 			range: 'Website Analytics!A:G',
 			valueInputOption: 'USER_ENTERED',
 			requestBody: {
-				values: [[serialDate, ip, country, city, pageUrl, PORTFOLIO_ID, userAgent]],
+				values: [[serialDate, ip, country, city, pageUrl, ACTIVE_PORTFOLIO_ID, userAgent]],
 			},
 		});
 	} catch (error) {

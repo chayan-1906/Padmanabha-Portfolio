@@ -1,3 +1,4 @@
+/*
 import {NextResponse} from 'next/server';
 import {PortfolioId} from "@/constants";
 import {getEducations} from '@/lib/hygraph';
@@ -22,3 +23,4 @@ export async function GET() {
 		}, {status: 500});
 	}
 }
+*/

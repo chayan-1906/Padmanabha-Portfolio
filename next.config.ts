@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'raw.githubusercontent.com',
 			},
+			{
+				protocol: 'https',
+				hostname: 'ap-south-1.graphassets.com',
+			},
 		],
 	},
 };

@@ -1,6 +1,6 @@
 import {GraphQLClient} from 'graphql-request';
-import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 import {PortfolioId} from "@/constants";
+import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
 const endpoint = HYGRAPH_ENDPOINT || '';
 const token = HYGRAPH_TOKEN || '';
@@ -118,8 +118,11 @@ const createTechStacksQuery = (portfolioId: string) => `
   }
 `;
 
-// Fetch functions
+
+/** Fetch functions */
+// hero
 export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getPersonalInfo called');
 	try {
 		const query = createPersonalInfoQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -130,7 +133,21 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 	}
 }
 
+// hero
+export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getTechStacks called');
+	try {
+		const query = createTechStacksQuery(portfolioId);
+		const data = await hygraph.request(query);
+		return (data as any).techStacks || [];
+	} catch (error) {
+		console.error('Error fetching tech stacks:', error);
+		return [];
+	}
+}
+
 export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getSections called');
 	try {
 		const query = createSectionsQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -141,7 +158,9 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 	}
 }
 
+// skills
 export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getSkills called');
 	try {
 		const query = createSkillsQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -153,6 +172,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 }
 
 export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getWorkExperiences called');
 	try {
 		const query = createWorkExperiencesQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -163,7 +183,9 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 	}
 }
 
+// education
 export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getEducations called');
 	try {
 		const query = createEducationsQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -174,7 +196,9 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 	}
 }
 
+// certifications
 export async function getCertifications(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getCertifications called');
 	try {
 		const query = createCertificationsQuery(portfolioId);
 		const data = await hygraph.request(query);
@@ -185,24 +209,15 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 	}
 }
 
+// hero
 export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('getSocialLinks called');
 	try {
 		const query = createSocialLinksQuery(portfolioId);
 		const data = await hygraph.request(query);
 		return (data as any).socialLinks || [];
 	} catch (error) {
 		console.error('Error fetching social links:', error);
-		return [];
-	}
-}
-
-export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const query = createTechStacksQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).techStacks || [];
-	} catch (error) {
-		console.error('Error fetching tech stacks:', error);
 		return [];
 	}
 }
