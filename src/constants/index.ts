@@ -305,8 +305,7 @@ export const EXPERIENCE_SUMMARY = [
 		value: `${Math.floor((new Date().getTime() - new Date('2022-07-01').getTime()) / (1000 * 60 * 60 * 24 * 365))}+`,
 		color: 'text-purple-500',
 		icon: FaCalendarAlt,
-	},
-	{
+	}, {
 		label: 'Technologies Used',
 		value: `${Math.floor(Object.values(SKILLS).flatMap(category => category.items).length / 5) * 5}+`,
 		color: 'text-green-500',
@@ -348,7 +347,7 @@ export const CERTIFICATIONS = [
 	{
 		name: 'DSA Course Certificate',
 		issuer: 'Katallyst',
-		date: '2021',
+		date: '2018',
 		credentialId: 'DS-COURSE-2021',
 		url: 'https://drive.google.com/file/d/1UwTsM5oD8LdkzLFqLX4XmGD9qj7J8jRi/view',
 	},
@@ -401,4 +400,11 @@ export const SOCIAL_LINKS = [
 // https://docs.google.com/spreadsheets/d/1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg
 export const CONTACT_SUBMISSION_SPREADSHEET_ID = '1Yvqssmy6c7LVbg7M_-dDbMQ-1_OOEJyo1N-DpTbV7dg';
 
-export const PORTFOLIO_ID = 'portfolio-I';
+export enum PortfolioId {
+	PORTFOLIO_I = 'portfolioI',
+	PORTFOLIO_II = 'portfolioII',
+	PORTFOLIO_III = 'portfolioIII',
+	PORTFOLIO_IV = 'portfolioIV'
+}
+
+export const PORTFOLIO_ID = PortfolioId.PORTFOLIO_I;
