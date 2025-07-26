@@ -5,10 +5,18 @@ import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 const endpoint = HYGRAPH_ENDPOINT || '';
 const token = HYGRAPH_TOKEN || '';
 
+const cachedFetch = (input: RequestInfo | URL, init?: RequestInit) => {
+	return fetch(input, {
+		...init,
+		next: {revalidate: 3600},
+	});
+}
+
 export const hygraph = new GraphQLClient(endpoint, {
 	headers: {
 		authorization: `Bearer ${token}`,
 	},
+	fetch: cachedFetch,
 });
 
 // Query builders
@@ -122,11 +130,26 @@ const createTechStacksQuery = (portfolioId: string) => `
 /** Fetch functions */
 // hero
 export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getPersonalInfo called');
+	console.log('🔥 getPersonalInfo called - cache miss');
 	try {
-		const query = createPersonalInfoQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).personalInfos[0] || null;
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createPersonalInfoQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch personal info');
+		}
+
+		const {data} = await response.json();
+		return data.personalInfos[0] || null;
 	} catch (error) {
 		console.error('Error fetching personal info:', error);
 		return null;
@@ -135,11 +158,26 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 
 // hero
 export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getTechStacks called');
+	console.log('🔥 getTechStacks called - cache miss');
 	try {
-		const query = createTechStacksQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).techStacks || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createTechStacksQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch tech stacks');
+		}
+
+		const {data} = await response.json();
+		return data.techStacks || [];
 	} catch (error) {
 		console.error('Error fetching tech stacks:', error);
 		return [];
@@ -147,11 +185,26 @@ export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTF
 }
 
 export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getSections called');
+	console.log('🔥 getSections called - cache miss');
 	try {
-		const query = createSectionsQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).sections || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createSectionsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch sections');
+		}
+
+		const {data} = await response.json();
+		return data.sections || [];
 	} catch (error) {
 		console.error('Error fetching sections:', error);
 		return [];
@@ -160,11 +213,26 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 
 // skills
 export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getSkills called');
+	console.log('🔥 getSkills called - cache miss');
 	try {
-		const query = createSkillsQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).skills || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createSkillsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch skills');
+		}
+
+		const {data} = await response.json();
+		return data.skills || [];
 	} catch (error) {
 		console.error('Error fetching skills:', error);
 		return [];
@@ -172,11 +240,26 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 }
 
 export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getWorkExperiences called');
+	console.log('🔥 getWorkExperiences called - cache miss');
 	try {
-		const query = createWorkExperiencesQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).workExperiences || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createWorkExperiencesQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch work experiences');
+		}
+
+		const {data} = await response.json();
+		return data.workExperiences || [];
 	} catch (error) {
 		console.error('Error fetching work experiences:', error);
 		return [];
@@ -185,11 +268,26 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 
 // education
 export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getEducations called');
+	console.log('🔥 getEducations called - cache miss');
 	try {
-		const query = createEducationsQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).educations || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createEducationsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch educations');
+		}
+
+		const {data} = await response.json();
+		return data.educations || [];
 	} catch (error) {
 		console.error('Error fetching educations:', error);
 		return [];
@@ -198,11 +296,26 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 
 // certifications
 export async function getCertifications(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getCertifications called');
+	console.log('🔥 getCertifications called - cache miss');
 	try {
-		const query = createCertificationsQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).certifications || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createCertificationsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch certifications');
+		}
+
+		const {data} = await response.json();
+		return data.certifications || [];
 	} catch (error) {
 		console.error('Error fetching certifications:', error);
 		return [];
@@ -211,11 +324,26 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 
 // hero
 export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('getSocialLinks called');
+	console.log('🔥 getSocialLinks called - cache miss');
 	try {
-		const query = createSocialLinksQuery(portfolioId);
-		const data = await hygraph.request(query);
-		return (data as any).socialLinks || [];
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createSocialLinksQuery(portfolioId)
+			}),
+			next: {revalidate: 3600}
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch social links');
+		}
+
+		const {data} = await response.json();
+		return data.socialLinks || [];
 	} catch (error) {
 		console.error('Error fetching social links:', error);
 		return [];

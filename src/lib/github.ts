@@ -2,6 +2,7 @@ import {PERSONAL_INFO} from "@/constants";
 import {Collaborator, DemoConfig, EnhancedGitHubRepo, GitHubRepo} from "@/types/github";
 
 async function getGitHubRepositories(): Promise<GitHubRepo[]> {
+	console.log('getGitHubRepositories called');
 	try {
 		const response = await fetch(`https://api.github.com/users/${PERSONAL_INFO.github.split('/').pop()}/repos?per_page=100`, {
 			headers: {

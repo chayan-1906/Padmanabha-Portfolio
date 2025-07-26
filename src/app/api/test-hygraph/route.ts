@@ -1,20 +1,16 @@
-/*
 import {NextResponse} from 'next/server';
 import {PortfolioId} from "@/constants";
-import {getEducations} from '@/lib/hygraph';
+import {getSocialLinks} from '@/lib/hygraph';
 
 export async function GET() {
 	try {
-		const personalInfo = await getEducations(PortfolioId.PORTFOLIO_I);
+		const personalInfo = await getSocialLinks(PortfolioId.PORTFOLIO_I);
 
 		if (!personalInfo) {
 			return NextResponse.json({error: 'No personal info found'}, {status: 404});
 		}
 
-		return NextResponse.json({
-			success: true,
-			data: personalInfo
-		});
+		return NextResponse.json({success: true, data: personalInfo});
 	} catch (error) {
 		console.error('API Error:', error);
 		return NextResponse.json({
@@ -23,4 +19,3 @@ export async function GET() {
 		}, {status: 500});
 	}
 }
-*/
