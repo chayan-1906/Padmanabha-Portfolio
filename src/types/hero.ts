@@ -1,4 +1,4 @@
-export interface PersonalInfo {
+interface PersonalInfo {
 	name: string;
 	title: string;
 	subtitle: string;
@@ -6,13 +6,13 @@ export interface PersonalInfo {
 	resumeUrl: string;
 }
 
-export interface SocialLink {
+interface SocialLink {
 	name: string;
 	url: string;
 	icon: string;
 }
 
-export interface TechStack {
+interface TechStack {
 	name: string;
 	order: number;
 }

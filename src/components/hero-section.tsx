@@ -10,9 +10,7 @@ async function HeroSection() {
 	]);
 
 	if (!personalInfo) {
-		return (
-			<div>Personal info not found</div>
-		);
+		return null;
 	}
 
 	return (

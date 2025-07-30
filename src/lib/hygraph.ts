@@ -139,9 +139,9 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 				'Authorization': `Bearer ${token}`,
 			},
 			body: JSON.stringify({
-				query: createPersonalInfoQuery(portfolioId)
+				query: createPersonalInfoQuery(portfolioId),
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -167,9 +167,9 @@ export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTF
 				'Authorization': `Bearer ${token}`,
 			},
 			body: JSON.stringify({
-				query: createTechStacksQuery(portfolioId)
+				query: createTechStacksQuery(portfolioId),
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -194,9 +194,9 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 				'Authorization': `Bearer ${token}`,
 			},
 			body: JSON.stringify({
-				query: createSectionsQuery(portfolioId)
+				query: createSectionsQuery(portfolioId),
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
