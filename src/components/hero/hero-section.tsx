@@ -1,5 +1,5 @@
 import {getPersonalInfo, getSocialLinks, getTechStacks} from '@/lib/hygraph';
-import {HeroClient} from './hero/hero-client';
+import {HeroClient} from './hero-client';
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 
 async function HeroSection() {

@@ -1,8 +1,4 @@
-export interface Section {
-	name: string;
-	title: string;
-	subtitle: string;
-}
+import {Section} from "@/types/section";
 
 export interface AboutClientProps {
 	aboutSection: Section;

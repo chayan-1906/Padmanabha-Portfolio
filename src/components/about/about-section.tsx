@@ -1,7 +1,7 @@
 import {getSections} from '@/lib/hygraph';
-import {Section} from "@/types/about";
+import {Section} from "@/types/section";
+import {AboutClient} from './about-client';
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
-import {AboutClient} from './about/about-client';
 
 async function AboutSection() {
 	const sections = await getSections(ACTIVE_PORTFOLIO_ID);
@@ -11,7 +11,9 @@ async function AboutSection() {
 		return null;
 	}
 
-	return <AboutClient aboutSection={aboutSection}/>;
+	return (
+		<AboutClient aboutSection={aboutSection}/>
+	);
 }
 
 export {AboutSection};

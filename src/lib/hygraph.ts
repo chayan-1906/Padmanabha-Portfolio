@@ -1,5 +1,8 @@
 import {GraphQLClient} from 'graphql-request';
+import {Skills} from "@/types/skills";
+import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
+import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
 const endpoint = HYGRAPH_ENDPOINT || '';
@@ -149,7 +152,7 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 		}
 
 		const {data} = await response.json();
-		return data.personalInfos[0] || null;
+		return data.personalInfos[0] as PersonalInfo || null;
 	} catch (error) {
 		console.error('Error fetching personal info:', error);
 		return null;
@@ -177,7 +180,7 @@ export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTF
 		}
 
 		const {data} = await response.json();
-		return data.techStacks || [];
+		return data.techStacks as TechStack[] || [];
 	} catch (error) {
 		console.error('Error fetching tech stacks:', error);
 		return [];
@@ -204,7 +207,7 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 		}
 
 		const {data} = await response.json();
-		return data.sections || [];
+		return data.sections as Section[] || [];
 	} catch (error) {
 		console.error('Error fetching sections:', error);
 		return [];
@@ -224,7 +227,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 			body: JSON.stringify({
 				query: createSkillsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -232,7 +235,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 		}
 
 		const {data} = await response.json();
-		return data.skills || [];
+		return data.skills as Skills[] || [];
 	} catch (error) {
 		console.error('Error fetching skills:', error);
 		return [];

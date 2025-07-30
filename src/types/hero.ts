@@ -1,4 +1,4 @@
-interface PersonalInfo {
+export interface PersonalInfo {
 	name: string;
 	title: string;
 	subtitle: string;
@@ -12,7 +12,7 @@ interface SocialLink {
 	icon: string;
 }
 
-interface TechStack {
+export interface TechStack {
 	name: string;
 	order: number;
 }
