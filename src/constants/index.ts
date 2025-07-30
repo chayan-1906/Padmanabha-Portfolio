@@ -1,5 +1,5 @@
 import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from "react-icons/si";
-import {FaBriefcase, FaCalendarAlt, FaCode, FaDatabase, FaEnvelope, FaGitAlt, FaMapMarkerAlt, FaMobile, FaNodeJs, FaPhone, FaReact, FaTools} from "react-icons/fa";
+import {FaCode, FaDatabase, FaEnvelope, FaGitAlt, FaMapMarkerAlt, FaMobile, FaNodeJs, FaPhone, FaReact, FaTools} from "react-icons/fa";
 
 export const PERSONAL_INFO = {
 	name: 'Padmanabha Das',
@@ -290,26 +290,6 @@ export const WORK_EXPERIENCES = [
 				],
 			},
 		],
-	},
-];
-
-export const EXPERIENCE_SUMMARY = [
-	{
-		label: 'Companies Worked',
-		value: WORK_EXPERIENCES.length,
-		color: 'text-blue-500',
-		icon: FaBriefcase,
-	},
-	{
-		label: 'Years Experience',
-		value: `${Math.floor((new Date().getTime() - new Date('2022-07-01').getTime()) / (1000 * 60 * 60 * 24 * 365))}+`,
-		color: 'text-purple-500',
-		icon: FaCalendarAlt,
-	}, {
-		label: 'Technologies Used',
-		value: `${Math.floor(Object.values(SKILLS).flatMap(category => category.items).length / 5) * 5}+`,
-		color: 'text-green-500',
-		icon: FaCode,
 	},
 ];
 

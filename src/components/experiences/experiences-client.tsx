@@ -1,12 +1,34 @@
 'use client';
 
-import Image from 'next/image';
-import {FaTrophy} from 'react-icons/fa';
+import Image from "next/image";
 import {motion, Variants} from 'framer-motion';
+import {FaBriefcase, FaCalendarAlt, FaCode, FaTrophy} from "react-icons/fa";
 import {cn} from '@/lib/utils';
-import {EXPERIENCE_SUMMARY, SECTIONS, WORK_EXPERIENCES} from '@/constants';
+import {SkillCategory} from "@/types/skills";
+import {Experience, ExperienceRole, ExperiencesClientProps} from "@/types/experiences";
 
-function ExperienceSection() {
+function ExperienceClient({experienceSection, skills, workExperiences}: ExperiencesClientProps) {
+	const EXPERIENCE_SUMMARY = [
+		{
+			label: 'Companies Worked',
+			value: workExperiences.length,
+			color: 'text-blue-500',
+			icon: FaBriefcase,
+		},
+		{
+			label: 'Years Experience',
+			value: `${Math.floor((new Date().getTime() - new Date('2022-07-01').getTime()) / (1000 * 60 * 60 * 24 * 365))}+`,
+			color: 'text-purple-500',
+			icon: FaCalendarAlt,
+		},
+		{
+			label: 'Technologies Used',
+			value: `${Math.floor(Object.values(skills).flatMap((category: SkillCategory) => category.items).length / 5) * 5}+`,
+			color: 'text-green-500',
+			icon: FaCode,
+		},
+	];
+
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
 		visible: {
@@ -44,7 +66,7 @@ function ExperienceSection() {
 	};
 
 	return (
-		<section id={'experience'} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={experienceSection.name.toLowerCase()} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -71,10 +93,10 @@ function ExperienceSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						{SECTIONS.experienceSectionConfig.title}
+						{experienceSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{SECTIONS.experienceSectionConfig.subtitle}
+						{experienceSection.subtitle}
 					</p>
 				</motion.div>
 
@@ -85,7 +107,7 @@ function ExperienceSection() {
 
 					{/* Experience Items */}
 					<div className={cn('space-y-12')}>
-						{WORK_EXPERIENCES.map((experience, index) => (
+						{workExperiences.map((experience: Experience, index: number) => (
 							<motion.div key={index} variants={itemVariants} className={cn('relative flex items-start gap-8')}>
 								{/* Timeline Dot */}
 								<motion.div
@@ -109,8 +131,8 @@ function ExperienceSection() {
 									{/* Company Header */}
 									<div className={cn('flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6')}>
 										<div className={cn('flex items-center gap-3')}>
-											{experience.logo && (
-												<Image src={experience.logo} alt={`${experience.company} logo`} width={200} height={200} className={cn('w-10 h-10 object-contain rounded-lg')}/>
+											{experience.logo.url && (
+												<Image src={experience.logo.url} alt={`${experience.company} logo`} width={200} height={200} className={cn('w-10 h-10 object-contain rounded-lg')}/>
 											)}
 											<div>
 												<h3 className={cn('text-2xl font-bold mb-1')} style={{color: 'rgb(var(--color-card-foreground))'}}>{experience.company}</h3>
@@ -121,7 +143,7 @@ function ExperienceSection() {
 
 									{/* Roles */}
 									<div className={cn('space-y-6')}>
-										{experience.roles.map((role, roleIndex) => (
+										{experience.role.map((role: ExperienceRole, roleIndex: number) => (
 											<motion.div
 												key={roleIndex}
 												className={cn('border-l-2 pl-4 py-2')}
@@ -143,7 +165,7 @@ function ExperienceSection() {
 
 												{/* Description */}
 												<div className={cn('space-y-2 mb-4')}>
-													{role.description.map((desc, descIndex) => (
+													{role.description.split('\n').map((desc, descIndex) => (
 														<motion.div
 															key={descIndex}
 															className={cn('flex items-start gap-2')}
@@ -160,7 +182,7 @@ function ExperienceSection() {
 												{/* Achievements */}
 												{role.achievements && (
 													<div className={cn('flex flex-wrap gap-2')}>
-														{role.achievements.map((achievement, achIndex) => (
+														{role.achievements.split('\n').map((achievement, achIndex) => (
 															<motion.div
 																key={achIndex}
 																className={cn('inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium')}
@@ -209,4 +231,4 @@ function ExperienceSection() {
 	);
 }
 
-export {ExperienceSection};
+export {ExperienceClient};

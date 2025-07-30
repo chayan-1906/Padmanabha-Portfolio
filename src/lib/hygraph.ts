@@ -1,7 +1,7 @@
 import {GraphQLClient} from 'graphql-request';
-import {Skills} from "@/types/skills";
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
+import {SkillCategory} from "@/types/skills";
 import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
@@ -24,61 +24,73 @@ export const hygraph = new GraphQLClient(endpoint, {
 
 // Query builders
 const createPersonalInfoQuery = (portfolioId: string) => `
-  query GetPersonalInfo {
-    personalInfos(where: { portfolioId: ${portfolioId} }) {
-      name
-      title
-      description
-      subtitle
-      email
-      phone
-      gitHub
-      linkedIn
-      location
-      company
-      bio
-      avatar {
-        url
-      }
-      resumeUrl
+    query GetPersonalInfo {
+        personalInfos(where: { portfolioId: ${portfolioId} }) {
+            name
+            title
+            description
+            subtitle
+            email
+            phone
+            gitHub
+            linkedIn
+            location
+            company
+            bio
+            avatar {
+                url
+            }
+            resumeUrl
+        }
     }
-  }
 `;
 
 const createSectionsQuery = (portfolioId: string) => `
-  query GetSections {
-    sections(where: { portfolioId: ${portfolioId} }) {
-      name
-      title
-      subtitle
+    query GetSections {
+        sections(where: { portfolioId: ${portfolioId} }) {
+            name
+            title
+            subtitle
+        }
     }
-  }
 `;
 
 const createSkillsQuery = (portfolioId: string) => `
-  query GetSkills {
-    skills(where: { portfolioId: ${portfolioId} }) {
-      name
-      level
-      category
-      icon
+    query GetSkills {
+        skills(where: { portfolioId: ${portfolioId} }) {
+            name
+            level
+            icon
+            skillCategory {
+                name
+                title
+                color
+                icon
+            }
+        }
     }
-  }
 `;
 
 const createWorkExperiencesQuery = (portfolioId: string) => `
-  query GetWorkExperiences {
-    workExperiences(where: { portfolioId: ${portfolioId} }) {
-      company
-      icon
-      logo {
-        url
-      }
-      location
-      period
-      color
-    }
-  }
+	query GetWorkExperiences {
+		workExperiences(where: {portfolioId: portfolioI}, orderBy: order_DESC) {
+            company
+            icon
+            logo {
+                url
+            }
+            location
+            period
+            color
+            role {
+                title
+		        period
+                type
+                description
+                achievements
+            }
+        }
+	}
 `;
 
 const createEducationsQuery = (portfolioId: string) => `
@@ -235,7 +247,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 		}
 
 		const {data} = await response.json();
-		return data.skills as Skills[] || [];
+		return data.skills as SkillCategory[] || [];
 	} catch (error) {
 		console.error('Error fetching skills:', error);
 		return [];
