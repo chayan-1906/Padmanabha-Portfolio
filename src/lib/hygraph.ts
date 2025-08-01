@@ -1,7 +1,7 @@
 import {GraphQLClient} from 'graphql-request';
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
-import {SkillCategory} from "@/types/skills";
+import {SkillItem} from "@/types/skills";
 import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
@@ -57,12 +57,11 @@ const createSectionsQuery = (portfolioId: string) => `
 
 const createSkillsQuery = (portfolioId: string) => `
     query GetSkills {
-        skills(where: { portfolioId: ${portfolioId} }) {
+        skills(where: { portfolioId: ${portfolioId} }, first: 100, orderBy: order_ASC) {
             name
             level
             icon
-            skillCategory {
-                name
+            category {
                 title
                 color
                 icon
@@ -247,7 +246,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 		}
 
 		const {data} = await response.json();
-		return data.skills as SkillCategory[] || [];
+		return data.skills as SkillItem[] || [];
 	} catch (error) {
 		console.error('Error fetching skills:', error);
 		return [];

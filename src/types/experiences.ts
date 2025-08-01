@@ -23,6 +23,6 @@ export interface Experience {
 
 export interface ExperiencesClientProps {
 	experienceSection: Section;
-	skills: SkillCategory[];
+	skills: Record<string, SkillCategory>; // SkillCategory now has string icons
 	workExperiences: Experience[];
 }

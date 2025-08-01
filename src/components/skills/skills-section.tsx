@@ -1,8 +1,7 @@
 import {getSections, getSkills} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {SkillsClient} from './skills-client';
-import {SkillCategory} from '@/types/skills';
-import {ACTIVE_PORTFOLIO_ID, SKILLS} from '@/constants';
+import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 
 async function SkillsSection() {
 	const [sections, skillsData] = await Promise.all([
@@ -12,35 +11,48 @@ async function SkillsSection() {
 
 	const skillsSection = sections.find((section: Section) => section.name === 'Skills');
 
+	console.log('SkillsSection - Raw data:', {skillsSection, skillsData});
+
 	if (!skillsSection || !skillsData.length) {
+		console.log('SkillsSection - No data, returning null');
 		return null;
 	}
 
-	// Group skills by category and merge with constants metadata
-	const groupedSkills: Record<string, SkillCategory> = {};
+	// Group skills by category (keeping icons as strings)
+	const groupedSkills: Record<string, any> = {};
 
 	skillsData.forEach((skill: any) => {
-		const category = skill.category;
-		const categoryConfig = SKILLS[category as keyof typeof SKILLS];
+		console.log('Processing skill:', skill);
 
-		if (!groupedSkills[category]) {
-			groupedSkills[category] = {
-				title: categoryConfig.title,
-				color: categoryConfig.color,
-				icon: categoryConfig.icon,
-				items: []
+		if (!skill.category) {
+			console.warn('Skill missing category:', skill);
+			return;
+		}
+
+		const categoryKey = skill.category.title?.toLowerCase();
+
+		if (!categoryKey) {
+			console.warn('Category missing title:', skill.category);
+			return;
+		}
+
+		if (!groupedSkills[categoryKey]) {
+			groupedSkills[categoryKey] = {
+				title: skill.category.title,
+				color: skill.category.color,
+				icon: skill.category.icon, // Keep as string
+				items: [],
 			};
 		}
 
-		// Find matching skill from constants for icon
-		const constantSkill = categoryConfig.items.find(item => item.name === skill.name);
-
-		groupedSkills[category].items.push({
+		groupedSkills[categoryKey].items.push({
 			name: skill.name,
 			level: skill.level,
-			icon: constantSkill?.icon || categoryConfig.icon
+			icon: skill.icon, // Keep as string
 		});
 	});
+
+	console.log('SkillsSection - Grouped skills:', groupedSkills);
 
 	return (
 		<SkillsClient skillsSection={skillsSection} skills={groupedSkills}/>
