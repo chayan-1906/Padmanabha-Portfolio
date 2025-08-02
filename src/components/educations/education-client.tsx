@@ -1,12 +1,12 @@
 'use client';
 
-import Image from "next/image";
-import {motion, Variants} from 'framer-motion';
+import Image from 'next/image';
 import {FaCalendarAlt, FaMapMarkerAlt, FaTrophy} from 'react-icons/fa';
+import {motion, Variants} from 'framer-motion';
 import {cn} from '@/lib/utils';
-import {EDUCATIONS, SECTIONS} from '@/constants';
+import {Education, EducationClientProps} from "@/types/education";
 
-function EducationSection() {
+function EducationClient({educationSection, educations}: EducationClientProps) {
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
 		visible: {
@@ -32,7 +32,7 @@ function EducationSection() {
 	};
 
 	return (
-		<section id={SECTIONS.educationSectionConfig.name.toLowerCase()} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={educationSection.name.toLowerCase()} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -50,16 +50,14 @@ function EducationSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						{SECTIONS.educationSectionConfig.title}
+						{educationSection.title}
 					</h2>
-					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{SECTIONS.educationSectionConfig.subtitle}
-					</p>
+					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{educationSection.subtitle}</p>
 				</motion.div>
 
 				{/* Education Cards */}
 				<div className={cn('space-y-8')}>
-					{EDUCATIONS.map((education, index) => (
+					{educations.map((education: Education, index: number) => (
 						<motion.div key={index} variants={itemVariants} className={cn('max-w-4xl mx-auto')}>
 							<motion.div
 								className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
@@ -73,7 +71,7 @@ function EducationSection() {
 								{/* Institution Header */}
 								<div className={cn('flex items-center gap-4 mb-6')}>
 									<motion.div className={cn('p-4 rounded-full')}>
-										<Image src={education.logoUrl} alt={'university-logo'} width={200} height={200} className={'w-20'}/>
+										<Image src={education.logo.url} alt={'university-logo'} width={200} height={200} className={'w-20'}/>
 									</motion.div>
 									<div>
 										<h3 className={cn('text-2xl font-bold mb-1')} style={{color: 'rgb(var(--color-card-foreground))'}}>{education.institution}</h3>
@@ -105,7 +103,7 @@ function EducationSection() {
 								<div className={cn('space-y-3')}>
 									<h5 className={cn('text-lg font-semibold mb-3')} style={{color: 'rgb(var(--color-card-foreground))'}}>Highlights</h5>
 									<div className={cn('grid md:grid-cols-2 gap-3')}>
-										{education.highlights.map((highlight, highlightIndex) => (
+										{education.highlights.split('\n').map((highlight, highlightIndex) => (
 											<motion.div
 												key={highlightIndex}
 												className={cn('flex items-center gap-3 p-3 rounded-xl')}
@@ -130,4 +128,4 @@ function EducationSection() {
 	);
 }
 
-export {EducationSection};
+export {EducationClient};

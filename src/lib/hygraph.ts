@@ -1,26 +1,12 @@
-import {GraphQLClient} from 'graphql-request';
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
 import {SkillItem} from "@/types/skills";
+import {Education} from "@/types/education";
 import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
 const endpoint = HYGRAPH_ENDPOINT || '';
 const token = HYGRAPH_TOKEN || '';
-
-const cachedFetch = (input: RequestInfo | URL, init?: RequestInit) => {
-	return fetch(input, {
-		...init,
-		next: {revalidate: 3600},
-	});
-}
-
-export const hygraph = new GraphQLClient(endpoint, {
-	headers: {
-		authorization: `Bearer ${token}`,
-	},
-	fetch: cachedFetch,
-});
 
 // Query builders
 const createPersonalInfoQuery = (portfolioId: string) => `
@@ -61,10 +47,13 @@ const createSkillsQuery = (portfolioId: string) => `
             name
             level
             icon
+            order
             category {
                 title
+                gradient
                 color
                 icon
+                order
             }
         }
     }
@@ -72,7 +61,7 @@ const createSkillsQuery = (portfolioId: string) => `
 
 const createWorkExperiencesQuery = (portfolioId: string) => `
 	query GetWorkExperiences {
-		workExperiences(where: {portfolioId: portfolioI}, orderBy: order_DESC) {
+		workExperiences(where: { portfolioId: ${portfolioId} }, orderBy: order_DESC) {
             company
             icon
             logo {
@@ -93,20 +82,20 @@ const createWorkExperiencesQuery = (portfolioId: string) => `
 `;
 
 const createEducationsQuery = (portfolioId: string) => `
-  query GetEducations {
-    educations(where: { portfolioId: ${portfolioId} }) {
-      degree
-      institution
-      logo {
-        id
-        url
-      }
-      location
-      period
-      cgpa
-      highlights
+	query GetEducations {
+        educations(where: { portfolioId: ${portfolioId} }) {
+            degree
+            institution
+            logo {
+                id
+                url
+            }
+            location
+            period
+            cgpa
+            highlights
+        }
     }
-  }
 `;
 
 const createCertificationsQuery = (portfolioId: string) => `
@@ -265,7 +254,7 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 			body: JSON.stringify({
 				query: createWorkExperiencesQuery(portfolioId)
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -301,7 +290,7 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 		}
 
 		const {data} = await response.json();
-		return data.educations || [];
+		return data.educations as Education[] || [];
 	} catch (error) {
 		console.error('Error fetching educations:', error);
 		return [];

@@ -2,7 +2,7 @@
 
 import {motion, Variants} from 'framer-motion';
 import {cn} from '@/lib/utils';
-import {SkillItem, SkillsClientProps} from "@/types/skills";
+import {ProcessedSkillItem, SkillsClientProps} from "@/types/skills";
 import {FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from 'react-icons/fa';
 import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from 'react-icons/si';
 
@@ -93,7 +93,7 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 									{/* Category Header */}
 									<div className={cn('flex items-center gap-3 mb-6')}>
 										<motion.div
-											className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.color)}
+											className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.gradient)}
 											whileHover={{rotate: 360}}
 											transition={{duration: 0.6}}
 										>
@@ -104,21 +104,22 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 
 									{/* Skills List */}
 									<div className={cn('space-y-4')}>
-										{category.items?.map((skillItem: SkillItem, skillIndex: number) => {
+										{category.items?.map((skillItem: ProcessedSkillItem, skillIndex: number) => {
 											const SkillIcon = skillIconMap[skillItem.icon as keyof typeof skillIconMap] || FaCode;
+											console.log('category.color:', category.color);
 
 											return (
 												<div key={skillItem.name} className={cn('space-y-2')}>
 													<div className={cn('flex items-center justify-between')}>
 														<div className={cn('flex items-center gap-2')}>
-															<SkillIcon className={cn('w-4 h-4 text-blue-500')}/>
+															<SkillIcon className={cn('w-4 h-4 flex-shrink-0', category.color)}/>
 															<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skillItem.name}</span>
 														</div>
 														<span className={cn('text-xs opacity-70')} style={{color: 'rgb(var(--color-card-foreground))'}}>{skillItem.level}%</span>
 													</div>
 													<div className={cn('w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700')}>
 														<motion.div
-															className={cn('h-2 rounded-full bg-gradient-to-r', category.color)}
+															className={cn('h-2 rounded-full bg-gradient-to-r', category.gradient)}
 															initial={{width: 0}}
 															whileInView={{width: `${skillItem.level}%`}}
 															transition={{duration: 1, delay: skillIndex * 0.1}}
@@ -130,7 +131,7 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 									</div>
 
 									{/* Hover Effect */}
-									<motion.div className={cn('absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300', category.color)}
+									<motion.div className={cn('absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300', category.gradient)}
 									            style={{pointerEvents: 'none'}}/>
 								</motion.div>
 							</motion.div>

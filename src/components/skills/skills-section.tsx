@@ -2,6 +2,7 @@ import {getSections, getSkills} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {SkillsClient} from './skills-client';
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {GroupedSkillCategory, SkillItem} from "@/types/skills";
 
 async function SkillsSection() {
 	const [sections, skillsData] = await Promise.all([
@@ -11,19 +12,13 @@ async function SkillsSection() {
 
 	const skillsSection = sections.find((section: Section) => section.name === 'Skills');
 
-	console.log('SkillsSection - Raw data:', {skillsSection, skillsData});
-
 	if (!skillsSection || !skillsData.length) {
-		console.log('SkillsSection - No data, returning null');
 		return null;
 	}
 
-	// Group skills by category (keeping icons as strings)
-	const groupedSkills: Record<string, any> = {};
+	const groupedSkillsMap: Record<string, GroupedSkillCategory> = {};
 
-	skillsData.forEach((skill: any) => {
-		console.log('Processing skill:', skill);
-
+	skillsData.forEach((skill: SkillItem) => {
 		if (!skill.category) {
 			console.warn('Skill missing category:', skill);
 			return;
@@ -36,26 +31,33 @@ async function SkillsSection() {
 			return;
 		}
 
-		if (!groupedSkills[categoryKey]) {
-			groupedSkills[categoryKey] = {
+		if (!groupedSkillsMap[categoryKey]) {
+			groupedSkillsMap[categoryKey] = {
 				title: skill.category.title,
 				color: skill.category.color,
-				icon: skill.category.icon, // Keep as string
+				gradient: skill.category.gradient,
+				icon: skill.category.icon,
+				order: skill.category.order,
 				items: [],
 			};
 		}
 
-		groupedSkills[categoryKey].items.push({
+		groupedSkillsMap[categoryKey].items.push({
 			name: skill.name,
 			level: skill.level,
-			icon: skill.icon, // Keep as string
+			icon: skill.icon,
 		});
 	});
 
-	console.log('SkillsSection - Grouped skills:', groupedSkills);
+	const sortedCategories = Object.entries(groupedSkillsMap)
+		// .sort(([, a], [, b]) => a.order - b.order)
+		.reduce((acc, [key, value]) => {
+			acc[key] = value;
+			return acc;
+		}, {} as Record<string, GroupedSkillCategory>);
 
 	return (
-		<SkillsClient skillsSection={skillsSection} skills={groupedSkills}/>
+		<SkillsClient skillsSection={skillsSection} skills={sortedCategories}/>
 	);
 }
 

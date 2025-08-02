@@ -2,6 +2,7 @@ import {getSections, getSkills, getWorkExperiences} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {ExperienceClient} from "@/components/experiences/experiences-client";
+import {GroupedSkillCategory, SkillItem} from "@/types/skills";
 
 async function ExperienceSection() {
 	const [sections, skillsData, workExperiences] = await Promise.all([
@@ -16,30 +17,48 @@ async function ExperienceSection() {
 		return null;
 	}
 
-	// Group skills by category (keeping icons as strings)
-	const groupedSkills: Record<string, any> = {};
+	const groupedSkillsMap: Record<string, GroupedSkillCategory> = {};
 
-	skillsData.forEach((skill: any) => {
-		const categoryKey = skill.category.title.toLowerCase();
+	skillsData.forEach((skill: SkillItem) => {
+		if (!skill.category) {
+			console.warn('Skill missing category:', skill);
+			return;
+		}
 
-		if (!groupedSkills[categoryKey]) {
-			groupedSkills[categoryKey] = {
+		const categoryKey = skill.category.title?.toLowerCase();
+
+		if (!categoryKey) {
+			console.warn('Category missing title:', skill.category);
+			return;
+		}
+
+		if (!groupedSkillsMap[categoryKey]) {
+			groupedSkillsMap[categoryKey] = {
 				title: skill.category.title,
 				color: skill.category.color,
+				gradient: skill.category.gradient,
 				icon: skill.category.icon,
+				order: skill.category.order,
 				items: [],
 			};
 		}
 
-		groupedSkills[categoryKey].items.push({
+		groupedSkillsMap[categoryKey].items.push({
 			name: skill.name,
 			level: skill.level,
 			icon: skill.icon,
 		});
 	});
 
+	const sortedSkills = Object.entries(groupedSkillsMap)
+		// .sort(([, a], [, b]) => a.order - b.order)
+		.reduce((acc, [key, value]) => {
+			acc[key] = value;
+			return acc;
+		}, {} as Record<string, GroupedSkillCategory>);
+
 	return (
-		<ExperienceClient experienceSection={experienceSection} skills={groupedSkills} workExperiences={workExperiences}/>
+		<ExperienceClient experienceSection={experienceSection} skills={sortedSkills} workExperiences={workExperiences}/>
 	);
 }
 

@@ -1,5 +1,5 @@
 import {Section} from "@/types/section";
-import {SkillCategory} from "@/types/skills";
+import {GroupedSkillCategory} from "@/types/skills";
 
 export interface ExperienceRole {
 	title: string;
@@ -23,6 +23,6 @@ export interface Experience {
 
 export interface ExperiencesClientProps {
 	experienceSection: Section;
-	skills: Record<string, SkillCategory>; // SkillCategory now has string icons
+	skills: Record<string, GroupedSkillCategory>;
 	workExperiences: Experience[];
 }

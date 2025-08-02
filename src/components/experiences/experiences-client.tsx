@@ -4,7 +4,7 @@ import Image from "next/image";
 import {motion, Variants} from 'framer-motion';
 import {FaBriefcase, FaCalendarAlt, FaCode, FaTrophy} from "react-icons/fa";
 import {cn} from '@/lib/utils';
-import {SkillCategory} from "@/types/skills";
+import {GroupedSkillCategory} from "@/types/skills";
 import {Experience, ExperienceRole, ExperiencesClientProps} from "@/types/experiences";
 
 function ExperienceClient({experienceSection, skills, workExperiences}: ExperiencesClientProps) {
@@ -23,7 +23,7 @@ function ExperienceClient({experienceSection, skills, workExperiences}: Experien
 		},
 		{
 			label: 'Technologies Used',
-			value: `${Math.floor(Object.values(skills).flatMap((category: SkillCategory) => category.items).length / 5) * 5}+`,
+			value: `${Math.floor(Object.values(skills).flatMap((category: GroupedSkillCategory) => category.items).length / 5) * 5}+`,
 			color: 'text-green-500',
 			icon: FaCode,
 		},
