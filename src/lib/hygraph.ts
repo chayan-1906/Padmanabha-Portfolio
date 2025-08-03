@@ -33,6 +33,15 @@ const createPersonalInfoQuery = (portfolioId: string) => `
     }
 `;
 
+const createTechStacksQuery = (portfolioId: string) => `
+	query GetTechStacks {
+        techStacks(where: { portfolioId: ${portfolioId} }, orderBy: order_ASC) {
+            name
+            order
+        }
+    }
+`;
+
 const createSectionsQuery = (portfolioId: string) => `
     query GetSections {
         sections(where: { portfolioId: ${portfolioId} }) {
@@ -118,15 +127,6 @@ const createSocialLinksQuery = (portfolioId: string) => `
       name
       url
       icon
-    }
-  }
-`;
-
-const createTechStacksQuery = (portfolioId: string) => `
-  query GetTechStacks {
-    techStacks(where: { portfolioId: ${portfolioId} }, orderBy: order_ASC) {
-      name
-      order
     }
   }
 `;
@@ -284,7 +284,7 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 			body: JSON.stringify({
 				query: createEducationsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -312,7 +312,7 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 			body: JSON.stringify({
 				query: createCertificationsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {
@@ -340,7 +340,7 @@ export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORT
 			body: JSON.stringify({
 				query: createSocialLinksQuery(portfolioId)
 			}),
-			next: {revalidate: 3600}
+			next: {revalidate: 3600},
 		});
 
 		if (!response.ok) {

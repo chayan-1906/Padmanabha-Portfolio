@@ -3,9 +3,10 @@
 import {motion} from 'framer-motion';
 import {FaArrowUp, FaEnvelope, FaGithub, FaHeart, FaLinkedin, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SECTIONS, SOCIAL_LINKS} from '@/constants';
+import {SocialLink} from '@/types/contact';
+import {FooterClientProps} from '@/types/footer';
 
-function Footer() {
+function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) {
 	const currentYear = new Date().getFullYear();
 
 	const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'});
@@ -39,12 +40,12 @@ function Footer() {
 					{/* About Column */}
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} className={cn('lg:col-span-2 space-y-6')}>
 						<div>
-							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>{PERSONAL_INFO.name}</h3>
-							<p className={cn('text-blue-500 font-medium mb-4')}>{PERSONAL_INFO.title}</p>
-							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{PERSONAL_INFO.description}</p>
+							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>{personalInfo.name}</h3>
+							<p className={cn('text-blue-500 font-medium mb-4')}>{personalInfo.title}</p>
+							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{personalInfo.subtitle}</p>
 						</div>
 						<div className={cn('flex items-center gap-4')}>
-							{SOCIAL_LINKS.map((link) => {
+							{socialLinks.map((link: SocialLink) => {
 								const Icon = link.name === 'GitHub' ? FaGithub : link.name === 'LinkedIn' ? FaLinkedin : link.name === 'Email' ? FaEnvelope : FaPhone;
 								return (
 									<motion.a
@@ -75,7 +76,7 @@ function Footer() {
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.2}} className={cn('space-y-6')}>
 						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Quick Links</h4>
 						<div className={cn('space-y-3')}>
-							{Object.values(SECTIONS).map((section) => (
+							{sections.map((section) => (
 								<motion.button
 									key={section.name}
 									onClick={() => scrollToSection(`#${section.name.toLowerCase()}`)}
@@ -94,23 +95,23 @@ function Footer() {
 						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Get In Touch</h4>
 						<div className={cn('space-y-3')}>
 							<motion.a
-								href={`mailto:${PERSONAL_INFO.email}`}
+								href={`mailto:${personalInfo.email}`}
 								className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
 								style={{color: 'rgb(var(--color-foreground))'}}
 								whileHover={{x: 4}}
 							>
-								{PERSONAL_INFO.email}
+								{personalInfo.email}
 							</motion.a>
 							<motion.a
-								href={`tel:${PERSONAL_INFO.phone}`}
+								href={`tel:${personalInfo.phone}`}
 								className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
 								style={{color: 'rgb(var(--color-foreground))'}}
 								whileHover={{x: 4}}
 							>
-								{PERSONAL_INFO.phone}
+								{personalInfo.phone}
 							</motion.a>
 							<motion.p className={cn('opacity-80')} style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
-								{PERSONAL_INFO.location}
+								{personalInfo.location}
 							</motion.p>
 						</div>
 					</motion.div>
@@ -125,7 +126,7 @@ function Footer() {
 					style={{borderColor: 'rgba(var(--color-border), 0.2)'}}
 				>
 					<div className={cn('flex items-center gap-2 text-sm opacity-80 mb-4 md:mb-0')} style={{color: 'rgb(var(--color-foreground))'}}>
-						<span>© {currentYear} {PERSONAL_INFO.name}. Made with</span>
+						<span>© {currentYear} {personalInfo.name}. Made with</span>
 						<motion.div
 							animate={{
 								scale: [1, 1.2, 1],
@@ -164,4 +165,4 @@ function Footer() {
 	);
 }
 
-export {Footer};
+export {FooterClient};

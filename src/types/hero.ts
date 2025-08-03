@@ -1,6 +1,9 @@
 export interface PersonalInfo {
 	name: string;
 	title: string;
+	email: string;
+	phone: string;
+	location: string;
 	subtitle: string;
 	avatar: { url: string };
 	resumeUrl: string;
