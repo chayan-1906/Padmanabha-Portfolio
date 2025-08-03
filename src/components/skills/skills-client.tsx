@@ -106,7 +106,6 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 									<div className={cn('space-y-4')}>
 										{category.items?.map((skillItem: ProcessedSkillItem, skillIndex: number) => {
 											const SkillIcon = skillIconMap[skillItem.icon as keyof typeof skillIconMap] || FaCode;
-											console.log('category.color:', category.color);
 
 											return (
 												<div key={skillItem.name} className={cn('space-y-2')}>

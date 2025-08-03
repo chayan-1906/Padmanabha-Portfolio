@@ -110,25 +110,25 @@ const createEducationsQuery = (portfolioId: string) => `
 `;
 
 const createCertificationsQuery = (portfolioId: string) => `
-  query GetCertifications {
-    certifications(where: { portfolioId: ${portfolioId} }) {
-      name
-      issuer
-      date
-      credentialId
-      url
+	query GetCertifications {
+        certifications(where: { portfolioId: ${portfolioId} }) {
+            name
+            issuer
+            date
+            credentialId
+            url
+        }
     }
-  }
 `;
 
 const createSocialLinksQuery = (portfolioId: string) => `
-  query GetSocialLinks {
-    socialLinks(where: { portfolioId: ${portfolioId} }) {
-      name
-      url
-      icon
+	query GetSocialLinks {
+        socialLinks(where: { portfolioId: ${portfolioId} }) {
+            name
+            url
+            icon
+        }
     }
-  }
 `;
 
 

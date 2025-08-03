@@ -1,11 +1,11 @@
 'use client';
 
-import {useEffect, useState} from 'react';
 import Image from "next/image";
+import React, {useEffect, useState} from 'react';
+import * as FaIcons from 'react-icons/fa';
 import {motion, Variants} from 'framer-motion';
-import {MdEmail, MdPhone} from 'react-icons/md';
-import {FaDownload, FaGithub, FaLinkedin} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
+import {SocialLink} from "@/types/contact";
 import {HeroClientProps} from "@/types/hero";
 
 function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
@@ -36,18 +36,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 	};
 
 	const getIcon = (iconName: string) => {
-		switch (iconName) {
-			case 'Github':
-				return FaGithub;
-			case 'Linkedin':
-				return FaLinkedin;
-			case 'Mail':
-				return MdEmail;
-			case 'Phone':
-				return MdPhone;
-			default:
-				return FaGithub;
-		}
+		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
 	};
 
 	const generateRandomGradient = () => {
@@ -151,8 +140,9 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 				{/* Contact Links */}
 				<motion.div variants={itemVariants} className={cn('mb-12')}>
 					<div className={cn('flex justify-center gap-6 mb-8')}>
-						{socialLinks.map((link) => {
+						{socialLinks.map((link: SocialLink) => {
 							const Icon = getIcon(link.icon);
+
 							return (
 								<motion.a
 									key={link.name}
@@ -212,7 +202,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 						}}
 						whileTap={{scale: 0.95}}
 					>
-						<FaDownload className={cn('w-5 h-5')}/>
+						<FaIcons.FaDownload className={cn('w-5 h-5')}/>
 						Download Resume
 					</motion.a>
 				</motion.div>
