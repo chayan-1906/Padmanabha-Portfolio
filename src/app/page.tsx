@@ -4,7 +4,7 @@ import {Navigation} from '@/components/navigation';
 import {HeroSection} from '@/components/hero/hero-section';
 import {AboutSection} from '@/components/about/about-section';
 import {SkillsSection} from '@/components/skills/skills-section';
-import {ContactSection} from '@/components/contact-section';
+import {ContactSection} from '@/components/contact/contact-section';
 import {ProjectsSection} from '@/components/projects-section';
 import {EducationSection} from '@/components/educations/education-section';
 import {ExperienceSection} from '@/components/experiences/experience-section';

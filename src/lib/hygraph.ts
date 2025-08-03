@@ -1,14 +1,16 @@
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
 import {SkillItem} from "@/types/skills";
+import {SocialLink} from "@/types/contact";
 import {Education} from "@/types/education";
+import {Certification} from "@/types/certification";
 import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
 
 const endpoint = HYGRAPH_ENDPOINT || '';
 const token = HYGRAPH_TOKEN || '';
 
-// Query builders
+/** Query builders */
 const createPersonalInfoQuery = (portfolioId: string) => `
     query GetPersonalInfo {
         personalInfos(where: { portfolioId: ${portfolioId} }) {
@@ -318,7 +320,7 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 		}
 
 		const {data} = await response.json();
-		return data.certifications || [];
+		return data.certifications as Certification[] || [];
 	} catch (error) {
 		console.error('Error fetching certifications:', error);
 		return [];
@@ -346,7 +348,7 @@ export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORT
 		}
 
 		const {data} = await response.json();
-		return data.socialLinks || [];
+		return data.socialLinks as SocialLink[] || [];
 	} catch (error) {
 		console.error('Error fetching social links:', error);
 		return [];

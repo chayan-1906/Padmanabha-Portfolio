@@ -2,11 +2,11 @@
 
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaGithub, FaLinkedin, FaPaperPlane} from 'react-icons/fa';
+import {FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaPhone} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {CONTACTS, SECTIONS, SOCIAL_LINKS} from '@/constants';
+import {ContactClientProps, SocialLink} from '@/types/contact';
 
-function ContactSection() {
+function ContactClient({contactSection, socialLinks}: ContactClientProps) {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -79,8 +79,30 @@ function ContactSection() {
 		},
 	};
 
+	// Hardcoded contact info - should be moved to Hygraph later
+	const CONTACTS = [
+		{
+			icon: FaEnvelope,
+			label: 'Email',
+			value: 'padmanabhadas9647@gmail.com',
+			href: 'mailto:padmanabhadas9647@gmail.com',
+		},
+		{
+			icon: FaPhone,
+			label: 'Phone',
+			value: '+919647100133',
+			href: 'tel:+919647100133',
+		},
+		{
+			icon: FaMapMarkerAlt,
+			label: 'Location',
+			value: 'West Bengal, India',
+			href: '#',
+		},
+	];
+
 	return (
-		<section id={SECTIONS.contactSectionConfig.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={contactSection.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -107,10 +129,10 @@ function ContactSection() {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						{SECTIONS.contactSectionConfig.title}
+						{contactSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{SECTIONS.contactSectionConfig.subtitle}
+						{contactSection.subtitle}
 					</p>
 				</motion.div>
 
@@ -148,7 +170,7 @@ function ContactSection() {
 						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.02}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Connect With Me</h3>
 							<div className={cn('flex gap-4')}>
-								{SOCIAL_LINKS.filter(link => link.name !== 'Email' && link.name !== 'Phone').map((link, index) => {
+								{socialLinks.filter(link => link.name !== 'Email' && link.name !== 'Phone').map((link: SocialLink, index: number) => {
 									const Icon = link.name === 'GitHub' ? FaGithub : FaLinkedin;
 									return (
 										<motion.a
@@ -273,4 +295,4 @@ function ContactSection() {
 	);
 }
 
-export {ContactSection};
+export {ContactClient};
