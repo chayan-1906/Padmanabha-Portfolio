@@ -8,7 +8,7 @@ import {ContactSection} from '@/components/contact-section';
 import {ProjectsSection} from '@/components/projects-section';
 import {EducationSection} from '@/components/educations/education-section';
 import {ExperienceSection} from '@/components/experiences/experience-section';
-import {CertificationsSection} from '@/components/certifications-section';
+import {CertificationsSection} from '@/components/certifications/certifications-section';
 import {getEnhancedGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
 
 export const dynamic = 'force-dynamic';

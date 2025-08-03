@@ -1,11 +1,11 @@
 'use client';
 
 import {motion, Variants} from 'framer-motion';
-import {FaCertificate, FaDownload, FaExternalLinkAlt} from 'react-icons/fa';
+import {FaCertificate, FaExternalLinkAlt} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
-import {CERTIFICATIONS, SECTIONS} from '@/constants';
+import {Certification, CertificationsClientProps} from "@/types/certification";
 
-function CertificationsSection() {
+function CertificationsClient({certificationsSection, certifications}: CertificationsClientProps) {
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
 		visible: {
@@ -44,7 +44,7 @@ function CertificationsSection() {
 	};
 
 	return (
-		<section id={SECTIONS.certificationsSectionConfig.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={certificationsSection.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -61,14 +61,14 @@ function CertificationsSection() {
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>{SECTIONS.certificationsSectionConfig.title}</h2>
-					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{SECTIONS.certificationsSectionConfig.subtitle}</p>
+					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>{certificationsSection.title}</h2>
+					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{certificationsSection.subtitle}</p>
 				</motion.div>
 
 				{/* Certifications Grid */}
 				<div className={cn('grid md:grid-cols-2 lg:grid-cols-3 gap-8')}>
-					{CERTIFICATIONS.map((cert, index) => (
-						<motion.div key={cert.credentialId} variants={cardVariants} className={cn('group relative')} custom={index}>
+					{certifications.map((certificate: Certification, index: number) => (
+						<motion.div key={certificate.credentialId} variants={cardVariants} className={cn('group relative')} custom={index}>
 							<motion.div
 								className={cn('p-6 rounded-2xl border border-opacity-20 backdrop-blur-sm h-full flex flex-col')}
 								style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
@@ -88,38 +88,23 @@ function CertificationsSection() {
 
 								{/* Certificate Details */}
 								<div className={cn('flex-1 text-center')}>
-									<h3 className={cn('text-lg font-bold mb-2')} style={{color: 'rgb(var(--color-card-foreground))'}}>{cert.name}</h3>
-									<p className={cn('text-sm text-blue-500 font-medium mb-2')}>{cert.issuer}</p>
-									<p className={cn('text-xs opacity-70 mb-4')} style={{color: 'rgb(var(--color-card-foreground))'}}>{cert.date}</p>
+									<h3 className={cn('text-lg font-bold mb-2')} style={{color: 'rgb(var(--color-card-foreground))'}}>{certificate.name}</h3>
+									<p className={cn('text-sm text-blue-500 font-medium mb-2')}>{certificate.issuer}</p>
+									<p className={cn('text-xs opacity-70 mb-4')} style={{color: 'rgb(var(--color-card-foreground))'}}>{certificate.date}</p>
 								</div>
 
-								{/* Actions */}
-								<div className={cn('flex gap-2 mt-auto')}>
-									<motion.a
-										href={cert.url}
-										target={'_blank'}
-										rel={'noopener noreferrer'}
-										className={cn('flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium transition-colors')}
-										style={{backgroundColor: 'rgba(var(--color-primary), 0.1)', color: 'rgb(var(--color-primary))'}}
-										whileHover={{scale: 1.05}}
-										whileTap={{scale: 0.95}}
-									>
-										<FaExternalLinkAlt className={cn('w-3 h-3')}/>
-										View
-									</motion.a>
-									<motion.a
-										href={cert.url}
-										target={'_blank'}
-										rel={'noopener noreferrer'}
-										className={cn('flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium transition-colors')}
-										style={{backgroundColor: 'rgba(var(--color-secondary), 0.1)', color: 'rgb(var(--color-secondary-foreground))'}}
-										whileHover={{scale: 1.05}}
-										whileTap={{scale: 0.95}}
-									>
-										<FaDownload className={cn('w-3 h-3')}/>
-										Download
-									</motion.a>
-								</div>
+								<motion.a
+									href={certificate.url}
+									target={'_blank'}
+									rel={'noopener noreferrer'}
+									className={cn('flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium transition-colors')}
+									style={{backgroundColor: 'rgba(var(--color-primary), 0.1)', color: 'rgb(var(--color-primary))'}}
+									whileHover={{scale: 1.05}}
+									whileTap={{scale: 0.95}}
+								>
+									<FaExternalLinkAlt className={cn('w-3 h-3')}/>
+									View Certificate
+								</motion.a>
 
 								{/* Hover Effect */}
 								<motion.div
@@ -134,4 +119,4 @@ function CertificationsSection() {
 	);
 }
 
-export {CertificationsSection};
+export {CertificationsClient};
