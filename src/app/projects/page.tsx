@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import {ChevronRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {Footer} from '@/components/footer';
 import {trackAnalytics} from "@/lib/analytics";
 import {Navigation} from '@/components/navigation';
 import {ProjectsGrid} from '@/components/projects-grid';
+import {Footer} from '@/components/footer/footer-section';
 import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
 
 export const dynamic = 'force-dynamic';
