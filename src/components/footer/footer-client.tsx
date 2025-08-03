@@ -1,7 +1,8 @@
 'use client';
 
 import {motion} from 'framer-motion';
-import {FaArrowUp, FaEnvelope, FaGithub, FaHeart, FaLinkedin, FaPhone} from 'react-icons/fa';
+import * as FaIcons from 'react-icons/fa';
+import {FaArrowUp, FaHeart} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {SocialLink} from '@/types/contact';
 import {FooterClientProps} from '@/types/footer';
@@ -19,6 +20,10 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 			}
 		}, 100);
 	}
+
+	const getIcon = (iconName: string) => {
+		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
+	};
 
 	return (
 		<footer className={cn('relative py-16 px-6 border-t border-opacity-20')} style={{backgroundColor: 'rgb(var(--color-background))', borderColor: 'rgba(var(--color-border), 0.2)'}}>
@@ -42,11 +47,12 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 						<div>
 							<h3 className={cn('text-2xl font-bold mb-4')} style={{color: 'rgb(var(--color-foreground))'}}>{personalInfo.name}</h3>
 							<p className={cn('text-blue-500 font-medium mb-4')}>{personalInfo.title}</p>
-							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{personalInfo.subtitle}</p>
+							<p className={cn('opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{personalInfo.description}</p>
 						</div>
 						<div className={cn('flex items-center gap-4')}>
 							{socialLinks.map((link: SocialLink) => {
-								const Icon = link.name === 'GitHub' ? FaGithub : link.name === 'LinkedIn' ? FaLinkedin : link.name === 'Email' ? FaEnvelope : FaPhone;
+								const Icon = getIcon(link.icon);
+
 								return (
 									<motion.a
 										key={link.name}
