@@ -1,15 +1,8 @@
-import {getSections, getSkills} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {SkillsClient} from './skills-client';
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
-import {GroupedSkillCategory, SkillItem} from "@/types/skills";
+import {GroupedSkillCategory, SkillItem, SkillsSectionProps} from "@/types/skills";
 
-async function SkillsSection() {
-	const [sections, skillsData] = await Promise.all([
-		getSections(ACTIVE_PORTFOLIO_ID),
-		getSkills(ACTIVE_PORTFOLIO_ID),
-	]);
-
+async function SkillsSection({sections, skillsData}: SkillsSectionProps) {
 	const skillsSection = sections.find((section: Section) => section.name === 'Skills');
 
 	if (!skillsSection || !skillsData.length) {

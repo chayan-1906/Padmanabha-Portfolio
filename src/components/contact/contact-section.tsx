@@ -1,14 +1,8 @@
-import {getSections, getSocialLinks} from '@/lib/hygraph';
 import {Section} from "@/types/section";
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {ContactClient} from "./contact-client";
+import {ContactSectionProps} from "@/types/contact";
 
-async function ContactSection() {
-	const [sections, socialLinks] = await Promise.all([
-		getSections(ACTIVE_PORTFOLIO_ID),
-		getSocialLinks(ACTIVE_PORTFOLIO_ID),
-	]);
-
+async function ContactSection({sections, socialLinks}: ContactSectionProps) {
 	const contactSection = sections.find((section: Section) => section.name === 'Contact');
 
 	if (!contactSection) {

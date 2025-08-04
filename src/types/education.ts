@@ -13,6 +13,10 @@ export interface Education {
 	highlights: string;
 }
 
+export interface EducationSectionProps {
+	sections: Section[];
+}
+
 export interface EducationClientProps {
 	educationSection: Section;
 	educations: Education[];

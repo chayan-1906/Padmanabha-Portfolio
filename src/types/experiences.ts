@@ -1,5 +1,5 @@
 import {Section} from "@/types/section";
-import {GroupedSkillCategory} from "@/types/skills";
+import {GroupedSkillCategory, SkillItem} from "@/types/skills";
 
 export interface ExperienceRole {
 	title: string;
@@ -19,6 +19,11 @@ export interface Experience {
 	period: string;
 	color: string;
 	role: ExperienceRole[];
+}
+
+export interface ExperiencesSectionProps {
+	sections: Section[];
+	skillsData: SkillItem[];
 }
 
 export interface ExperiencesClientProps {

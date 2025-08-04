@@ -6,6 +6,11 @@ export interface SocialLink {
 	icon: string;
 }
 
+export interface ContactSectionProps {
+	sections: Section[];
+	socialLinks: SocialLink[];
+}
+
 export interface ContactClientProps {
 	contactSection: Section;
 	socialLinks: SocialLink[];

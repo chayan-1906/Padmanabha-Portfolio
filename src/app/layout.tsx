@@ -17,13 +17,7 @@ function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
 	return (
 		<html lang={'en'} suppressHydrationWarning>
 		<body className={cn(inter.className, 'transition-colors duration-300')}>
-		<ThemeProvider
-			attribute={'class'}
-			defaultTheme={'system'}
-			enableSystem
-			disableTransitionOnChange={false}
-			forcedTheme={undefined}
-		>
+		<ThemeProvider attribute={'class'} defaultTheme={'system'} enableSystem disableTransitionOnChange={false} forcedTheme={undefined}>
 			{children}
 		</ThemeProvider>
 		</body>

@@ -1,13 +1,10 @@
-import {getPersonalInfo, getSocialLinks, getTechStacks} from '@/lib/hygraph';
+import {getTechStacks} from '@/lib/hygraph';
 import {HeroClient} from './hero-client';
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
+import {HeroSectionProps} from '@/types/hero';
 
-async function HeroSection() {
-	const [personalInfo, socialLinks, techStacks] = await Promise.all([
-		getPersonalInfo(ACTIVE_PORTFOLIO_ID),
-		getSocialLinks(ACTIVE_PORTFOLIO_ID),
-		getTechStacks(ACTIVE_PORTFOLIO_ID),
-	]);
+async function HeroSection({personalInfo, socialLinks}: HeroSectionProps) {
+	const techStacks = await getTechStacks(ACTIVE_PORTFOLIO_ID);
 
 	if (!personalInfo) {
 		return null;

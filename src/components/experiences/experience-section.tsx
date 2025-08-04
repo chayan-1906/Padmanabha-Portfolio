@@ -1,15 +1,12 @@
-import {getSections, getSkills, getWorkExperiences} from '@/lib/hygraph';
+import {getWorkExperiences} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {ExperienceClient} from "@/components/experiences/experiences-client";
 import {GroupedSkillCategory, SkillItem} from "@/types/skills";
+import {ExperiencesSectionProps} from "@/types/experiences";
 
-async function ExperienceSection() {
-	const [sections, skillsData, workExperiences] = await Promise.all([
-		getSections(ACTIVE_PORTFOLIO_ID),
-		getSkills(ACTIVE_PORTFOLIO_ID),
-		getWorkExperiences(ACTIVE_PORTFOLIO_ID),
-	]);
+async function ExperienceSection({sections, skillsData}: ExperiencesSectionProps) {
+	const workExperiences = await getWorkExperiences(ACTIVE_PORTFOLIO_ID);
 
 	const experienceSection = sections.find((section: Section) => section.name === 'Experience');
 

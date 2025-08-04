@@ -1,14 +1,7 @@
-import {getPersonalInfo, getSections, getSocialLinks} from '@/lib/hygraph';
 import {FooterClient} from "./footer-client";
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {FooterSectionProps} from '@/types/footer';
 
-async function Footer() {
-	const [sections, socialLinks, personalInfo] = await Promise.all([
-		getSections(ACTIVE_PORTFOLIO_ID),
-		getSocialLinks(ACTIVE_PORTFOLIO_ID),
-		getPersonalInfo(ACTIVE_PORTFOLIO_ID),
-	]);
-
+async function Footer({sections, socialLinks, personalInfo}: FooterSectionProps) {
 	if (!personalInfo || !socialLinks) {
 		return null;
 	}

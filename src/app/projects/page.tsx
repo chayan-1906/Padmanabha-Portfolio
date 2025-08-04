@@ -2,15 +2,27 @@ import Link from 'next/link';
 import {ChevronRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {trackAnalytics} from "@/lib/analytics";
-import {NavigationSection} from '@/components/navigation/navigation-section';
+import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {ProjectsGrid} from '@/components/projects-grid';
 import {Footer} from '@/components/footer/footer-section';
+import {NavigationSection} from '@/components/navigation/navigation-section';
 import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
+import {getPersonalInfo, getSections, getSkills, getSocialLinks} from "@/lib/hygraph";
 
 export const dynamic = 'force-dynamic';
 
 async function ProjectsPage() {
-	const repositories = await getEnhancedGitHubRepositories();
+	const [repositories, sections, skillsData, personalInfo, socialLinks] = await Promise.all([
+		getEnhancedGitHubRepositories(),
+		getSections(ACTIVE_PORTFOLIO_ID),
+		getSkills(ACTIVE_PORTFOLIO_ID),
+		getPersonalInfo(ACTIVE_PORTFOLIO_ID),
+		getSocialLinks(ACTIVE_PORTFOLIO_ID),
+	]);
+	if (!personalInfo) {
+		return null;
+	}
+
 	const allFeaturedProjects = getAllFeaturedProjects(repositories);
 
 	// Track analytics server-side
@@ -18,7 +30,7 @@ async function ProjectsPage() {
 
 	return (
 		<>
-			<NavigationSection/>
+			<NavigationSection sections={sections} personalInfo={personalInfo}/>
 			<main className={cn('min-h-screen pt-32 pb-20 px-6')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 				<div className={cn('max-w-7xl mx-auto')}>
 					{/* Breadcrumb */}
@@ -43,7 +55,7 @@ async function ProjectsPage() {
 					<ProjectsGrid projects={allFeaturedProjects}/>
 				</div>
 			</main>
-			<Footer/>
+			<Footer sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
 		</>
 	);
 }

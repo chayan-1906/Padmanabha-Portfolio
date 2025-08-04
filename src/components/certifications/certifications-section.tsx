@@ -1,13 +1,11 @@
-import {getCertifications, getSections} from '@/lib/hygraph';
+import {getCertifications} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {CertificationsClient} from "./certifications-client";
+import {CertificationsSectionProps} from "@/types/certification";
 
-async function CertificationsSection() {
-	const [sections, certifications] = await Promise.all([
-		getSections(ACTIVE_PORTFOLIO_ID),
-		getCertifications(ACTIVE_PORTFOLIO_ID),
-	]);
+async function CertificationsSection({sections}: CertificationsSectionProps) {
+	const certifications = await getCertifications(ACTIVE_PORTFOLIO_ID);
 
 	const certificationsSection = sections.find((section: Section) => section.name === 'Certifications');
 

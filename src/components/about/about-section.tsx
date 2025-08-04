@@ -1,10 +1,8 @@
-import {getSections} from '@/lib/hygraph';
 import {Section} from "@/types/section";
 import {AboutClient} from './about-client';
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {AboutSectionProps} from "@/types/about";
 
-async function AboutSection() {
-	const sections = await getSections(ACTIVE_PORTFOLIO_ID);
+async function AboutSection({sections}: AboutSectionProps) {
 	const aboutSection = sections.find((section: Section) => section.name === 'About');
 
 	if (!aboutSection) {

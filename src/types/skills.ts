@@ -33,6 +33,11 @@ export interface GroupedSkillCategory {
 	items: ProcessedSkillItem[];
 }
 
+export interface SkillsSectionProps {
+	sections: Section[];
+	skillsData: SkillItem[];
+}
+
 export interface SkillsClientProps {
 	skillsSection: Section;
 	skills: Record<string, GroupedSkillCategory>;

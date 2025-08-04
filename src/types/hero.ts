@@ -10,7 +10,7 @@ export interface PersonalInfo {
 	resumeUrl: string;
 }
 
-interface SocialLink {
+export interface SocialLink {
 	name: string;
 	url: string;
 	icon: string;
@@ -19,6 +19,11 @@ interface SocialLink {
 export interface TechStack {
 	name: string;
 	order: number;
+}
+
+export interface HeroSectionProps {
+	personalInfo: PersonalInfo;
+	socialLinks: SocialLink[];
 }
 
 export interface HeroClientProps {

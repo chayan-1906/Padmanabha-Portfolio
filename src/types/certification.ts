@@ -8,6 +8,10 @@ export interface Certification {
 	url: string;
 }
 
+export interface CertificationsSectionProps {
+	sections: Section[];
+}
+
 export interface CertificationsClientProps {
 	certificationsSection: Section;
 	certifications: Certification[];
