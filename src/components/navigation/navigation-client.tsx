@@ -1,14 +1,14 @@
 'use client';
 
-import {useEffect, useRef, useState} from 'react';
 import {useTheme} from 'next-themes';
-import {usePathname, useRouter} from 'next/navigation';
+import {useEffect, useRef, useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
+import {usePathname, useRouter} from 'next/navigation';
 import {ChevronDown, Menu, Monitor, Moon, Sun, X} from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {PERSONAL_INFO, SECTIONS} from '@/constants';
+import {NavigationClientProps} from '@/types/navigation';
 
-function Navigation() {
+function NavigationClient({sections, personalInfo}: NavigationClientProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
@@ -21,7 +21,7 @@ function Navigation() {
 
 	const navItems = [
 		{name: 'Home', href: '#home'},
-		...Object.values(SECTIONS).map(section => ({
+		...sections.map(section => ({
 			name: section.name,
 			href: `#${section.name.toLowerCase()}`
 		}))
@@ -52,9 +52,7 @@ function Navigation() {
 
 	useEffect(() => {
 		setMounted(true);
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 50);
-		};
+		const handleScroll = () => setScrolled(window.scrollY > 50);
 
 		const handleClickOutside = (event: MouseEvent) => {
 			if (navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -74,15 +72,24 @@ function Navigation() {
 		};
 	}, []);
 
-	// Handle scroll on homepage load with hash
 	useEffect(() => {
-		if (pathname === '/' && window.location.hash) {
-			setTimeout(() => {
-				const element = document.querySelector(window.location.hash);
-				if (element) {
-					element.scrollIntoView({behavior: 'smooth'});
-				}
-			}, 500);
+		if (pathname === '/') {
+			if (window.location.hash) {
+				setTimeout(() => {
+					const element = document.querySelector(window.location.hash);
+					if (element) {
+						element.scrollIntoView({behavior: 'smooth'});
+					}
+				}, 500);
+			} else {
+				window.history.replaceState(null, '', '#home');
+				setTimeout(() => {
+					const homeElement = document.querySelector('#home');
+					if (homeElement) {
+						homeElement.scrollIntoView({behavior: 'smooth'});
+					}
+				}, 500);
+			}
 		}
 	}, [pathname]);
 
@@ -107,7 +114,7 @@ function Navigation() {
 				{/* Logo */}
 				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer')} style={{color: 'rgb(var(--color-card-foreground))'}}
 				            onClick={() => navigateToSection('#home')}>
-					{PERSONAL_INFO.name.split(' ').map((word, index) => (
+					{personalInfo.name.split(' ').map((word: string, index: number) => (
 						<span key={index} className={index === 0 ? 'text-blue-500' : 'text-purple-500'}>
 							{word}
 							{index === 0 && ' '}
@@ -237,4 +244,4 @@ function Navigation() {
 	);
 }
 
-export {Navigation};
+export {NavigationClient};

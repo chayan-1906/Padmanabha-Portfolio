@@ -1,5 +1,4 @@
 import {trackAnalytics} from '@/lib/analytics';
-import {Navigation} from '@/components/navigation';
 import {Footer} from '@/components/footer/footer-section';
 import {HeroSection} from '@/components/hero/hero-section';
 import {AboutSection} from '@/components/about/about-section';
@@ -7,6 +6,7 @@ import {ProjectsSection} from '@/components/projects-section';
 import {SkillsSection} from '@/components/skills/skills-section';
 import {ContactSection} from '@/components/contact/contact-section';
 import {EducationSection} from '@/components/educations/education-section';
+import {NavigationSection} from "@/components/navigation/navigation-section";
 import {ExperienceSection} from '@/components/experiences/experience-section';
 import {getEnhancedGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
 import {CertificationsSection} from '@/components/certifications/certifications-section';
@@ -22,7 +22,7 @@ async function Home() {
 
 	return (
 		<>
-			<Navigation/>
+			<NavigationSection/>
 			<main>
 				<div id={'home'}>
 					<HeroSection/>

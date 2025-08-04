@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {ChevronRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {trackAnalytics} from "@/lib/analytics";
-import {Navigation} from '@/components/navigation';
+import {NavigationSection} from '@/components/navigation/navigation-section';
 import {ProjectsGrid} from '@/components/projects-grid';
 import {Footer} from '@/components/footer/footer-section';
 import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
@@ -18,7 +18,7 @@ async function ProjectsPage() {
 
 	return (
 		<>
-			<Navigation/>
+			<NavigationSection/>
 			<main className={cn('min-h-screen pt-32 pb-20 px-6')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 				<div className={cn('max-w-7xl mx-auto')}>
 					{/* Breadcrumb */}
