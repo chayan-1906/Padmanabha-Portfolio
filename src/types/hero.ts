@@ -1,3 +1,5 @@
+import {SkillItem} from "@/types/skills";
+
 export interface PersonalInfo {
 	name: string;
 	title: string;
@@ -23,11 +25,13 @@ export interface TechStack {
 
 export interface HeroSectionProps {
 	personalInfo: PersonalInfo;
+	skillsData: SkillItem[];
 	socialLinks: SocialLink[];
 }
 
 export interface HeroClientProps {
 	personalInfo: PersonalInfo;
-	socialLinks: SocialLink[];
+	skillsData: SkillItem[];
 	techStacks: TechStack[];
+	socialLinks: SocialLink[];
 }

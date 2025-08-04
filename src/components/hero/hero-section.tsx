@@ -3,7 +3,7 @@ import {HeroClient} from './hero-client';
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {HeroSectionProps} from '@/types/hero';
 
-async function HeroSection({personalInfo, socialLinks}: HeroSectionProps) {
+async function HeroSection({personalInfo, skillsData, socialLinks}: HeroSectionProps) {
 	const techStacks = await getTechStacks(ACTIVE_PORTFOLIO_ID);
 
 	if (!personalInfo) {
@@ -11,7 +11,7 @@ async function HeroSection({personalInfo, socialLinks}: HeroSectionProps) {
 	}
 
 	return (
-		<HeroClient personalInfo={personalInfo} socialLinks={socialLinks} techStacks={techStacks}/>
+		<HeroClient personalInfo={personalInfo} skillsData={skillsData} techStacks={techStacks} socialLinks={socialLinks}/>
 	);
 }
 

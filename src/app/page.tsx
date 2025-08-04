@@ -38,7 +38,7 @@ async function Home() {
 			<NavigationSection sections={sections} personalInfo={personalInfo}/>
 			<main>
 				<div id={'home'}>
-					<HeroSection personalInfo={personalInfo} socialLinks={socialLinks}/>
+					<HeroSection personalInfo={personalInfo} skillsData={skillsData} socialLinks={socialLinks}/>
 				</div>
 				<AboutSection sections={sections}/>
 				<SkillsSection sections={sections} skillsData={skillsData}/>

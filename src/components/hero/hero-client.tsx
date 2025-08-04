@@ -53,6 +53,8 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 		return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
 	};
 
+	const renderSubtitleWithHTML = (htmlContent: string) => <span dangerouslySetInnerHTML={{__html: htmlContent}}/>;
+
 	useEffect(() => {
 		setTechGradients(techStacks.map(() => generateRandomGradient()));
 	}, [techStacks]);
@@ -108,7 +110,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 				{/* Subtitle */}
 				<motion.div variants={itemVariants} className={cn('mb-8')}>
 					<p className={cn('text-lg md:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{personalInfo.subtitle}
+						{renderSubtitleWithHTML(personalInfo.subtitle)}
 					</p>
 				</motion.div>
 
