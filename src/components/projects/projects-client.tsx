@@ -1,16 +1,11 @@
 'use client';
 
-import {motion, Variants} from 'framer-motion';
-import {cn} from '@/lib/utils';
-import {SECTIONS} from "@/constants";
-import {EnhancedGitHubRepo} from '@/types/github';
-import {ProjectCard} from '@/components/projects';
+import {motion, Variants} from "framer-motion";
+import {cn} from "@/lib/utils";
+import {ProjectsClientProps} from "@/types/project";
+import {ProjectCard} from "@/components/projects/project-card";
 
-interface ProjectsSectionProps {
-	projects: EnhancedGitHubRepo[];
-}
-
-function ProjectsSection({projects}: ProjectsSectionProps) {
+function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
 		visible: {
@@ -37,7 +32,7 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 	};
 
 	return (
-		<section id={SECTIONS.projectsSectionConfig.name.toLowerCase()} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
+		<section id={projectSection.name.toLowerCase()} className={cn('pt-32 pb-24 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
 			{/* Floating Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
@@ -64,17 +59,17 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
 					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
-						{SECTIONS.projectsSectionConfig.title}
+						{projectSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-						{SECTIONS.projectsSectionConfig.subtitle}
+						{projectSection.subtitle}
 					</p>
 				</motion.div>
 
 				{/* Projects Grid */}
 				<div className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8')}>
 					{projects.map((project, index) => (
-						<ProjectCard key={project.id} project={project} index={index}/>
+						<ProjectCard key={project.title} project={project} index={index}/>
 					))}
 				</div>
 
@@ -99,4 +94,4 @@ function ProjectsSection({projects}: ProjectsSectionProps) {
 	);
 }
 
-export {ProjectsSection};
+export {ProjectsClient};

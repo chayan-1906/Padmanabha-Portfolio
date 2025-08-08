@@ -1,8 +1,10 @@
+import {Project} from "@/types/project";
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
 import {SkillItem} from "@/types/skills";
 import {SocialLink} from "@/types/contact";
 import {Education} from "@/types/education";
+import {Experience} from "@/types/experiences";
 import {Certification} from "@/types/certification";
 import {PersonalInfo, TechStack} from "@/types/hero";
 import {HYGRAPH_ENDPOINT, HYGRAPH_TOKEN} from "@/config/config";
@@ -107,6 +109,42 @@ const createEducationsQuery = (portfolioId: string) => `
             highlights
         }
     }
+`;
+
+const createFeaturedProjectsQuery = (portfolioId: string) => `
+	query GetFeaturedProjects {
+        projects(where: {portfolioId: ${portfolioId}, featured: true }, orderBy: order_DESC) {
+            id
+            title
+            description
+            gitHubUrl
+            logoUrl
+            actionUrl
+            actionType
+            language
+            technologies
+            featured
+            category
+        }
+	}
+`;
+
+const createAllProjectsQuery = (portfolioId: string) => `
+	query GetAllProjects {
+		projects(where: { portfolioId: ${portfolioId} }, orderBy: order_DESC) {
+            id
+            title
+            description
+            gitHubUrl
+            logoUrl
+            actionUrl
+            actionType
+            language
+            technologies
+            featured
+            category
+        }
+	}
 `;
 
 const createCertificationsQuery = (portfolioId: string) => `
@@ -264,14 +302,14 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 		}
 
 		const {data} = await response.json();
-		return data.workExperiences || [];
+		return data.workExperiences as Experience[] || [];
 	} catch (error) {
 		console.error('Error fetching work experiences:', error);
 		return [];
 	}
 }
 
-// education
+// educations
 export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
 	console.log('🔥 getEducations called - cache miss');
 	try {
@@ -295,6 +333,62 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 		return data.educations as Education[] || [];
 	} catch (error) {
 		console.error('Error fetching educations:', error);
+		return [];
+	}
+}
+
+// projects
+export async function getFeaturedProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('🔥 geProjects called - cache miss');
+	try {
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createFeaturedProjectsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch featured projects');
+		}
+
+		const {data} = await response.json();
+		return data.projects as Project[] || [];
+	} catch (error) {
+		console.error('Error fetching featured projects:', error);
+		return [];
+	}
+}
+
+// projects
+export async function getAllProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
+	console.log('🔥 getAllProjects called - cache miss');
+	try {
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				query: createAllProjectsQuery(portfolioId)
+			}),
+			next: {revalidate: 3600},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch all projects');
+		}
+
+		const {data} = await response.json();
+		return data.projects as Project[] || [];
+	} catch (error) {
+		console.error('Error fetching all projects:', error);
 		return [];
 	}
 }

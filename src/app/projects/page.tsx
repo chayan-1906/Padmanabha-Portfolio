@@ -4,18 +4,16 @@ import {cn} from '@/lib/utils';
 import {trackAnalytics} from "@/lib/analytics";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {ProjectsGrid} from '@/components/projects-grid';
+import {getAllProjectsWithGitHubData} from "@/lib/github";
 import {Footer} from '@/components/footer/footer-section';
+import {getPersonalInfo, getSections, getSocialLinks} from "@/lib/hygraph";
 import {NavigationSection} from '@/components/navigation/navigation-section';
-import {getAllFeaturedProjects, getEnhancedGitHubRepositories} from '@/lib/github';
-import {getPersonalInfo, getSections, getSkills, getSocialLinks} from "@/lib/hygraph";
 
 export const dynamic = 'force-dynamic';
 
 async function ProjectsPage() {
-	const [repositories, sections, skillsData, personalInfo, socialLinks] = await Promise.all([
-		getEnhancedGitHubRepositories(),
+	const [sections, personalInfo, socialLinks] = await Promise.all([
 		getSections(ACTIVE_PORTFOLIO_ID),
-		getSkills(ACTIVE_PORTFOLIO_ID),
 		getPersonalInfo(ACTIVE_PORTFOLIO_ID),
 		getSocialLinks(ACTIVE_PORTFOLIO_ID),
 	]);
@@ -23,7 +21,7 @@ async function ProjectsPage() {
 		return null;
 	}
 
-	const allFeaturedProjects = getAllFeaturedProjects(repositories);
+	const projects = await getAllProjectsWithGitHubData();
 
 	// Track analytics server-side
 	await trackAnalytics({pageUrl: '/projects'});
@@ -48,11 +46,11 @@ async function ProjectsPage() {
 							All Projects
 						</h1>
 						<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
-							Complete collection of {allFeaturedProjects.length} featured projects showcasing expertise in modern web technologies
+							Complete collection of {projects.length} featured projects showcasing expertise in modern web technologies
 						</p>
 					</div>
 
-					<ProjectsGrid projects={allFeaturedProjects}/>
+					<ProjectsGrid projects={projects}/>
 				</div>
 			</main>
 			<Footer sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>

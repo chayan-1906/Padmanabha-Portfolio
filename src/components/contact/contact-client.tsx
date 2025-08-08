@@ -2,11 +2,12 @@
 
 import React, {useState} from 'react';
 import {motion, Variants} from 'framer-motion';
-import {FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane, FaPhone} from 'react-icons/fa';
+import * as FaIcons from 'react-icons/fa';
+import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from 'react-icons/fa';
 import {cn} from '@/lib/utils';
 import {ContactClientProps, SocialLink} from '@/types/contact';
 
-function ContactClient({contactSection, socialLinks}: ContactClientProps) {
+function ContactClient({contactSection, socialLinks, personalInfo}: ContactClientProps) {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -46,7 +47,7 @@ function ContactClient({contactSection, socialLinks}: ContactClientProps) {
 		} finally {
 			setIsSubmitting(false);
 		}
-	};
+	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setFormData({
@@ -79,27 +80,9 @@ function ContactClient({contactSection, socialLinks}: ContactClientProps) {
 		},
 	};
 
-	// Hardcoded contact info - should be moved to Hygraph later
-	const CONTACTS = [
-		{
-			icon: FaEnvelope,
-			label: 'Email',
-			value: 'padmanabhadas9647@gmail.com',
-			href: 'mailto:padmanabhadas9647@gmail.com',
-		},
-		{
-			icon: FaPhone,
-			label: 'Phone',
-			value: '+919647100133',
-			href: 'tel:+919647100133',
-		},
-		{
-			icon: FaMapMarkerAlt,
-			label: 'Location',
-			value: 'West Bengal, India',
-			href: '#',
-		},
-	];
+	const getIcon = (iconName: string) => {
+		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
+	}
 
 	return (
 		<section id={contactSection.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
@@ -143,25 +126,57 @@ function ContactClient({contactSection, socialLinks}: ContactClientProps) {
 						     style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Contact Information</h3>
 							<div className={cn('space-y-6')}>
-								{CONTACTS.map((contact, index) => (
-									<motion.a
-										key={contact.label}
-										href={contact.href}
-										className={cn('flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-opacity-50')}
-										style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
-										whileHover={{scale: 1.02, x: 8}}
-										target={contact.href.startsWith('http') ? '_blank' : '_self'}
-										rel={contact.href.startsWith('http') ? 'noopener noreferrer' : ''}
-									>
-										<div className={cn('p-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white')}>
-											<contact.icon className={cn('w-5 h-5')}/>
-										</div>
-										<div>
-											<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{contact.label}</p>
-											<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{contact.value}</p>
-										</div>
-									</motion.a>
-								))}
+								{socialLinks.filter((socialLink: SocialLink) => socialLink.name === 'Email' || socialLink.name === 'Phone').map((socialLink: SocialLink, index: number) => {
+									const Icon = getIcon(socialLink.icon);
+
+									return (
+										<motion.a
+											key={socialLink.name}
+											href={socialLink.url}
+											className={cn('flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-opacity-50')}
+											style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
+											whileHover={{scale: 1.02, x: 8}}
+											target={socialLink.url.startsWith('http') ? '_blank' : '_self'}
+											rel={socialLink.url.startsWith('http') ? 'noopener noreferrer' : ''}
+										>
+											<div className={cn('p-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white')}>
+												<Icon className={cn('w-5 h-5')}/>
+											</div>
+											<div>
+												<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>{socialLink.name}</p>
+												<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>
+													{(() => {
+														const key = socialLink.name.toLowerCase() as keyof typeof personalInfo;
+														const value = personalInfo[key];
+
+														if (typeof value === 'string') {
+															return value;
+														}
+
+														if (value && typeof value === 'object' && 'url' in value) {
+															return value.url;
+														}
+
+														return '';
+													})()}
+												</p>
+											</div>
+										</motion.a>
+									);
+								})}
+								<motion.div
+									key={'Location'}
+									className={cn('flex items-center gap-4 p-4 rounded-xl transition-all duration-300 cursor-pointer hover:bg-opacity-50')}
+									style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
+									whileHover={{scale: 1.02, x: 8}}>
+									<div className={cn('p-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white')}>
+										<FaMapMarkerAlt className={cn('w-5 h-5')}/>
+									</div>
+									<div>
+										<p className={cn('text-sm opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>Location</p>
+										<p className={cn('font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{personalInfo.location}</p>
+									</div>
+								</motion.div>
 							</div>
 						</div>
 
@@ -172,6 +187,7 @@ function ContactClient({contactSection, socialLinks}: ContactClientProps) {
 							<div className={cn('flex gap-4')}>
 								{socialLinks.filter(link => link.name !== 'Email' && link.name !== 'Phone').map((link: SocialLink, index: number) => {
 									const Icon = link.name === 'GitHub' ? FaGithub : FaLinkedin;
+
 									return (
 										<motion.a
 											key={link.name}

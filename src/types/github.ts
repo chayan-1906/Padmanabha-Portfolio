@@ -1,4 +1,9 @@
-export interface GitHubRepo {
+export interface Collaborator {
+	login: string;
+	html_url: string;
+}
+
+export interface GitHubRepository {
 	id: number;
 	name: string;
 	full_name: string;
@@ -19,6 +24,7 @@ export interface GitHubRepo {
 	private: boolean;
 	archived: boolean;
 	disabled: boolean;
+	collaborators: Collaborator[];
 }
 
 export interface DemoConfig {
@@ -27,12 +33,7 @@ export interface DemoConfig {
 	label: string;
 }
 
-export interface Collaborator {
-	name: string;
-	githubUrl: string;
-}
-
-export interface EnhancedGitHubRepo extends GitHubRepo {
+export interface EnhancedGitHubRepo extends GitHubRepository {
 	demoConfig: DemoConfig;
 	logoUrl?: string;
 	collaborators: Collaborator[];

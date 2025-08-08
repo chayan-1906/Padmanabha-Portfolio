@@ -23,7 +23,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 
 	const getIcon = (iconName: string) => {
 		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
-	};
+	}
 
 	return (
 		<footer className={cn('relative py-16 px-6 border-t border-opacity-20')} style={{backgroundColor: 'rgb(var(--color-background))', borderColor: 'rgba(var(--color-border), 0.2)'}}>

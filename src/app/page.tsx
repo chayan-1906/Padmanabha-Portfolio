@@ -3,21 +3,21 @@ import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {Footer} from '@/components/footer/footer-section';
 import {HeroSection} from '@/components/hero/hero-section';
 import {AboutSection} from '@/components/about/about-section';
-import {ProjectsSection} from '@/components/projects-section';
+import {getFeaturedProjectsWithGitHubData} from "@/lib/github";
 import {SkillsSection} from '@/components/skills/skills-section';
 import {ContactSection} from '@/components/contact/contact-section';
+import {ProjectsSection} from '@/components/projects/projects-section';
 import {EducationSection} from '@/components/educations/education-section';
 import {NavigationSection} from "@/components/navigation/navigation-section";
 import {ExperienceSection} from '@/components/experiences/experience-section';
-import {getEnhancedGitHubRepositories, getTopFeaturedProjects} from '@/lib/github';
-import {getPersonalInfo, getSections, getSkills, getSocialLinks} from '@/lib/hygraph';
 import {CertificationsSection} from '@/components/certifications/certifications-section';
+import {getPersonalInfo, getSections, getSkills, getSocialLinks} from '@/lib/hygraph';
 
 export const dynamic = 'force-dynamic';
 
 async function Home() {
-	const [repositories, sections, skillsData, personalInfo, socialLinks] = await Promise.all([
-		getEnhancedGitHubRepositories(),
+	const [featuredProjects, sections, skillsData, personalInfo, socialLinks] = await Promise.all([
+		getFeaturedProjectsWithGitHubData(),
 		getSections(ACTIVE_PORTFOLIO_ID),
 		getSkills(ACTIVE_PORTFOLIO_ID),
 		getPersonalInfo(ACTIVE_PORTFOLIO_ID),
@@ -27,8 +27,6 @@ async function Home() {
 	if (!personalInfo) {
 		return null;
 	}
-
-	const topFeaturedProjects = getTopFeaturedProjects(repositories);
 
 	// Track analytics server-side
 	await trackAnalytics({pageUrl: '/'});
@@ -44,9 +42,9 @@ async function Home() {
 				<SkillsSection sections={sections} skillsData={skillsData}/>
 				<ExperienceSection sections={sections} skillsData={skillsData}/>
 				<EducationSection sections={sections}/>
-				<ProjectsSection projects={topFeaturedProjects}/>
+				<ProjectsSection sections={sections} featuredProjects={featuredProjects}/>
 				<CertificationsSection sections={sections}/>
-				<ContactSection sections={sections} socialLinks={socialLinks}/>
+				<ContactSection sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
 			</main>
 			<Footer sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
 		</>

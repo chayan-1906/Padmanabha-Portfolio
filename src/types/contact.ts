@@ -1,4 +1,5 @@
 import {Section} from "@/types/section";
+import {PersonalInfo} from "@/types/hero";
 
 export interface SocialLink {
 	name: string;
@@ -9,9 +10,11 @@ export interface SocialLink {
 export interface ContactSectionProps {
 	sections: Section[];
 	socialLinks: SocialLink[];
+	personalInfo: PersonalInfo;
 }
 
 export interface ContactClientProps {
 	contactSection: Section;
 	socialLinks: SocialLink[];
+	personalInfo: PersonalInfo;
 }

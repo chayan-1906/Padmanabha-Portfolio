@@ -3,14 +3,10 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import {motion, Variants} from 'framer-motion';
+import {Collaborator} from "@/types/github";
+import {camelToWords, cn} from '@/lib/utils';
+import {ProjectCardProps} from "@/types/project";
 import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
-import {cn} from '@/lib/utils';
-import {EnhancedGitHubRepo} from '@/types/github';
-
-interface ProjectCardProps {
-	project: EnhancedGitHubRepo;
-	index: number;
-}
 
 function ProjectCard({project, index}: ProjectCardProps) {
 	const [isHovered, setIsHovered] = useState(false);
@@ -27,7 +23,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				stiffness: 100,
 			},
 		},
-	};
+	}
 
 	const getTechColor = (tech: string) => {
 		const colors: { [key: string]: string } = {
@@ -121,20 +117,20 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		}
 
 		return 'from-gray-500 to-gray-700';
-	};
+	}
 
 	const getDemoIcon = (type: string) => {
 		switch (type) {
-			case 'live':
+			case 'liveDemo':
 				return FaExternalLinkAlt;
-			case 'apk':
+			case 'apkDownload':
 				return FaDownload;
-			case 'guide':
+			case 'userGuide':
 				return FaBook;
 			default:
 				return FaGithub;
 		}
-	};
+	}
 
 	return (
 		<motion.div
@@ -162,7 +158,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				}}
 				transition={{duration: 0.3}}
 			>
-				<motion.a href={project.html_url} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
+				<motion.a href={project.gitHubUrl} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
 					<FaGithub className={cn('w-16 h-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
 				</motion.a>
 			</motion.div>
@@ -182,16 +178,16 @@ function ProjectCard({project, index}: ProjectCardProps) {
 						)}
 					>
 						{project.logoUrl ? (
-							<Image src={project.logoUrl} alt={`${project.name} logo`} height={400} width={400} className={cn('w-full h-full object-contain p-1')}/>
+							<Image src={project.logoUrl} alt={`${project.title} logo`} height={400} width={400} className={cn('w-full h-full object-contain p-1')}/>
 						) : (
-							<span className={cn('text-white font-bold text-lg')}>{project.name.charAt(0)}</span>
+							<span className={cn('text-white font-bold text-lg')}>{project.title.charAt(0)}</span>
 						)}
 					</motion.div>
 				</div>
 
 				<h3 className={cn('text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-500')}
 				    style={{color: 'rgb(var(--color-card-foreground))'}}>
-					{project.name}
+					{project.title}
 				</h3>
 
 				<p className={cn('text-base opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>{project.description}</p>
@@ -205,17 +201,17 @@ function ProjectCard({project, index}: ProjectCardProps) {
 						<span className={cn('text-sm font-medium opacity-80')} style={{color: 'rgb(var(--color-card-foreground))'}}>Collaborators</span>
 					</div>
 					<div className={cn('flex flex-wrap gap-2')}>
-						{project.collaborators.map((collaborator, idx) => (
+						{project.collaborators.map((collaborator: Collaborator, idx: number) => (
 							<motion.a
 								key={idx}
-								href={collaborator.githubUrl}
+								href={collaborator.html_url}
 								target={'_blank'}
 								rel={'noopener noreferrer'}
 								className={cn('px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 z-1')}
 								whileHover={{scale: 1.05, y: -1}}
 								whileTap={{scale: 0.95}}
 							>
-								{collaborator.name}
+								{collaborator.login}
 							</motion.a>
 						))}
 					</div>
@@ -224,7 +220,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 			{/* Tech Stack */}
 			<div className={cn('flex flex-wrap gap-2 mb-3')}>
-				{project.topics.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 8).map((tech) => (
+				{project.technologies.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 8).map((tech: string) => (
 					<motion.span key={tech} className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(tech))} whileHover={{scale: 1.1, y: -2}}>
 						{tech}
 					</motion.span>
@@ -249,10 +245,10 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			</div>
 
 			{/* Demo Button */}
-			{project.demoConfig && project.demoConfig.type !== 'none' && (
+			{project.actionUrl && project.actionType !== 'none' && (
 				<div className={cn('flex justify-center mt-auto relative z-40')}>
 					<motion.a
-						href={project.demoConfig.url}
+						href={project.actionUrl}
 						target={'_blank'}
 						rel={'noopener noreferrer'}
 						className={cn('flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white transition-all duration-300 relative z-40')}
@@ -260,8 +256,8 @@ function ProjectCard({project, index}: ProjectCardProps) {
 						whileHover={{scale: 1.05, y: -2, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
 						whileTap={{scale: 0.95}}
 					>
-						{React.createElement(getDemoIcon(project.demoConfig.type), {className: cn('w-4 h-4')})}
-						{project.demoConfig.label}
+						{React.createElement(getDemoIcon(project.actionType), {className: cn('w-4 h-4')})}
+						{camelToWords(project.actionType)}
 					</motion.a>
 				</div>
 			)}
