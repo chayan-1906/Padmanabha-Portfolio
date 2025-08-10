@@ -3,11 +3,12 @@ import {ChevronRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {trackAnalytics} from "@/lib/analytics";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
-import {ProjectsGrid} from '@/components/projects-grid';
 import {getAllProjectsWithGitHubData} from "@/lib/github";
 import {Footer} from '@/components/footer/footer-section';
+import {GroupedProjectCategory, Project} from "@/types/project";
 import {getPersonalInfo, getSections, getSocialLinks} from "@/lib/hygraph";
 import {NavigationSection} from '@/components/navigation/navigation-section';
+import {CategorizedProjectsGridClient} from "@/components/projects/categorized-projects-grid-client";
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,44 @@ async function ProjectsPage() {
 	}
 
 	const projects = await getAllProjectsWithGitHubData();
+
+	const groupedProjectsMap: Record<string, GroupedProjectCategory> = {};
+
+	projects.forEach((project: Project) => {
+		const {title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, technologies, stargazers_count, featured, projectCategory, collaborators} = project;
+		if (!projectCategory) {
+			console.warn('Project missing category:', project);
+			return;
+		}
+
+		const categoryKey = project.projectCategory.title?.toLowerCase();
+
+		if (!categoryKey) {
+			console.warn('Category missing title:', project.projectCategory);
+			return;
+		}
+
+		if (!groupedProjectsMap[categoryKey]) {
+			groupedProjectsMap[categoryKey] = {
+				title: project.projectCategory.title,
+				gradient: project.projectCategory.gradient,
+				icon: project.projectCategory.icon,
+				order: project.projectCategory.order,
+				projects: [],
+			};
+		}
+
+		groupedProjectsMap[categoryKey].projects.push({
+			title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, technologies, stargazers_count, collaborators, featured, projectCategory,
+		});
+	});
+
+	const sortedCategories = Object.entries(groupedProjectsMap)
+		.sort(([, a], [, b]) => a.order - b.order)
+		.reduce((acc, [key, value]) => {
+			acc[key] = value;
+			return acc;
+		}, {} as Record<string, GroupedProjectCategory>);
 
 	// Track analytics server-side
 	await trackAnalytics({pageUrl: '/projects'});
@@ -50,7 +89,8 @@ async function ProjectsPage() {
 						</p>
 					</div>
 
-					<ProjectsGrid projects={projects}/>
+					{/*<ProjectsGrid projects={projects}/>*/}
+					<CategorizedProjectsGridClient projects={sortedCategories}/>
 				</div>
 			</main>
 			<Footer sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>

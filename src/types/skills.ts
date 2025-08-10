@@ -16,14 +16,12 @@ export interface SkillCategory {
 	order: number;
 }
 
-// For individual skill items without the full category object
 export interface ProcessedSkillItem {
 	name: string;
 	level: number;
 	icon: string;
 }
 
-// For grouped skills with items
 export interface GroupedSkillCategory {
 	title: string;
 	gradient: string;

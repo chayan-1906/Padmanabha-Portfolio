@@ -131,7 +131,7 @@ const createFeaturedProjectsQuery = (portfolioId: string) => `
 
 const createAllProjectsQuery = (portfolioId: string) => `
 	query GetAllProjects {
-		projects(where: { portfolioId: ${portfolioId} }, orderBy: order_DESC) {
+		projects(where: { portfolioId: ${portfolioId} } orderBy: order_DESC) {
             id
             title
             description
@@ -142,7 +142,12 @@ const createAllProjectsQuery = (portfolioId: string) => `
             language
             technologies
             featured
-            category
+            projectCategory {
+                title
+                icon
+                gradient
+                order
+            }
         }
 	}
 `;

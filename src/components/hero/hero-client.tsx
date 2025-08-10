@@ -37,7 +37,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 
 	const getIcon = (iconName: string) => {
 		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
-	};
+	}
 
 	const generateRandomGradient = () => {
 		const colors = [
@@ -51,7 +51,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 		const angle = Math.floor(Math.random() * 360);
 
 		return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
-	};
+	}
 
 	const renderSubtitleWithHTML = (htmlContent: string) => <span dangerouslySetInnerHTML={{__html: htmlContent}}/>;
 

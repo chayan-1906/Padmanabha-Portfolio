@@ -193,6 +193,9 @@ function ProjectCard({project, index}: ProjectCardProps) {
 				<p className={cn('text-base opacity-80 leading-relaxed')} style={{color: 'rgb(var(--color-card-foreground))'}}>{project.description}</p>
 			</div>
 
+			{/* Divider */}
+			<div className={'h-[1px] w-full mb-4'} style={{backgroundColor: 'rgb(var(--color-divider))'}}/>
+
 			{/* Collaborators */}
 			{project.collaborators && project.collaborators.length > 0 && (
 				<div className={cn('mb-4')}>
@@ -217,6 +220,9 @@ function ProjectCard({project, index}: ProjectCardProps) {
 					</div>
 				</div>
 			)}
+
+			{/* Divider */}
+			<div className={'h-[1px] w-full mb-4'} style={{backgroundColor: 'rgb(var(--color-divider))'}}/>
 
 			{/* Tech Stack */}
 			<div className={cn('flex flex-wrap gap-2 mb-3')}>

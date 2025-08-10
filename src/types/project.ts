@@ -1,6 +1,13 @@
 import {Section} from "@/types/section";
 import {Collaborator} from "@/types/github";
 
+export interface ProjectCategory {
+	title: string;
+	icon: string;
+	gradient: string;
+	order: number;
+}
+
 export interface Project {
 	title: string;
 	description: string;
@@ -13,7 +20,15 @@ export interface Project {
 	stargazers_count: number;
 	collaborators: Collaborator[];
 	featured: boolean;
-	category: string;
+	projectCategory: ProjectCategory;
+}
+
+export interface GroupedProjectCategory {
+	title: string;
+	icon: string;
+	gradient: string;
+	order: number;
+	projects: Project[];
 }
 
 export interface ProjectCardProps {
@@ -30,7 +45,18 @@ export interface ProjectsSectionProps {
 	featuredProjects: Project[];
 }
 
+export interface CategorySection {
+	name: string;
+	projects: Project[];
+	gradient: string;
+	icon: string;
+}
+
 export interface ProjectsClientProps {
 	projectSection: Section;
 	projects: Project[];
+}
+
+export interface CategorizedProjectsGridProps {
+	projects: Record<string, GroupedProjectCategory>;
 }
