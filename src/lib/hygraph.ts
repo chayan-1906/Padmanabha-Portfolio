@@ -116,15 +116,17 @@ const createFeaturedProjectsQuery = (portfolioId: string) => `
         projects(where: {portfolioId: ${portfolioId}, featured: true }, orderBy: order_DESC) {
             id
             title
-            description
             gitHubUrl
             logoUrl
             actionUrl
             actionType
-            language
-            technologies
             featured
-            category
+            projectCategory {
+                title
+                icon
+                gradient
+                order
+            }
         }
 	}
 `;
@@ -134,13 +136,10 @@ const createAllProjectsQuery = (portfolioId: string) => `
 		projects(where: { portfolioId: ${portfolioId} } orderBy: order_DESC) {
             id
             title
-            description
             gitHubUrl
             logoUrl
             actionUrl
             actionType
-            language
-            technologies
             featured
             projectCategory {
                 title

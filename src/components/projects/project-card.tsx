@@ -25,98 +25,30 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		},
 	}
 
-	const getTechColor = (tech: string) => {
-		const colors: { [key: string]: string } = {
-			// Web Development & Frontend
-			'nextjs15': 'from-gray-800 to-black',
-			'tailwindcss': 'from-cyan-400 to-blue-600',
-			'tainwindcss': 'from-cyan-400 to-blue-600', // typo variant
-			'framer-motion': 'from-purple-500 to-pink-600',
-			'approuter': 'from-gray-700 to-gray-900',
-			'app-router': 'from-gray-700 to-gray-900',
-			'typescript': 'from-blue-500 to-blue-700',
-			'react-native': 'from-blue-400 to-cyan-600',
-			'express': 'from-green-600 to-green-800',
-			'express-js': 'from-green-600 to-green-800',
-			'shadcn-ui': 'from-slate-600 to-slate-800',
+	const generateTechGradient = (tech: string) => {
+		const colors = [
+			'#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981',
+			'#3b82f6', '#ef4444', '#8b5cf6', '#06b6d4', '#84cc16',
+			'#f97316', '#a855f7', '#14b8a6', '#f472b6', '#eab308',
+			'#6366f1', '#d946ef', '#0ea5e9', '#22c55e', '#f59e0b',
+			'#ef4444', '#8b5cf6', '#06b6d4', '#84cc16', '#f97316'
+		];
 
-			// Backend & APIs
-			'nodejs': 'from-green-500 to-green-700',
-			'backend': 'from-gray-600 to-gray-800',
-			'rest-api': 'from-orange-500 to-red-600',
-			'api': 'from-orange-400 to-orange-600',
-			'crud': 'from-yellow-600 to-orange-700',
-			'authentication': 'from-red-500 to-red-700',
-			'jwt-authentication': 'from-red-600 to-red-800',
-			'google-authentication': 'from-blue-500 to-green-500',
-			'github-oauth': 'from-slate-800 to-gray-500',
-			'clerk': 'from-purple-600 to-purple-800',
-			'email-verification': 'from-blue-600 to-indigo-700',
-
-			// Databases
-			'mongodb': 'from-green-500 to-green-700',
-			'mongoose': 'from-green-600 to-green-800',
-			'mongo-db': 'from-green-500 to-green-700',
-			'postgresql': 'from-blue-600 to-indigo-700',
-			'prisma': 'from-indigo-500 to-purple-600',
-			'neon-database': 'from-cyan-500 to-blue-600',
-			'redis': 'from-red-500 to-red-700',
-
-			// Mobile Development
-			'mobile-app': 'from-blue-500 to-purple-600',
-			'tanstack-query': 'from-orange-500 to-red-600',
-			'featured': 'from-yellow-400 to-yellow-600',
-
-			// Business Applications
-			'bus-booking': 'from-blue-600 to-blue-800',
-			'ticketing-logic': 'from-purple-500 to-purple-700',
-			'ticketing-system': 'from-purple-500 to-purple-700',
-			'transport': 'from-blue-500 to-blue-700',
-			'travel-app': 'from-green-500 to-teal-600',
-			'restaurant-management': 'from-orange-600 to-red-700',
-			'admin-panel': 'from-gray-700 to-gray-900',
-			'role-based-access': 'from-red-600 to-red-800',
-			'user-management': 'from-indigo-600 to-purple-700',
-
-			// Security & Validation
-			'security': 'from-red-600 to-red-800',
-			'rate-limiting': 'from-yellow-600 to-orange-700',
-			'zod-validation': 'from-blue-600 to-indigo-700',
-			'encryption': 'from-gray-700 to-gray-900',
-
-			// Development Tools & Utilities
-			'development': 'from-gray-500 to-gray-700',
-			'development-tools': 'from-gray-500 to-gray-700',
-			'utilities': 'from-cyan-500 to-blue-600',
-			'server': 'from-green-600 to-green-800',
-			'mcp': 'from-purple-600 to-indigo-700',
-			'model-context-protocol': 'from-purple-600 to-indigo-700',
-			'claude': 'from-orange-500 to-orange-700',
-			'llm': 'from-amber-600 to-yellow-800',
-
-			// Additional categories...
-			'fintech': 'from-green-400 to-green-600',
-			'productivity': 'from-blue-400 to-blue-600',
-			'analytics': 'from-purple-400 to-purple-600',
-			'dashboard': 'from-indigo-500 to-purple-600',
-			'ai': 'from-orange-500 to-red-700',
-		};
-
-		const techLower = tech.toLowerCase();
-
-		// Try exact match first
-		if (colors[techLower]) {
-			return colors[techLower];
+		let hash = 0;
+		for (let i = 0; i < tech.length; i++) {
+			const char = tech.charCodeAt(i);
+			hash = ((hash << 5) - hash) + char;
+			hash = hash & hash; // Convert to 32bit integer
 		}
 
-		// Try partial match - find first key that tech contains
-		for (const key in colors) {
-			if (techLower.includes(key)) {
-				return colors[key];
-			}
-		}
+		const color1Index = Math.abs(hash) % colors.length;
+		const color2Index = Math.abs(hash >> 8) % colors.length;
+		const angle = Math.abs(hash >> 16) % 360;
 
-		return 'from-gray-500 to-gray-700';
+		const color1 = colors[color1Index];
+		const color2 = colors[color2Index];
+
+		return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
 	}
 
 	const getDemoIcon = (type: string) => {
@@ -170,13 +102,10 @@ function ProjectCard({project, index}: ProjectCardProps) {
 			<div className={cn('absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10 blur-sm')}/>
 
 			{/* Project Header */}
-			<div className={cn('relative z-10 mb-6')}>
-				<div className={cn('flex items-start justify-between mb-4')}>
-					<motion.div
-						className={cn('w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden',
-							project.logoUrl ? 'bg-white' : 'bg-gradient-to-br ' + getTechColor(project.language || '')
-						)}
-					>
+			<div className={'relative z-10 mb-6'}>
+				<div className={'flex items-start justify-between mb-4'}>
+					<motion.div className={cn('w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden', project.logoUrl ? 'bg-white border border-black' : '')}
+					            style={{background: project.logoUrl ? 'white' : generateTechGradient(project.language)}}>
 						{project.logoUrl ? (
 							<Image src={project.logoUrl} alt={`${project.title} logo`} height={400} width={400} className={cn('w-full h-full object-contain p-1')}/>
 						) : (
@@ -226,17 +155,23 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 			{/* Tech Stack */}
 			<div className={cn('flex flex-wrap gap-2 mb-3')}>
-				{project.technologies.filter(topic => topic !== 'featured' && !topic.startsWith('demo-')).slice(0, 8).map((tech: string) => (
-					<motion.span key={tech} className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(tech))} whileHover={{scale: 1.1, y: -2}}>
+				{project.topics.slice(0, 10).map((tech: string) => (
+					<motion.span key={tech} className={'px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r'} style={{background: generateTechGradient(tech)}}
+					             whileHover={{scale: 1.1, y: -2}}>
 						{tech}
 					</motion.span>
 				))}
 			</div>
 
+			{/* Divider */}
+			<div className={'h-[1px] w-full mb-4'} style={{backgroundColor: 'rgb(var(--color-divider))'}}/>
+
 			{/* Language Tag */}
 			{project.language && (
 				<div className={cn('flex mb-6')}>
-					<motion.span className={cn('px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r', getTechColor(project.language))} whileHover={{scale: 1.1, y: -2}}>
+					<motion.span
+						className={'px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-red-500 to-pink-600 text-white hover:from-red-400 hover:to-pink-500 transition-all duration-300 z-1'}
+						whileHover={{scale: 1.1, y: -2}}>
 						{project.language}
 					</motion.span>
 				</div>

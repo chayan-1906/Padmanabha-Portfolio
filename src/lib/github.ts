@@ -39,6 +39,9 @@ async function enrichProjectsWithGitHubData(projects: Project[]) {
 		const repositoryData = await getRepositoryWithCollaborators(project.gitHubUrl);
 		return {
 			...project,
+			description: repositoryData?.description,
+			topics: repositoryData?.topics || [],
+			language: repositoryData?.language || [],
 			stargazers_count: repositoryData?.stargazers_count || 0,
 			collaborators: repositoryData?.collaborators || [],
 		};

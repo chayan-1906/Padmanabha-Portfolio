@@ -11,6 +11,9 @@ const inter = Inter({subsets: ['latin']});
 export const metadata: Metadata = {
 	title: `${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`,
 	description: PERSONAL_INFO.description,
+	icons: {
+		icon: '/favicon.svg',
+	}
 };
 
 function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {

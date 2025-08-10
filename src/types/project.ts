@@ -16,7 +16,7 @@ export interface Project {
 	actionUrl: string;
 	actionType: string;
 	language: string;
-	technologies: string[];
+	topics: string[];
 	stargazers_count: number;
 	collaborators: Collaborator[];
 	featured: boolean;
