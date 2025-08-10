@@ -43,21 +43,26 @@ function CategorizedProjectsGridClient({projects}: CategorizedProjectsGridProps)
 	return (
 		<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('space-y-16')}>
 			{Object.entries(projects).map(([key, category]) => {
+				console.log('gradient:', category.gradient);
+
 				return (
 					<motion.section key={key} variants={sectionVariants} className={cn('space-y-6')}>
 						{/* Category Header */}
 						<div className={cn('text-center space-y-4')}>
 							<div className={cn('flex items-center justify-center gap-3')}>
 								<span className={cn('text-4xl')}>{category.icon}</span>
-								<h2 className={cn('text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent', category.gradient)}>{category.title}</h2>
-								{/*<h2 className={cn('text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent', 'from-lime-500 via-emerald-500 to-teal-500')}>{category.title}</h2>*/}
+								{/* TODO: FIX */}
+								{/*<h2 className={cn('text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent', category.gradient)}>{category.title}</h2>*/}
+								<h2 className={cn('text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent', 'from-amber-600 via-yellow-300 to-orange-500')}>{category.title}</h2>
 							</div>
 							<div className={cn('flex items-center justify-center gap-4')}>
 								<div className={cn('h-1 w-16 rounded-full bg-gradient-to-r', category.gradient)}/>
 								<span className={cn('text-sm font-medium opacity-70')} style={{color: 'rgb(var(--color-foreground))'}}>
 									{category.projects.length} {category.projects.length === 1 ? 'Project' : 'Projects'}
 								</span>
-								<div className={cn('h-1 w-16 rounded-full bg-gradient-to-l', category.gradient)}/>
+								{/* TODO: FIX */}
+								{/*<div className={cn('h-1 w-16 rounded-full bg-gradient-to-l', category.gradient)}/>*/}
+								<div className={cn('h-1 w-16 rounded-full bg-gradient-to-l', 'from-sky-500 via-violet-500 to-purple-500')}/>
 							</div>
 						</div>
 
