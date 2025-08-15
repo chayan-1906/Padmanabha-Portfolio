@@ -1,266 +1,433 @@
-# Padmanabha Das - Portfolio Website
+# 🚀 Padmanabha Das - Portfolio
 
-A modern, responsive portfolio website built with Next.js 15, React 19, and cutting-edge web technologies. This portfolio showcases my expertise in full-stack development, mobile applications, and AI
-integration.
+<div align="center">
 
-## 🚀 Live Demo
+![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-[Visit Portfolio](https://padmanabha-portfolio.vercel.app) (Deploy link will be updated)
+**A cutting-edge portfolio showcasing expertise in full-stack development, mobile applications, and AI integration**
 
-## ✨ Features
+[📱 **Live Demo**](https://padmanabha-portfolio.vercel.app) • [📧 **Contact**](mailto:padmanabhadas9647@gmail.com) • [💼 **LinkedIn**](https://www.linkedin.com/in/padmanabha-das-59bb2019b/)
 
-- **Modern Design**: Clean, professional design with smooth animations and transitions
-- **Responsive Layout**: Fully responsive across all devices and screen sizes
-- **Dark/Light Mode**: Built-in theme switching with system preference detection
-- **Interactive Animations**: Framer Motion animations for engaging user experience
-- **GitHub Integration**: Dynamic project fetching from GitHub API
-- **Performance Optimized**: Next.js 15 with App Router for optimal performance
-- **SEO Optimized**: Built-in SEO optimization with proper meta tags
-- **TypeScript**: Full TypeScript implementation for type safety
-- **Accessibility**: WCAG compliance and screen reader support
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- **Next.js 15** - React framework with App Router
-- **React 19** - Latest React features and performance improvements
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library for React
-- **Aceternity UI** - Modern UI components
-- **Shadcn UI** - Reusable component library
-
-### Backend & APIs
-
-- **GitHub API** - Dynamic project fetching
-- **Next.js API Routes** - Server-side functionality
-- **Vercel** - Deployment and hosting
-
-### Tools & Services
-
-- **Git** - Version control
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **next-themes** - Theme management
-
-## 🎯 Sections
-
-1. **Navigation** - Smooth scrolling navigation with theme toggle
-2. **Hero Section** - Introduction with animated elements
-3. **About** - Personal information and education
-4. **Skills** - Interactive skill showcase with categories
-5. **Experience** - Professional timeline with achievements
-6. **Projects** - Featured projects from GitHub with live demos
-7. **Contact** - Contact form and information
-8. **Footer** - Links and additional information
-
-## 🚦 Getting Started
-
-### Prerequisites
-
-- Node.js 18.0 or later
-- npm or yarn package manager
-
-### Installation
-
-1. Clone the repository
-   \`\`\`bash
-   git clone https://github.com/chayan-1906/padmanabha-portfolio.git
-   cd padmanabha-portfolio
-   \`\`\`
-
-2. Install dependencies
-   \`\`\`bash
-   npm install
-
-# or
-
-yarn install
-\`\`\`
-
-3. Set up environment variables
-   \`\`\`bash
-
-# Create .env.local file
-
-cp .env.example .env.local
-\`\`\`
-
-4. Run the development server
-   \`\`\`bash
-npm run dev
-# or
-yarn dev
-\`\`\`
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## 📁 Project Structure
-
-\`\`\`
-src/
-├── app/
-│ ├── globals.css
-│ ├── layout.tsx
-│ └── page.tsx
-├── components/
-│ ├── ui/
-│ ├── about-section.tsx
-│ ├── contact-section.tsx
-│ ├── experience-section.tsx
-│ ├── footer.tsx
-│ ├── hero-section.tsx
-│ ├── navigation.tsx
-│ ├── projects-section.tsx
-│ ├── skills-section.tsx
-│ └── theme-toggle.tsx
-├── constants/
-│ └── index.ts
-├── lib/
-│ ├── github.ts
-│ └── utils.ts
-├── types/
-│ └── github.ts
-└── ...
-\`\`\`
-
-## 🎨 Customization
-
-### Personal Information
-
-Update your personal information in \`src/constants/index.ts\`:
-\`\`\`typescript
-export const PERSONAL_INFO = {
-name: 'Your Name',
-title: 'Your Title',
-email: 'your.email@example.com',
-// ... other details
-};
-\`\`\`
-
-### Skills and Experience
-
-Modify the skills and experience sections in the same constants file:
-\`\`\`typescript
-export const SKILLS = {
-frontend: ['React', 'Next.js', ...],
-// ... other categories
-};
-
-export const WORK_EXPERIENCE = [
-{
-title: 'Your Job Title',
-company: 'Company Name',
-// ... other details
-},
-];
-\`\`\`
-
-### GitHub Integration
-
-The portfolio automatically fetches projects from GitHub. Update the GitHub username in constants:
-\`\`\`typescript
-export const PERSONAL_INFO = {
-github: 'https://github.com/your-username',
-};
-\`\`\`
-
-### Theme Customization
-
-Modify the theme colors in \`src/app/globals.css\`:
-\`\`\`css
-:root {
---color-background: 255 255 255;
---color-foreground: 0 0 0;
-/* ... other colors */
-}
-\`\`\`
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically with each push
-
-### Manual Deployment
-
-\`\`\`bash
-npm run build
-npm run start
-\`\`\`
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+ across all metrics
-- **Core Web Vitals**: Excellent ratings
-- **Loading Speed**: Optimized images and code splitting
-- **SEO**: Structured data and meta tags
-
-## 🔧 Development Guidelines
-
-### Code Standards
-
-- Follow TypeScript strict mode
-- Use ESLint and Prettier for code formatting
-- Implement proper error handling
-- Write clean, maintainable code
-
-### Component Structure
-
-- Use functional components with hooks
-- Implement proper TypeScript interfaces
-- Follow consistent naming conventions
-- Use Framer Motion for animations
-
-### Performance Best Practices
-
-- Optimize images with Next.js Image component
-- Implement lazy loading for heavy components
-- Use React.memo for expensive components
-- Minimize bundle size with code splitting
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Padmanabha Das**
-
-- Email: padmanabhadas9647@gmail.com
-- GitHub: [@chayan-1906](https://github.com/chayan-1906)
-- LinkedIn: [Padmanabha Das](https://www.linkedin.com/in/padmanabha-das-59bb2019b/)
-
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Vercel for hosting and deployment
-- Tailwind CSS for the utility-first approach
-- Framer Motion for smooth animations
-- The open-source community for inspiration
-
-## 📈 Future Enhancements
-
-- [ ] Blog section with MDX support
-- [ ] Project filtering and search
-- [ ] Analytics integration
-- [ ] Newsletter subscription
-- [ ] Multi-language support
-- [ ] Progressive Web App (PWA) features
+</div>
 
 ---
 
-Made with ❤️ and Next.js by Padmanabha Das
+## ✨ **Highlights**
+
+🎯 **3+ years** of experience in full-stack development  
+🏆 **300+ active users** on live applications  
+🤖 **AI Integration Expert** with Model Context Protocol (MCP) development  
+📱 **Cross-platform specialist** in Flutter, React Native, and Next.js
+
+---
+
+## 🌟 **Key Features**
+
+### 🎨 **Modern Design & UX**
+
+- **Responsive Design**: Optimized for all devices and screen sizes
+- **Dark/Light Theme**: Seamless theme switching with system preference detection
+- **Smooth Animations**: Powered by Framer Motion for engaging interactions
+- **Gradient Aesthetics**: Beautiful color schemes and modern UI patterns
+
+### ⚡ **Performance & Tech Stack**
+
+- **Next.js 15**: Latest App Router with Turbopack for lightning-fast builds
+- **React 19**: Cutting-edge React features and performance optimizations
+- **TypeScript**: Full type safety and enhanced developer experience
+- **Tailwind CSS 4.0**: Modern utility-first styling with enhanced features
+
+### 🔗 **Dynamic Integrations**
+
+- **Hygraph CMS**: Headless CMS for dynamic content management
+- **Google Sheets API**: Contact form submissions with automated storage
+- **GraphQL**: Efficient data fetching and management
+- **Real-time Updates**: Content updates without redeployment
+
+### 🛡️ **Security & Best Practices**
+
+- **Environment Variables**: Secure API key management
+- **Input Validation**: Comprehensive form validation and sanitization
+- **Error Handling**: Graceful error boundaries and fallbacks
+- **SEO Optimized**: Structured data and meta tags for better visibility
+
+---
+
+## 📸 **Screenshots**
+
+> 🚧 **Coming Soon**: Portfolio screenshots will be added in the next 2-3 days showcasing:
+>
+> - **Desktop & Mobile Views**: Responsive design across all devices
+> - **Dark & Light Themes**: Theme switching demonstration
+> - **Interactive Sections**: Hero, skills, projects, and contact sections
+> - **Smooth Animations**: Framer Motion effects in action
+> - **Project Gallery**: Dynamic project cards with filtering
+
+---
+
+## 🏗️ **Architecture Overview**
+
+```
+src/
+├── 📁 app/                      # Next.js App Router
+│   ├── 🌐 api/contact/         # API routes for form submissions
+│   ├── 📄 page.tsx             # Home page with all sections
+│   ├── 📁 projects/            # Dedicated projects page
+│   └── 🎨 globals.css          # Global styles and theme variables
+├── 🧩 components/              # Reusable UI components
+│   ├── 🏠 hero/                # Hero section with animated intro
+│   ├── 👤 about/               # About section with personal info
+│   ├── 💪 skills/              # Interactive skills showcase
+│   ├── 💼 experiences/         # Professional timeline
+│   ├── 🎓 educations/          # Academic background
+│   ├── 🚀 projects/            # Project portfolio with categories
+│   ├── 🏅 certifications/      # Professional certifications
+│   ├── 📞 contact/             # Contact form with validation
+│   ├── 🧭 navigation/          # Responsive navigation bar
+│   ├── 🦶 footer/              # Footer with social links
+│   └── 🎛️ ui/                  # Reusable UI primitives
+├── 📊 lib/                     # Utility libraries
+│   ├── 🔗 hygraph.ts           # CMS data fetching
+│   ├── 📋 google-sheets.ts     # Form submission handling
+│   ├── 🐙 github.ts            # GitHub API integration
+│   └── 🛠️ utils.ts             # Common utilities
+├── 🔧 types/                   # TypeScript type definitions
+├── 📝 constants/               # Static configuration data
+└── ⚙️ config/                  # Environment configuration
+```
+
+---
+
+## 🛠️ **Technology Stack**
+
+### **Frontend**
+
+| Technology        | Version | Purpose                         |
+|-------------------|---------|---------------------------------|
+| **Next.js**       | 15.3.5  | React framework with App Router |
+| **React**         | 19.0.0  | UI library with latest features |
+| **TypeScript**    | 5.0     | Type-safe development           |
+| **Tailwind CSS**  | 4.0     | Utility-first styling           |
+| **Framer Motion** | 12.23.3 | Animation library               |
+
+### **Backend & Services**
+
+| Service               | Purpose                     |
+|-----------------------|-----------------------------|
+| **Hygraph CMS**       | Headless content management |
+| **GraphQL**           | Efficient data querying     |
+| **Google Sheets API** | Form data storage           |
+| **Vercel**            | Deployment and hosting      |
+
+### **Development Tools**
+
+| Tool                         | Purpose                  |
+|------------------------------|--------------------------|
+| **ESLint**                   | Code linting and quality |
+| **Turbopack**                | Fast build tool          |
+| **next-themes**              | Theme management         |
+| **class-variance-authority** | Component styling        |
+
+---
+
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+
+- Node.js 18.0+
+- npm or yarn package manager
+- Git for version control
+
+### **Installation**
+
+```bash
+# Clone the repository
+git clone https://github.com/chayan-1906/padmanabha-portfolio.git
+cd padmanabha-portfolio
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your API keys and configuration
+
+# Start development server with Turbopack
+npm run dev
+```
+
+### **Environment Setup**
+
+Create a `.env.local` file with the following variables:
+
+```env
+# Hygraph CMS Configuration
+HYGRAPH_ENDPOINT=your_hygraph_endpoint
+HYGRAPH_TOKEN=your_hygraph_token
+
+# Google Sheets API (for contact form)
+GOOGLE_SHEETS_PRIVATE_KEY=your_private_key
+GOOGLE_SHEETS_CLIENT_EMAIL=your_client_email
+
+# GitHub Integration (optional)
+GITHUB_TOKEN=your_github_token
+```
+
+### **Hygraph CMS Setup**
+
+This portfolio requires a Hygraph CMS backend. You'll need to:
+
+1. **Create a Hygraph Account**: Sign up at [hygraph.com](https://hygraph.com)
+2. **Set up Content Models**: Create the following models in your Hygraph project:
+
+#### Required Content Models:
+
+- **PersonalInfo**: Name, title, description, email, phone, social links, resume URL
+- **Sections**: Section names, titles, and subtitles for each portfolio section
+- **TechStacks**: Technology names and display order
+- **Skills**: Skill names, levels, icons, and categories
+- **SkillCategories**: Category titles, gradients, colors, and icons
+- **WorkExperiences**: Company details, roles, periods, descriptions, achievements
+- **Projects**: Project titles, URLs, categories, featured status
+- **ProjectCategories**: Category names, icons, and gradients
+- **Educations**: Degree, institution, period, CGPA, highlights
+- **Certifications**: Certificate names, issuers, dates, credential IDs
+- **SocialLinks**: Platform names, URLs, and icons
+
+3. **Configure Permissions**: Set up public read access for content delivery
+4. **Get API Credentials**: Copy your endpoint URL and create a permanent auth token
+5. **Populate Content**: Add your personal information and portfolio data
+
+**📋 Schema Documentation**:
+> ✅ **GraphQL Schema Definitions**: Use these type definitions to set up your own Hygraph project
+>
+> **Content Models Structure**:
+> ```graphql
+> type PersonalInfo {
+>   name: String!
+>   title: String!
+>   description: String
+>   email: String!
+>   phone: String
+>   avatar: Asset
+>   resumeUrl: String
+>   portfolioId: PortfolioId!
+> }
+> 
+> type Skill {
+>   name: String!
+>   level: Int!
+>   icon: String
+>   order: Int
+>   category: SkillCategory
+>   portfolioId: PortfolioId!
+> }
+> 
+> type WorkExperience {
+>   company: String!
+>   icon: String
+>   location: String
+>   period: String
+>   color: String
+>   role: [Role!]!
+>   portfolioId: PortfolioId!
+> }
+> 
+> # ... and more content models
+> ```
+>
+> **For Others Using This Portfolio**:
+> 1. Use the GraphQL schema definitions as reference
+> 2. Create matching content models in your Hygraph project
+> 3. Configure field types, validations, and relationships
+> 4. Set up API permissions and get your tokens
+
+---
+
+## 📱 **Sections Overview**
+
+### 🏠 **Hero Section**
+
+- Dynamic name animation with gradient effects
+- Tech stack carousel with smooth transitions
+- Professional introduction with call-to-action buttons
+- Social media links with hover animations
+
+### 👤 **About Section**
+
+- Personal background and philosophy
+- Educational achievements with CGPA display
+- Professional journey and key highlights
+- Interactive timeline elements
+
+### 💪 **Skills Section**
+
+- Categorized skill display (Frontend, Mobile, Backend, Tools)
+- Progress bars with animated percentage indicators
+- Technology icons with hover effects
+- Skill level visualization
+
+### 💼 **Experience Section**
+
+- Professional timeline with company logos
+- Multiple roles per company with detailed descriptions
+- Achievement highlights and key metrics
+- Color-coded experience cards
+
+### 🚀 **Projects Section**
+
+- Featured projects with category filtering
+- Dynamic project fetching from Hygraph CMS
+- GitHub integration for repository data
+- Live demo and code links
+
+### 🏅 **Certifications Section**
+
+- Professional certifications with credential verification
+- Direct links to certificate documents
+- Issuer information and completion dates
+
+### 📞 **Contact Section**
+
+- Interactive contact form with validation
+- Google Sheets integration for form submissions
+- Multiple contact methods (email, phone, location)
+- Social media links
+
+---
+
+## 🎨 **Customization Guide**
+
+### **Personal Information**
+
+Update your details directly in the Hygraph CMS dashboard. You'll need to create your own Hygraph project and configure the content models to match the schema used in this portfolio.
+
+### **Theme Customization**
+
+Modify theme colors in `src/app/globals.css`:
+
+```css
+:root {
+	--color-background: 255 255 255;
+	--color-foreground: 0 0 0;
+	--color-primary: 59 130 246;
+	--color-secondary: 168 85 247;
+}
+
+[data-theme="dark"] {
+	--color-background: 9 9 11;
+	--color-foreground: 250 250 250;
+}
+```
+
+### **Adding New Sections**
+
+1. Create component in appropriate directory
+2. Add to main page layout
+3. Update navigation menu
+4. Configure CMS content model
+
+---
+
+## 📊 **Performance Metrics**
+
+- **Lighthouse Score**: 95+ across all categories
+- **Core Web Vitals**: Excellent ratings
+- **First Contentful Paint**: < 1.5s
+- **Largest Contentful Paint**: < 2.5s
+- **Cumulative Layout Shift**: < 0.1
+
+### **Optimization Features**
+
+- Image optimization with Next.js Image component
+- Code splitting with dynamic imports
+- Font optimization with next/font
+- Efficient bundle size with tree shaking
+
+---
+
+## 🚀 **Deployment**
+
+### **Vercel (Recommended)**
+
+1. Connect your GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Deploy automatically with each push to main branch
+
+### **Manual Deployment**
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 🔧 **Development Guidelines**
+
+### **Code Standards**
+
+- Follow TypeScript strict mode
+- Use ESLint configuration for consistent formatting
+- Implement proper error boundaries
+- Write clean, maintainable code with proper documentation
+
+### **Component Architecture**
+
+- Functional components with React hooks
+- TypeScript interfaces for all props
+- Consistent naming conventions (kebab-case for files)
+- Separation of client and server components
+
+### **Best Practices**
+
+- Implement proper loading states
+- Use React.memo for performance optimization
+- Leverage Next.js built-in optimizations
+- Follow accessibility guidelines (WCAG 2.1)
+
+---
+
+## 👨‍💻 **About the Developer**
+
+<div align="center">
+
+### **Padmanabha Das**
+
+*Full-Stack Developer & AI Integration Specialist*
+
+**3+ years** of experience building scalable web and mobile applications  
+Specialized in **Next.js 15**, **React 19**, **Flutter**, and **AI integration**
+
+[![Email](https://img.shields.io/badge/Email-padmanabhadas9647%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:padmanabhadas9647@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-chayan--1906-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/chayan-1906)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Padmanabha%20Das-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/padmanabha-das-59bb2019b/)
+
+</div>
+
+---
+
+## 🙏 **Acknowledgments**
+
+- **Next.js Team** for the incredible framework and developer experience
+- **Vercel** for seamless deployment and hosting solutions
+- **Hygraph** for providing an excellent headless CMS platform
+- **Tailwind CSS** for the utility-first styling approach
+- **Framer Motion** for beautiful animation capabilities
+- **Open Source Community** for continuous inspiration and innovation
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you found it helpful!**
+
+Made with ❤️ and **Next.js 15** by [Padmanabha Das](https://github.com/chayan-1906)
+
+*Last updated: January 2025*
+
+</div>
