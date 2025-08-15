@@ -112,14 +112,9 @@ function NavigationClient({sections, personalInfo}: NavigationClientProps) {
 		>
 			<div className={cn('flex items-center justify-between px-6 py-4')}>
 				{/* Logo */}
-				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer')} style={{color: 'rgb(var(--color-card-foreground))'}}
+				<motion.div whileHover={{scale: 1.05}} className={cn('font-bold text-xl cursor-pointer bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent')}
 				            onClick={() => navigateToSection('#home')}>
-					{personalInfo.name.split(' ').map((word: string, index: number) => (
-						<span key={index} className={index === 0 ? 'text-blue-500' : 'text-purple-500'}>
-							{word}
-							{index === 0 && ' '}
-						</span>
-					))}
+					{personalInfo.name}
 				</motion.div>
 
 				{/* Desktop Navigation */}
