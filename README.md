@@ -1,433 +1,464 @@
-# 🚀 Padmanabha Das - Portfolio
+# 🚀 Padmanabha Das - Modern Portfolio
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-**A cutting-edge portfolio showcasing expertise in full-stack development, mobile applications, and AI integration**
+A cutting-edge portfolio website built with **Next.js 15**, **React 19**, and **TypeScript**, featuring dynamic content management, GitHub integration, and sophisticated animations.
 
-[📱 **Live Demo**](https://padmanabha-portfolio.vercel.app) • [📧 **Contact**](mailto:padmanabhadas9647@gmail.com) • [💼 **LinkedIn**](https://www.linkedin.com/in/padmanabha-das-59bb2019b/)
+[🌐 **Live Demo**](https://padmanabha-portfolio.vercel.app) · [📋 **Report Bug**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues) · [✨ **Request Feature
+**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues)
 
 </div>
 
 ---
 
-## ✨ **Highlights**
+## 🎯 **Overview**
 
-🎯 **3+ years** of experience in full-stack development  
-🏆 **300+ active users** on live applications  
-🤖 **AI Integration Expert** with Model Context Protocol (MCP) development  
-📱 **Cross-platform specialist** in Flutter, React Native, and Next.js
+This modern portfolio website represents the perfect blend of aesthetic design and technical excellence. Built to showcase my journey as a **Full-Stack Developer** specializing in **Next.js 15**, *
+*React.js 19**, **React Native**, **Flutter**, and **AI integration** through Model Context Protocol (MCP) development.
 
----
+### 🏆 **Key Highlights**
 
-## 🌟 **Key Features**
-
-### 🎨 **Modern Design & UX**
-
-- **Responsive Design**: Optimized for all devices and screen sizes
-- **Dark/Light Theme**: Seamless theme switching with system preference detection
-- **Smooth Animations**: Powered by Framer Motion for engaging interactions
-- **Gradient Aesthetics**: Beautiful color schemes and modern UI patterns
-
-### ⚡ **Performance & Tech Stack**
-
-- **Next.js 15**: Latest App Router with Turbopack for lightning-fast builds
-- **React 19**: Cutting-edge React features and performance optimizations
-- **TypeScript**: Full type safety and enhanced developer experience
-- **Tailwind CSS 4.0**: Modern utility-first styling with enhanced features
-
-### 🔗 **Dynamic Integrations**
-
-- **Hygraph CMS**: Headless CMS for dynamic content management
-- **Google Sheets API**: Contact form submissions with automated storage
-- **GraphQL**: Efficient data fetching and management
-- **Real-time Updates**: Content updates without redeployment
-
-### 🛡️ **Security & Best Practices**
-
-- **Environment Variables**: Secure API key management
-- **Input Validation**: Comprehensive form validation and sanitization
-- **Error Handling**: Graceful error boundaries and fallbacks
-- **SEO Optimized**: Structured data and meta tags for better visibility
+- **3+ years** of professional development experience
+- **300+ active users** across deployed applications
+- **Real-time systems** and **AI-powered solutions**
+- **Cross-platform expertise** in web and mobile development
 
 ---
 
-## 📸 **Screenshots**
+## ✨ Features
 
-> 🚧 **Coming Soon**: Portfolio screenshots will be added in the next 2-3 days showcasing:
->
-> - **Desktop & Mobile Views**: Responsive design across all devices
-> - **Dark & Light Themes**: Theme switching demonstration
-> - **Interactive Sections**: Hero, skills, projects, and contact sections
-> - **Smooth Animations**: Framer Motion effects in action
-> - **Project Gallery**: Dynamic project cards with filtering
+### 🎨 **Modern Design System**
+
+- **Dual Theme Support** - Seamless light/dark theme switching with system preference detection
+- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- **Smooth Animations** - Powered by Framer Motion for engaging user interactions
+- **Custom CSS Variables** - Dynamic theming with Tailwind CSS 4
+
+## 🛠️ **Tech Stack**
+
+<div align="center">
+
+### **Frontend**
+
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-4.0-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white)
+
+### **UI & Animation**
+
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0+-0055FF?style=flat-square&logo=framer&logoColor=white)
+![Shadcn UI](https://img.shields.io/badge/Shadcn_UI-Latest-000000?style=flat-square&logo=shadcnui&logoColor=white)
+![Lucide Icons](https://img.shields.io/badge/Lucide-Icons-F56565?style=flat-square&logo=lucide&logoColor=white)
+
+### **Data & APIs**
+
+![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=flat-square&logo=graphql&logoColor=white)
+![GitHub API](https://img.shields.io/badge/GitHub_API-181717?style=flat-square&logo=github&logoColor=white)
+![Hygraph](https://img.shields.io/badge/Hygraph-CMS-6B46C1?style=flat-square&logo=hygraph&logoColor=white)
+
+</div>
 
 ---
 
 ## 🏗️ **Architecture Overview**
 
-```
-src/
-├── 📁 app/                      # Next.js App Router
-│   ├── 🌐 api/contact/         # API routes for form submissions
-│   ├── 📄 page.tsx             # Home page with all sections
-│   ├── 📁 projects/            # Dedicated projects page
-│   └── 🎨 globals.css          # Global styles and theme variables
-├── 🧩 components/              # Reusable UI components
-│   ├── 🏠 hero/                # Hero section with animated intro
-│   ├── 👤 about/               # About section with personal info
-│   ├── 💪 skills/              # Interactive skills showcase
-│   ├── 💼 experiences/         # Professional timeline
-│   ├── 🎓 educations/          # Academic background
-│   ├── 🚀 projects/            # Project portfolio with categories
-│   ├── 🏅 certifications/      # Professional certifications
-│   ├── 📞 contact/             # Contact form with validation
-│   ├── 🧭 navigation/          # Responsive navigation bar
-│   ├── 🦶 footer/              # Footer with social links
-│   └── 🎛️ ui/                  # Reusable UI primitives
-├── 📊 lib/                     # Utility libraries
-│   ├── 🔗 hygraph.ts           # CMS data fetching
-│   ├── 📋 google-sheets.ts     # Form submission handling
-│   ├── 🐙 github.ts            # GitHub API integration
-│   └── 🛠️ utils.ts             # Common utilities
-├── 🔧 types/                   # TypeScript type definitions
-├── 📝 constants/               # Static configuration data
-└── ⚙️ config/                  # Environment configuration
+```mermaid
+graph TD
+    A[User] --> B[Next.js 15 App]
+    B --> C[React 19 Components]
+    C --> D[TypeScript Logic]
+    D --> E[Tailwind Styling]
+    B --> F[GitHub API]
+    B --> G[Hygraph CMS]
+    B --> H[Google Sheets API]
+    C --> I[Framer Motion]
+    B --> J[Vercel Deployment]
 ```
 
 ---
 
-## 🛠️ **Technology Stack**
+## 🖼️ Screenshots
+
+### Hero Section
+
+Experience the modern, animated landing page with a dynamic tech stack display and social links.
+
+<div align="center">
+	<div>
+		<h2>Desktop - Light Theme</h2>
+		<img width="1822" height="1108" alt="hero-section-light" src="https://github.com/user-attachments/assets/aad0dfe9-248c-475b-b68e-fe0bb949142d" />
+	</div>
+	<div>
+		<h2>Desktop - Dark Theme</h2>
+		<img width="1822" height="1108" alt="hero-section-dark" src="https://github.com/user-attachments/assets/f33f1354-3741-4809-baed-8451e7ec280e" />
+	</div>
+	<div>
+		<h2>Mobile Responsive</h2>
+		<img height="1108" alt="hero-section-light-mobile" src="https://github.com/user-attachments/assets/d5f1acde-dfbf-493f-837c-e0101829d2e3" />
+	</div>
+</div>
+
+### Skills & Experience
+
+Interactive skill categories with progress indicators and a comprehensive work timeline.
+
+<div align="center">
+	<div>
+		<h2>Skills Section</h2>
+		<img width="1822" height="1108" alt="skills-section-light" src="https://github.com/user-attachments/assets/2e3d9e9c-529a-4368-b0be-a3a3a66f38bc" />
+	</div>
+	<div>
+		<h2>Experience Timeline</h2>
+		<img width="1822" height="1108" alt="experience-section-dark" src="https://github.com/user-attachments/assets/f384df2b-45dd-4df1-9844-20b4cfd60577" />
+	</div>
+</div>
+
+### Projects Showcase
+
+GitHub-integrated project display with categorization and live data synchronization.
+
+<div align="center">
+	<div>
+		<h2>Featured Projects</h2>
+		<img width="1822" height="1108" alt="projects-section-dark" src="https://github.com/user-attachments/assets/94184b8a-7df9-4f5c-a203-62b955974fec" />
+	</div>
+	<div>
+		<h2>Project Categories - Web Development</h2>
+		<img width="1822" height="1108" alt="web-development-light" src="https://github.com/user-attachments/assets/00275519-534e-4aa2-8d29-4a450ce0ecbd" />
+	</div>
+	<div>
+		<h2>Project Categories - MCP Development</h2>
+		<img width="1822" height="1108" alt="mcp-server-development-dark" src="https://github.com/user-attachments/assets/fc91b44b-43ac-4fc3-848d-6990fd6f989a" />
+	</div>
+	<div>
+		<h2>Mobile Projects View</h2>
+		<img height="1108" alt="projects-light-mobile" src="https://github.com/user-attachments/assets/6c01a2b3-b844-4e01-8fc3-fe89d7f8284e" />
+	</div>
+</div>
+
+### Contact & Education
+
+Functional contact form with Google Sheets integration and academic background display.
+
+<div align="center">
+	<div>
+		<h2>Contact Form - iPad</h2>
+		<img width="1024" height="1366" alt="contact-section-light-iPad" src="https://github.com/user-attachments/assets/6cc4227a-130c-4326-b4c3-2b79c22a7011" />
+	</div>
+	<div>
+		<h2>Education Section</h2>
+		<img width="1822" height="1108" alt="academic-background-section-dark" src="https://github.com/user-attachments/assets/f9c9b906-e1a2-406e-b85e-76f55e17559d" />
+	</div>
+</div>
+
+## 🛠️ Tech Stack
 
 ### **Frontend**
 
-| Technology        | Version | Purpose                         |
-|-------------------|---------|---------------------------------|
-| **Next.js**       | 15.3.5  | React framework with App Router |
-| **React**         | 19.0.0  | UI library with latest features |
-| **TypeScript**    | 5.0     | Type-safe development           |
-| **Tailwind CSS**  | 4.0     | Utility-first styling           |
-| **Framer Motion** | 12.23.3 | Animation library               |
+- **Next.js 15** - React framework with App Router
+- **React 19** - Latest React features and optimizations
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 4** - Utility-first styling with custom theming
+- **Framer Motion** - Advanced animations and transitions
 
-### **Backend & Services**
+### **Backend & CMS**
 
-| Service               | Purpose                     |
-|-----------------------|-----------------------------|
-| **Hygraph CMS**       | Headless content management |
-| **GraphQL**           | Efficient data querying     |
-| **Google Sheets API** | Form data storage           |
-| **Vercel**            | Deployment and hosting      |
+- **Hygraph** - Headless CMS for content management
+- **GitHub API** - Live repository data integration
+- **Google Sheets API** - Analytics and contact form backend
+- **GraphQL** - Efficient data fetching
 
-### **Development Tools**
+### **Development & Deployment**
 
-| Tool                         | Purpose                  |
-|------------------------------|--------------------------|
-| **ESLint**                   | Code linting and quality |
-| **Turbopack**                | Fast build tool          |
-| **next-themes**              | Theme management         |
-| **class-variance-authority** | Component styling        |
+- **Turbopack** - Fast development builds
+- **Vercel** - Optimized deployment platform
+- **ESLint** - Code quality and consistency
+- **Next.js Image** - Optimized image handling
 
----
+## 📁 **Project Structure**
 
-## 🚀 **Quick Start**
-
-### **Prerequisites**
-
-- Node.js 18.0+
-- npm or yarn package manager
-- Git for version control
-
-### **Installation**
-
-```bash
-# Clone the repository
-git clone https://github.com/chayan-1906/padmanabha-portfolio.git
-cd padmanabha-portfolio
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Add your API keys and configuration
-
-# Start development server with Turbopack
-npm run dev
+```
+src/
+├── 📁 app/                    # Next.js 15 App Router
+│   ├── 🎨 globals.css        # Global styles
+│   ├── 📄 layout.tsx         # Root layout component
+│   ├── 📄 page.tsx           # Home page
+│   └── 📁 api/               # API routes
+├── 📁 components/            # React components
+│   ├── 📁 ui/                # Reusable UI components
+│   ├── 📁 hero/              # Hero section
+│   ├── 📁 about/             # About section
+│   ├── 📁 skills/            # Skills showcase
+│   ├── 📁 experiences/       # Work experience
+│   ├── 📁 projects/          # Project grid
+│   ├── 📁 contact/           # Contact form
+│   └── 📁 navigation/        # Navigation bar
+├── 📁 constants/             # App constants & data
+├── 📁 lib/                   # Utility functions
+├── 📁 types/                 # TypeScript definitions
+└── 📁 config/                # Configuration files
 ```
 
-### **Environment Setup**
+## 🚀 Getting Started
 
-Create a `.env.local` file with the following variables:
+### Prerequisites
 
-```env
-# Hygraph CMS Configuration
-HYGRAPH_ENDPOINT=your_hygraph_endpoint
-HYGRAPH_TOKEN=your_hygraph_token
+- Node.js 18+
+- npm
 
-# Google Sheets API (for contact form)
-GOOGLE_SHEETS_PRIVATE_KEY=your_private_key
-GOOGLE_SHEETS_CLIENT_EMAIL=your_client_email
+### Installation
 
-# GitHub Integration (optional)
-GITHUB_TOKEN=your_github_token
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/chayan-1906/Padmanabha-Portfolio.git
+   cd Padmanabha-Portfolio
+   ```
 
-### **Hygraph CMS Setup**
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-This portfolio requires a Hygraph CMS backend. You'll need to:
+3. **Environment Setup**
+   ```bash
+    cp .env.example .env
 
-1. **Create a Hygraph Account**: Sign up at [hygraph.com](https://hygraph.com)
-2. **Set up Content Models**: Create the following models in your Hygraph project:
+   # Update .env with your credentials:
+   GITHUB_TOKEN=your_github_personal_access_token
+   HYGRAPH_ENDPOINT=your_hygraph_content_api_endpoint  
+   HYGRAPH_TOKEN=your_hygraph_permanent_auth_token
 
-#### Required Content Models:
+  ```
 
-- **PersonalInfo**: Name, title, description, email, phone, social links, resume URL
-- **Sections**: Section names, titles, and subtitles for each portfolio section
-- **TechStacks**: Technology names and display order
-- **Skills**: Skill names, levels, icons, and categories
-- **SkillCategories**: Category titles, gradients, colors, and icons
-- **WorkExperiences**: Company details, roles, periods, descriptions, achievements
-- **Projects**: Project titles, URLs, categories, featured status
-- **ProjectCategories**: Category names, icons, and gradients
-- **Educations**: Degree, institution, period, CGPA, highlights
-- **Certifications**: Certificate names, issuers, dates, credential IDs
-- **SocialLinks**: Platform names, URLs, and icons
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-3. **Configure Permissions**: Set up public read access for content delivery
-4. **Get API Credentials**: Copy your endpoint URL and create a permanent auth token
-5. **Populate Content**: Add your personal information and portfolio data
+5. **Open** [http://localhost:3000](http://localhost:3000)
 
-**📋 Schema Documentation**:
-> ✅ **GraphQL Schema Definitions**: Use these type definitions to set up your own Hygraph project
->
-> **Content Models Structure**:
-> ```graphql
-> type PersonalInfo {
->   name: String!
->   title: String!
->   description: String
->   email: String!
->   phone: String
->   avatar: Asset
->   resumeUrl: String
->   portfolioId: PortfolioId!
-> }
-> 
-> type Skill {
->   name: String!
->   level: Int!
->   icon: String
->   order: Int
->   category: SkillCategory
->   portfolioId: PortfolioId!
-> }
-> 
-> type WorkExperience {
->   company: String!
->   icon: String
->   location: String
->   period: String
->   color: String
->   role: [Role!]!
->   portfolioId: PortfolioId!
-> }
-> 
-> # ... and more content models
-> ```
->
-> **For Others Using This Portfolio**:
-> 1. Use the GraphQL schema definitions as reference
-> 2. Create matching content models in your Hygraph project
-> 3. Configure field types, validations, and relationships
-> 4. Set up API permissions and get your tokens
-
----
-
-## 📱 **Sections Overview**
-
-### 🏠 **Hero Section**
-
-- Dynamic name animation with gradient effects
-- Tech stack carousel with smooth transitions
-- Professional introduction with call-to-action buttons
-- Social media links with hover animations
-
-### 👤 **About Section**
-
-- Personal background and philosophy
-- Educational achievements with CGPA display
-- Professional journey and key highlights
-- Interactive timeline elements
-
-### 💪 **Skills Section**
-
-- Categorized skill display (Frontend, Mobile, Backend, Tools)
-- Progress bars with animated percentage indicators
-- Technology icons with hover effects
-- Skill level visualization
-
-### 💼 **Experience Section**
-
-- Professional timeline with company logos
-- Multiple roles per company with detailed descriptions
-- Achievement highlights and key metrics
-- Color-coded experience cards
-
-### 🚀 **Projects Section**
-
-- Featured projects with category filtering
-- Dynamic project fetching from Hygraph CMS
-- GitHub integration for repository data
-- Live demo and code links
-
-### 🏅 **Certifications Section**
-
-- Professional certifications with credential verification
-- Direct links to certificate documents
-- Issuer information and completion dates
-
-### 📞 **Contact Section**
-
-- Interactive contact form with validation
-- Google Sheets integration for form submissions
-- Multiple contact methods (email, phone, location)
-- Social media links
-
----
-
-## 🎨 **Customization Guide**
-
-### **Personal Information**
-
-Update your details directly in the Hygraph CMS dashboard. You'll need to create your own Hygraph project and configure the content models to match the schema used in this portfolio.
-
-### **Theme Customization**
-
-Modify theme colors in `src/app/globals.css`:
-
-```css
-:root {
-	--color-background: 255 255 255;
-	--color-foreground: 0 0 0;
-	--color-primary: 59 130 246;
-	--color-secondary: 168 85 247;
-}
-
-[data-theme="dark"] {
-	--color-background: 9 9 11;
-	--color-foreground: 250 250 250;
-}
-```
-
-### **Adding New Sections**
-
-1. Create component in appropriate directory
-2. Add to main page layout
-3. Update navigation menu
-4. Configure CMS content model
-
----
-
-## 📊 **Performance Metrics**
-
-- **Lighthouse Score**: 95+ across all categories
-- **Core Web Vitals**: Excellent ratings
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
-
-### **Optimization Features**
-
-- Image optimization with Next.js Image component
-- Code splitting with dynamic imports
-- Font optimization with next/font
-- Efficient bundle size with tree shaking
-
----
-
-## 🚀 **Deployment**
-
-### **Vercel (Recommended)**
-
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables in Vercel dashboard
-3. Deploy automatically with each push to main branch
-
-### **Manual Deployment**
-
+### Build for Production
 ```bash
 npm run build
-npm run start
+npm start
 ```
 
----
+## 📊 Data Architecture
 
-## 🔧 **Development Guidelines**
+### **Content Management**
 
-### **Code Standards**
+The portfolio uses **Hygraph CMS** for dynamic content management, allowing easy updates without code changes.
 
-- Follow TypeScript strict mode
-- Use ESLint configuration for consistent formatting
-- Implement proper error boundaries
-- Write clean, maintainable code with proper documentation
+### **GitHub Integration**
 
-### **Component Architecture**
+Live project data is synchronized from GitHub repositories, including:
 
-- Functional components with React hooks
-- TypeScript interfaces for all props
-- Consistent naming conventions (kebab-case for files)
-- Separation of client and server components
+- Repository descriptions and topics
+- Star counts and language statistics
+- Collaborator information
+- Live project links
 
-### **Best Practices**
+### **Analytics & Contact**
 
-- Implement proper loading states
-- Use React.memo for performance optimization
-- Leverage Next.js built-in optimizations
-- Follow accessibility guidelines (WCAG 2.1)
+Google Sheets integration provides:
 
----
+- Website analytics tracking
+- Contact form submission handling
+
+## 🗄️ Hygraph Schema
+
+```graphql
+type Section {
+  name: Single line text/String!/Unique
+  title: Single line text/String!
+  subtitle: Multi line text/String!
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type PersonalInfo {
+  name: Single line text/String!
+  title: Single line text/String!
+  description: Multi line text/String!
+  subtitle: Multi line text/String!
+  email: Single line text/String!
+  phone: Single line text/String!
+  github: Single line text/String!
+  linkedin: Single line text/String!
+  location: Single line text/String!
+  company: Single line text/String!
+  bio: Single line text/String!
+  avatar: Asset Picker/Asset!/Two-way reference
+  resumeUrl: String
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type Skill {
+  name: Single line text/String!
+  level: Number/Int!
+  icon: Single line text/String!
+  category: SkillCategory/One-way reference
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type SkillCategory {
+  title: Single line text/String!
+  icon: Single line text/String!
+  gradient: Single line text/String!
+  color: Single line text/String!
+  order: Number/Int!
+}
+
+type TechStack {
+  name: Single line text/String!
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type WorkExperience {
+  company: Single line text/String!
+  icon: Single line text/String!
+  logo: Asset Picker/Asset!/Two-way reference
+  location: Single line text/String!
+  period: Single line text/String!
+  color: Single line text/String!
+  role: Role/Multiple Values/One-way reference
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type Role {
+  title: Single line text/String!
+  period: Single line text/String!
+  type: Single line text/String!
+  description: Multi line text/String!
+  achievements: Multi line text/String!
+  order: Number/Int!
+  workExperience: Work Experience/One-way reference
+}
+
+type Education {
+  degree: Single line text/String!/Unique
+  institution: Single line text/String!
+  logo: Asset Picker/Asset!/Two-way reference
+  location: Single line text/String!
+  period: Single line text/String!
+  cgpa: Single line text/String!
+  highlights: Multi line text/String!
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type Project {
+  title: Single line text/String!
+  githubUrl: Single line text/String!
+  logoUrl: Single line text/String!
+  actionUrl: Slug/String!/Unique
+  actionType: Enumeration/Project Action Type Enum!
+  featured: Boolean/Boolean!
+  order: Number/Int!
+  projectCategory: Project Category/Two-way reference
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type ProjectCategory {
+  title: Single line text/String!
+  icon: Single line text/String!
+  gradient: Single line text/String!
+  order: Number/Int!
+  project: Project/Two-way reference
+}
+
+type Certification {
+  name: Single line text/String!
+  issuer: Single line text/String!
+  date: Date!
+  credentialId: Single line text/String!
+  url: Single line text/String!
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+
+type SocialLink {
+  name: Single line text/String!
+  url: Single line text/String!
+  icon: Single line text/String!
+  order: Number/Int!
+  portfolioId: Enumeration/Portfolio ID Enum!
+}
+```
+
+## 🎯 Key Features
+
+### **Performance Optimizations**
+
+- Server-side rendering with caching
+- Image optimization and lazy loading
+- Code splitting and dynamic imports
+- Efficient GraphQL queries
+
+### **SEO & Analytics**
+
+- Comprehensive metadata management
+- Server-side analytics tracking
+- Social media optimization
+- Performance monitoring
+
+## 📱 Responsive Design
+
+The portfolio is fully responsive across all device types:
+
+- **Desktop** (1920px+) - Full featured experience
+- **Tablet** (768px-1919px) - Optimized layouts
+- **Mobile** (320px-767px) - Touch-friendly interface
+
+## 🤝 Contributing
+
+This is a personal portfolio project. For suggestions or issues:
+
+1. Open an issue for bugs or feature requests
+2. Fork the repository for contributions
+3. Create pull requests with clear descriptions
 
 ## 👨‍💻 **About the Developer**
 
 <div align="center">
 
-### **Padmanabha Das**
+**Padmanabha Das**
+*Full-Stack Developer | AI Integration Specialist*
 
-*Full-Stack Developer & AI Integration Specialist*
-
-**3+ years** of experience building scalable web and mobile applications  
-Specialized in **Next.js 15**, **React 19**, **Flutter**, and **AI integration**
-
-[![Email](https://img.shields.io/badge/Email-padmanabhadas9647%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:padmanabhadas9647@gmail.com)
+[![Email](https://img.shields.io/badge/Email-padmanabhadas9647@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:padmanabhadas9647@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-chayan--1906-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/chayan-1906)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Padmanabha%20Das-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/padmanabha-das-59bb2019b/)
 
 </div>
 
+### **Professional Highlights**
+
+- 🎯 **3+ years** of full-stack development experience
+- 🚀 **300+ active users** across deployed applications
+- 🤖 **AI integration specialist** with MCP development expertise
+- 📱 **Cross-platform developer** in React Native & Flutter
+- 🏢 Currently at **Remix Labs** as Product Analyst
+
 ---
 
 ## 🙏 **Acknowledgments**
 
-- **Next.js Team** for the incredible framework and developer experience
-- **Vercel** for seamless deployment and hosting solutions
-- **Hygraph** for providing an excellent headless CMS platform
-- **Tailwind CSS** for the utility-first styling approach
-- **Framer Motion** for beautiful animation capabilities
-- **Open Source Community** for continuous inspiration and innovation
+- **Next.js Team** for the incredible framework
+- **Vercel** for seamless deployment
+- **Tailwind CSS** for utility-first styling
+- **Framer Motion** for smooth animations
+- **Open Source Community** for inspiration and tools
 
 ---
 
-<div align="center">
-
-**⭐ Star this repository if you found it helpful!**
-
-Made with ❤️ and **Next.js 15** by [Padmanabha Das](https://github.com/chayan-1906)
-
-*Last updated: January 2025*
-
-</div>
+*Built with ❤️ using Next.js 15, React 19, and modern web technologies.*
