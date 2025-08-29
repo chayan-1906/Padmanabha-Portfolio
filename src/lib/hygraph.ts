@@ -177,7 +177,6 @@ const createSocialLinksQuery = (portfolioId: string) => `
 /** Fetch functions */
 // hero
 export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getPersonalInfo called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -188,7 +187,7 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 			body: JSON.stringify({
 				query: createPersonalInfoQuery(portfolioId),
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['personal-info']},
 		});
 
 		if (!response.ok) {
@@ -205,7 +204,6 @@ export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.POR
 
 // hero
 export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getTechStacks called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -216,7 +214,7 @@ export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTF
 			body: JSON.stringify({
 				query: createTechStacksQuery(portfolioId),
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['tech-stacks']},
 		});
 
 		if (!response.ok) {
@@ -232,7 +230,6 @@ export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTF
 }
 
 export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getSections called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -243,7 +240,7 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 			body: JSON.stringify({
 				query: createSectionsQuery(portfolioId),
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['sections']},
 		});
 
 		if (!response.ok) {
@@ -260,7 +257,6 @@ export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOL
 
 // skills
 export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getSkills called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -271,7 +267,7 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 			body: JSON.stringify({
 				query: createSkillsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['skills']},
 		});
 
 		if (!response.ok) {
@@ -287,7 +283,6 @@ export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO
 }
 
 export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getWorkExperiences called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -298,7 +293,7 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 			body: JSON.stringify({
 				query: createWorkExperiencesQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['work-experiences']},
 		});
 
 		if (!response.ok) {
@@ -315,7 +310,6 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 
 // educations
 export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getEducations called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -326,7 +320,7 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 			body: JSON.stringify({
 				query: createEducationsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['educations']},
 		});
 
 		if (!response.ok) {
@@ -343,7 +337,6 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 
 // projects
 export async function getFeaturedProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 geProjects called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -354,7 +347,7 @@ export async function getFeaturedProjects(portfolioId: PortfolioId = PortfolioId
 			body: JSON.stringify({
 				query: createFeaturedProjectsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['featured-projects']},
 		});
 
 		if (!response.ok) {
@@ -371,7 +364,6 @@ export async function getFeaturedProjects(portfolioId: PortfolioId = PortfolioId
 
 // projects
 export async function getAllProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getAllProjects called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -382,7 +374,7 @@ export async function getAllProjects(portfolioId: PortfolioId = PortfolioId.PORT
 			body: JSON.stringify({
 				query: createAllProjectsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['all-projects']},
 		});
 
 		if (!response.ok) {
@@ -399,7 +391,6 @@ export async function getAllProjects(portfolioId: PortfolioId = PortfolioId.PORT
 
 // certifications
 export async function getCertifications(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getCertifications called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -410,7 +401,7 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 			body: JSON.stringify({
 				query: createCertificationsQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['certifications']},
 		});
 
 		if (!response.ok) {
@@ -427,7 +418,6 @@ export async function getCertifications(portfolioId: PortfolioId = PortfolioId.P
 
 // hero
 export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	console.log('🔥 getSocialLinks called - cache miss');
 	try {
 		const response = await fetch(endpoint, {
 			method: 'POST',
@@ -438,7 +428,7 @@ export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORT
 			body: JSON.stringify({
 				query: createSocialLinksQuery(portfolioId)
 			}),
-			next: {revalidate: 3600},
+			next: {revalidate: 3600, tags: ['social-links']},
 		});
 
 		if (!response.ok) {
