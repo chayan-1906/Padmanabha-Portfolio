@@ -186,11 +186,13 @@ Functional contact form with Google Sheets integration and academic background d
 
 ```
 src/
-├── 📁 app/                    # Next.js 15 App Router
+├── 📁 app/                   # Next.js 15 App Router
 │   ├── 🎨 globals.css        # Global styles
 │   ├── 📄 layout.tsx         # Root layout component
 │   ├── 📄 page.tsx           # Home page
 │   └── 📁 api/               # API routes
+│       └── 📁 contact/       # Contact submission endpoint
+│       └── 📁 revalidate/    # Webhook revalidation endpoint
 ├── 📁 components/            # React components
 │   ├── 📁 ui/                # Reusable UI components
 │   ├── 📁 hero/              # Hero section
@@ -234,6 +236,7 @@ src/
    GITHUB_TOKEN=your_github_personal_access_token
    HYGRAPH_ENDPOINT=your_hygraph_content_api_endpoint  
    HYGRAPH_TOKEN=your_hygraph_permanent_auth_token
+   REVALIDATE_SECRET=your_webhook_secret_key
 
   ```
 
@@ -271,6 +274,23 @@ Google Sheets integration provides:
 
 - Website analytics tracking
 - Contact form submission handling
+
+### **Real-Time Content Updates**
+
+The portfolio implements **on-demand Incremental Static Regeneration (ISR)** with webhook revalidation:
+
+- **Instant Updates** - Content changes in Hygraph trigger immediate cache invalidation
+- **SEO Optimization** - Maintains static generation benefits while enabling real-time updates  
+- **Performance** - 1-hour cache with webhook-triggered refresh for optimal speed
+- **Webhook Integration** - Hygraph webhooks automatically revalidate content on publish
+
+#### Webhook Configuration
+```
+Endpoint: https://your-domain.com/api/revalidate?secret=your_secret
+Method: POST
+Trigger: Content publish/update events
+Sources: Permanent Auth Token, Project Member, Public API
+```
 
 ## 🗄️ Hygraph Schema
 
