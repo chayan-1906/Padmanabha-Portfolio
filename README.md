@@ -10,8 +10,7 @@
 
 A cutting-edge portfolio website built with **Next.js 15**, **React 19**, and **TypeScript**, featuring dynamic content management, GitHub integration, and sophisticated animations.
 
-[🌐 **Live Demo**](https://padmanabha-portfolio.vercel.app) · [📋 **Report Bug**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues) · [✨ **Request Feature
-**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues)
+[🌐 **Live Demo**](https://padmanabha-portfolio.vercel.app) · [📋 **Report Bug**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues) · [✨ **Request Feature**](https://github.com/chayan-1906/Padmanabha-Portfolio/issues)
 
 </div>
 
