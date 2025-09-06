@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 		if (!name || !email || !subject || !message) {
 			return NextResponse.json(
 				{error: 'All fields are required'},
-				{status: 400}
+				{status: 400},
 			);
 		}
 
@@ -34,14 +34,14 @@ export async function POST(request: NextRequest) {
 		} else {
 			return NextResponse.json(
 				{error: 'Failed to submit form'},
-				{status: 500}
+				{status: 500},
 			);
 		}
-	} catch (error) {
+	} catch (error: any) {
 		console.error('API Error:', error);
 		return NextResponse.json(
 			{error: 'Internal server error'},
-			{status: 500}
+			{status: 500},
 		);
 	}
 }

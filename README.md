@@ -221,37 +221,36 @@ src/
    ```bash
    git clone https://github.com/chayan-1906/Padmanabha-Portfolio.git
    cd Padmanabha-Portfolio
-   ```
+
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment Setup**
-   ```bash
-    cp .env.example .env
 
-   # Update .env with your credentials:
+   ```bash
+   cp .env.example .env
+   ```
+
+   Update your `.env` file with the following variables:
+
+   ```env
    GITHUB_TOKEN=your_github_personal_access_token
-   HYGRAPH_ENDPOINT=your_hygraph_content_api_endpoint  
+   HYGRAPH_ENDPOINT=your_hygraph_content_api_endpoint
    HYGRAPH_TOKEN=your_hygraph_permanent_auth_token
    REVALIDATE_SECRET=your_webhook_secret_key
-
-  ```
+   ```
 
 4. **Run development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Open** [http://localhost:3000](http://localhost:3000)
-
-### Build for Production
-```bash
-npm run build
-npm start
-```
 
 ## 📊 Data Architecture
 
