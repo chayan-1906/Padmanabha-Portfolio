@@ -43,7 +43,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 			}
 		} catch (error) {
 			console.error('Error:', error);
-			alert('Failed to send message. Please try again.');
+			alert('Failed to send message. Please try again');
 		} finally {
 			setIsSubmitting(false);
 		}

@@ -1,6 +1,7 @@
 import {google} from 'googleapis';
 import {headers} from 'next/headers';
 import {ACTIVE_PORTFOLIO_ID, CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
+import {GOOGLE_CREDENTIALS} from "@/config/config";
 
 async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 	'use server';
@@ -11,9 +12,9 @@ async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 
 		const userAgent = headersList.get('user-agent') || 'unknown';
 
-		if (!process.env.GOOGLE_CREDENTIALS) return;
+		if (!GOOGLE_CREDENTIALS) return;
 
-		const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+		const credentials = JSON.parse(GOOGLE_CREDENTIALS);
 		const auth = new google.auth.GoogleAuth({
 			credentials,
 			scopes: ['https://www.googleapis.com/auth/spreadsheets'],

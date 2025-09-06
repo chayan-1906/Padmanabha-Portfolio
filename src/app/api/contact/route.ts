@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({name, email, subject, message})
+					body: JSON.stringify({name, email, subject, message}),
 				});
 			} catch (webhookError) {
 				console.error('Webhook error:', webhookError);
