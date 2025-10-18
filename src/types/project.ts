@@ -18,6 +18,7 @@ export interface Project {
 	language: string;
 	topics: string[];
 	stargazers_count: number;
+	forks_count: number;
 	collaborators: Collaborator[];
 	featured: boolean;
 	projectCategory: ProjectCategory;

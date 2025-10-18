@@ -27,7 +27,7 @@ async function ProjectsPage() {
 	const groupedProjectsMap: Record<string, GroupedProjectCategory> = {};
 
 	projects.forEach((project: Project) => {
-		const {title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, topics, stargazers_count, featured, projectCategory, collaborators} = project;
+		const {title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, topics, stargazers_count, forks_count, featured, projectCategory, collaborators} = project;
 		if (!projectCategory) {
 			console.warn('Project missing category:', project);
 			return;
@@ -51,7 +51,7 @@ async function ProjectsPage() {
 		}
 
 		groupedProjectsMap[categoryKey].projects.push({
-			title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, topics, stargazers_count, collaborators, featured, projectCategory,
+			title, description, gitHubUrl, logoUrl, actionUrl, actionType, language, topics, stargazers_count, forks_count, collaborators, featured, projectCategory,
 		});
 	});
 

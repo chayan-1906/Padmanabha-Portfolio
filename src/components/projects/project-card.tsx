@@ -6,6 +6,7 @@ import {motion, Variants} from 'framer-motion';
 import {Collaborator} from "@/types/github";
 import {camelToWords, cn} from '@/lib/utils';
 import {ProjectCardProps} from "@/types/project";
+import {GoRepoForked, GoStarFill} from "react-icons/go";
 import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 
 function ProjectCard({project, index}: ProjectCardProps) {
@@ -179,10 +180,16 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 			{/* Project Stats */}
 			<div className={cn('flex items-center gap-4 text-sm opacity-80 mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-				<motion.div className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
-					<span>⭐</span>
+				<motion.div title={'Stars'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
+					<GoStarFill size={18} className="text-yellow-400"/>
 					<span className={cn('font-medium')}>{project.stargazers_count}</span>
 				</motion.div>
+				{project.forks_count > 0 && (
+					<motion.div title={'Forks'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
+						<GoRepoForked size={18}/>
+						<span className={cn('font-medium')}>{project.forks_count}</span>
+					</motion.div>
+				)}
 			</div>
 
 			{/* Demo Button */}

@@ -29,6 +29,7 @@ async function getRepositoryWithCollaborators(githubUrl: string) {
 	]);
 
 	const repoData = repoRes.ok ? await repoRes.json() : null;
+	// console.log('repoData:', repoData);
 	const collaborators = collabRes.ok ? await collabRes.json() : [];
 
 	return {...repoData, collaborators};
@@ -43,6 +44,7 @@ async function enrichProjectsWithGitHubData(projects: Project[]) {
 			topics: repositoryData?.topics || [],
 			language: repositoryData?.language || [],
 			stargazers_count: repositoryData?.stargazers_count || 0,
+			forks_count: repositoryData?.forks_count || 0,
 			collaborators: repositoryData?.collaborators || [],
 		};
 	}));
