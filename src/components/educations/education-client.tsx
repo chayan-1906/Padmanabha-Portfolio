@@ -38,10 +38,7 @@ function EducationClient({educationSection, educations}: EducationClientProps) {
 				<motion.div
 					className={cn('absolute top-20 right-20 w-96 h-96 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}}
 					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>

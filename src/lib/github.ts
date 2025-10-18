@@ -62,4 +62,16 @@ async function getAllProjectsWithGitHubData() {
 	return await enrichProjectsWithGitHubData(projects);
 }
 
-export {getFeaturedProjectsWithGitHubData, getAllProjectsWithGitHubData};
+// for achievements section
+async function getGitHubUserStats(username: string) {
+	const headers = {
+		Accept: 'application/vnd.github.v3+json',
+		Authorization: `token ${GITHUB_TOKEN}`,
+	};
+
+	const response = await fetch(`https://api.github.com/users/${username}`, {headers, next: {revalidate: 3600}});
+
+	return response.ok ? await response.json() : null;
+}
+
+export {getFeaturedProjectsWithGitHubData, getAllProjectsWithGitHubData, getGitHubUserStats};

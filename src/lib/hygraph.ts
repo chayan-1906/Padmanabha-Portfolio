@@ -46,10 +46,11 @@ const createTechStacksQuery = (portfolioId: string) => `
 
 const createSectionsQuery = (portfolioId: string) => `
     query GetSections {
-        sections(where: { portfolioId: ${portfolioId} }) {
+        sections(where: { portfolioId: ${portfolioId} }, orderBy: order_ASC) {
             name
             title
             subtitle
+            order
         }
     }
 `;
@@ -301,6 +302,7 @@ export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.
 		}
 
 		const {data} = await response.json();
+		// console.log('Work Experiences:', data);
 		return data.workExperiences as Experience[] || [];
 	} catch (error) {
 		console.error('Error fetching work experiences:', error);
@@ -328,6 +330,7 @@ export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTF
 		}
 
 		const {data} = await response.json();
+		// console.log('Educations:', data);
 		return data.educations as Education[] || [];
 	} catch (error) {
 		console.error('Error fetching educations:', error);

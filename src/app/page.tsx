@@ -3,15 +3,15 @@ import {ACTIVE_PORTFOLIO_ID} from '@/constants';
 import {Footer} from '@/components/footer/footer-section';
 import {HeroSection} from '@/components/hero/hero-section';
 import {AboutSection} from '@/components/about/about-section';
-import {getFeaturedProjectsWithGitHubData} from "@/lib/github";
 import {SkillsSection} from '@/components/skills/skills-section';
 import {ContactSection} from '@/components/contact/contact-section';
 import {ProjectsSection} from '@/components/projects/projects-section';
 import {EducationSection} from '@/components/educations/education-section';
 import {NavigationSection} from "@/components/navigation/navigation-section";
 import {ExperienceSection} from '@/components/experiences/experience-section';
-import {CertificationsSection} from '@/components/certifications/certifications-section';
+import {getFeaturedProjectsWithGitHubData, getGitHubUserStats} from "@/lib/github";
 import {getPersonalInfo, getSections, getSkills, getSocialLinks} from '@/lib/hygraph';
+import {CertificationsSection} from '@/components/certifications/certifications-section';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,6 +28,9 @@ async function Home() {
 		return null;
 	}
 
+	const githubUsername = personalInfo.gitHub?.split('/').pop() || '';
+	const githubStats = await getGitHubUserStats(githubUsername);
+
 	// Track analytics server-side
 	await trackAnalytics({pageUrl: '/'});
 
@@ -43,6 +46,7 @@ async function Home() {
 				<ExperienceSection sections={sections} skillsData={skillsData}/>
 				<EducationSection sections={sections}/>
 				<ProjectsSection sections={sections} featuredProjects={featuredProjects}/>
+				{/*<AchievementSection sections={sections} githubStats={githubStats}/>*/}
 				<CertificationsSection sections={sections}/>
 				<ContactSection sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
 			</main>
