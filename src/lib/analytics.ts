@@ -3,12 +3,16 @@ import {headers} from 'next/headers';
 import {GOOGLE_CREDENTIALS} from "@/config/config";
 import {ACTIVE_PORTFOLIO_ID, CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
 
-function parseReferrer(refererUrl: string | null): string {
+function parseReferrer(refererUrl: string | null, currentHostname?: string): string {
 	if (!refererUrl) return 'Direct Visit';
 
 	try {
 		const url = new URL(refererUrl);
 		const hostname = url.hostname.toLowerCase();
+
+		if (currentHostname && hostname === currentHostname.toLowerCase()) {
+			return 'Direct Visit';
+		}
 
 		if (hostname.includes('linkedin.com')) return 'LinkedIn';
 
@@ -48,8 +52,9 @@ async function trackAnalytics({pageUrl}: { pageUrl: string }) {
 		const ip = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || headersList.get('cf-connecting-ip') || 'unknown';
 
 		const userAgent = headersList.get('user-agent') || 'unknown';
+		const currentHostname = headersList.get('host') || '';
 		const refererUrl = headersList.get('referer') || headersList.get('referrer');
-		const referrer = parseReferrer(refererUrl);
+		const referrer = parseReferrer(refererUrl, currentHostname);
 
 		if (!GOOGLE_CREDENTIALS) return;
 
