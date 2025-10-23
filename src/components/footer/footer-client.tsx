@@ -71,7 +71,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 										}}
 										whileTap={{scale: 0.9}}
 									>
-										<Icon className={cn('w-5 h-5')}/>
+										<Icon className={cn('size-5')}/>
 									</motion.a>
 								);
 							})}
@@ -100,20 +100,12 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 					<motion.div initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.4}} className={cn('space-y-6')}>
 						<h4 className={cn('text-lg font-semibold')} style={{color: 'rgb(var(--color-foreground))'}}>Get In Touch</h4>
 						<div className={cn('space-y-3')}>
-							<motion.a
-								href={`mailto:${personalInfo.email}`}
-								className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
-								style={{color: 'rgb(var(--color-foreground))'}}
-								whileHover={{x: 4}}
-							>
+							<motion.a href={`mailto:${personalInfo.email}`} className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
+							          style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
 								{personalInfo.email}
 							</motion.a>
-							<motion.a
-								href={`tel:${personalInfo.phone}`}
-								className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
-								style={{color: 'rgb(var(--color-foreground))'}}
-								whileHover={{x: 4}}
-							>
+							<motion.a href={`tel:${personalInfo.phone}`} className={cn('block opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
+							          style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
 								{personalInfo.phone}
 							</motion.a>
 							<motion.p className={cn('opacity-80')} style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
@@ -123,23 +115,19 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 					</motion.div>
 				</div>
 
+				{/* Privacy Notice */}
+				<motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{delay: 0.5}} className={cn('pt-8 border-t border-opacity-20')}
+				            style={{borderColor: 'rgba(var(--color-border), 0.2)'}}>
+					<p className={cn('text-xs text-center opacity-60 leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
+						This portfolio collects basic visitor analytics (location, device type) to understand audience and improve content. No personal data is sold or shared.
+					</p>
+				</motion.div>
+
 				{/* Bottom Bar */}
-				<motion.div
-					initial={{opacity: 0}}
-					whileInView={{opacity: 1}}
-					transition={{delay: 0.6}}
-					className={cn('flex flex-col md:flex-row items-center justify-between pt-8 border-t border-opacity-20')}
-					style={{borderColor: 'rgba(var(--color-border), 0.2)'}}
-				>
+				<motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{delay: 0.6}} className={cn('flex flex-col md:flex-row items-center justify-between pt-8')}>
 					<div className={cn('flex items-center gap-2 text-sm opacity-80 mb-4 md:mb-0')} style={{color: 'rgb(var(--color-foreground))'}}>
 						<span>© {currentYear} {personalInfo.name}. Made with</span>
-						<motion.div
-							animate={{
-								scale: [1, 1.2, 1],
-								rotate: [0, 10, -10, 0],
-							}}
-							transition={{duration: 2, repeat: Infinity, ease: 'easeInOut'}}
-						>
+						<motion.div animate={{scale: [1, 1.2, 1], rotate: [0, 10, -10, 0]}} transition={{duration: 2, repeat: Infinity, ease: 'easeInOut'}}>
 							<FaHeart className={cn('w-4 h-4 text-red-500')}/>
 						</motion.div>
 						<span>and Next.js</span>
@@ -154,10 +142,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 							color: 'rgb(var(--color-card-foreground))',
 							border: '1px solid rgba(var(--color-border), 0.3)',
 						}}
-						whileHover={{
-							scale: 1.05,
-							backgroundColor: 'rgba(var(--color-card), 0.8)',
-						}}
+						whileHover={{scale: 1.05, backgroundColor: 'rgba(var(--color-card), 0.8)'}}
 						whileTap={{scale: 0.95}}
 					>
 						<span>Back to Top</span>
