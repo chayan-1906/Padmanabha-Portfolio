@@ -5,5 +5,6 @@ export interface CTAButton {
 
 export interface CTAProps {
 	title: string;
+	subtext?: string;
 	buttons: CTAButton[];
 }

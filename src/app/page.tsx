@@ -44,15 +44,22 @@ async function Home() {
 				</div>
 				<AboutSection sections={sections}/>
 				<SkillsSection sections={sections} skillsData={skillsData}/>
-				<CTASection title={'Need help with Next.js, React Native, or AI?'} buttons={[{label: "Let's Talk", reason: 'technical'}]}/>
+				<CTASection
+					title={'Need help with Next.js, React Native, or AI?'}
+					subtext={'I build production-ready applications with modern tech stacks'}
+					buttons={[{label: "Let's Talk", reason: 'technical'}]}/>
 				<ExperienceSection sections={sections} skillsData={skillsData}/>
-				<CTASection title={'Looking for someone with this experience?'} buttons={[{label: 'View Availability', reason: 'job'}]}/>
+				<CTASection
+					title={'Looking for someone with this experience?'}
+					subtext={"I'm open to full-time, contract, and consulting opportunities"}
+					buttons={[{label: 'View Availability', reason: 'job'}]}/>
 				<EducationSection sections={sections}/>
 				<ProjectsSection sections={sections} featuredProjects={featuredProjects}/>
 				<CTASection
 					title={'Impressed by my work?'}
+					subtext={"I'm available for freelance projects and collaboration opportunities"}
 					buttons={[
-						{label: 'Discuss a Project', reason: 'collaboration'},
+						{label: 'Discuss a Project', reason: 'project'},
 						{label: 'Just Say Hi', reason: 'networking'},
 					]}
 				/>

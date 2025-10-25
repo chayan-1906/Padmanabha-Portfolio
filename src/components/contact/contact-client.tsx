@@ -109,19 +109,13 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 				<motion.div
 					className={cn('absolute top-20 left-20 w-96 h-96 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}}
 					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-40 -right-40 w-80 h-80 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
-					animate={{
-						rotate: [360, 0],
-						scale: [1.2, 1, 1.2],
-					}}
+					animate={{rotate: [360, 0], scale: [1.2, 1, 1.2]}}
 					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
@@ -129,7 +123,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/** Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{contactSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -291,7 +285,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 										}}>
 										<option value={''}>Why are you reaching out? (Optional)</option>
 										<option value={'job'}>Job/Freelance Opportunity</option>
-										<option value={'collaboration'}>Collaboration/Partnership</option>
+										<option value={'project'}>Collaboration/Partnership</option>
 										<option value={'project-inquiry'}>Project Question</option>
 										<option value={'technical'}>Technical Discussion</option>
 										<option value={'networking'}>Just Networking</option>

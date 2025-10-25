@@ -76,10 +76,7 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 				<motion.div
 					className={cn('absolute bottom-20 right-20 size-80 rounded-full opacity-20 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
-					animate={{
-						scale: [1.2, 1, 1.2],
-						rotate: [360, 180, 0],
-					}}
+					animate={{scale: [1.2, 1, 1.2], rotate: [360, 180, 0]}}
 					transition={{duration: 15, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
@@ -122,18 +119,9 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 							<motion.span
 								key={tech.name}
 								className={cn('px-4 py-2 rounded-full text-sm font-medium')}
-								style={{
-									background: techGradients[index] || 'rgb(var(--color-secondary))',
-									color: 'white',
-								}}
-								whileHover={{
-									scale: 1.05,
-									boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
-								}}
-								initial={{opacity: 0, scale: 0.8}}
-								animate={{opacity: 1, scale: 1}}
-								transition={{delay: 0.5 + index * 0.1}}
-							>
+								style={{background: techGradients[index] || 'rgb(var(--color-secondary))', color: 'white'}}
+								whileHover={{scale: 1.05, boxShadow: '0 8px 25px rgba(0,0,0,0.15)'}} initial={{opacity: 0, scale: 0.8}}
+								animate={{opacity: 1, scale: 1}} transition={{delay: 0.5 + index * 0.1}}>
 								{tech.name}
 							</motion.span>
 						))}
@@ -148,22 +136,15 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 
 							return (
 								<motion.a
-									key={link.name}
-									href={link.url}
-									target={link.url.startsWith('http') ? '_blank' : '_self'}
-									rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
+									key={link.name} href={link.url}
+									target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
 									className={cn('p-3 rounded-full transition-all duration-300')}
 									style={{
 										backgroundColor: 'rgb(var(--color-card))',
 										color: 'rgb(var(--color-card-foreground))',
 										border: '1px solid rgb(var(--color-border))',
 									}}
-									whileHover={{
-										scale: 1.1,
-										boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-									}}
-									whileTap={{scale: 0.95}}
-								>
+									whileHover={{scale: 1.1, boxShadow: '0 10px 30px rgba(0,0,0,0.2)'}} whileTap={{scale: 0.95}}>
 									<Icon className={cn('w-6 h-6')}/>
 								</motion.a>
 							);
@@ -179,20 +160,14 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 					</GradientButton>
 
 					<motion.a
-						href={personalInfo.resumeUrl}
-						target={'_blank'}
-						rel={'noopener noreferrer'}
-						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2')}
+						href={personalInfo.resumeUrl} target={'_blank'}
+						rel={'noopener noreferrer'} className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2')}
 						style={{
 							background: 'transparent',
 							color: 'rgb(var(--color-foreground))',
 							border: '2px solid rgb(var(--color-border))',
 						}}
-						whileHover={{
-							scale: 1.05,
-							backgroundColor: 'rgba(var(--color-card), 0.5)',
-						}}
-						whileTap={{scale: 0.95}}
+						whileHover={{scale: 1.05, backgroundColor: 'rgba(var(--color-card), 0.5)'}} whileTap={{scale: 0.95}}
 					>
 						<FaIcons.FaDownload className={cn('w-5 h-5')}/>
 						Download Resume
