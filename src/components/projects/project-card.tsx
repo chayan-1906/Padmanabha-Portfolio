@@ -92,7 +92,7 @@ function ProjectCard({project}: ProjectCardProps) {
 				initial={{opacity: 0, scale: 0.5}} transition={{duration: 0.3}}
 				animate={{opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.5}}>
 				<motion.a href={project.gitHubUrl} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
-					<FaGithub className={cn('w-16 h-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
+					<FaGithub className={cn('size-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
 				</motion.a>
 			</motion.div>
 
@@ -117,10 +117,7 @@ function ProjectCard({project}: ProjectCardProps) {
 					{/* Ask About Project - Animated Icon Button */}
 					<motion.button
 						onClick={handleAskAboutProject} className={cn('p-3 rounded-full backdrop-blur-sm border-2')}
-						style={{
-							background: 'linear-gradient(45deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))',
-							borderColor: 'rgba(99, 102, 241, 0.5)',
-						}}
+						style={{background: 'linear-gradient(45deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))', borderColor: 'rgba(99, 102, 241, 0.5)'}}
 						animate={{
 							scale: [1, 1.15, 1],
 							borderColor: [
@@ -137,7 +134,7 @@ function ProjectCard({project}: ProjectCardProps) {
 						transition={{duration: 2.5, repeat: Infinity, ease: 'easeInOut'}}
 						whileHover={{scale: 1.3, rotate: 10}} whileTap={{scale: 0.9}}
 						title={'Ask about this project'}>
-						<FaCommentDots className={cn('size-5')} style={{color: 'white'}}/>
+						<FaCommentDots className={cn('size-5')} style={{color: 'rgb(var(--color-foreground))'}}/>
 					</motion.button>
 				</div>
 
@@ -204,23 +201,31 @@ function ProjectCard({project}: ProjectCardProps) {
 				</div>
 			)}
 
+			<div className={'flex-1'}/>
+
 			{/* Project Stats */}
 			<div className={cn('flex items-center gap-4 text-sm opacity-80 mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>
-				<motion.div title={'Stars'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
-					<GoStarFill size={18} className="text-yellow-400"/>
-					<span className={cn('font-medium')}>{project.stargazers_count}</span>
-				</motion.div>
-				{project.forks_count > 0 && (
-					<motion.div title={'Forks'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
-						<GoRepoForked size={18}/>
-						<span className={cn('font-medium')}>{project.forks_count}</span>
+				<motion.a href={`${project.gitHubUrl}/stargazers`} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}}
+				          whileTap={{scale: 0.9}}>
+					<motion.div title={'Stars'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
+						<GoStarFill size={18} className={'text-yellow-400'}/>
+						<span className={cn('font-medium')}>{project.stargazers_count}</span>
 					</motion.div>
+				</motion.a>
+				{project.forks_count > 0 && (
+					<motion.a href={`${project.gitHubUrl}/network/members`} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}}
+					          whileTap={{scale: 0.9}}>
+						<motion.div title={'Forks'} className={cn('flex items-center gap-1')} whileHover={{scale: 1.1}}>
+							<GoRepoForked size={18}/>
+							<span className={cn('font-medium')}>{project.forks_count}</span>
+						</motion.div>
+					</motion.a>
 				)}
 			</div>
 
 			{/* Demo Button */}
-			{project.actionUrl && project.actionType !== 'none' && (
-				<div className={cn('flex justify-center mt-auto relative z-40')}>
+			<div className={cn('relative flex justify-center h-12 mt-auto z-40')}>
+				{project.actionUrl && project.actionType !== 'none' && (
 					<motion.a
 						href={project.actionUrl}
 						target={'_blank'}
@@ -233,8 +238,8 @@ function ProjectCard({project}: ProjectCardProps) {
 						{React.createElement(getDemoIcon(project.actionType), {className: cn('w-4 h-4')})}
 						{camelToWords(project.actionType)}
 					</motion.a>
-				</div>
-			)}
+				)}
+			</div>
 		</motion.div>
 	);
 }

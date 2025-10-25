@@ -31,7 +31,7 @@ function CTASection({title, subtext, buttons}: CTAProps) {
 
 			<motion.div className={cn('max-w-4xl mx-auto text-center relative z-10')} initial={{opacity: 0, y: 40}} whileInView={{opacity: 1, y: 0}} viewport={{once: true, margin: '-100px'}}
 			            transition={{duration: 0.6}}>
-				<h2 className={cn('text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>{title}</h2>
+				<h2 className={cn('text-4xl md:text-5xl font-bold mb-4 leading-12 md:leading-16 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>{title}</h2>
 
 				{subtext && (
 					<p className={cn('text-xl opacity-80 mb-8 max-w-2xl mx-auto')} style={{color: 'rgb(var(--color-foreground))'}}>
