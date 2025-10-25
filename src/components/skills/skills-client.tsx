@@ -46,26 +46,15 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 			{/* Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
-					className={cn('absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-5 blur-3xl')}
-					style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
-					animate={{
-						rotate: [360, 0],
-						scale: [1.2, 1, 1.2],
-					}}
-					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
+					className={cn('absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-5 blur-3xl')} style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
+					animate={{rotate: [360, 0], scale: [1.2, 1, 1.2]}} transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
-			<motion.div
-				variants={containerVariants}
-				initial={'hidden'}
-				whileInView={'visible'}
-				viewport={{once: true, margin: '-100px'}}
-				className={cn('max-w-7xl mx-auto relative z-10')}
-			>
+			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-7xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{skillsSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -83,20 +72,10 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 								<motion.div
 									className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm h-full')}
 									style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
-									whileHover={{
-										scale: 1.05,
-										rotateY: 5,
-										boxShadow: '0 25px 50px rgba(0,0,0,0.25)',
-									}}
-									transition={{duration: 0.3}}
-								>
+									whileHover={{scale: 1.05, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.25)'}} transition={{duration: 0.3}}>
 									{/* Category Header */}
 									<div className={cn('flex items-center gap-3 mb-6')}>
-										<motion.div
-											className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.gradient)}
-											whileHover={{rotate: 360}}
-											transition={{duration: 0.6}}
-										>
+										<motion.div className={cn('p-3 rounded-xl bg-gradient-to-br text-white', category.gradient)} whileHover={{rotate: 360}} transition={{duration: 0.6}}>
 											<CategoryIcon className={cn('w-6 h-6')}/>
 										</motion.div>
 										<h3 className={cn('text-xl font-bold')} style={{color: 'rgb(var(--color-card-foreground))'}}>{category.title}</h3>

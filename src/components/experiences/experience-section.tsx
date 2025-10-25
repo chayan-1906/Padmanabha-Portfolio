@@ -8,7 +8,7 @@ import {ExperiencesSectionProps} from "@/types/experiences";
 async function ExperienceSection({sections, skillsData}: ExperiencesSectionProps) {
 	const workExperiences = await getWorkExperiences(ACTIVE_PORTFOLIO_ID);
 
-	const experienceSection = sections.find((section: Section) => section.name === 'Experiences');
+	const experienceSection = sections.find((section: Section) => section.name === 'Experience');
 
 	if (!experienceSection || !workExperiences.length) {
 		return null;

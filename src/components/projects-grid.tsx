@@ -20,7 +20,7 @@ function ProjectsGrid({projects}: ProjectsGridProps) {
 	return (
 		<motion.div variants={containerVariants} initial={'hidden'} animate={'visible'} className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8')}>
 			{projects.map((project, index) => (
-				<ProjectCard key={project.title} project={project} index={index}/>
+				<ProjectCard key={project.title} project={project}/>
 			))}
 		</motion.div>
 	);

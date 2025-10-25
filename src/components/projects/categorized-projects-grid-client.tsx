@@ -82,7 +82,7 @@ function CategorizedProjectsGridClient({projects}: CategorizedProjectsGridProps)
 						{/* Projects Grid for this category */}
 						<motion.div variants={gridVariants} className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6')}>
 							{category.projects.map((project: Project, projectIndex: number) => (
-								<ProjectCard key={`${category.title}-${project.title}`} project={project} index={projectIndex}/>
+								<ProjectCard key={`${category.title}-${project.title}`} project={project}/>
 							))}
 						</motion.div>
 					</motion.section>

@@ -46,7 +46,7 @@ function EducationClient({educationSection, educations}: EducationClientProps) {
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{educationSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>{educationSection.subtitle}</p>
@@ -59,12 +59,7 @@ function EducationClient({educationSection, educations}: EducationClientProps) {
 							<motion.div
 								className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
 								style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
-								whileHover={{
-									scale: 1.02,
-									boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
-								}}
-								transition={{duration: 0.3}}
-							>
+								whileHover={{scale: 1.02, boxShadow: '0 25px 50px rgba(0,0,0,0.15)'}} transition={{duration: 0.3}}>
 								{/* Institution Header */}
 								<div className={cn('flex items-center gap-4 mb-6')}>
 									<motion.div className={cn('p-4 rounded-full')}>
@@ -102,15 +97,11 @@ function EducationClient({educationSection, educations}: EducationClientProps) {
 									<div className={cn('grid md:grid-cols-2 gap-3')}>
 										{education.highlights.split('\n').map((highlight, highlightIndex) => (
 											<motion.div
-												key={highlightIndex}
-												className={cn('flex items-center gap-3 p-3 rounded-xl')}
+												key={highlightIndex} className={cn('flex items-center gap-3 p-3 rounded-xl')}
 												style={{backgroundColor: 'rgba(var(--color-secondary), 0.3)'}}
-												whileHover={{scale: 1.02, x: 4}}
-												initial={{opacity: 0, x: -20}}
-												whileInView={{opacity: 1, x: 0}}
-												transition={{delay: highlightIndex * 0.1}}
-											>
-												<FaTrophy className={cn('w-4 h-4 text-yellow-500')}/>
+												whileHover={{scale: 1.02, x: 4}} initial={{opacity: 0, x: -20}}
+												whileInView={{opacity: 1, x: 0}} transition={{delay: highlightIndex * 0.1}}>
+												<FaTrophy className={cn('size-4 text-yellow-500')}/>
 												<span className={cn('text-sm font-medium')} style={{color: 'rgb(var(--color-card-foreground))'}}>{highlight}</span>
 											</motion.div>
 										))}

@@ -1,16 +1,21 @@
 'use client';
 
-import React, {useState} from 'react';
-import {motion, Variants} from 'framer-motion';
 import * as FaIcons from 'react-icons/fa';
 import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from 'react-icons/fa';
+import {motion, Variants} from 'framer-motion';
+import {useSearchParams} from 'next/navigation';
+import React, {useEffect, useState} from 'react';
 import {cn} from '@/lib/utils';
 import {ContactClientProps, SocialLink} from '@/types/contact';
 
 function ContactClient({contactSection, socialLinks, personalInfo}: ContactClientProps) {
+	const searchParams = useSearchParams();
+
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
+		company: '',
+		reason: '',
 		subject: '',
 		message: '',
 	});
@@ -34,6 +39,8 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 				setFormData({
 					name: '',
 					email: '',
+					company: '',
+					reason: '',
 					subject: '',
 					message: '',
 				});
@@ -41,7 +48,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 			} else {
 				throw new Error('Failed to send message');
 			}
-		} catch (error) {
+		} catch (error: any) {
 			console.error('Error:', error);
 			alert('Failed to send message. Please try again');
 		} finally {
@@ -49,12 +56,12 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 		}
 	}
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});
-	};
+	}
 
 	const containerVariants: Variants = {
 		hidden: {opacity: 0},
@@ -80,38 +87,43 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 		},
 	};
 
-	const getIcon = (iconName: string) => {
-		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
-	}
+	const getIcon = (iconName: string) => (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
+
+	useEffect(() => {
+		const reason = searchParams.get('reason');
+		const project = searchParams.get('project');
+
+		if (reason || project) {
+			setFormData(prev => ({
+				...prev,
+				...(reason && {reason}),
+				subject: project ? `Question about ${project}` : '',
+			}));
+		}
+	}, [searchParams]);
 
 	return (
 		<section id={contactSection.name.toLowerCase()} className={cn('py-32 px-6 relative overflow-hidden')} style={{backgroundColor: 'rgb(var(--color-background))'}}>
-			{/* Background Elements */}
+			{/** Background Elements */}
 			<div className={cn('absolute inset-0 overflow-hidden pointer-events-none')}>
 				<motion.div
 					className={cn('absolute top-20 left-20 w-96 h-96 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}}
 					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-40 -right-40 w-80 h-80 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
-					animate={{
-						rotate: [360, 0],
-						scale: [1.2, 1, 1.2],
-					}}
+					animate={{rotate: [360, 0], scale: [1.2, 1, 1.2]}}
 					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
-				{/* Section Header */}
+				{/** Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{contactSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -119,13 +131,13 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 					</p>
 				</motion.div>
 
-				<div className={cn('grid lg:grid-cols-2 gap-12')}>
+				<div className={cn('grid lg:grid-cols-2 gap-12 items-stretch')}>
 					{/* Contact Information */}
-					<motion.div variants={itemVariants} className={cn('space-y-8')}>
+					<motion.div variants={itemVariants} className={cn('flex flex-col gap-12')}>
 						<div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
 						     style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Contact Information</h3>
-							<div className={cn('space-y-6')}>
+							<div className={cn('flex flex-col gap-3')}>
 								{socialLinks.filter((socialLink: SocialLink) => socialLink.name === 'Email' || socialLink.name === 'Phone').map((socialLink: SocialLink, index: number) => {
 									const Icon = getIcon(socialLink.icon);
 
@@ -206,21 +218,19 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 						</motion.div>
 					</motion.div>
 
-					{/* Contact Form */}
-					<motion.div variants={itemVariants}>
-						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
+					{/** Contact Form */}
+					<motion.div variants={itemVariants} className={cn('flex')}>
+						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm flex-1')}
 						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.01}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Send a Message</h3>
 							<form onSubmit={handleSubmit} className={cn('space-y-6')}>
 								<div className={cn('grid grid-cols-1 md:grid-cols-2 gap-6')}>
+									{/** Name */}
 									<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 										<input
-											type={'text'}
-											name={'name'}
-											placeholder={'Your Name'}
-											value={formData.name}
-											onChange={handleChange}
-											required
+											type={'text'} name={'name'}
+											placeholder={'Your Name'} value={formData.name}
+											onChange={handleChange} required
 											className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500')}
 											style={{
 												backgroundColor: 'rgba(var(--color-secondary), 0.5)',
@@ -229,14 +239,13 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 											}}
 										/>
 									</motion.div>
+
+									{/** Email */}
 									<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 										<input
-											type={'email'}
-											name={'email'}
-											placeholder={'Your Email'}
-											value={formData.email}
-											onChange={handleChange}
-											required
+											type={'email'} name={'email'}
+											placeholder={'Your Email'} value={formData.email}
+											onChange={handleChange} required
 											className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500')}
 											style={{
 												backgroundColor: 'rgba(var(--color-secondary), 0.5)',
@@ -246,14 +255,15 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 										/>
 									</motion.div>
 								</div>
+
+								{/** Company */}
 								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
 									<input
 										type={'text'}
-										name={'subject'}
-										placeholder={'Subject'}
-										value={formData.subject}
+										name={'company'}
+										placeholder={'Company/Organization (Optional)'}
+										value={formData.company}
 										onChange={handleChange}
-										required
 										className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500')}
 										style={{
 											backgroundColor: 'rgba(var(--color-secondary), 0.5)',
@@ -262,15 +272,41 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 										}}
 									/>
 								</motion.div>
+
+								{/** Reason */}
+								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}} className={cn('relative')}>
+									<select
+										name={'reason'} value={formData.reason} onChange={handleChange}
+										className={cn('w-full px-4 py-3 pr-10 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none')}
+										style={{
+											backgroundColor: 'rgba(var(--color-secondary), 0.5)',
+											color: 'rgb(var(--color-secondary-foreground))',
+											borderColor: 'rgba(var(--color-border), 0.3)',
+										}}>
+										<option value={''}>Why are you reaching out? (Optional)</option>
+										<option value={'job'}>Job/Freelance Opportunity</option>
+										<option value={'project'}>Collaboration/Partnership</option>
+										<option value={'project-inquiry'}>Project Question</option>
+										<option value={'technical'}>Technical Discussion</option>
+										<option value={'networking'}>Just Networking</option>
+										<option value={'other'}>Other</option>
+									</select>
+
+									{/* Dropdown */}
+									<div className={cn('absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none')} style={{color: 'rgb(var(--color-secondary-foreground))'}}>
+										<svg className={cn('size-4')} fill={'none'} stroke={'currentColor'} viewBox={'0 0 24 24'}>
+											<path strokeLinecap="round" strokeLinejoin={'round'} strokeWidth={2} d={'M19 9l-7 7-7-7'}/>
+										</svg>
+									</div>
+								</motion.div>
+
+								{/** Subject */}
 								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
-									<textarea
-										name={'message'}
-										placeholder={'Your Message'}
-										value={formData.message}
-										onChange={handleChange}
-										required
-										rows={5}
-										className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none')}
+									<input
+										type={'text'} name={'subject'}
+										placeholder={'Subject'} value={formData.subject}
+										onChange={handleChange} required
+										className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500')}
 										style={{
 											backgroundColor: 'rgba(var(--color-secondary), 0.5)',
 											color: 'rgb(var(--color-secondary-foreground))',
@@ -278,12 +314,27 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 										}}
 									/>
 								</motion.div>
+
+								{/** Message */}
+								<motion.div whileHover={{scale: 1.02}} whileFocus={{scale: 1.02}}>
+									<textarea
+										name={'message'} placeholder={'Your Message'}
+										value={formData.message} onChange={handleChange}
+										required rows={3}
+										className={cn('w-full px-4 py-3 rounded-xl border border-opacity-20 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y min-h-[6rem]')}
+										style={{
+											backgroundColor: 'rgba(var(--color-secondary), 0.5)',
+											color: 'rgb(var(--color-secondary-foreground))',
+											borderColor: 'rgba(var(--color-border), 0.3)',
+										}}
+									/>
+								</motion.div>
+
+								{/** Send Mesage */}
 								<motion.button
-									type={'submit'}
-									disabled={isSubmitting}
+									type={'submit'} disabled={isSubmitting}
 									className={cn('w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed')}
-									style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-									whileHover={{scale: 1.05, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
+									style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}} whileHover={{scale: 1.05, boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)'}}
 									whileTap={{scale: 0.95}}
 								>
 									{isSubmitting ? (

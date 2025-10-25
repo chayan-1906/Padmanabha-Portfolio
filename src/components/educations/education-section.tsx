@@ -7,7 +7,7 @@ import {EducationClient} from "@/components/educations/education-client";
 async function EducationSection({sections}: EducationSectionProps) {
 	const educations = await getEducations(ACTIVE_PORTFOLIO_ID);
 
-	const educationSection = sections.find((section: Section) => section.name === 'Educations');
+	const educationSection = sections.find((section: Section) => section.name === 'Education');
 
 	if (!educationSection || !educations.length) {
 		return null;

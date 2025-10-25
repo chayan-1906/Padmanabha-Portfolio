@@ -4,6 +4,7 @@ import {motion, Variants} from "framer-motion";
 import {cn} from "@/lib/utils";
 import {ProjectsClientProps} from "@/types/project";
 import {ProjectCard} from "@/components/projects/project-card";
+import {GradientButton} from "@/components/ui/gradient-button";
 
 function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 	const containerVariants: Variants = {
@@ -38,19 +39,13 @@ function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 				<motion.div
 					className={cn('absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-10 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}}
 					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 				<motion.div
 					className={cn('absolute -bottom-40 -left-40 w-96 h-96 rounded-full opacity-10 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #ec4899, #f59e0b)'}}
-					animate={{
-						rotate: [360, 0],
-						scale: [1.2, 1, 1.2],
-					}}
+					animate={{rotate: [360, 0], scale: [1.2, 1, 1.2]}}
 					transition={{duration: 25, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
@@ -58,7 +53,7 @@ function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-7xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{projectSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
@@ -69,25 +64,17 @@ function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 				{/* Projects Grid */}
 				<div className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8')}>
 					{projects.map((project, index) => (
-						<ProjectCard key={project.title} project={project} index={index}/>
+						<ProjectCard key={project.title} project={project}/>
 					))}
 				</div>
 
 				{/* Floating CTA */}
 				<motion.div variants={itemVariants} className={cn('text-center mt-20')}>
-					<motion.a
-						href={'/projects'}
-						className={cn('inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-semibold text-white transition-all duration-300')}
-						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899)'}}
-						whileHover={{
-							scale: 1.05,
-							boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)',
-						}}
-						whileTap={{scale: 0.95}}
-					>
+					<GradientButton className={cn('gap-2 px-8 py-4 text-lg')} whileHover={{scale: 1.05, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)',}} whileTap={{scale: 0.95}}
+					                onClick={() => window.location.href = '/projects'}>
 						View All Projects
 						<motion.span animate={{x: [0, 5, 0]}} transition={{repeat: Infinity, duration: 2}}>→</motion.span>
-					</motion.a>
+					</GradientButton>
 				</motion.div>
 			</motion.div>
 		</section>

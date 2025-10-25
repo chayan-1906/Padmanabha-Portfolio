@@ -34,7 +34,6 @@ export interface GroupedProjectCategory {
 
 export interface ProjectCardProps {
 	project: Project;
-	index: number;
 }
 
 export interface ProjectsGridProps {

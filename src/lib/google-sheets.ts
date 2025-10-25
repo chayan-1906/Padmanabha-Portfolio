@@ -2,7 +2,7 @@ import {google} from 'googleapis';
 import {GOOGLE_CREDENTIALS} from "@/config/config";
 import {CONTACT_SUBMISSION_SPREADSHEET_ID} from "@/constants";
 
-async function appendToSheet(data: { name: string; email: string; subject: string; message: string; }) {
+async function appendToSheet(data: { name: string; email: string; company: string; reason: string; subject: string; message: string; referrer: string; ip: string; }) {
 	try {
 		const credentials = JSON.parse(GOOGLE_CREDENTIALS!);
 
@@ -19,10 +19,10 @@ async function appendToSheet(data: { name: string; email: string; subject: strin
 
 		await sheets.spreadsheets.values.append({
 			spreadsheetId: CONTACT_SUBMISSION_SPREADSHEET_ID,
-			range: 'Contact Form!A:E',
+			range: 'Contact Form!A:I',
 			valueInputOption: 'USER_ENTERED',
 			requestBody: {
-				values: [[serialDate, data.name, data.email, data.subject, data.message]],
+				values: [[serialDate, data.name, data.email, data.company, data.reason, data.subject, data.message, data.referrer, data.ip]],
 			},
 		});
 

@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
 	try {
 		const data = await request.json();
 
-		const {name, email, subject, message} = data;
+		const {name, email, company, reason, subject, message} = data;
 
 		if (!name || !email || !subject || !message) {
 			return NextResponse.json(
@@ -14,7 +14,19 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		const result = await appendToSheet({name, email, subject, message});
+		const referrer = request.headers.get('referer') || '';
+		const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip') || '';
+
+		const result = await appendToSheet({
+			name,
+			email,
+			company: company || '',
+			reason: reason || '',
+			subject,
+			message,
+			referrer,
+			ip,
+		});
 
 		if (result.success) {
 			// Webhook to trigger email notification
@@ -24,7 +36,7 @@ export async function POST(request: NextRequest) {
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({name, email, subject, message}),
+					body: JSON.stringify({name, email, company, reason, subject, message}),
 				});
 			} catch (webhookError) {
 				console.error('Webhook error:', webhookError);

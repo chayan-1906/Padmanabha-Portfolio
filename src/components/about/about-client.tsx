@@ -36,18 +36,14 @@ function AboutClient({aboutSection}: AboutClientProps) {
 				<motion.div
 					className={cn('absolute top-20 left-20 w-96 h-96 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
-					transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}} transition={{duration: 30, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
 			<motion.div variants={containerVariants} initial={'hidden'} whileInView={'visible'} viewport={{once: true, margin: '-100px'}} className={cn('max-w-6xl mx-auto relative z-10')}>
 				{/* Section Header */}
 				<motion.div variants={itemVariants} className={cn('text-center mb-20')}>
-					<h2 className={cn('text-5xl md:text-6xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
+					<h2 className={cn('text-5xl md:text-7xl font-bold mb-6 leading-16 md:leading-24 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent')}>
 						{aboutSection.title}
 					</h2>
 					<p className={cn('text-xl opacity-80 max-w-3xl mx-auto leading-relaxed')} style={{color: 'rgb(var(--color-foreground))'}}>
