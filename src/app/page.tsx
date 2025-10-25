@@ -1,5 +1,6 @@
 import {trackAnalytics} from '@/lib/analytics';
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {CTASection} from '@/components/cta/cta-section';
 import {Footer} from '@/components/footer/footer-section';
 import {HeroSection} from '@/components/hero/hero-section';
 import {AboutSection} from '@/components/about/about-section';
@@ -43,9 +44,18 @@ async function Home() {
 				</div>
 				<AboutSection sections={sections}/>
 				<SkillsSection sections={sections} skillsData={skillsData}/>
+				<CTASection title={'Need help with Next.js, React Native, or AI?'} buttons={[{label: "Let's Talk", reason: 'technical'}]}/>
 				<ExperienceSection sections={sections} skillsData={skillsData}/>
+				<CTASection title={'Looking for someone with this experience?'} buttons={[{label: 'View Availability', reason: 'job'}]}/>
 				<EducationSection sections={sections}/>
 				<ProjectsSection sections={sections} featuredProjects={featuredProjects}/>
+				<CTASection
+					title={'Impressed by my work?'}
+					buttons={[
+						{label: 'Discuss a Project', reason: 'collaboration'},
+						{label: 'Just Say Hi', reason: 'networking'},
+					]}
+				/>
 				{/*<AchievementSection sections={sections} githubStats={githubStats}/>*/}
 				<CertificationsSection sections={sections}/>
 				<ContactSection sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
