@@ -1,15 +1,17 @@
 'use client';
 
-import React, {useState} from 'react';
 import Image from 'next/image';
+import React, {useState} from 'react';
+import {useRouter} from 'next/navigation';
 import {motion, Variants} from 'framer-motion';
+import {GoRepoForked, GoStarFill} from "react-icons/go";
+import {FaBook, FaCommentDots, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 import {Collaborator} from "@/types/github";
 import {camelToWords, cn} from '@/lib/utils';
 import {ProjectCardProps} from "@/types/project";
-import {GoRepoForked, GoStarFill} from "react-icons/go";
-import {FaBook, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
 
-function ProjectCard({project, index}: ProjectCardProps) {
+function ProjectCard({project}: ProjectCardProps) {
+	const router = useRouter();
 	const [isHovered, setIsHovered] = useState(false);
 
 	const itemVariants: Variants = {
@@ -65,32 +67,30 @@ function ProjectCard({project, index}: ProjectCardProps) {
 		}
 	}
 
+	const handleAskAboutProject = () => {
+		const contactSection = document.getElementById('contact');
+		if (contactSection) {
+			contactSection.scrollIntoView({behavior: 'smooth'});
+			router.push(`?project=${encodeURIComponent(project.title)}&reason=project-inquiry#contact`);
+		} else {
+			router.push(`/?project=${encodeURIComponent(project.title)}&reason=project-inquiry#contact`);
+		}
+	}
+
 	return (
 		<motion.div
 			variants={itemVariants}
 			className={cn('group relative rounded-2xl p-8 border border-opacity-20 backdrop-blur-sm transition-all duration-500 flex flex-col')}
-			style={{
-				backgroundColor: 'rgba(var(--color-card), 0.5)',
-				borderColor: 'rgba(var(--color-border), 0.3)',
-			}}
-			whileHover={{
-				y: -10,
-				rotateX: 5,
-				boxShadow: '0 25px 50px rgba(0,0,0,0.25)',
-			}}
+			style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}
+			whileHover={{y: -10, rotateX: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.25)'}}
 			onHoverStart={() => setIsHovered(true)}
-			onHoverEnd={() => setIsHovered(false)}
-		>
+			onHoverEnd={() => setIsHovered(false)}>
+
 			{/* GitHub Icon Overlay */}
 			<motion.div
 				className={cn('absolute inset-0 rounded-2xl flex items-center justify-center z-30 pointer-events-none')}
-				initial={{opacity: 0, scale: 0.5}}
-				animate={{
-					opacity: isHovered ? 1 : 0,
-					scale: isHovered ? 1 : 0.5,
-				}}
-				transition={{duration: 0.3}}
-			>
+				initial={{opacity: 0, scale: 0.5}} transition={{duration: 0.3}}
+				animate={{opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.5}}>
 				<motion.a href={project.gitHubUrl} target={'_blank'} rel={'noopener noreferrer'} className={cn('pointer-events-auto')} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}>
 					<FaGithub className={cn('w-16 h-16 drop-shadow-lg')} style={{color: 'rgba(var(--color-border), 0.3)'}}/>
 				</motion.a>
@@ -104,7 +104,7 @@ function ProjectCard({project, index}: ProjectCardProps) {
 
 			{/* Project Header */}
 			<div className={'relative z-10 mb-6'}>
-				<div className={'flex items-start justify-between mb-4'}>
+				<div className={'flex items-center justify-between mb-4'}>
 					<motion.div className={cn('w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden', project.logoUrl ? 'bg-white border border-black' : '')}
 					            style={{background: project.logoUrl ? 'white' : generateTechGradient(project.language)}}>
 						{project.logoUrl ? (
@@ -113,6 +113,32 @@ function ProjectCard({project, index}: ProjectCardProps) {
 							<span className={cn('text-white font-bold text-lg')}>{project.title.charAt(0)}</span>
 						)}
 					</motion.div>
+
+					{/* Ask About Project - Animated Icon Button */}
+					<motion.button
+						onClick={handleAskAboutProject} className={cn('p-3 rounded-full backdrop-blur-sm border-2')}
+						style={{
+							background: 'linear-gradient(45deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))',
+							borderColor: 'rgba(99, 102, 241, 0.5)',
+						}}
+						animate={{
+							scale: [1, 1.15, 1],
+							borderColor: [
+								'rgba(99, 102, 241, 0.5)',
+								'rgba(139, 92, 246, 0.8)',
+								'rgba(99, 102, 241, 0.5)',
+							],
+							boxShadow: [
+								'0 0 0 0 rgba(99, 102, 241, 0.7)',
+								'0 0 0 15px rgba(99, 102, 241, 0)',
+								'0 0 0 0 rgba(99, 102, 241, 0)',
+							],
+						}}
+						transition={{duration: 2.5, repeat: Infinity, ease: 'easeInOut'}}
+						whileHover={{scale: 1.3, rotate: 10}} whileTap={{scale: 0.9}}
+						title={'Ask about this project'}>
+						<FaCommentDots className={cn('size-5')} style={{color: 'white'}}/>
+					</motion.button>
 				</div>
 
 				<h3 className={cn('text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-500')}

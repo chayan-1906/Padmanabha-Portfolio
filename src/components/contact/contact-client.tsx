@@ -97,7 +97,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 			setFormData(prev => ({
 				...prev,
 				...(reason && {reason}),
-				...(project && {subject: `Question about ${project}`}),
+				subject: project ? `Question about ${project}` : '',
 			}));
 		}
 	}, [searchParams]);
