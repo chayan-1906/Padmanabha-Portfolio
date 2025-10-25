@@ -3,27 +3,33 @@
 import {motion} from 'framer-motion';
 import * as FaIcons from 'react-icons/fa';
 import {FaArrowUp, FaHeart} from 'react-icons/fa';
+import {usePathname, useRouter} from "next/navigation";
 import {cn} from '@/lib/utils';
 import {SocialLink} from '@/types/contact';
 import {FooterClientProps} from '@/types/footer';
 
 function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) {
+	const pathname = usePathname();
+	const router = useRouter();
 	const currentYear = new Date().getFullYear();
 
 	const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'});
 
-	const scrollToSection = (href: string) => {
-		setTimeout(() => {
-			const element = document.querySelector(href);
-			if (element) {
-				element.scrollIntoView({behavior: 'smooth'});
-			}
-		}, 100);
+	const navigateToSection = (href: string) => {
+		if (pathname === '/') {
+			window.history.replaceState(null, '', href);
+			setTimeout(() => {
+				const element = document.querySelector(href);
+				if (element) {
+					element.scrollIntoView({behavior: 'smooth'});
+				}
+			}, 100);
+		} else {
+			router.push(`/${href}`);
+		}
 	}
 
-	const getIcon = (iconName: string) => {
-		return (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
-	}
+	const getIcon = (iconName: string) => (FaIcons as any)[iconName] || FaIcons.FaQuestionCircle;
 
 	return (
 		<footer className={cn('relative py-16 px-6 border-t border-opacity-20')} style={{backgroundColor: 'rgb(var(--color-background))', borderColor: 'rgba(var(--color-border), 0.2)'}}>
@@ -32,11 +38,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 				<motion.div
 					className={cn('absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 rounded-full opacity-5 blur-3xl')}
 					style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6)'}}
-					animate={{
-						rotate: [0, 360],
-						scale: [1, 1.2, 1],
-					}}
-					transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
+					animate={{rotate: [0, 360], scale: [1, 1.2, 1]}} transition={{duration: 20, repeat: Infinity, ease: 'linear'}}
 				/>
 			</div>
 
@@ -55,8 +57,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 
 								return (
 									<motion.a
-										key={link.name}
-										href={link.url}
+										key={link.name} href={link.url}
 										target={link.url.startsWith('http') ? '_blank' : '_self'}
 										rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
 										className={cn('p-3 rounded-full transition-all duration-300')}
@@ -65,12 +66,7 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 											color: 'rgb(var(--color-card-foreground))',
 											border: '1px solid rgba(var(--color-border), 0.3)',
 										}}
-										whileHover={{
-											scale: 1.1,
-											backgroundColor: 'rgba(var(--color-card), 0.8)',
-										}}
-										whileTap={{scale: 0.9}}
-									>
+										whileHover={{scale: 1.1, backgroundColor: 'rgba(var(--color-card), 0.8)'}} whileTap={{scale: 0.9}}>
 										<Icon className={cn('size-5')}/>
 									</motion.a>
 								);
@@ -85,11 +81,9 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 							{sections.map((section) => (
 								<motion.button
 									key={section.name}
-									onClick={() => scrollToSection(`#${section.name.toLowerCase()}`)}
+									onClick={() => navigateToSection(`#${section.name.toLowerCase()}`)}
 									className={cn('block text-left opacity-80 transition-all duration-300 hover:opacity-100 hover:text-blue-500')}
-									style={{color: 'rgb(var(--color-foreground))'}}
-									whileHover={{x: 4}}
-								>
+									style={{color: 'rgb(var(--color-foreground))'}} whileHover={{x: 4}}>
 									{section.name}
 								</motion.button>
 							))}
@@ -142,12 +136,10 @@ function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) 
 							color: 'rgb(var(--color-card-foreground))',
 							border: '1px solid rgba(var(--color-border), 0.3)',
 						}}
-						whileHover={{scale: 1.05, backgroundColor: 'rgba(var(--color-card), 0.8)'}}
-						whileTap={{scale: 0.95}}
-					>
+						whileHover={{scale: 1.05, backgroundColor: 'rgba(var(--color-card), 0.8)'}} whileTap={{scale: 0.95}}>
 						<span>Back to Top</span>
 						<motion.div animate={{y: [0, -2, 0]}} transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}>
-							<FaArrowUp className={cn('w-4 h-4')}/>
+							<FaArrowUp className={cn('size-4')}/>
 						</motion.div>
 					</motion.button>
 				</motion.div>

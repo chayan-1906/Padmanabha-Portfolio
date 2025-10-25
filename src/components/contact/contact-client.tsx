@@ -44,7 +44,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 					subject: '',
 					message: '',
 				});
-				alert('Thank you for your message! I\'ll get back to you soon.');
+				alert('Thank you for reaching out! I\'ll get back to you soon.');
 			} else {
 				throw new Error('Failed to send message');
 			}
