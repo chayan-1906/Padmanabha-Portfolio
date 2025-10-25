@@ -1,12 +1,13 @@
 'use client';
 
 import Image from "next/image";
-import React, {useEffect, useState} from 'react';
 import * as FaIcons from 'react-icons/fa';
 import {motion, Variants} from 'framer-motion';
+import React, {useEffect, useState} from 'react';
 import {cn} from '@/lib/utils';
 import {SocialLink} from "@/types/contact";
 import {HeroClientProps} from "@/types/hero";
+import {GradientButton} from "@/components/ui/gradient-button";
 
 function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 	const [techGradients, setTechGradients] = useState<string[]>([]);
@@ -172,21 +173,10 @@ function HeroClient({personalInfo, socialLinks, techStacks}: HeroClientProps) {
 
 				{/* CTA Buttons */}
 				<motion.div variants={itemVariants} className={cn('flex flex-col sm:flex-row gap-4 justify-center')}>
-					<motion.button
-						className={cn('px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer')}
-						style={{
-							background: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
-							color: 'white',
-						}}
-						whileHover={{
-							scale: 1.05,
-							boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)',
-						}}
-						whileTap={{scale: 0.95}}
-						onClick={() => document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})}
-					>
+					<GradientButton className={cn('px-8 py-4 text-lg')} whileHover={{scale: 1.05, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)'}} whileTap={{scale: 0.95}}
+					                onClick={() => document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})}>
 						View My Work
-					</motion.button>
+					</GradientButton>
 
 					<motion.a
 						href={personalInfo.resumeUrl}

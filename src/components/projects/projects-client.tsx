@@ -4,6 +4,7 @@ import {motion, Variants} from "framer-motion";
 import {cn} from "@/lib/utils";
 import {ProjectsClientProps} from "@/types/project";
 import {ProjectCard} from "@/components/projects/project-card";
+import {GradientButton} from "@/components/ui/gradient-button";
 
 function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 	const containerVariants: Variants = {
@@ -75,19 +76,11 @@ function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 
 				{/* Floating CTA */}
 				<motion.div variants={itemVariants} className={cn('text-center mt-20')}>
-					<motion.a
-						href={'/projects'}
-						className={cn('inline-flex items-center gap-2 px-8 py-4 rounded-full text-lg font-semibold text-white transition-all duration-300')}
-						style={{background: 'linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899)'}}
-						whileHover={{
-							scale: 1.05,
-							boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)',
-						}}
-						whileTap={{scale: 0.95}}
-					>
+					<GradientButton className={cn('gap-2 px-8 py-4 text-lg')} whileHover={{scale: 1.05, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)',}} whileTap={{scale: 0.95}}
+					                onClick={() => window.location.href = '/projects'}>
 						View All Projects
 						<motion.span animate={{x: [0, 5, 0]}} transition={{repeat: Infinity, duration: 2}}>→</motion.span>
-					</motion.a>
+					</GradientButton>
 				</motion.div>
 			</motion.div>
 		</section>
