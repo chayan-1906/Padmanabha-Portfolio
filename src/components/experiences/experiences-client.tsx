@@ -6,6 +6,7 @@ import {FaBriefcase, FaCalendarAlt, FaCode, FaTrophy} from "react-icons/fa";
 import {cn} from '@/lib/utils';
 import {GroupedSkillCategory} from "@/types/skills";
 import {Experience, ExperienceRole, ExperiencesClientProps} from "@/types/experiences";
+import {CTASection} from "@/components/cta/cta-section";
 
 function ExperienceClient({experienceSection, skills, workExperiences}: ExperiencesClientProps) {
 	const EXPERIENCE_SUMMARY = [
@@ -219,6 +220,11 @@ function ExperienceClient({experienceSection, skills, workExperiences}: Experien
 					</div>
 				</motion.div>
 			</motion.div>
+
+			<CTASection
+				title={'Want someone who gets it done?'}
+				subtext={"I'm open to full-time, contract, and consulting opportunities"}
+				buttons={[{label: 'Hire Me 🎯', reason: 'job'}]}/>
 		</section>
 	);
 }

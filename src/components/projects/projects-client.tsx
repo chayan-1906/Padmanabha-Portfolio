@@ -5,6 +5,7 @@ import {cn} from "@/lib/utils";
 import {ProjectsClientProps} from "@/types/project";
 import {ProjectCard} from "@/components/projects/project-card";
 import {GradientButton} from "@/components/ui/gradient-button";
+import {CTASection} from "@/components/cta/cta-section";
 
 function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 	const containerVariants: Variants = {
@@ -77,6 +78,15 @@ function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 					</GradientButton>
 				</motion.div>
 			</motion.div>
+
+			<CTASection
+				title={'Got a project in mind?'}
+				subtext={"I'm available for freelance projects and collaboration opportunities"}
+				buttons={[
+					{label: "Let's Build It 🚀", reason: 'project'},
+					{label: 'Just Say Hi 👋', reason: 'networking'},
+				]}
+			/>
 		</section>
 	);
 }

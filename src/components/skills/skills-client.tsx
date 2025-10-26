@@ -5,6 +5,7 @@ import {cn} from '@/lib/utils';
 import {ProcessedSkillItem, SkillsClientProps} from "@/types/skills";
 import {FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from 'react-icons/fa';
 import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from 'react-icons/si';
+import {CTASection} from "@/components/cta/cta-section";
 
 function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 	const categoryIconMap = {FaReact, FaMobile, FaNodeJs, FaTools} as const;
@@ -117,6 +118,11 @@ function SkillsClient({skillsSection, skills}: SkillsClientProps) {
 					})}
 				</div>
 			</motion.div>
+
+			<CTASection
+				title={'Building with modern tech?'}
+				subtext={'I build production-ready applications with modern tech stacks'}
+				buttons={[{label: 'Work With Me ⚡', reason: 'technical'}]}/>
 		</section>
 	);
 }

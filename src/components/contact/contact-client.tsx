@@ -132,10 +132,10 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 				</motion.div>
 
 				<div className={cn('grid lg:grid-cols-2 gap-12 items-stretch')}>
-					{/* Contact Information */}
 					<motion.div variants={itemVariants} className={cn('flex flex-col gap-12')}>
-						<div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
-						     style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}>
+						{/** Contact Information */}
+						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')} whileHover={{scale: 1.02}}
+						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Contact Information</h3>
 							<div className={cn('flex flex-col gap-3')}>
 								{socialLinks.filter((socialLink: SocialLink) => socialLink.name === 'Email' || socialLink.name === 'Phone').map((socialLink: SocialLink, index: number) => {
@@ -190,9 +190,9 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 									</div>
 								</motion.div>
 							</div>
-						</div>
+						</motion.div>
 
-						{/* Social Links */}
+						{/** Social Links */}
 						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm')}
 						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.02}}>
 							<h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Connect With Me</h3>
@@ -218,7 +218,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 						</motion.div>
 					</motion.div>
 
-					{/** Contact Form */}
+					{/**= Contact Form */}
 					<motion.div variants={itemVariants} className={cn('flex')}>
 						<motion.div className={cn('p-8 rounded-2xl border border-opacity-20 backdrop-blur-sm flex-1')}
 						            style={{backgroundColor: 'rgba(var(--color-card), 0.5)', borderColor: 'rgba(var(--color-border), 0.3)'}} whileHover={{scale: 1.01}}>
