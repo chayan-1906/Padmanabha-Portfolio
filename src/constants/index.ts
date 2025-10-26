@@ -1,5 +1,6 @@
 import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from "react-icons/si";
 import {FaCode, FaDatabase, FaEnvelope, FaGitAlt, FaMapMarkerAlt, FaMobile, FaNodeJs, FaPhone, FaReact, FaTools} from "react-icons/fa";
+import {ContactReason} from "@/types/contact";
 
 export const PERSONAL_INFO = {
 	name: 'Padmanabha Das',
@@ -388,3 +389,34 @@ export enum PortfolioId {
 }
 
 export const ACTIVE_PORTFOLIO_ID = PortfolioId.PORTFOLIO_I;
+
+export const CONTACT_REASONS = [
+	{
+		value: '',
+		label: 'Why are you reaching out? (Optional)',
+	},
+	{
+		value: 'job',
+		label: 'Job/Freelance Opportunity',
+	},
+	{
+		value: 'project',
+		label: 'Collaboration/Partnership',
+	},
+	{
+		value: 'project-inquiry',
+		label: 'Project Question',
+	},
+	{
+		value: 'technical',
+		label: 'Technical Discussion',
+	},
+	{
+		value: 'networking',
+		label: 'Just Networking',
+	},
+	{
+		value: 'other',
+		label: 'Other',
+	},
+] as const satisfies readonly ContactReason[];

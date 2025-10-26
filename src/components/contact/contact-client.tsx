@@ -2,10 +2,11 @@
 
 import * as FaIcons from 'react-icons/fa';
 import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from 'react-icons/fa';
+import {cn} from '@/lib/utils';
+import {CONTACT_REASONS} from "@/constants";
 import {motion, Variants} from 'framer-motion';
 import {useSearchParams} from 'next/navigation';
 import React, {useEffect, useState} from 'react';
-import {cn} from '@/lib/utils';
 import {ContactClientProps, SocialLink} from '@/types/contact';
 
 function ContactClient({contactSection, socialLinks, personalInfo}: ContactClientProps) {
@@ -283,13 +284,9 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 											color: 'rgb(var(--color-secondary-foreground))',
 											borderColor: 'rgba(var(--color-border), 0.3)',
 										}}>
-										<option value={''}>Why are you reaching out? (Optional)</option>
-										<option value={'job'}>Job/Freelance Opportunity</option>
-										<option value={'project'}>Collaboration/Partnership</option>
-										<option value={'project-inquiry'}>Project Question</option>
-										<option value={'technical'}>Technical Discussion</option>
-										<option value={'networking'}>Just Networking</option>
-										<option value={'other'}>Other</option>
+										{CONTACT_REASONS.map(({value, label}) => (
+											<option key={value} value={value}>{label}</option>
+										))}
 									</select>
 
 									{/* Dropdown */}
@@ -330,7 +327,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
 									/>
 								</motion.div>
 
-								{/** Send Mesage */}
+								{/** Send Message */}
 								<motion.button
 									type={'submit'} disabled={isSubmitting}
 									className={cn('w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed')}

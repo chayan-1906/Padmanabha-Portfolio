@@ -3,9 +3,9 @@
 import {motion, Variants} from "framer-motion";
 import {cn} from "@/lib/utils";
 import {ProjectsClientProps} from "@/types/project";
+import {CTASection} from "@/components/cta/cta-section";
 import {ProjectCard} from "@/components/projects/project-card";
 import {GradientButton} from "@/components/ui/gradient-button";
-import {CTASection} from "@/components/cta/cta-section";
 
 function ProjectsClient({projectSection, projects}: ProjectsClientProps) {
 	const containerVariants: Variants = {

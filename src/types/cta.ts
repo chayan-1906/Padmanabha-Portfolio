@@ -1,6 +1,8 @@
+import {ContactReasonValue} from "@/types/contact";
+
 export interface CTAButton {
 	label: string;
-	reason: string;
+	reason: ContactReasonValue;
 }
 
 export interface CTAProps {
