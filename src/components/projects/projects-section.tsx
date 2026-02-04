@@ -1,3 +1,4 @@
+import {Suspense} from "react";
 import {Section} from "@/types/section";
 import {ProjectsSectionProps} from "@/types/project";
 import {ProjectsClient} from "@/components/projects/projects-client";
@@ -10,7 +11,9 @@ async function ProjectsSection({sections, featuredProjects}: ProjectsSectionProp
 	}
 
 	return (
-		<ProjectsClient projectSection={projectsSection} projects={featuredProjects}/>
+		<Suspense fallback={null}>
+			<ProjectsClient projectSection={projectsSection} projects={featuredProjects}/>
+		</Suspense>
 	);
 }
 

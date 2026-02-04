@@ -1,3 +1,4 @@
+import {Suspense} from "react";
 import {NavigationClient} from './navigation-client';
 import {NavigationSectionProps} from '@/types/navigation';
 
@@ -7,7 +8,9 @@ async function NavigationSection({sections, personalInfo}: NavigationSectionProp
 	}
 
 	return (
-		<NavigationClient sections={sections} personalInfo={personalInfo}/>
+		<Suspense fallback={null}>
+			<NavigationClient sections={sections} personalInfo={personalInfo}/>
+		</Suspense>
 	);
 }
 

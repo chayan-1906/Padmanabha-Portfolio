@@ -1,9 +1,10 @@
-import {getWorkExperiences} from '@/lib/hygraph';
+import {Suspense} from 'react';
 import {Section} from "@/types/section";
 import {ACTIVE_PORTFOLIO_ID} from '@/constants';
-import {ExperienceClient} from "@/components/experiences/experiences-client";
-import {GroupedSkillCategory, SkillItem} from "@/types/skills";
+import {getWorkExperiences} from '@/lib/hygraph';
 import {ExperiencesSectionProps} from "@/types/experiences";
+import {GroupedSkillCategory, SkillItem} from "@/types/skills";
+import {ExperienceClient} from "@/components/experiences/experiences-client";
 
 async function ExperienceSection({sections, skillsData}: ExperiencesSectionProps) {
 	const workExperiences = await getWorkExperiences(ACTIVE_PORTFOLIO_ID);
@@ -55,7 +56,9 @@ async function ExperienceSection({sections, skillsData}: ExperiencesSectionProps
 		}, {} as Record<string, GroupedSkillCategory>);
 
 	return (
-		<ExperienceClient experienceSection={experienceSection} skills={sortedSkills} workExperiences={workExperiences}/>
+		<Suspense fallback={null}>
+			<ExperienceClient experienceSection={experienceSection} skills={sortedSkills} workExperiences={workExperiences}/>
+		</Suspense>
 	);
 }
 

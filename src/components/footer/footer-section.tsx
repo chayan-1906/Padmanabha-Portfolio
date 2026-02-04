@@ -1,3 +1,4 @@
+import {Suspense} from 'react';
 import {FooterClient} from "./footer-client";
 import {FooterSectionProps} from '@/types/footer';
 
@@ -7,7 +8,9 @@ async function Footer({sections, socialLinks, personalInfo}: FooterSectionProps)
 	}
 
 	return (
-		<FooterClient sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
+		<Suspense fallback={null}>
+			<FooterClient sections={sections} socialLinks={socialLinks} personalInfo={personalInfo}/>
+		</Suspense>
 	);
 }
 
