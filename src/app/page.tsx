@@ -19,7 +19,7 @@ async function Home() {
         <Suspense fallback={<div>TODO: Loading...</div>}>
             <HomeWrapper/>
         </Suspense>
-    )
+    );
 }
 
 async function HomeWrapper() {

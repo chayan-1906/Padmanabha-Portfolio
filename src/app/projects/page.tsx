@@ -16,7 +16,7 @@ async function ProjectsPage() {
         <Suspense fallback={<div>TODO: Loading...</div>}>
             <ProjectWrapper/>
         </Suspense>
-    )
+    );
 }
 
 async function ProjectWrapper() {

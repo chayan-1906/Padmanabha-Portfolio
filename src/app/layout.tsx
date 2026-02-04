@@ -10,6 +10,7 @@ import {ThemeProvider} from "@/components/theme-provider";
 const inter: NextFont = Inter({subsets: ['latin']});
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://padmanabha-portfolio.vercel.app'),
     title: `${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`,
     description: PERSONAL_INFO.description,
     icons: {
