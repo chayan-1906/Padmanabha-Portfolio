@@ -1,5 +1,5 @@
 import {NextRequest} from 'next/server';
-import {revalidatePath, revalidateTag} from 'next/cache';
+import {revalidatePath, updateTag} from 'next/cache';
 import {REVALIDATE_SECRET} from '@/config/config';
 
 export async function POST(request: NextRequest) {
@@ -18,16 +18,16 @@ export async function POST(request: NextRequest) {
 		revalidatePath('/projects');
 
 		// Revalidate by cache tags
-		revalidateTag('personal-info');
-		revalidateTag('tech-stacks');
-		revalidateTag('sections');
-		revalidateTag('skills');
-		revalidateTag('work-experiences');
-		revalidateTag('educations');
-		revalidateTag('featured-projects');
-		revalidateTag('all-projects');
-		revalidateTag('certifications');
-		revalidateTag('social-links');
+		updateTag('personal-info');
+		updateTag('tech-stacks');
+		updateTag('sections');
+		updateTag('skills');
+		updateTag('work-experiences');
+		updateTag('educations');
+		updateTag('featured-projects');
+		updateTag('all-projects');
+		updateTag('certifications');
+		updateTag('social-links');
 
 		console.log('✅ Cache revalidated successfully');
 
