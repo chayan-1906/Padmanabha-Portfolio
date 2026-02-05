@@ -2,6 +2,7 @@ import {Suspense} from "react";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {Footer} from "@/components/footer/footer-section";
 import {HeroSection} from "@/components/hero/hero-section";
+import {HomeLoading} from "@/components/loading/HomeLoading";
 import {AboutSection} from "@/components/about/about-section";
 import {SkillsSection} from "@/components/skills/skills-section";
 import {ContactSection} from "@/components/contact/contact-section";
@@ -16,7 +17,7 @@ import {CertificationsSection} from "@/components/certifications/certifications-
 
 async function Home() {
     return (
-        <Suspense fallback={<div>TODO: Loading...</div>}>
+        <Suspense fallback={<HomeLoading/>}>
             <HomeWrapper/>
         </Suspense>
     );

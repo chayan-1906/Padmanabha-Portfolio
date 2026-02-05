@@ -10,8 +10,8 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.31.0",
-    "googleapis": "^171.2.0",
+    "framer-motion": "^12.33.0",
+    "googleapis": "^171.3.0",
     "graphql": "^16.12.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
