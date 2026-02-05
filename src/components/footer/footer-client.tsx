@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import {motion} from 'framer-motion';
-import * as FaIcons from 'react-icons/fa';
-import {FaArrowUp, FaHeart} from 'react-icons/fa';
+import {motion} from "framer-motion";
+import * as FaIcons from "react-icons/fa";
+import {FaArrowUp, FaHeart} from "react-icons/fa";
 import {usePathname, useRouter} from "next/navigation";
-import {cn} from '@/lib/utils';
-import {SocialLink} from '@/types/contact';
-import {FooterClientProps} from '@/types/footer';
+import {cn} from "@/lib/utils";
+import {SocialLink} from "@/types/contact";
+import {FooterClientProps} from "@/types/footer";
 
 function FooterClient({sections, socialLinks, personalInfo}: FooterClientProps) {
 	const pathname = usePathname();

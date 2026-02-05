@@ -1,6 +1,6 @@
 import {Suspense} from "react";
-import {NavigationClient} from './navigation-client';
-import {NavigationSectionProps} from '@/types/navigation';
+import {NavigationClient} from "./navigation-client";
+import {NavigationSectionProps} from "@/types/navigation";
 
 async function NavigationSection({sections, personalInfo}: NavigationSectionProps) {
 	if (!personalInfo || !sections.length) {

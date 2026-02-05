@@ -1,6 +1,6 @@
-import {NextRequest} from 'next/server';
-import {revalidatePath, updateTag} from 'next/cache';
-import {REVALIDATE_SECRET} from '@/config/config';
+import {NextRequest} from "next/server";
+import {revalidatePath, updateTag} from "next/cache";
+import {REVALIDATE_SECRET} from "@/config/config";
 
 export async function POST(request: NextRequest) {
 	try {
@@ -28,6 +28,8 @@ export async function POST(request: NextRequest) {
 		updateTag('all-projects');
 		updateTag('certifications');
 		updateTag('social-links');
+		updateTag('github-repos');
+		updateTag('github-user-stats');
 
 		console.log('✅ Cache revalidated successfully');
 

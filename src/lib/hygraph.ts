@@ -1,3 +1,5 @@
+import {cache} from "react";
+import {cacheLife, cacheTag} from "next/cache";
 import {Project} from "@/types/project";
 import {Section} from "@/types/section";
 import {PortfolioId} from "@/constants";
@@ -177,271 +179,301 @@ const createSocialLinksQuery = (portfolioId: string) => `
 
 /** Fetch functions */
 // hero
-export async function getPersonalInfo(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createPersonalInfoQuery(portfolioId),
-			}),
-			next: {revalidate: 3600, tags: ['personal-info']},
-		});
+export const getPersonalInfo = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('personal-info');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch personal info');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createPersonalInfoQuery(portfolioId),
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.personalInfos[0] as PersonalInfo || null;
-	} catch (error) {
-		console.error('Error fetching personal info:', error);
-		return null;
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch personal info');
+        }
+
+        const {data} = await response.json();
+        return data.personalInfos[0] as PersonalInfo || null;
+    } catch (error: any) {
+        console.error('Error fetching personal info:', error);
+        return null;
+    }
+});
 
 // hero
-export async function getTechStacks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createTechStacksQuery(portfolioId),
-			}),
-			next: {revalidate: 3600, tags: ['tech-stacks']},
-		});
+export const getTechStacks = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('tech-stacks');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch tech stacks');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createTechStacksQuery(portfolioId),
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.techStacks as TechStack[] || [];
-	} catch (error) {
-		console.error('Error fetching tech stacks:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch tech stacks');
+        }
 
-export async function getSections(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createSectionsQuery(portfolioId),
-			}),
-			next: {revalidate: 3600, tags: ['sections']},
-		});
+        const {data} = await response.json();
+        return data.techStacks as TechStack[] || [];
+    } catch (error: any) {
+        console.error('Error fetching tech stacks:', error);
+        return [];
+    }
+});
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch sections');
-		}
+export const getSections = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('sections');
+    cacheLife('weeks');
 
-		const {data} = await response.json();
-		return data.sections as Section[] || [];
-	} catch (error) {
-		console.error('Error fetching sections:', error);
-		return [];
-	}
-}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createSectionsQuery(portfolioId),
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch sections');
+        }
+
+        const {data} = await response.json();
+        return data.sections as Section[] || [];
+    } catch (error) {
+        console.error('Error fetching sections:', error);
+        return [];
+    }
+});
 
 // skills
-export async function getSkills(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createSkillsQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['skills']},
-		});
+export const getSkills = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('skills');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch skills');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createSkillsQuery(portfolioId)
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.skills as SkillItem[] || [];
-	} catch (error) {
-		console.error('Error fetching skills:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch skills');
+        }
 
-export async function getWorkExperiences(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createWorkExperiencesQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['work-experiences']},
-		});
+        const {data} = await response.json();
+        return data.skills as SkillItem[] || [];
+    } catch (error: any) {
+        console.error('Error fetching skills:', error);
+        return [];
+    }
+});
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch work experiences');
-		}
+export const getWorkExperiences = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('work-experiences');
+    cacheLife('weeks');
 
-		const {data} = await response.json();
-		// console.log('Work Experiences:', data);
-		return data.workExperiences as Experience[] || [];
-	} catch (error) {
-		console.error('Error fetching work experiences:', error);
-		return [];
-	}
-}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createWorkExperiencesQuery(portfolioId)
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch work experiences');
+        }
+
+        const {data} = await response.json();
+        // console.log('Work Experiences:', data);
+        return data.workExperiences as Experience[] || [];
+    } catch (error: any) {
+        console.error('Error fetching work experiences:', error);
+        return [];
+    }
+});
 
 // educations
-export async function getEducations(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createEducationsQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['educations']},
-		});
+export const getEducations = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('educations');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch educations');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createEducationsQuery(portfolioId)
+            }),
+        });
 
-		const {data} = await response.json();
-		// console.log('Educations:', data);
-		return data.educations as Education[] || [];
-	} catch (error) {
-		console.error('Error fetching educations:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch educations');
+        }
 
-// projects
-export async function getFeaturedProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createFeaturedProjectsQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['featured-projects']},
-		});
-
-		if (!response.ok) {
-			throw new Error('Failed to fetch featured projects');
-		}
-
-		const {data} = await response.json();
-		return data.projects as Project[] || [];
-	} catch (error) {
-		console.error('Error fetching featured projects:', error);
-		return [];
-	}
-}
+        const {data} = await response.json();
+        // console.log('Educations:', data);
+        return data.educations as Education[] || [];
+    } catch (error: any) {
+        console.error('Error fetching educations:', error);
+        return [];
+    }
+});
 
 // projects
-export async function getAllProjects(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createAllProjectsQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['all-projects']},
-		});
+export const getFeaturedProjects = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('featured-projects');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch all projects');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createFeaturedProjectsQuery(portfolioId)
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.projects as Project[] || [];
-	} catch (error) {
-		console.error('Error fetching all projects:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch featured projects');
+        }
+
+        const {data} = await response.json();
+        return data.projects as Project[] || [];
+    } catch (error: any) {
+        console.error('Error fetching featured projects:', error);
+        return [];
+    }
+});
+
+// projects
+export const getAllProjects = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('all-projects');
+    cacheLife('weeks');
+
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createAllProjectsQuery(portfolioId)
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch all projects');
+        }
+
+        const {data} = await response.json();
+        return data.projects as Project[] || [];
+    } catch (error: any) {
+        console.error('Error fetching all projects:', error);
+        return [];
+    }
+});
 
 // certifications
-export async function getCertifications(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createCertificationsQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['certifications']},
-		});
+export const getCertifications = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('certifications');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch certifications');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createCertificationsQuery(portfolioId)
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.certifications as Certification[] || [];
-	} catch (error) {
-		console.error('Error fetching certifications:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch certifications');
+        }
+
+        const {data} = await response.json();
+        return data.certifications as Certification[] || [];
+    } catch (error: any) {
+        console.error('Error fetching certifications:', error);
+        return [];
+    }
+});
 
 // hero
-export async function getSocialLinks(portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) {
-	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				query: createSocialLinksQuery(portfolioId)
-			}),
-			next: {revalidate: 3600, tags: ['social-links']},
-		});
+export const getSocialLinks = cache(async (portfolioId: PortfolioId = PortfolioId.PORTFOLIO_I) => {
+    "use cache";
+    cacheTag('social-links');
+    cacheLife('weeks');
 
-		if (!response.ok) {
-			throw new Error('Failed to fetch social links');
-		}
+    try {
+        const response: Response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                query: createSocialLinksQuery(portfolioId)
+            }),
+        });
 
-		const {data} = await response.json();
-		return data.socialLinks as SocialLink[] || [];
-	} catch (error) {
-		console.error('Error fetching social links:', error);
-		return [];
-	}
-}
+        if (!response.ok) {
+            throw new Error('Failed to fetch social links');
+        }
+
+        const {data} = await response.json();
+        return data.socialLinks as SocialLink[] || [];
+    } catch (error: any) {
+        console.error('Error fetching social links:', error);
+        return [];
+    }
+});

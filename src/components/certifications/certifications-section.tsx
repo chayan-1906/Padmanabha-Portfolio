@@ -1,6 +1,6 @@
-import {getCertifications} from '@/lib/hygraph';
 import {Section} from "@/types/section";
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {ACTIVE_PORTFOLIO_ID} from "@/constants";
+import {getCertifications} from "@/lib/hygraph";
 import {CertificationsClient} from "./certifications-client";
 import {CertificationsSectionProps} from "@/types/certification";
 

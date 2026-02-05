@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import {motion, Variants} from 'framer-motion';
-import {FaCertificate, FaExternalLinkAlt} from 'react-icons/fa';
-import {cn} from '@/lib/utils';
+import {motion, Variants} from "framer-motion";
+import {FaCertificate, FaExternalLinkAlt} from "react-icons/fa";
+import {cn} from "@/lib/utils";
 import {Certification, CertificationsClientProps} from "@/types/certification";
 
 function CertificationsClient({certificationsSection, certifications}: CertificationsClientProps) {

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import React, {useState} from 'react';
-import {useRouter} from 'next/navigation';
-import {motion, Variants} from 'framer-motion';
+import Image from "next/image";
+import React, {useState} from "react";
+import {useRouter} from "next/navigation";
+import {motion, Variants} from "framer-motion";
 import {GoRepoForked, GoStarFill} from "react-icons/go";
-import {FaBook, FaCommentDots, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from 'react-icons/fa';
+import {FaBook, FaCommentDots, FaDownload, FaExternalLinkAlt, FaGithub, FaUsers} from "react-icons/fa";
 import {Collaborator} from "@/types/github";
-import {camelToWords, cn} from '@/lib/utils';
+import {camelToWords, cn} from "@/lib/utils";
 import {ProjectCardProps} from "@/types/project";
 
 function ProjectCard({project}: ProjectCardProps) {

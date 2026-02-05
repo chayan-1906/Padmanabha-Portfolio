@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import {motion, Variants} from 'framer-motion';
-import {cn} from '@/lib/utils';
+import {motion, Variants} from "framer-motion";
+import {cn} from "@/lib/utils";
 import {ProjectsGridProps} from "@/types/project";
-import {ProjectCard} from '@/components/projects/project-card';
+import {ProjectCard} from "@/components/projects/project-card";
 
 function ProjectsGrid({projects}: ProjectsGridProps) {
 	const containerVariants: Variants = {

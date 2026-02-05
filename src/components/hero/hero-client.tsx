@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import Image from "next/image";
-import * as FaIcons from 'react-icons/fa';
-import {motion, Variants} from 'framer-motion';
-import React, {useEffect, useState} from 'react';
-import {cn} from '@/lib/utils';
+import * as FaIcons from "react-icons/fa";
+import {motion, Variants} from "framer-motion";
+import React, {useEffect, useState} from "react";
+import {cn} from "@/lib/utils";
 import {SocialLink} from "@/types/contact";
 import {HeroClientProps} from "@/types/hero";
 import {GradientButton} from "@/components/ui/gradient-button";

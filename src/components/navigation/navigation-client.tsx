@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import {useTheme} from 'next-themes';
-import {useEffect, useRef, useState} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
-import {usePathname, useRouter} from 'next/navigation';
-import {ChevronDown, Menu, Monitor, Moon, Sun, X} from 'lucide-react';
-import {cn} from '@/lib/utils';
-import {NavigationClientProps} from '@/types/navigation';
+import {useTheme} from "next-themes";
+import {useEffect, useRef, useState} from "react";
+import {AnimatePresence, motion} from "framer-motion";
+import {usePathname, useRouter} from "next/navigation";
+import {ChevronDown, Menu, Monitor, Moon, Sun, X} from "lucide-react";
+import {cn} from "@/lib/utils";
+import {NavigationClientProps} from "@/types/navigation";
 
 function NavigationClient({sections, personalInfo}: NavigationClientProps) {
 	const [isOpen, setIsOpen] = useState(false);

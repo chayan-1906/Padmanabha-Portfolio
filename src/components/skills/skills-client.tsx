@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import {motion, Variants} from 'framer-motion';
-import {cn} from '@/lib/utils';
+import {motion, Variants} from "framer-motion";
+import {FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from "react-icons/fa";
+import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from "react-icons/si";
+import {cn} from "@/lib/utils";
 import {ProcessedSkillItem, SkillsClientProps} from "@/types/skills";
-import {FaCode, FaDatabase, FaGitAlt, FaMobile, FaNodeJs, FaReact, FaTools} from 'react-icons/fa';
-import {SiFirebase, SiFlutter, SiMongodb, SiNextdotjs, SiTailwindcss, SiTypescript} from 'react-icons/si';
 import {CTASection} from "@/components/cta/cta-section";
 
 function SkillsClient({skillsSection, skills}: SkillsClientProps) {

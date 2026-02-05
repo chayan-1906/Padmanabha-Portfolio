@@ -1,5 +1,5 @@
 import {Section} from "@/types/section";
-import {AboutClient} from './about-client';
+import {AboutClient} from "./about-client";
 import {AboutSectionProps} from "@/types/about";
 
 async function AboutSection({sections}: AboutSectionProps) {

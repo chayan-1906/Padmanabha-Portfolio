@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import * as FaIcons from 'react-icons/fa';
-import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from 'react-icons/fa';
-import {cn} from '@/lib/utils';
+import * as FaIcons from "react-icons/fa";
+import {motion, Variants} from "framer-motion";
+import {useSearchParams} from "next/navigation";
+import React, {useEffect, useState} from "react";
+import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from "react-icons/fa";
+import {cn} from "@/lib/utils";
 import {CONTACT_REASONS} from "@/constants";
-import {motion, Variants} from 'framer-motion';
-import {useSearchParams} from 'next/navigation';
-import React, {useEffect, useState} from 'react';
-import {ContactClientProps, SocialLink} from '@/types/contact';
+import {ContactClientProps, SocialLink} from "@/types/contact";
 
 function ContactClient({contactSection, socialLinks, personalInfo}: ContactClientProps) {
     const searchParams = useSearchParams();

@@ -1,6 +1,6 @@
 import {Suspense} from "react";
 import {Section} from "@/types/section";
-import {SkillsClient} from './skills-client';
+import {SkillsClient} from "./skills-client";
 import {GroupedSkillCategory, SkillItem, SkillsSectionProps} from "@/types/skills";
 
 async function SkillsSection({sections, skillsData}: SkillsSectionProps) {

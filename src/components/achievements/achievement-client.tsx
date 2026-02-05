@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import {motion, Variants} from 'framer-motion';
-import {FaCodeBranch, FaGithub, FaUserFriends, FaUsers} from 'react-icons/fa';
-import {cn} from '@/lib/utils';
+import {motion, Variants} from "framer-motion";
+import {FaCodeBranch, FaGithub, FaUserFriends, FaUsers} from "react-icons/fa";
+import {cn} from "@/lib/utils";
 import {AchievementClientProps} from "@/types/achievement";
 
 function AchievementClient({achievementSection, githubStats}: AchievementClientProps) {

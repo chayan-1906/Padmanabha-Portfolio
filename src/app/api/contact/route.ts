@@ -1,5 +1,5 @@
-import {appendToSheet} from '@/lib/google-sheets';
-import {NextRequest, NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from "next/server";
+import {appendToSheet} from "@/lib/google-sheets";
 
 export async function POST(request: NextRequest) {
 	try {

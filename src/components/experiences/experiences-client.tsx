@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import Image from "next/image";
-import {motion, Variants} from 'framer-motion';
+import {motion, Variants} from "framer-motion";
 import {FaBriefcase, FaCalendarAlt, FaCode, FaTrophy} from "react-icons/fa";
-import {cn} from '@/lib/utils';
+import {cn} from "@/lib/utils";
 import {GroupedSkillCategory} from "@/types/skills";
-import {Experience, ExperienceRole, ExperiencesClientProps} from "@/types/experiences";
 import {CTASection} from "@/components/cta/cta-section";
+import {Experience, ExperienceRole, ExperiencesClientProps} from "@/types/experiences";
 
 function ExperienceClient({experienceSection, skills, workExperiences}: ExperiencesClientProps) {
 	const EXPERIENCE_SUMMARY = [

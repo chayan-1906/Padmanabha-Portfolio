@@ -1,6 +1,6 @@
 import {Section} from "@/types/section";
-import {getEducations} from '@/lib/hygraph';
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
+import {getEducations} from "@/lib/hygraph";
+import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {EducationSectionProps} from "@/types/education";
 import {EducationClient} from "@/components/educations/education-client";
 

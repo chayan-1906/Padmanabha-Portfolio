@@ -4,12 +4,12 @@ import {ChevronRight} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {getAllProjectsWithGitHubData} from "@/lib/github";
-import {Footer} from '@/components/footer/footer-section';
+import {Footer} from "@/components/footer/footer-section";
 import {GroupedProjectCategory, Project} from "@/types/project";
 import {ProjectsLoading} from "@/components/loading/ProjectsLoading";
 import {AnalyticsTracker} from "@/components/analytics/analytics-tracker";
 import {getPersonalInfo, getSections, getSocialLinks} from "@/lib/hygraph";
-import {NavigationSection} from '@/components/navigation/navigation-section';
+import {NavigationSection} from "@/components/navigation/navigation-section";
 import {CategorizedProjectsGridClient} from "@/components/projects/categorized-projects-grid-client";
 
 async function ProjectsPage() {

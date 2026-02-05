@@ -1,4 +1,4 @@
-import {google} from 'googleapis';
+import {google} from "googleapis";
 import {GOOGLE_CREDENTIALS} from "@/config/config";
 import {CONTACT_SUBMISSION_SPREADSHEET_ID} from "@/constants";
 

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import {FaCalendarAlt, FaMapMarkerAlt, FaTrophy} from 'react-icons/fa';
-import {motion, Variants} from 'framer-motion';
-import {cn} from '@/lib/utils';
+import Image from "next/image";
+import {FaCalendarAlt, FaMapMarkerAlt, FaTrophy} from "react-icons/fa";
+import {motion, Variants} from "framer-motion";
+import {cn} from "@/lib/utils";
 import {Education, EducationClientProps} from "@/types/education";
 
 function EducationClient({educationSection, educations}: EducationClientProps) {

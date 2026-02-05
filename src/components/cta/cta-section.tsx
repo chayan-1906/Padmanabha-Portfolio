@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import {motion} from 'framer-motion';
+import {motion} from "framer-motion";
 import {useRouter} from "next/navigation";
-import {cn} from '@/lib/utils';
-import {CTAProps} from '@/types/cta';
-import {GradientButton} from '@/components/ui/gradient-button';
+import {cn} from "@/lib/utils";
+import {CTAProps} from "@/types/cta";
+import {GradientButton} from "@/components/ui/gradient-button";
 
 function CTASection({title, subtext, buttons}: CTAProps) {
 	const router = useRouter();

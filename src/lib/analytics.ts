@@ -3,7 +3,7 @@ import {headers} from "next/headers";
 import {google, sheets_v4} from "googleapis";
 import {ReadonlyHeaders} from "next/dist/server/web/spec-extension/adapters/headers";
 import {GOOGLE_CREDENTIALS} from "@/config/config";
-import {ACTIVE_PORTFOLIO_ID, CONTACT_SUBMISSION_SPREADSHEET_ID} from '@/constants';
+import {ACTIVE_PORTFOLIO_ID, CONTACT_SUBMISSION_SPREADSHEET_ID} from "@/constants";
 
 function parseReferrer(refererUrl: string | null, currentHostname?: string): string {
     if (!refererUrl) return 'Direct Visit';

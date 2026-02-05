@@ -1,5 +1,5 @@
-import {Section} from './section';
-import {PersonalInfo} from './hero';
+import {Section} from "./section";
+import {PersonalInfo} from "./hero";
 
 export interface NavigationSectionProps {
 	sections: Section[];

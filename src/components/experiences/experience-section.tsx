@@ -1,7 +1,7 @@
-import {Suspense} from 'react';
+import {Suspense} from "react";
 import {Section} from "@/types/section";
-import {ACTIVE_PORTFOLIO_ID} from '@/constants';
-import {getWorkExperiences} from '@/lib/hygraph';
+import {ACTIVE_PORTFOLIO_ID} from "@/constants";
+import {getWorkExperiences} from "@/lib/hygraph";
 import {ExperiencesSectionProps} from "@/types/experiences";
 import {GroupedSkillCategory, SkillItem} from "@/types/skills";
 import {ExperienceClient} from "@/components/experiences/experiences-client";
