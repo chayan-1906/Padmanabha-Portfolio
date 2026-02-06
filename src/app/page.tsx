@@ -1,4 +1,5 @@
 import {Suspense} from "react";
+import {SocialLink} from "@/types/contact";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {Footer} from "@/components/footer/footer-section";
 import {HeroSection} from "@/components/hero/hero-section";
@@ -37,11 +38,60 @@ async function HomeWrapper() {
     }
 
     const githubUsername: string = personalInfo.gitHub?.split('/').pop() || '';
-    const githubStats = await getGitHubUserStats(githubUsername);
+    // const githubStats = await getGitHubUserStats(githubUsername);
+
+    const siteUrl: string = 'https://padmanabha-portfolio.vercel.app';
+
+    const sameAsLinks: string[] = socialLinks
+        .filter((link: SocialLink) => link.name !== 'Email' && link.name !== 'Phone')
+        .map((link: SocialLink) => link.url);
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebSite',
+                '@id': `${siteUrl}/#website`,
+                'name': `${personalInfo.name} - Portfolio`,
+                'url': siteUrl,
+                'description': personalInfo.description,
+            },
+            {
+                '@type': 'ProfilePage',
+                '@id': `${siteUrl}/#profilepage`,
+                'url': siteUrl,
+                'name': `${personalInfo.name} - ${personalInfo.title}`,
+                'isPartOf': {'@id': `${siteUrl}/#website`},
+                'mainEntity': {'@id': `${siteUrl}/#person`},
+            },
+            {
+                '@type': 'Person',
+                '@id': `${siteUrl}/#person`,
+                'name': personalInfo.name,
+                'jobTitle': personalInfo.title,
+                'description': personalInfo.description,
+                'email': personalInfo.email,
+                'telephone': personalInfo.phone,
+                'url': siteUrl,
+                'image': personalInfo.avatar?.url,
+                'address': {
+                    '@type': 'PostalAddress',
+                    'addressLocality': personalInfo.location,
+                },
+                'sameAs': sameAsLinks,
+            },
+        ],
+    };
 
     return (
         <>
             <AnalyticsTracker pageUrl={'/'}/>
+            <script
+                type={'application/ld+json'}
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+                }}
+            />
             <NavigationSection sections={sections} personalInfo={personalInfo}/>
             <main>
                 <div id={'home'}>

@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 import {motion, Variants} from "framer-motion";
 import {useSearchParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {FaGithub, FaLinkedin, FaMapMarkerAlt, FaPaperPlane} from "react-icons/fa";
+import {FaMapMarkerAlt, FaPaperPlane} from "react-icons/fa";
 import {cn} from "@/lib/utils";
 import {CONTACT_REASONS} from "@/constants";
 import {ContactClientProps, SocialLink} from "@/types/contact";
@@ -199,7 +199,7 @@ function ContactClient({contactSection, socialLinks, personalInfo}: ContactClien
                             <h3 className={cn('text-2xl font-bold mb-6')} style={{color: 'rgb(var(--color-card-foreground))'}}>Connect With Me</h3>
                             <div className={cn('flex gap-4')}>
                                 {socialLinks.filter((link: SocialLink) => link.name !== 'Email' && link.name !== 'Phone').map((link: SocialLink, index: number) => {
-                                    const Icon = link.name === 'GitHub' ? FaGithub : FaLinkedin;
+                                    const Icon = getIcon(link.icon);
 
                                     return (
                                         <motion.a

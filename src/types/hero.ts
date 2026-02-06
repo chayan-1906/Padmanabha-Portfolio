@@ -1,4 +1,5 @@
 import {SkillItem} from "@/types/skills";
+import {SocialLink} from "@/types/contact";
 
 export interface PersonalInfo {
 	name: string;
@@ -11,12 +12,6 @@ export interface PersonalInfo {
 	subtitle: string;
 	avatar: { url: string };
 	resumeUrl: string;
-}
-
-export interface SocialLink {
-	name: string;
-	url: string;
-	icon: string;
 }
 
 export interface TechStack {
