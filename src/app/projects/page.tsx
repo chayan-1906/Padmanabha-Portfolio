@@ -1,16 +1,22 @@
 import Link from "next/link";
 import {Suspense} from "react";
+import type {Metadata} from "next";
 import {ChevronRight} from "lucide-react";
 import {cn} from "@/lib/utils";
-import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {getAllProjectsWithGitHubData} from "@/lib/github";
 import {Footer} from "@/components/footer/footer-section";
+import {ACTIVE_PORTFOLIO_ID, PERSONAL_INFO} from "@/constants";
 import {GroupedProjectCategory, Project} from "@/types/project";
 import {ProjectsLoading} from "@/components/loading/ProjectsLoading";
 import {AnalyticsTracker} from "@/components/analytics/analytics-tracker";
 import {getPersonalInfo, getSections, getSocialLinks} from "@/lib/hygraph";
 import {NavigationSection} from "@/components/navigation/navigation-section";
 import {CategorizedProjectsGridClient} from "@/components/projects/categorized-projects-grid-client";
+
+export const metadata: Metadata = {
+    title: `Projects | ${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`,
+    description: `Explore projects by ${PERSONAL_INFO.name} showcasing expertise in modern web technologies, mobile development, and AI integration`,
+};
 
 async function ProjectsPage() {
     return (

@@ -241,6 +241,7 @@ src/
    HYGRAPH_ENDPOINT=your_hygraph_content_api_endpoint
    HYGRAPH_TOKEN=your_hygraph_permanent_auth_token
    REVALIDATE_SECRET=your_webhook_secret_key
+   SITE_URL=your_deployed_portfolio_url
    ```
 
 4. **Run development server**

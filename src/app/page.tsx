@@ -1,10 +1,12 @@
 import {Suspense} from "react";
+import {SITE_URL} from "@/config/config";
 import {SocialLink} from "@/types/contact";
 import {ACTIVE_PORTFOLIO_ID} from "@/constants";
 import {Footer} from "@/components/footer/footer-section";
 import {HeroSection} from "@/components/hero/hero-section";
 import {HomeLoading} from "@/components/loading/HomeLoading";
 import {AboutSection} from "@/components/about/about-section";
+import {getFeaturedProjectsWithGitHubData} from "@/lib/github";
 import {SkillsSection} from "@/components/skills/skills-section";
 import {ContactSection} from "@/components/contact/contact-section";
 import {ProjectsSection} from "@/components/projects/projects-section";
@@ -12,7 +14,6 @@ import {AnalyticsTracker} from "@/components/analytics/analytics-tracker";
 import {EducationSection} from "@/components/educations/education-section";
 import {NavigationSection} from "@/components/navigation/navigation-section";
 import {ExperienceSection} from "@/components/experiences/experience-section";
-import {getFeaturedProjectsWithGitHubData, getGitHubUserStats} from "@/lib/github";
 import {getPersonalInfo, getSections, getSkills, getSocialLinks} from "@/lib/hygraph";
 import {CertificationsSection} from "@/components/certifications/certifications-section";
 
@@ -40,8 +41,6 @@ async function HomeWrapper() {
     const githubUsername: string = personalInfo.gitHub?.split('/').pop() || '';
     // const githubStats = await getGitHubUserStats(githubUsername);
 
-    const siteUrl: string = 'https://padmanabha-portfolio.vercel.app';
-
     const sameAsLinks: string[] = socialLinks
         .filter((link: SocialLink) => link.name !== 'Email' && link.name !== 'Phone')
         .map((link: SocialLink) => link.url);
@@ -51,28 +50,28 @@ async function HomeWrapper() {
         '@graph': [
             {
                 '@type': 'WebSite',
-                '@id': `${siteUrl}/#website`,
+                '@id': `${SITE_URL}/#website`,
                 'name': `${personalInfo.name} - Portfolio`,
-                'url': siteUrl,
+                'url': SITE_URL,
                 'description': personalInfo.description,
             },
             {
                 '@type': 'ProfilePage',
-                '@id': `${siteUrl}/#profilepage`,
-                'url': siteUrl,
+                '@id': `${SITE_URL}/#profilepage`,
+                'url': SITE_URL,
                 'name': `${personalInfo.name} - ${personalInfo.title}`,
-                'isPartOf': {'@id': `${siteUrl}/#website`},
-                'mainEntity': {'@id': `${siteUrl}/#person`},
+                'isPartOf': {'@id': `${SITE_URL}/#website`},
+                'mainEntity': {'@id': `${SITE_URL}/#person`},
             },
             {
                 '@type': 'Person',
-                '@id': `${siteUrl}/#person`,
+                '@id': `${SITE_URL}/#person`,
                 'name': personalInfo.name,
                 'jobTitle': personalInfo.title,
                 'description': personalInfo.description,
                 'email': personalInfo.email,
                 'telephone': personalInfo.phone,
-                'url': siteUrl,
+                'url': SITE_URL,
                 'image': personalInfo.avatar?.url,
                 'address': {
                     '@type': 'PostalAddress',
